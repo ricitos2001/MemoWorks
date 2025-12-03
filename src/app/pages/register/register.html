@@ -1,0 +1,32 @@
+<form (ngSubmit)="submitForm(registerForm)" #registerForm="ngForm">
+<fieldset>
+    <legend>Registrate</legend>
+
+    <app-form-input
+      type="email"
+      name="email"
+      placeholder="Correo electrónico"
+      [required]="true"
+      helpText="Introduce tu correo registrado"
+      errorMessage="El correo es obligatorio"
+      [showError]="submitted && !email.value"
+      #email="ngModel"
+      ngModel
+    ></app-form-input>
+
+    <app-form-input
+      type="password"
+      name="password"
+      placeholder="Contraseña"
+      [required]="true"
+      helpText="Introduce tu contraseña"
+      errorMessage="La contraseña es obligatoria"
+      [showError]="submitted && !password.value"
+      #password="ngModel"
+      ngModel
+    ></app-form-input>
+
+    <app-button type="submit">Registrate</app-button>
+    <a href="/login">¿Ya tienes cuenta? Iniciar sesión</a>
+  </fieldset>
+</form>

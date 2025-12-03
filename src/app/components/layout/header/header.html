@@ -1,0 +1,19 @@
+<header class="header">
+  <img src="" alt="">
+  <nav>
+    <ul class="header__nav">
+      <ng-container *ngIf="!loggedIn">
+        <li><a href="">Inicio</a></li>
+        <li><a href="">Que ofrecemos</a></li>
+        <li><a href="">Contacto</a></li>
+        <li><a href="/register">Empecemos</a></li>
+      </ng-container>
+
+      <ng-container *ngIf="loggedIn">
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/calendario">Calendario</a></li>
+        <li><a href="/configuracion">Configuración</a></li>
+      </ng-container>
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,17 @@
+@use '../00-settings/variables' as *;
+@use '../01-tools/mixins' as *;
+
+.header, .footer {
+  display: flex;
+  flex-direction: row;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  justify-content: space-between;
+  background: var(--color-secondary-3);
+}
+
+.header__nav{
+  display: flex;
+  flex-direction: row;
+}

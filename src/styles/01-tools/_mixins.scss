@@ -1,0 +1,55 @@
+@use "../00-settings/variables" as *;
+@use "sass:map";
+
+$breakpoints: (
+  'sm': $break-sm,
+  'md': $break-md,
+  'lg': $break-lg,
+  'xl': $break-xl
+);
+
+@mixin respond($bp) {
+  @media (min-width: map.get($breakpoints, $bp)) {
+    @content;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex($direction: row, $gap: $spacing-4, $justify: flex-start, $align: stretch) {
+  display: flex;
+  flex-direction: $direction;
+  gap: $gap;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin grid-center {
+  display: grid;
+  place-items: center;
+}
+
+@mixin text-style($size: $font-size-base, $weight: $font-weight-regular, $lh: $line-height-normal) {
+  font-family: $font-primary, sans-serif;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lh;
+}
+
+@mixin button-base(
+  $padding: $spacing-3 $spacing-5,
+  $radius: $radius-md,
+  $shadow: $shadow-sm
+) {
+  @include text-style($font-size-sm, $font-weight-semibold);
+  cursor: pointer;
+  border: none;
+  border-radius: $radius;
+  transition: $transition-base;
+  padding: $padding;
+  box-shadow: $shadow;
+}

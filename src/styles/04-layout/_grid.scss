@@ -1,0 +1,85 @@
+@use '../00-settings/variables' as *;
+@use '../01-tools/mixins' as *;
+
+.container {
+  width: 100%;
+  max-width: 75rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $spacing-4;
+  padding-right: $spacing-4;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-6;
+
+  @include respond('sm') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond('md') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include respond('lg') {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: $spacing-4;
+
+  @include respond('sm') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond('md') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include respond('lg') {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  &-center {
+    @include grid-center;
+  }
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  gap: $spacing-4;
+
+  &-center {
+    @include flex-center;
+  }
+
+  &-column {
+    flex-direction: column;
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-4;
+}
+
+.col {
+  flex: 1 1 100%;
+  min-width: 200px;
+
+  @include respond('sm') {
+    flex: 1 1 48%;
+  }
+
+  @include respond('md') {
+    flex: 1 1 30%;
+  }
+
+  @include respond('lg') {
+    flex: 1 1 22%;
+  }
+}

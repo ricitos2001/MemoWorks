@@ -1,0 +1,59 @@
+@use '../00-settings/variables' as *;
+@use '../01-tools/mixins' as *;
+
+html {
+  box-sizing: border-box;
+  font-family: $font-primary;
+}
+
+body {
+  margin: 0;
+  background: var(--color-primary-1);
+  color: $neutral-900;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 $spacing-4 0;
+  font-family: $font-secondary;
+  line-height: $line-height-tight;
+  color: $neutral-900;
+}
+
+h1 { font-size: $font-size-5xl; }
+h2 { font-size: $font-size-4xl; }
+h3 { font-size: $font-size-3xl; }
+h4 { font-size: $font-size-2xl; }
+h5 { font-size: $font-size-xl; }
+h6 { font-size: $font-size-lg; }
+
+p {
+  margin: 0 0 $spacing-4 0;
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  color: $neutral-700;
+}
+
+a {
+  font-family: $font-primary;
+  color: $color-primary-1;
+}
+
+button {
+  cursor: pointer;
+  font-family: $font-primary;
+}
+
+ol, li {
+  padding: $spacing-6 $spacing-6 $spacing-6;
+}
+
+label { display: inline-block; margin-bottom: $spacing-2; font-weight: $font-weight-medium; font-family: $font-primary;}
+input, textarea, select {
+  border: $border-thin solid $neutral-300;
+  padding: $spacing-3;
+  border-radius: $radius-md;
+  background: #fff;
+}
+

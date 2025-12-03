@@ -1,0 +1,20 @@
+<label [for]="name">
+  {{ placeholder }}
+  <span *ngIf="required" aria-hidden="true">*</span>
+</label>
+
+<input
+  [type]="type"
+  [id]="name"
+  [name]="name"
+  [placeholder]="placeholder"
+  [required]="required"
+>
+
+<p class="error" *ngIf="showError && errorMessage">
+  {{ errorMessage }}
+</p>
+
+<p class="help" *ngIf="!showError && helpText">
+  {{ helpText }}
+</p>
