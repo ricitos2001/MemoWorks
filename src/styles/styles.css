@@ -274,9 +274,13 @@ input, textarea, select {
 }
 
 /***********************************/
-.header__nav {
+.header__nav, .footer__nav {
   display: flex;
   flex-direction: row;
+}
+
+.footer__img {
+  max-width: 10%;
 }
 
 .container {
@@ -309,7 +313,6 @@ input, textarea, select {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 1rem;
-  padding: 6rem;
 }
 @media (min-width: 40rem) {
   .grid {

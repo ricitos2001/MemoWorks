@@ -13,7 +13,11 @@
 
 /***********************************/
 
-.header__nav, {
+.header__nav, .footer__nav{
   display: flex;
   flex-direction: row;
+}
+
+.footer__img {
+  max-width: 10%;
 }
