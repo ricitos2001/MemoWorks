@@ -11,7 +11,9 @@
   background: var(--color-secondary-3);
 }
 
-.header__nav{
+/***********************************/
+
+.header__nav, {
   display: flex;
   flex-direction: row;
 }

@@ -21,4 +21,7 @@ export class Header implements OnInit {
       this.loggedIn = status;
     });
   }
+
+
+  urlImage = "../../../../assets/img/discord.png"
 }

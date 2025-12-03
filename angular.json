@@ -22,9 +22,11 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "src/assets",
+                "output": "/assets"
               }
             ],
+
             "styles": [
               "src/styles/styles.css"
             ]
