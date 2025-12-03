@@ -8,6 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: '../../../../styles/styles.css',
 })
 export class Footer {
-  urlImage: String = "/src/assets/img/discord.png"
 
 }
