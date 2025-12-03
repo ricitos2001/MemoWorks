@@ -43,6 +43,10 @@ a {
 button {
   cursor: pointer;
   font-family: $font-primary;
+  padding: $spacing-3 $spacing-24;
+  color: $color-primary-1;
+  background: $color-secondary-1;
+  border-radius: $radius-md;
 }
 
 ol, li {
