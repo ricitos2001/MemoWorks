@@ -12,6 +12,6 @@ export const routes: Routes = [
   { path: 'login', component: Login },
   { path: 'register', component: Register },
   { path: 'dashboard', component: Dasboard },
-  { path: 'calendar', component: Calendar },
-  { path: 'configuration', component: Config}
+  { path: 'calendario', component: Calendar },
+  { path: 'configuracion', component: Config }
 ];
