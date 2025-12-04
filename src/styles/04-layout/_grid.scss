@@ -1,4 +1,4 @@
-@use '../00-settings/variables' as *;
+@use '../00-settings/css-variables' as *;
 @use '../01-tools/mixins' as *;
 
 .container {
@@ -6,10 +6,10 @@
   max-width: 75rem;
   margin-left: auto;
   margin-right: auto;
-  padding: $spacing-24;
+  padding: var(--spacing-24);
   display: grid;
   grid-template-columns: 1fr;
-  gap: $spacing-6;
+  gap: var(--spacing-6);
 
   @include respond('sm') {
     grid-template-columns: repeat(2, 1fr);
@@ -27,7 +27,7 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  gap: $spacing-4;
+  gap: var(--spacing-4);
 
   @include respond('sm') {
     grid-template-columns: repeat(2, 1fr);
@@ -49,7 +49,7 @@
 .flex {
   display: flex;
   flex-direction: row;
-  gap: $spacing-4;
+  gap: var(--spacing-4);
 
   &-center {
     @include flex-center;
@@ -63,7 +63,7 @@
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: $spacing-4;
+  gap: var(--spacing-4);
 }
 
 .col {

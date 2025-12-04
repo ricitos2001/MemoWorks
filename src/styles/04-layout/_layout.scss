@@ -1,4 +1,4 @@
-@use '../00-settings/variables' as *;
+@use '../00-settings/css-variables' as *;
 @use '../01-tools/mixins' as *;
 
 .header, .footer {
@@ -7,8 +7,21 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  justify-content: space-between;
   background: var(--color-secondary-3);
+}
+
+.main{
+  align-items: center;
+  align-content: center;
+}
+
+.header {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer {
+  justify-content: space-around;
 }
 
 /***********************************/
@@ -18,6 +31,55 @@
   flex-direction: row;
 }
 
+.header__nav{
+  align-items: center;
+  justify-content: center;
+}
+
+.footer__marca{
+  align-items: center;
+  justify-content: center;
+}
+
+.header__logo {
+  max-width: 5%;
+}
+
+.footer__titulo {
+  display: flex;
+  flex-direction: row;
+}
+
+.footer__logo {
+  max-width: 25%;
+}
+
+.footer__copyright {
+  max-width: 8%;
+}
+
 .footer__img {
   max-width: 10%;
 }
+
+.footer__texto{
+  color: var(--color-primary-1);
+}
+
+/****************************************************************/
+
+.landing{
+  padding: var(--spacing-24);
+}
+
+.landing__iconos {
+  padding: var(--spacing-12);
+}
+
+.landing__icono {
+  max-width: 10%;
+  padding: var(--spacing-6) var(--spacing-6) var(--spacing-6) var(--spacing-6);
+  background: var(--color-secondary-3);
+  border-radius: var(--radius-xl);
+}
+

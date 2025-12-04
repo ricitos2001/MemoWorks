@@ -1,32 +1,24 @@
-<form (ngSubmit)="submitForm(registerForm)" #registerForm="ngForm">
-<fieldset>
+<form (ngSubmit)="submitForm(registerForm)" #registerForm="ngForm" class="container">
+  <fieldset class="fieldset">
     <legend>Registrate</legend>
-
-    <app-form-input
-      type="email"
-      name="email"
-      placeholder="Correo electrónico"
-      [required]="true"
-      helpText="Introduce tu correo registrado"
-      errorMessage="El correo es obligatorio"
-      [showError]="submitted && !email.value"
-      #email="ngModel"
-      ngModel
-    ></app-form-input>
-
-    <app-form-input
-      type="password"
-      name="password"
-      placeholder="Contraseña"
-      [required]="true"
-      helpText="Introduce tu contraseña"
-      errorMessage="La contraseña es obligatoria"
-      [showError]="submitted && !password.value"
-      #password="ngModel"
-      ngModel
-    ></app-form-input>
-
-    <app-button type="submit">Registrate</app-button>
-    <a href="/login">¿Ya tienes cuenta? Iniciar sesión</a>
+    <article class="grid-center">
+      <app-form-input type="email" name="email" placeholder="Correo electrónico" [required]="true" helpText="Introduce tu correo registrado" errorMessage="El correo es obligatorio" [showError]="submitted && !email.value" #email="ngModel" ngModel class="grid"></app-form-input>
+    </article>
+    <article class="flex-center">
+      <app-form-input type="text" name="name" placeholder="nombre" [required]="true" helpText="Introduce tu nombre" errorMessage="debes introducir tu nombre" [showError]="submitted && !name.value" #name="ngModel" ngModel class="grid"></app-form-input>
+      <app-form-input type="text" name="surnames" placeholder="Apellidos" [required]="true" helpText="Introduce tus apellidos" errorMessage="Debes introducir tus apellidos" [showError]="submitted && !surnames.value" #surnames="ngModel" ngModel class="grid"></app-form-input>
+    </article>
+    <article class="flex-center">
+      <app-form-input type="text" name="username" placeholder="Nombre de usuario" [required]="true" helpText="Introduce tu nombre de usuario" errorMessage="Debes introducir un nombre de usuario" [showError]="submitted && !username.value" #username="ngModel" ngModel class="grid"></app-form-input>
+      <app-form-input type="tel" name="phoneNumber" placeholder="Número de teléfono" [required]="true" helpText="Introduce tu número de teléfono" errorMessage="El número de teléfono no es válido" [showError]="submitted && !phoneNumber.value" #phoneNumber="ngModel" ngModel class="grid"></app-form-input>
+    </article>
+    <article class="flex-center">
+      <app-form-input type="password" name="password" placeholder="Contraseña" [required]="true" helpText="Introduce tu contraseña" errorMessage="La contraseña es obligatoria" [showError]="submitted && !password.value" #password="ngModel" ngModel class="grid"></app-form-input>
+      <app-form-input type="password" name="confirmPassword" placeholder="Confirmar contraseña" [required]="true" helpText="Vuelve a introducir tu contraseña" errorMessage="Las contraseñas no coinciden" [showError]="submitted && !password.value" #password="ngModel" ngModel class="grid"></app-form-input>
+    </article>
+    <article class="grid-center">
+      <app-button type="submit" class="grid">Registrate</app-button>
+      <a href="/login">¿Ya tienes cuenta? Iniciar sesión</a>
+    </article>
   </fieldset>
 </form>

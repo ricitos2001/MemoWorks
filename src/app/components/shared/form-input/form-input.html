@@ -1,20 +1,15 @@
-<label [for]="name">
-  {{ placeholder }}
-  <span *ngIf="required" aria-hidden="true">*</span>
-</label>
+<label [for]="name">{{ placeholder }}</label>
+<input [type]="type"
+       [id]="name"
+       [name]="name"
+       [placeholder]="placeholder"
+       [required]="required"
+       [value]="value"
+       [disabled]="disabled"
+       (input)="onInput($event)"
+       (blur)="onTouched()"
+       autocomplete="current-password">
+<p class="error" *ngIf="showError && errorMessage">{{ errorMessage }}</p>
 
-<input
-  [type]="type"
-  [id]="name"
-  [name]="name"
-  [placeholder]="placeholder"
-  [required]="required"
->
 
-<p class="error" *ngIf="showError && errorMessage">
-  {{ errorMessage }}
-</p>
-
-<p class="help" *ngIf="!showError && helpText">
-  {{ helpText }}
-</p>
+<!--p class="help" *ngIf="showError && helpText">{{ helpText }}</p-->

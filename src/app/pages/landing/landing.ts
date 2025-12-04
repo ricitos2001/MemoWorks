@@ -13,7 +13,7 @@ import {Button} from '../../components/shared/button/button';
 export class Landing {
 
   constructor(private router: Router) {}
-  imagen = '../../assets/img/Group_150.png';
+
   getStarted() {
     this.router.navigate(['/register']);
   }

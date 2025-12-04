@@ -1,63 +1,76 @@
-@use '../00-settings/variables' as *;
+@use '../00-settings/css-variables' as *;
 @use '../01-tools/mixins' as *;
 
 html {
   box-sizing: border-box;
-  font-family: $font-primary;
+  font-family: var(--font-primary), 'sans-serif';
 }
 
 body {
   margin: 0;
   background: var(--color-primary-1);
-  color: $neutral-900;
+  color: var(--neutral-900);
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 0 0 $spacing-4 0;
-  font-family: $font-secondary;
-  line-height: $line-height-tight;
-  color: $neutral-900;
+  margin: 0 0 var(--spacing-4) 0;
+  font-family: var(--font-secondary), sans-serif;
+  line-height: var(--line-height-tight);
+  color: var(--neutral-900);
 }
 
-h1 { font-size: $font-size-5xl; }
-h2 { font-size: $font-size-4xl; }
-h3 { font-size: $font-size-3xl; }
-h4 { font-size: $font-size-2xl; }
-h5 { font-size: $font-size-xl; }
-h6 { font-size: $font-size-lg; }
+h1 , legend{ font-size: var(--font-size-5xl); }
+h2 { font-size: var(--font-size-4xl); }
+h3 { font-size: var(--font-size-3xl); }
+h4 { font-size: var(--font-size-2xl); }
+h5 { font-size: var(--font-size-xl); }
+h6 { font-size: var(--font-size-lg); }
 
 p {
-  margin: 0 0 $spacing-4 0;
-  font-family: $font-primary;
-  font-size: $font-size-base;
-  line-height: $line-height-normal;
-  color: $neutral-700;
+  margin: 0 0 var(--spacing-4) 0;
+  font-family: var(--font-primary), sans-serif;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--neutral-700);
 }
 
 a {
-  font-family: $font-primary;
-  color: $color-primary-1;
+  font-family: var(--font-primary), sans-serif;
+  color: var(--color-primary-1);
 }
 
 button {
   cursor: pointer;
-  font-family: $font-primary;
-  padding: $spacing-3 $spacing-24;
-  color: $color-primary-1;
-  background: $color-secondary-1;
-  border-radius: $radius-md;
+  font-family: var(--font-primary), sans-serif;
+  padding: var(--spacing-3) var(--spacing-24);
+  color: var(--color-primary-1);
+  background: var(--color-secondary-1);
+  border-radius: var(--radius-md);
+  border: none;
+}
+
+button:hover{
+  background: var(--color-secondary-1);
 }
 
 ol, li {
-  padding: $spacing-6 $spacing-6 $spacing-6;
+  padding: var(--spacing-6) var(--spacing-6) var(--spacing-6) ;
 }
 
-label { display: inline-block; margin-bottom: $spacing-2; font-weight: $font-weight-medium; font-family: $font-primary;}
+label { display: inline-block; margin-bottom: var(--spacing-2); font-weight: var(--font-weight-medium); font-family: var(--font-primary), sans-serif;}
 input, textarea, select {
-  border: $border-thin solid $neutral-300;
-  padding: $spacing-3;
-  border-radius: $radius-md;
+  border: var(--border-thin) solid var(--neutral-300);
+  padding: var(--spacing-3);
+  border-radius: var(--radius-md);
   background: #fff;
 }
 
+/**************************************************/
+
+form {
+  margin: var(--spacing-24);
+  color: var(--color-primary-1);
+  background: var(--color-secondary-3);
+  border-radius: var(--radius-md);
+}

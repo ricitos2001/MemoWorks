@@ -22,12 +22,12 @@ export class Register {
   submitForm(form: NgForm) {
     this.submitted = true;
 
-    if (!form.valid) {
-      return
-    } else {
-      const dummyToken = 'token-ejemplo';
-      this.authService.login(dummyToken);
-      this.router.navigate(['/dashboard']);
+    if (form.valid) {
+      const token = 'token-ejemplo';
+      if (token) {
+        this.authService.register(token);
+        this.router.navigate(['/dashboard']);
+      }
     }
   }
 }
