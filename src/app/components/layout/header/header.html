@@ -1,19 +1,18 @@
 <header class="header">
-  <!--IMAGEN TEMPORAL-->
-  <a href="/landing" class="header__logo"><img src="assets/img/_𝘊𝘺𝘳𝘦𝘯𝘦-removebg-preview.png" alt="logo"></a>
+  <a href="/landing" class="header__logo"><img src="assets/img/logo.svg" alt="logo"></a>
   <nav>
     <ul class="header__nav">
       <ng-container *ngIf="!loggedIn">
-        <li><a href="">Inicio</a></li>
-        <li><a href="">Que ofrecemos</a></li>
-        <li><a href="">Contacto</a></li>
-        <li><a href="/register">Empecemos</a></li>
+        <li><a href="" class="header__link">Inicio</a></li>
+        <li><a href="" class="header__link">Que ofrecemos</a></li>
+        <li><a href="" class="header__link">Contacto</a></li>
+        <li><a href="/register" class="header__link">Empecemos</a></li>
       </ng-container>
 
       <ng-container *ngIf="loggedIn">
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/calendario">Calendario</a></li>
-        <li><a href="/configuracion">Configuración</a></li>
+        <li><a href="/dashboard" class="header__link">Dashboard</a></li>
+        <li><a href="/calendario" class="header__link">Calendario</a></li>
+        <li><a href="/configuracion" class="header__link">Configuración</a></li>
       </ng-container>
     </ul>
   </nav>

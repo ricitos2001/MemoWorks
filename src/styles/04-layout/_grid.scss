@@ -4,9 +4,8 @@
 .container {
   width: 100%;
   max-width: 75rem;
-  margin-left: auto;
-  margin-right: auto;
   padding: var(--spacing-24);
+  margin: var(--spacing-24) auto;
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--spacing-6);
