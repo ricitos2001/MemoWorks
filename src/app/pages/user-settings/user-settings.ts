@@ -4,14 +4,14 @@ import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-settings',
+  selector: 'app-user-settings',
   imports: [
     Button
   ],
-  templateUrl: './settings.html',
+  templateUrl: './user-settings.html',
   styleUrl: '../../../styles/styles.css',
 })
-export class Settings {
+export class UserSettings {
   constructor(private authService: AuthService, private router: Router) {}
 
   logout() {

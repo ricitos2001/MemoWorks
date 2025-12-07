@@ -290,8 +290,10 @@ form {
 .main {
   align-items: center;
   justify-content: center;
+  padding: var(--spacing-24);
 }
 
+/***************************************************/
 .header__nav {
   display: flex;
   flex-direction: row;
@@ -359,12 +361,15 @@ form {
 
 .settings__info {
   background: var(--color-secondary-4);
+  padding: var(--spacing-4);
 }
 
 .settings__item {
   display: flex;
   flex-direction: row;
-  padding: var(--spacing-4);
+  padding-top: var(--spacing-4);
+  padding-right: var(--spacing-4);
+  padding-bottom: var(--spacing-4);
   align-items: center;
 }
 
@@ -380,6 +385,34 @@ form {
   color: var(--color-secondary-1);
   background: var(--color-primary-1);
   flex: 0 0 16.25rem;
+}
+
+.settings__texto {
+  color: var(--color-primary-1);
+}
+
+.settings__nombre-grupo {
+  color: var(--color-primary-1);
+  font-size: var(--font-size-xl);
+}
+
+.settings__users {
+  display: flex;
+  flex-direction: row;
+  color: var(--color-secondary-1);
+  background: var(--color-primary-1);
+  flex: 0 0 auto;
+}
+
+.settings__imgUser {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+}
+
+.optionButton {
+  padding: var(--spacing-4);
+  background: var(--color-secondary-3);
+  border-radius: var(--radius-sm);
 }
 
 .container {
