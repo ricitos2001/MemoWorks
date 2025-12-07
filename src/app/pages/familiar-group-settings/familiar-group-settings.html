@@ -1,0 +1,42 @@
+
+<section class="settings">
+  <article class="grid settings__choices">
+    <a href="/configuracion">Información del usuario</a>
+    <a href="/gruposFamiliares">Grupos familiares</a>
+  </article>
+  <section>
+    <h2 class="settings__choice">Grupos familiares</h2>
+    <article class="settings__info">
+      <section class="flex-center">
+        <ng-container *ngIf="!inGroup">
+          <article class="grid-center">
+            <p class="settings__texto">Aun no estas dentro de un grupo familiar</p>
+            <p class="settings__texto">quieres formar parte de uno?</p>
+            <app-button (click)="createGroup()">Crear grupo familiar</app-button>
+          </article>
+        </ng-container>
+        <ng-container *ngIf="inGroup">
+          <article class="grid">
+            <p class="settings__nombre-grupo">Grupo familiar</p>
+            <img src="assets/img/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector-removebg-preview.png" alt="user">
+            <section>
+              <p class="settings__texto">miembros principales</p>
+              <article class="settings__item">
+                <article class="settings__users">
+                  <img src="assets/img/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector-removebg-preview.png" alt="user1" class="settings__imgUser">
+                  <img src="assets/img/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector-removebg-preview.png" alt="user2" class="settings__imgUser">
+                  <img src="assets/img/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector-removebg-preview.png" alt="user3" class="settings__imgUser">
+                  <img src="assets/img/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector-removebg-preview.png" alt="user4" class="settings__imgUser">
+                </article>
+                <a href="#" class="settings__boton-miembros">ver todos los miembros</a>
+              </article>
+            </section>
+            <app-button (click)="leaveGroup()">Abandonar grupo familiar</app-button>
+          </article>
+        </ng-container>
+      </section>
+      <article class="grid">
+      </article>
+    </article>
+  </section>
+</section>
