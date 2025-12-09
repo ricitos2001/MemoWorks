@@ -17,17 +17,33 @@ import {Router} from '@angular/router';
   styleUrl: '../../../styles/styles.css',
 })
 export class RecoverPassword {
-  constructor(private authService: AuthService, private router: Router) {}
   submitted = false;
+
+  formData = {
+    email: '',
+    password: ''
+  };
+
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
   submitForm(form: NgForm) {
     this.submitted = true;
 
     if (form.valid) {
-      const token = 'token-ejemplo';
-      if (token) {
-        this.authService.login(token);
-        this.router.navigate(['/dashboard']);
-      }
+      this.authService.login(this.formData).subscribe({
+        next: (res) => {
+          localStorage.setItem('token', res.token);
+          this.authService.saveToken(res.token);
+          this.authService.loggedInSubject.next(true);
+          this.router.navigate(['/dashboard']);
+        },
+        error: (err) => {
+          console.error('Error en login', err);
+        }
+      });
     }
   }
 }

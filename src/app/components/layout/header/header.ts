@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import {NgIf} from '@angular/common';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,6 @@ export class Header implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    // Nos suscribimos al estado de login
     this.authService.loggedIn$.subscribe(status => {
       this.loggedIn = status;
     });

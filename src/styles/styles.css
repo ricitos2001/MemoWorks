@@ -291,6 +291,7 @@ form {
   align-items: center;
   justify-content: center;
   padding: var(--spacing-24);
+  min-height: 56.25rem;
 }
 
 /***************************************************/
@@ -391,6 +392,7 @@ form {
   color: var(--color-primary-1);
 }
 
+/*****************************************************/
 .settings__nombre-grupo {
   color: var(--color-primary-1);
   font-size: var(--font-size-xl);
@@ -409,10 +411,54 @@ form {
   height: var(--spacing-24);
 }
 
+/*****************************************************/
 .optionButton {
   padding: var(--spacing-4);
   background: var(--color-secondary-3);
   border-radius: var(--radius-sm);
+  position: fixed;
+  right: var(--spacing-24);
+  bottom: var(--spacing-24);
+  transform: translateY(-50%);
+}
+
+.addButton {
+  padding: var(--spacing-4);
+  background: var(--color-secondary-3);
+  border-radius: var(--radius-sm);
+  position: fixed;
+  right: var(--spacing-24);
+  bottom: 24rem;
+  transform: translateY(-50%);
+}
+
+.editButton {
+  padding: var(--spacing-4);
+  background: var(--color-secondary-3);
+  border-radius: var(--radius-sm);
+  position: fixed;
+  right: var(--spacing-24);
+  bottom: 18rem;
+  transform: translateY(-50%);
+}
+
+.removeButton {
+  padding: var(--spacing-4);
+  background: var(--color-secondary-3);
+  border-radius: var(--radius-sm);
+  position: fixed;
+  right: var(--spacing-24);
+  bottom: 12rem;
+  transform: translateY(-50%);
+}
+
+/*****************************************************/
+.task {
+  background: var(--color-secondary-3);
+}
+
+.task__text {
+  color: var(--color-primary-1);
 }
 
 .container {

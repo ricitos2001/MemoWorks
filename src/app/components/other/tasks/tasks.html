@@ -1,0 +1,33 @@
+<ul>
+  <li *ngFor="let task of tasks">
+    <section class="task">
+      <section>
+        <img src="" alt="">
+        <article id="etiquetas">
+          {{ task.labels.join(', ') }}
+        </article>
+      </section>
+      <section>
+        <section>
+          <article>
+            <img src="assets/img/Calendar.svg" alt="icon">
+            <p class="task__text">{{ task.date | date:'dd/MM/yyyy' }}</p>
+          </article>
+          <article>
+            <img src="assets/img/Clock.svg" alt="icon">
+            <p class="task__text">{{ task.date | date:'HH:mm' }}</p>
+          </article>
+        </section>
+        <section>
+          <article>
+            <p class="task__text"><span>{{ task.title }}</span> - {{ task.description }}</p>
+          </article>
+          <app-view-task-button (click)="viewDetails(task.id)"></app-view-task-button>
+        </section>
+      </section>
+    </section>
+  </li>
+</ul>
+
+
+

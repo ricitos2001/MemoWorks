@@ -1,31 +1,39 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // Estado de login: true = logueado, false = no logueado
-  private loggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
+  private API_URL = 'http://localhost:8080/api/v1/auth';
 
+  loggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
   loggedIn$ = this.loggedInSubject.asObservable();
 
-  login(token: string) {
-    localStorage.setItem('token', token);
-    this.loggedInSubject.next(true);
+  constructor(private http: HttpClient) {}
+
+  login(data: { email: string; password: string }) {
+    return this.http.post<any>(`${this.API_URL}/authenticate`, data);
   }
 
-  register(token: string) {
-    localStorage.setItem('token', token);
-    this.loggedInSubject.next(true);
+  register(data: { email: string; name: string; surnames: string; phoneNumber: string; username: string; password: string; rol: string }) {
+    return this.http.post<any>(`${this.API_URL}/register`, data);
   }
 
   logout() {
-    localStorage.removeItem('token');
-    this.loggedInSubject.next(false);
+    return this.http.post(`${this.API_URL}/logout`, {});
   }
 
-  isLoggedIn(): boolean {
-    return this.loggedInSubject.value;
+  removeAccount() {
+    return this.http.post(`${this.API_URL}/logout`, {});
+  }
+
+  saveToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  removeToken() {
+    localStorage.removeItem('token');
   }
 }

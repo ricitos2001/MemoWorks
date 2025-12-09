@@ -16,17 +16,40 @@ import {FormsModule, NgForm} from '@angular/forms';
   styleUrl: '../../../styles/styles.css',
 })
 export class Register {
-  constructor(private authService: AuthService, private router: Router) {}
   submitted = false;
+
+  formData = {
+    email: '',
+    name: '',
+    surnames: '',
+    phoneNumber: '',
+    username: '',
+    password: '',
+    repeatPassword: '',
+    rol: 'USUARIO'
+  };
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   submitForm(form: NgForm) {
     this.submitted = true;
 
     if (form.valid) {
-      const token = 'token-ejemplo';
-      if (token) {
-        this.authService.register(token);
-        this.router.navigate(['/dashboard']);
+      if (this.formData.password !== this.formData.repeatPassword) {
+        console.error('Las contraseñas no coinciden');
+        return;
+      } else {
+        this.authService.register(this.formData).subscribe({
+          next: (res) => {
+            localStorage.setItem('token', res.token);
+            this.authService.saveToken(res.token);
+            this.authService.loggedInSubject.next(true);
+            this.router.navigate(['/dashboard']);
+          },
+          error: (err) => {
+            console.error('Error en registo', err);
+          }
+        });
       }
     }
   }
