@@ -1,0 +1,17 @@
+<form (ngSubmit)="createTask(taskForm)" #taskForm="ngForm">
+  <fieldset>
+    <legend>Crear tarea</legend>
+    <app-form-input type="text" name="title" placeholder="Titulo" [required]="true" helpText="Introduce una titulo" errorMessage="El titulo es obligatoria" [showError]="submitted && !title.value" #title="ngModel" ngModel aria-required="true" class="grid" [(ngModel)]="taskFormData.title"></app-form-input>
+    <app-form-input type="textarea" name="description" placeholder="descripcion" [required]="true" helpText="Introduce una descripcion" errorMessage="La descripcion es obligatoria" [showError]="submitted && !description.value" #description="ngModel" ngModel aria-required="true" class="grid" [(ngModel)]="taskFormData.description"></app-form-input>
+    <article class="flex">
+      <app-form-input type="date" name="date" placeholder="Fecha" [required]="true" helpText="Introduce una fecha" errorMessage="La fecha es obligatoria" [showError]="submitted && !date.value" #date="ngModel" ngModel aria-required="true" class="grid" [(ngModel)]="taskFormData.date"></app-form-input>
+      <app-form-input type="time" name="time" placeholder="Hora" [required]="true" helpText="Introduce una hora" errorMessage="La hora es obligatoria" [showError]="submitted && !time.value" #time="ngModel" ngModel aria-required="true" class="grid" [(ngModel)]="taskFormData.time"></app-form-input>
+    </article>
+    <article>
+      <app-button type="submit">crear tarea</app-button>
+      <app-button (click)="cancelTask()">cancelar</app-button>
+    </article>
+  </fieldset>
+</form>
+
+
