@@ -1,5 +1,6 @@
 <label [for]="name">{{ placeholder }}</label>
-<input [type]="type"
+<input *ngIf="type !== 'textarea'"
+       [type]="type"
        [id]="name"
        [name]="name"
        [placeholder]="placeholder"
@@ -9,7 +10,16 @@
        (input)="onInput($event)"
        (blur)="onTouched()"
        autocomplete="current-password">
-<p class="error" *ngIf="showError && errorMessage">{{ errorMessage }}</p>
 
+<textarea *ngIf="type === 'textarea'"
+          [id]="name"
+          [name]="name"
+          [placeholder]="placeholder"
+          [required]="required"
+          [disabled]="disabled"
+          (input)="onInput($event)"
+          (blur)="onTouched()">{{ value }}</textarea>
+
+<p class="error" *ngIf="showError && errorMessage">{{ errorMessage }}</p>
 
 <!--p class="help" *ngIf="showError && helpText">{{ helpText }}</p-->

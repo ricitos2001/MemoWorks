@@ -15,6 +15,7 @@ import {AuthInterceptor} from './interceptors/auth-interceptor';
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ]
 })
+
 export class App {
-  protected readonly title = signal('untitled');
+  protected readonly title = signal('MemoWorks');
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'app-add-button',
@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: '../../../../styles/styles.css',
 })
 export class AddButton {
-
+  @Output() add = new EventEmitter<void>();
 }

@@ -42,6 +42,7 @@ export class Register {
         this.authService.register(this.formData).subscribe({
           next: (res) => {
             localStorage.setItem('token', res.token);
+            this.authService.getUserIdFromToken();
             this.authService.saveToken(res.token);
             this.authService.loggedInSubject.next(true);
             this.router.navigate(['/dashboard']);

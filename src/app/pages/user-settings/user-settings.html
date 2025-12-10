@@ -1,28 +1,24 @@
-<section class="flex-center">
+<section class="flex-center" *ngIf="user">
   <section>
     <article class="settings__item">
       <p class="settings__name">nombre</p>
-      <p class="settings__value">cesar gabriel</p>
+      <p class="settings__value">{{ user.name }}</p>
     </article>
     <article class="settings__item">
       <p class="settings__name">apellidos</p>
-      <p class="settings__value">ucha sousa</p>
+      <p class="settings__value">{{ user.surnames }}</p>
     </article>
     <article class="settings__item">
       <p class="settings__name">nombre de usuarió</p>
-      <p class="settings__value">ricitos2001</p>
+      <p class="settings__value">{{ user.username }}</p>
     </article>
     <article class="settings__item">
       <p class="settings__name">numero de teléfono</p>
-      <p class="settings__value">+XX XXX XX XX XX</p>
+      <p class="settings__value">{{ user.phoneNumber }}</p>
     </article>
     <article class="settings__item">
       <p class="settings__name">correo electrónico</p>
-      <p  class="settings__value">cesar@email.com</p>
-    </article>
-    <article class="settings__item">
-      <p class="settings__name">contraseña</p>
-      <p class="settings__value">XXXX</p>
+      <p  class="settings__value">{{ user.email }}</p>
     </article>
   </section>
   <article class="grid-center">

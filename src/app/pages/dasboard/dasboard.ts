@@ -3,14 +3,15 @@ import {OptionButton} from '../../components/other/option-button/option-button';
 import {AddButton} from '../../components/other/add-button/add-button';
 import {EditButton} from '../../components/other/edit-button/edit-button';
 import {RemoveButton} from '../../components/other/remove-button/remove-button';
-import {TaskCard} from '../../components/other/task-card/task-card';
 import {Tasks} from '../../components/other/tasks/tasks';
+import {TaskForm} from '../../components/shared/task-form/task-form';
 
 @Component({
   selector: 'app-dasboard',
   imports: [
     OptionButton,
-    Tasks
+    Tasks,
+    TaskForm,
   ],
   templateUrl: './dasboard.html',
   styleUrl: '../../../styles/styles.css',

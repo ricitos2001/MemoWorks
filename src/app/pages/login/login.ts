@@ -17,6 +17,8 @@ import {FormsModule, NgForm} from '@angular/forms';
 })
 
 export class Login {
+
+
   submitted = false;
 
   formData = {
@@ -38,6 +40,7 @@ export class Login {
           // Guardar el token real del backend
           console.log(res);
           localStorage.setItem('token', res.token);
+          this.authService.getUserIdFromToken();
           this.authService.saveToken(res.token);
           this.authService.loggedInSubject.next(true);
           this.router.navigate(['/dashboard']);

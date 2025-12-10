@@ -185,12 +185,46 @@
 
 /*****************************************************/
 
-.task {
+.task, .task-details{
   background: var(--color-secondary-3);
 }
 
-.task__text {
+.task {
+  width: 25rem;
+  height: 30rem;
+}
+
+.task-details {
+  width: 50rem;
+  height: 25rem;
+}
+
+.task__text, .task-details__text {
   color: var(--color-primary-1);
 }
 
+.task-details__title {
+  color: var(--color-primary-1);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
 
+.task-details__padding {
+  padding-top: var(--spacing-24);
+  padding-right: var(--spacing-12);
+  padding-bottom: var(--spacing-24);
+}
+
+.task__box, .task-details__box {
+  width: 25rem;
+  height: 15rem;
+}
+
+.task__image-box, .task-details__image-box {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 25rem;
+  height: 15rem;
+  background-image: url("/assets/img/funds/digital-dimensions-twilight-landscape-with-a-purple-haze-sunrise-designed-by-ppublish-colorful-reflections-perfect-942666541-1.jpg");
+  background-size: cover;
+}

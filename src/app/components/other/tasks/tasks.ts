@@ -18,10 +18,13 @@ import { Router } from '@angular/router';
 export class Tasks implements OnInit {
   tasks: Task[] = [];
 
+
   constructor(private taskService: TaskService, private cdr: ChangeDetectorRef, private router: Router) {}
 
+
+  id = localStorage.getItem('userId');
   ngOnInit(): void {
-    this.taskService.getTasks().subscribe({
+    this.taskService.getTasksByUserId(this.id).subscribe({
       next: (response: any) => {
         this.tasks = response.content;
         this.cdr.detectChanges();
@@ -31,5 +34,13 @@ export class Tasks implements OnInit {
 
   viewDetails(taskId: number) {
     this.router.navigate(['/dashboard', taskId]);
+  }
+
+  formatTime(timeStr: string): Date | null {
+    if (!timeStr) return null;
+    const [hours, minutes] = timeStr.split(':');
+    const date = new Date();
+    date.setHours(+hours, +minutes, 0, 0);
+    return date;
   }
 }

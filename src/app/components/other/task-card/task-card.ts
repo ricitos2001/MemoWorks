@@ -7,7 +7,7 @@ import {ActivatedRoute} from '@angular/router';
   selector: 'app-task-card',
   imports: [
     DatePipe,
-    NgIf
+    NgIf,
   ],
   templateUrl: './task-card.html',
   styleUrl: '../../../../styles/styles.css',
@@ -35,6 +35,14 @@ export class TaskCard implements OnInit {
         }
       });
     }
+  }
+
+  formatTime(timeStr: string): Date | null {
+    if (!timeStr) return null;
+    const [hours, minutes] = timeStr.split(':');
+    const date = new Date();
+    date.setHours(+hours, +minutes, 0, 0);
+    return date;
   }
 }
 

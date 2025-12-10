@@ -7,10 +7,9 @@ export interface Task {
   title: string;
   description: string;
   date: string;
+  time: string;
   assigmentFor: {
     id: number;
-    name: string;
-    username: string;
   };
   status: boolean;
   labels: string[];
@@ -25,8 +24,8 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
 
-  getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>('http://localhost:8080/api/v1/tasks', {
+  getTasksByUserId(id: string | null): Observable<Task[]> {
+    return this.http.get<Task[]>(`http://localhost:8080/api/v1/tasks/myTasks/${id}`, {
       headers: {
         Authorization: `Bearer ${this.token}`
       }
@@ -38,6 +37,12 @@ export class TaskService {
       headers: {
         Authorization: `Bearer ${this.token}`
       }
+    });
+  }
+
+  createTask(task: any): Observable<any> {
+    return this.http.post(`http://localhost:8080/api/v1/tasks`, task, {
+      headers: { Authorization: `Bearer ${this.token}`}
     });
   }
 }

@@ -50,8 +50,8 @@ export class FormInput implements ControlValueAccessor {
   }
 
   onInput(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.onChange(input.value);
+    const element = event.target as HTMLInputElement | HTMLTextAreaElement;
+    this.onChange(element.value);
   }
 }
 

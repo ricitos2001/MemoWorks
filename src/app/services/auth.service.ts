@@ -33,7 +33,17 @@ export class AuthService {
     localStorage.setItem('token', token);
   }
 
-  removeToken() {
+  getUserIdFromToken() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const payload = token.split('.')[1];
+      const userData = JSON.parse(atob(payload));
+      localStorage.setItem('userId', userData.id);
+    }
+  }
+
+  removeUserData() {
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
   }
 }

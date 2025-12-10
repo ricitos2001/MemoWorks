@@ -24,7 +24,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUserById(id: number): Observable<any> {
+  getUserById(id: string | null): Observable<any> {
     return this.http.get(`http://localhost:8080/api/v1/users/id/${id}`,
       {
         headers: {
