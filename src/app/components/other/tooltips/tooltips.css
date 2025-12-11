@@ -1,0 +1,15 @@
+.tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  background: black;
+  color: white;
+  padding: .5rem 1rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {ThemeService} from '../../../services/theme.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,6 +9,14 @@ import { Component } from '@angular/core';
   templateUrl: './footer.html',
   styleUrl: '../../../../styles/styles.css',
 })
-export class Footer {
+export class Footer implements OnInit {
+  darkMode = false;
 
+  constructor(private themeService: ThemeService) {}
+
+  ngOnInit(): void {
+    this.themeService.currentTheme$.subscribe(theme => {
+      this.darkMode = theme === 'dark';
+    });
+  }
 }

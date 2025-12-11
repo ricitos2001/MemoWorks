@@ -8,6 +8,24 @@
   box-sizing: border-box;
 }
 
+:root {
+  --background: var(--color-primary-1);
+  --letters: var(--color-primary-1);
+  --components: var(--color-secondary-3);
+  --buttons: var(--color-secondary-1);
+  --landing-letters: var(--neutral-900);
+
+}
+
+.theme-dark {
+  --background: var(--neutral-500);
+  --letters: var(--color-primary-1);
+  --components: var(--neutral-700);
+  --buttons: var(--neutral-900);
+  --landing-letters: var(--color-primary-1);
+}
+
+
 html {
   font-family: var(--font-primary), sans-serif;
   font-size: var(--font-size-base);
@@ -17,8 +35,8 @@ html {
 }
 
 body {
-  background-color: var(--color-primary-1);
-  color: var(--neutral-900);
+  background-color: var(--background);
+  color: var(--landing-letters);
   font-family: var(--font-primary), sans-serif;
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);

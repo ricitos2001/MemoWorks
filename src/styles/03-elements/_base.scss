@@ -8,7 +8,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-primary-1);
+  background: var(--background);
   color: var(--neutral-900);
   -webkit-font-smoothing: antialiased;
 }
@@ -16,7 +16,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-secondary), sans-serif;
   line-height: var(--line-height-tight);
-  color: var(--neutral-900);
+  color: var(--landing-letters);
 }
 
 h1 , legend{ font-size: var(--font-size-5xl); }
@@ -30,7 +30,7 @@ p {
   font-family: var(--font-primary), sans-serif;
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
-  color: var(--neutral-700);
+  color: var(--landing-letters);
 }
 
 a {
@@ -42,14 +42,10 @@ button {
   cursor: pointer;
   font-family: var(--font-primary), sans-serif;
   padding: var(--spacing-6) var(--spacing-24);
-  color: var(--color-primary-1);
-  background: var(--color-secondary-1);
+  color: var(--letters);
+  background: var(--buttons);
   border-radius: var(--radius-md);
   border: none;
-}
-
-button:hover{
-  background: var(--color-secondary-1);
 }
 
 ol, li {
@@ -61,12 +57,12 @@ input, textarea, select {
   border: var(--border-thin) solid var(--neutral-300);
   padding: var(--spacing-3);
   border-radius: var(--radius-md);
-  background: #fff;
+  background: var(--letters);
 }
 
 form {
   margin: var(--spacing-24);
-  color: var(--color-primary-1);
-  background: var(--color-secondary-3);
+  color: var(--letters);
+  background: var(--components);
   border-radius: var(--radius-md);
 }

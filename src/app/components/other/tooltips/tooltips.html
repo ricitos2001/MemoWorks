@@ -1,0 +1,11 @@
+<section
+  class="tooltip-wrapper"
+  (mouseenter)="showTooltip = true"
+  (mouseleave)="showTooltip = false"
+>
+  <button>Hover aquí</button>
+
+  <article class="tooltip" *ngIf="showTooltip">
+    Este es un tooltip.
+  </article>
+</section>

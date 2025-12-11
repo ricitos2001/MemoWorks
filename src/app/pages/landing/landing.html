@@ -16,10 +16,10 @@
       <h3>Organiza tu vida</h3>
       <p>organiza tus tareas creando notas y asignándoles una fecha de realización y finalización</p>
     </article>
-    <img src="assets/img/Group_150.webp" alt="imagen1">
+    <img [src]="darkMode ? 'assets/img/Group_150.png' : 'assets/img/Group_150.webp'" alt="imagen1">
   </article>
   <article class="flex grid-center container">
-    <img src="assets/img/Group_151.webp" alt="imagen2">
+    <img [src]="darkMode ? 'assets/img/Group_151.png' : 'assets/img/Group_151.webp'" alt="imagen2">
     <article>
       <h3>Crea grupos de trabajo</h3>
       <p>Crea grupos familiares o de trabajo con otros usuarios a los que les podrían asignar las tareas que se te ocurran</p>
@@ -30,6 +30,6 @@
       <h3>No olvides lo pendiente</h3>
       <p>Recibe notificaciones por correo desde tu teléfono para no olvidar lo que tienes pendiente</p>
     </article>
-    <img src="assets/img/Clip_path_group.webp" alt="imagen3">
+    <img [src]="darkMode ? 'assets/img/Clip_path_group.png' : 'assets/img/Clip_path_group.webp'" alt="imagen3">
   </article>
 </section>

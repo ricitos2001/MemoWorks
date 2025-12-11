@@ -1,0 +1,18 @@
+<button class="hamburger" (click)="toggleMenu()">☰</button>
+
+<nav class="menu" [class.open]="isOpen">
+  <ul class="header__nav">
+    <ng-container *ngIf="!loggedIn">
+      <li><a href="#inicio" class="header__link">Inicio</a></li>
+      <li><a href="#queOfrecemos" class="header__link">Que ofrecemos</a></li>
+      <li><a href="#contacto" class="header__link">Contacto</a></li>
+      <li><a href="/register" class="header__link">Empecemos</a></li>
+    </ng-container>
+
+    <ng-container *ngIf="loggedIn">
+      <li><a href="/dashboard" class="header__link">Dashboard</a></li>
+      <li><a href="/calendar" class="header__link">Calendario</a></li>
+      <li><a href="/settings" class="header__link">Configuración</a></li>
+    </ng-container>
+  </ul>
+</nav>
