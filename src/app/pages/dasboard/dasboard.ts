@@ -39,6 +39,7 @@ export class Dasboard {
       if (firstChild) {
         this.renderer.removeChild(this.buttons.nativeElement, firstChild);
         this.status = false;
+        this.formStatus = false;
       }
     }
   }
