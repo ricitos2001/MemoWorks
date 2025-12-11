@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-tooltips',
-  imports: [],
+  imports: [
+    NgIf
+  ],
   templateUrl: './tooltips.html',
   styleUrl: './tooltips.css',
 })

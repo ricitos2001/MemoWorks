@@ -1,8 +1,11 @@
 import { Component, HostListener } from '@angular/core';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-modal',
-  imports: [],
+  imports: [
+    NgIf
+  ],
   templateUrl: './modal.html',
   styleUrl: './modal.css',
 })
@@ -17,8 +20,11 @@ export class Modal {
     this.isOpen = false;
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
-  onEsc() {
-    this.close();
+  @HostListener('document:keydown', ['$event'])
+  onKeydown(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      this.close();
+    }
   }
+
 }
