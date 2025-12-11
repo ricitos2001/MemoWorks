@@ -1,4 +1,4 @@
-<form (ngSubmit)="createTask(taskForm)" #taskForm="ngForm">
+<form (ngSubmit)="createTask(taskForm, $event)" #taskForm="ngForm">
   <fieldset>
     <legend>Crear tarea</legend>
     <app-form-input type="text" name="title" placeholder="Titulo" [required]="true" helpText="Introduce una titulo" errorMessage="El titulo es obligatoria" [showError]="submitted && !title.value" #title="ngModel" ngModel aria-required="true" class="grid" [(ngModel)]="taskFormData.title"></app-form-input>

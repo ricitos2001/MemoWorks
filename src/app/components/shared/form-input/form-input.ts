@@ -31,7 +31,17 @@ export class FormInput implements ControlValueAccessor {
   disabled = false;
 
   onChange = (value: any) => {};
-  onTouched = () => {};
+  onTouched = () => {
+    console.log('Input perdió foco');
+  };
+
+  onFocus() {
+    console.log('Input con foco');
+  }
+
+  onKeyUp(event: KeyboardEvent) {
+    console.log(event.key);
+  }
 
   writeValue(value: any): void {
     this.value = value;

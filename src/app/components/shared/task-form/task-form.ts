@@ -43,15 +43,17 @@ export class TaskForm {
   @Output() cancel = new EventEmitter<void>();
   @Output() create = new EventEmitter<void>();
 
-  createTask(form: NgForm) {
-      this.submitted = true;
-      if (form.valid) {
-        this.taskService.createTask(this.taskFormData).subscribe({
-          next: (response) => console.log('Enviado correctamente', response),
-          error: (err) => console.error('Error al enviar', err)
-        });
-        this.create.emit();
-      }
+  createTask(form: NgForm, event: Event) {
+    event.preventDefault();
+    console.log('Formulario enviado sin recarga');
+    this.submitted = true;
+    if (form.valid) {
+      this.taskService.createTask(this.taskFormData).subscribe({
+        next: (response) => console.log('Enviado correctamente', response),
+        error: (err) => console.error('Error al enviar', err)
+      });
+      this.create.emit();
+    }
   }
 
   cancelTask() {

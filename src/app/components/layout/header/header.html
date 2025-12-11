@@ -1,8 +1,9 @@
-<header class="header">
+<header class="header" #header>
   <a href="/landing" class="header__logo"><img src="assets/img/logo.svg" alt="logo"></a>
   <nav>
     <ul class="header__nav">
       <ng-container *ngIf="!loggedIn">
+        <li><app-dark-mode-button (click)="changeTheme()"></app-dark-mode-button></li>
         <li><a href="#inicio" class="header__link">Inicio</a></li>
         <li><a href="#queOfrecemos" class="header__link">Que ofrecemos</a></li>
         <li><a href="#contacto" class="header__link">Contacto</a></li>
@@ -10,6 +11,7 @@
       </ng-container>
 
       <ng-container *ngIf="loggedIn">
+        <li><app-dark-mode-button (click)="changeTheme()"></app-dark-mode-button></li>
         <li><a href="/dashboard" class="header__link">Dashboard</a></li>
         <li><a href="/calendar" class="header__link">Calendario</a></li>
         <li><a href="/settings" class="header__link">Configuración</a></li>

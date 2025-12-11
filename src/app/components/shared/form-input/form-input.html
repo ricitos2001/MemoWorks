@@ -8,8 +8,11 @@
        [value]="value"
        [disabled]="disabled"
        (input)="onInput($event)"
+       (keyup)="onKeyUp($event)"
+       (focus)="onFocus()"
        (blur)="onTouched()"
-       autocomplete="current-password">
+       autocomplete="current-password"
+>
 
 <textarea *ngIf="type === 'textarea'"
           [id]="name"
@@ -18,7 +21,12 @@
           [required]="required"
           [disabled]="disabled"
           (input)="onInput($event)"
-          (blur)="onTouched()">{{ value }}</textarea>
+          (keyup)="onKeyUp($event)"
+          (focus)="onFocus()"
+          (blur)="onTouched()"
+
+
+>{{ value }}</textarea>
 
 <p class="error" *ngIf="showError && errorMessage">{{ errorMessage }}</p>
 

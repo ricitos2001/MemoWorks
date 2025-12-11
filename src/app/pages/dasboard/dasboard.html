@@ -1,6 +1,7 @@
 <section class="notes" id="notes">
   <app-tasks></app-tasks>
 </section>
-<ng-container #buttons></ng-container>
-<app-task-form></app-task-form>
-<app-option-button (click)="showOrRemoveOptions()"></app-option-button>
+<app-task-form *ngIf="formStatus"></app-task-form>
+<article #buttons></article>
+<app-option-button (click)="createButtons($event)"></app-option-button>
+

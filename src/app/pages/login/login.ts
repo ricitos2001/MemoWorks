@@ -31,7 +31,9 @@ export class Login {
     private router: Router
   ) {}
 
-  submitForm(form: NgForm) {
+  submitForm(form: NgForm, event: Event) {
+    event.preventDefault();
+    console.log('Formulario enviado sin recarga');
     this.submitted = true;
 
     if (form.valid) {
