@@ -1,11 +1,19 @@
-import {ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component, DestroyRef,
+  ElementRef,
+  inject,
+  OnInit,
+  Renderer2,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {OptionButton} from '../../components/other/option-button/option-button';
-import {AddButton} from '../../components/other/add-button/add-button';
-import {EditButton} from '../../components/other/edit-button/edit-button';
-import {RemoveButton} from '../../components/other/remove-button/remove-button';
 import {Tasks} from '../../components/other/tasks/tasks';
 import {TaskForm} from '../../components/shared/task-form/task-form';
 import {NgIf} from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {CommunicationService} from '../../services/shared/communication.service';
 
 @Component({
   selector: 'app-dasboard',
@@ -18,11 +26,11 @@ import {NgIf} from '@angular/common';
   templateUrl: './dasboard.html',
   styleUrl: '../../../styles/styles.css',
 })
-export class Dasboard {
+export class Dasboard implements OnInit {
 
   @ViewChild('buttons', { static: false }) buttons!: ElementRef;
 
-  constructor(private renderer: Renderer2, private cd: ChangeDetectorRef) {}
+  constructor(private renderer: Renderer2, private cd: ChangeDetectorRef, private communicationService: CommunicationService) {}
 
   status = false
   formStatus = false
@@ -80,5 +88,17 @@ export class Dasboard {
     this.renderer.setStyle(removeButton, 'right', '6rem');
     this.renderer.setStyle(removeButton, 'bottom', '15rem');
     this.renderer.appendChild(this.buttons.nativeElement, removeButton);
+  }
+
+  private destroyRef = inject(DestroyRef);
+
+  ngOnInit() {
+    this.communicationService.notifications$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(n => {
+        if (n) {
+          console.log('Recibido:', n);
+        }
+      });
   }
 }

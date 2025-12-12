@@ -6,6 +6,7 @@ import { TaskService } from '../../../services/task.service';
 import {NgIf} from '@angular/common';
 import {AuthService} from '../../../services/auth.service';
 import {Router} from '@angular/router';
+import {CommunicationService} from '../../../services/shared/communication.service';
 
 
 
@@ -37,7 +38,7 @@ export class TaskForm {
     labels: [] as string[],
   };
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, private comm: CommunicationService) {}
 
 
   @Output() cancel = new EventEmitter<void>();
@@ -49,14 +50,22 @@ export class TaskForm {
     this.submitted = true;
     if (form.valid) {
       this.taskService.createTask(this.taskFormData).subscribe({
-        next: (response) => console.log('Enviado correctamente', response),
-        error: (err) => console.error('Error al enviar', err)
+        next: (response) => {
+          console.log('Enviado correctamente', response)
+        },
+        error: (err) => {
+          console.error('Error al enviar', err)
+        }
       });
       this.create.emit();
+      this.onAction()
     }
   }
 
   cancelTask() {
     this.cancel.emit();
   }
-}
+
+  onAction() {
+    this.comm.sendNotification({ source: 'hermano1', payload: { id: 123, msg: 'actualizado' } });
+  }}

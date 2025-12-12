@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {DarkModeButton} from '../../other/dark-mode-button/dark-mode-button';
 import {HamburgerMenu} from '../../other/hamburger-menu/hamburger-menu';
-import {ThemeService} from '../../../services/theme.service';
+import {ThemeService} from '../../../services/shared/theme.service';
 
 @Component({
   selector: 'app-header',

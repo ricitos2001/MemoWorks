@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {ThemeService} from '../../../services/theme.service';
+import {ThemeService} from '../../../services/shared/theme.service';
 
 @Component({
   selector: 'app-footer',

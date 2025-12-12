@@ -1,8 +1,10 @@
-import {Component, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {OptionButton} from '../../components/other/option-button/option-button';
 import {AddButton} from '../../components/other/add-button/add-button';
 import {EditButton} from '../../components/other/edit-button/edit-button';
 import {RemoveButton} from '../../components/other/remove-button/remove-button';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {CommunicationService} from '../../services/shared/communication.service';
 
 @Component({
   selector: 'app-calendar',
@@ -12,7 +14,10 @@ import {RemoveButton} from '../../components/other/remove-button/remove-button';
   templateUrl: './calendar.html',
   styleUrl: '../../../styles/styles.css',
 })
-export class Calendar {
+export class Calendar implements OnInit {
+  constructor(private communicationService: CommunicationService) {
+  }
+
   @ViewChild('buttons', { read: ViewContainerRef })
   buttons!: ViewContainerRef;
 
@@ -28,5 +33,17 @@ export class Calendar {
       this.buttons.clear()
       this.visibles = false;
     }
+  }
+
+  private destroyRef = inject(DestroyRef);
+
+  ngOnInit() {
+    this.communicationService.notifications$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(n => {
+        if (n) {
+          console.log('Recibido:', n);
+        }
+      });
   }
 }

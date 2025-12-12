@@ -5,6 +5,7 @@ import {Footer} from './components/layout/footer/footer';
 import {Main} from './components/layout/main/main';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './interceptors/auth-interceptor';
+import {LoadingInterceptor} from './interceptors/loading.interceptor-interceptor';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,8 @@ import {AuthInterceptor} from './interceptors/auth-interceptor';
   templateUrl: './app.html',
   styleUrl: '../styles/styles.css',
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ]
 })
 
