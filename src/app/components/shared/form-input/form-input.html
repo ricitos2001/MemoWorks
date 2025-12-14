@@ -1,33 +1,21 @@
 <label [for]="name">{{ placeholder }}</label>
-<input *ngIf="type !== 'textarea'"
-       [type]="type"
-       [id]="name"
-       [name]="name"
-       [placeholder]="placeholder"
-       [required]="required"
-       [value]="value"
-       [disabled]="disabled"
-       (input)="onInput($event)"
-       (keyup)="onKeyUp($event)"
-       (focus)="onFocus()"
-       (blur)="onTouched()"
-       autocomplete="current-password"
->
 
-<textarea *ngIf="type === 'textarea'"
-          [id]="name"
-          [name]="name"
-          [placeholder]="placeholder"
-          [required]="required"
-          [disabled]="disabled"
-          (input)="onInput($event)"
-          (keyup)="onKeyUp($event)"
-          (focus)="onFocus()"
-          (blur)="onTouched()"
+<input
+  *ngIf="type !== 'textarea'"
+  [id]="name"
+  [type]="type"
+  [placeholder]="placeholder"
+  [value]="value"
+  [disabled]="disabled"
+  (input)="onInput($event)"
+  (blur)="onBlur()"
+/>
 
-
+<textarea
+  *ngIf="type === 'textarea'"
+  [id]="name"
+  [placeholder]="placeholder"
+  [disabled]="disabled"
+  (input)="onInput($event)"
+  (blur)="onBlur()"
 >{{ value }}</textarea>
-
-<p class="error" *ngIf="showError && errorMessage">{{ errorMessage }}</p>
-
-<!--p class="help" *ngIf="showError && helpText">{{ helpText }}</p-->

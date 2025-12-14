@@ -1,12 +1,18 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Output} from '@angular/core';
 import {Button} from '../button/button';
 import {FormInput} from '../form-input/form-input';
-import {FormsModule, NgForm, ReactiveFormsModule} from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 import { TaskService } from '../../../services/task.service';
-import {NgIf} from '@angular/common';
-import {AuthService} from '../../../services/auth.service';
-import {Router} from '@angular/router';
 import {CommunicationService} from '../../../services/shared/communication.service';
+import {NgForOf, NgIf} from '@angular/common';
 
 
 
@@ -18,6 +24,8 @@ import {CommunicationService} from '../../../services/shared/communication.servi
     FormsModule,
     ReactiveFormsModule,
     FormInput,
+    NgIf,
+    NgForOf,
   ],
   templateUrl: './task-form.html',
   styleUrl: '../../../../styles/styles.css',
@@ -26,46 +34,71 @@ import {CommunicationService} from '../../../services/shared/communication.servi
 export class TaskForm {
 
   submitted = false;
+  taskForm: FormGroup
 
-  taskFormData = {
-    title: '',
-    description: '',
-    date: '',
-    time: '',
-    assigmentFor: {
-      id: `${localStorage.getItem('userId')}`,},
-    status: true,
-    labels: [] as string[],
-  };
 
-  constructor(private taskService: TaskService, private comm: CommunicationService) {}
+  constructor(private taskService: TaskService, private comm: CommunicationService, private fb: FormBuilder, private cd: ChangeDetectorRef) {
+    this.taskForm = this.fb.group({
+      title: ['', [Validators.required, Validators.maxLength(50)]],
+      description: ['', [Validators.required, Validators.max(500)]],
+      date: ['', [Validators.required, Validators.maxLength(50)]],
+      time: ['', [Validators.required, Validators.maxLength(50)]],
+      assigmentFor: {
+        id: `${localStorage.getItem('userId')}`,},
+      status: true,
+      labels: this.fb.array([]),
+    });
+  }
 
+  get labels(): FormArray {
+    return this.taskForm.get('labels') as FormArray;
+  }
+
+  addLabel(value: string): void {
+    const label = value.trim();
+    if (!label) return;
+    if (this.labels.value.includes(label)) return;
+    this.labels.push(this.fb.control(label));
+  }
+
+  removeLabel(index: number): void {
+    this.labels.removeAt(index);
+  }
+
+  get labelControls(): FormControl[] {
+    return this.labels.controls as FormControl[];
+  }
 
   @Output() cancel = new EventEmitter<void>();
   @Output() create = new EventEmitter<void>();
 
-  createTask(form: NgForm, event: Event) {
+  onSubmit(event: Event): void {
     event.preventDefault();
-    console.log('Formulario enviado sin recarga');
-    this.submitted = true;
-    if (form.valid) {
-      this.taskService.createTask(this.taskFormData).subscribe({
-        next: (response) => {
-          console.log('Enviado correctamente', response)
-        },
-        error: (err) => {
-          console.error('Error al enviar', err)
-        }
-      });
-      this.create.emit();
-      this.onAction()
+    if (this.taskForm.invalid) {
+      this.taskForm.markAllAsTouched();
+      return;
     }
+    this.submitted = true;
+    const payload = {
+      ...this.taskForm.value,
+      labels: this.labels.value,
+    };
+
+    this.taskService.createTask(payload).subscribe({
+      next: (response) => {
+        this.create.emit();
+        this.onAction(response);
+      },
+      error: (err) => {
+        console.error('Error al enviar', err);
+      }
+    });
   }
 
   cancelTask() {
     this.cancel.emit();
   }
 
-  onAction() {
-    this.comm.sendNotification({ source: 'hermano1', payload: { id: 123, msg: 'actualizado' } });
+  onAction(response: any) {
+    this.comm.sendNotification({ source: 'taskForm', payload: response });
   }}

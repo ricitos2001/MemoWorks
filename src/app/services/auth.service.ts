@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import {FormGroup} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,12 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(data: { email: string; password: string }) {
-    return this.http.post<any>(`${this.API_URL}/authenticate`, data);
+  login(data: FormGroup) {
+    return this.http.post<any>(`${this.API_URL}/authenticate`, data.value);
   }
 
-  register(data: { email: string; name: string; surnames: string; phoneNumber: string; username: string; password: string; rol: string }) {
-    return this.http.post<any>(`${this.API_URL}/register`, data);
+  register(data: FormGroup) {
+    return this.http.post<any>(`${this.API_URL}/register`, data.value);
   }
 
   logout() {

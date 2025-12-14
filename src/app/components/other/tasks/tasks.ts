@@ -22,8 +22,23 @@ export class Tasks implements OnInit {
   constructor(private taskService: TaskService, private cdr: ChangeDetectorRef, private router: Router) {}
 
 
+
   id = localStorage.getItem('userId');
   ngOnInit(): void {
+    this.loadTasks();
+    this.taskService.getTasksByUserId(this.id).subscribe({
+      next: (response: any) => {
+        this.tasks = response.content;
+        this.cdr.detectChanges();
+      },
+    });
+  }
+
+
+
+
+
+  loadTasks() {
     this.taskService.getTasksByUserId(this.id).subscribe({
       next: (response: any) => {
         this.tasks = response.content;

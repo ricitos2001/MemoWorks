@@ -1,17 +1,71 @@
-<form (ngSubmit)="createTask(taskForm, $event)" #taskForm="ngForm">
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit($event)">
   <fieldset>
     <legend>Crear tarea</legend>
-    <app-form-input type="text" name="title" placeholder="Titulo" [required]="true" helpText="Introduce una titulo" errorMessage="El titulo es obligatoria" [showError]="submitted && !title.value" #title="ngModel" ngModel aria-required="true" class="grid" [(ngModel)]="taskFormData.title"></app-form-input>
-    <app-form-input type="textarea" name="description" placeholder="descripcion" [required]="true" helpText="Introduce una descripcion" errorMessage="La descripcion es obligatoria" [showError]="submitted && !description.value" #description="ngModel" ngModel aria-required="true" class="grid" [(ngModel)]="taskFormData.description"></app-form-input>
-    <article class="flex">
-      <app-form-input type="date" name="date" placeholder="Fecha" [required]="true" helpText="Introduce una fecha" errorMessage="La fecha es obligatoria" [showError]="submitted && !date.value" #date="ngModel" ngModel aria-required="true" class="grid" [(ngModel)]="taskFormData.date"></app-form-input>
-      <app-form-input type="time" name="time" placeholder="Hora" [required]="true" helpText="Introduce una hora" errorMessage="La hora es obligatoria" [showError]="submitted && !time.value" #time="ngModel" ngModel aria-required="true" class="grid" [(ngModel)]="taskFormData.time"></app-form-input>
-    </article>
+    <app-form-input
+      formControlName="title"
+      name="title"
+      placeholder="Título"
+      [required]="true"
+      class="grid"
+    ></app-form-input>
+    <div class="error" *ngIf="taskForm.get('title')?.touched && taskForm.get('title')?.invalid">
+      <small *ngIf="taskForm.get('title')?.errors?.['required']">Título obligatorio</small>
+      <small *ngIf="taskForm.get('title')?.errors?.['minlength']">Mínimo 5 caracteres</small>
+    </div>
+
+    <app-form-input
+      formControlName="description"
+      name="description"
+      placeholder="Descripción"
+      type="textarea"
+      [required]="true"
+      class="grid"
+    ></app-form-input>
+    <div class="error" *ngIf="taskForm.get('description')?.touched && taskForm.get('description')?.invalid">
+      <small *ngIf="taskForm.get('description')?.errors?.['required']">Descripción obligatoria</small>
+      <small *ngIf="taskForm.get('description')?.errors?.['minlength']">Mínimo 10 caracteres</small>
+    </div>
+
+    <app-form-input
+      formControlName="date"
+      type="date"
+      name="date"
+      placeholder="Fecha"
+      [required]="true"
+      class="grid"
+    ></app-form-input>
+    <app-form-input
+      formControlName="time"
+      type="time"
+      name="time"
+      placeholder="Hora"
+      [required]="true"
+      class="grid"
+    ></app-form-input>
+    <app-form-input
+      name="labelInput"
+      placeholder="Añadir etiqueta"
+      (keydown.enter)="addLabel(labelInput.value); labelInput.value=''; $event.preventDefault()"
+      #labelInput
+    ></app-form-input>
+    <section class="labels" *ngIf="labels.length > 0">
+      <article *ngFor="let labelCtrl of labelControls; let i = index">
+        <app-form-input
+          [name]="'label-' + i"
+          [formControl]="labelCtrl"
+          [disabled]="true"
+        ></app-form-input>
+        <button type="button" (click)="removeLabel(i)">✕</button>
+      </article>
+    </section>
+    <div class="grid">
+      <span *ngFor="let label of labels.controls; let i = index">
+        {{ label.value }}<app-button (click)="removeLabel(i)">✕</app-button>
+      </span>
+    </div>
     <article>
       <app-button type="submit">crear tarea</app-button>
       <app-button (click)="cancelTask()">cancelar</app-button>
     </article>
   </fieldset>
 </form>
-
-
