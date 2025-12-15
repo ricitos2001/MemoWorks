@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {Button} from '../../components/shared/button/button';
 import {FormInput} from '../../components/shared/form-input/form-input';
-import {FormBuilder, FormGroup, NgForm, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {passwordStrength} from '../../validators/password-strength.validator';
 import {passwordMatch} from '../../validators/password-match.validator';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-recover-password',
   imports: [
     Button,
     FormInput,
@@ -19,7 +19,7 @@ import {passwordMatch} from '../../validators/password-match.validator';
 })
 
 export class RecoverPassword {
-
+  @Output() authSuccess = new EventEmitter<void>();
 
   submitted = false;
 
@@ -53,7 +53,8 @@ export class RecoverPassword {
         this.authService.getUserIdFromToken();
         this.authService.saveToken(res.token);
         this.authService.loggedInSubject.next(true);
-        this.router.navigate(['/dashboard']);
+        this.authSuccess.emit();
+        // navegación delegada al componente padre
       },
       error: (err) => {
         console.error('Error en login', err);
@@ -61,5 +62,4 @@ export class RecoverPassword {
     });
   }
 }
-
 

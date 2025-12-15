@@ -1,0 +1,5 @@
+.auth-tabs { display:flex; gap:8px; justify-content:space-between; margin-bottom:12px; }
+.auth-tabs button { flex:1; padding:8px 12px; border:1px solid #e6e6e6; background:#fff; cursor:pointer; }
+.auth-tabs button.active { border-bottom:3px solid #007bff; color:#007bff; }
+.auth-body { padding-top:8px; }
+

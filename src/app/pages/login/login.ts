@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, Optional, Host } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {Button} from '../../components/shared/button/button';
 import {FormInput} from '../../components/shared/form-input/form-input';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgIf} from '@angular/common';
+import {RouterLink} from '@angular/router';
 import {passwordStrength} from '../../validators/password-strength.validator';
+import { AuthModalComponent } from '../../components/shared/modal/auth-modal.component';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +20,8 @@ import {passwordStrength} from '../../validators/password-strength.validator';
   templateUrl: './login.html',
   styleUrl: '../../../styles/styles.css',
 })
-
 export class Login {
+  @Output() authSuccess = new EventEmitter<void>();
   submitted = false;
 
   loginForm: FormGroup;
@@ -28,6 +30,7 @@ export class Login {
     private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
+    @Optional() @Host() private authModal?: AuthModalComponent
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -55,7 +58,8 @@ export class Login {
         this.authService.getUserIdFromToken();
         this.authService.saveToken(res.token);
         this.authService.loggedInSubject.next(true);
-        this.router.navigate(['/dashboard']);
+        this.authSuccess.emit();
+        // navegación delegada al componente padre que use el modal
       },
       error: (err) => {
         console.error('Error en login', err);
@@ -68,6 +72,13 @@ export class Login {
     if (control?.errors?.['email']) return 'Email inválido';
     return '';
   }
+
+  openRegister(event: Event) {
+    event.preventDefault();
+    if (this.authModal) {
+      this.authModal.open('register');
+    } else {
+      this.router.navigate(['/register']);
+    }
+  }
 }
-
-

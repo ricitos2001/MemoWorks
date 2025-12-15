@@ -1,18 +1,20 @@
-import { Component } from '@angular/core';
-import {NgIf} from '@angular/common';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {NgFor} from '@angular/common';
 
 @Component({
   selector: 'app-tabs',
-  imports: [
-    NgIf
-  ],
+  standalone: true,
+  imports: [NgFor],
   templateUrl: './tabs.html',
-  styleUrl: './tabs.css',
+  styleUrls: ['./tabs.css'],
 })
 export class Tabs {
-  activeTab = 'detalles';
+  @Input() tabs: Array<{ key: string; label: string }> = [];
+  @Input() active: string = '';
+  @Output() activeChange = new EventEmitter<string>();
 
   selectTab(tab: string) {
-    this.activeTab = tab;
+    this.active = tab;
+    this.activeChange.emit(tab);
   }
 }

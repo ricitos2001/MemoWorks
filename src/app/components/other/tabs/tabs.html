@@ -1,21 +1,8 @@
 <div class="tabs">
-  <button
-    [class.active]="activeTab === 'detalles'"
-    (click)="selectTab('detalles')">
-    Detalles
-  </button>
-
-  <button
-    [class.active]="activeTab === 'config'"
-    (click)="selectTab('config')">
-    Configuración
+  <button *ngFor="let t of tabs"
+    [class.active]="active === t.key"
+    (click)="selectTab(t.key)">
+    {{ t.label }}
   </button>
 </div>
 
-<div class="panel" *ngIf="activeTab === 'detalles'">
-  <h3>Detalles</h3>
-</div>
-
-<div class="panel" *ngIf="activeTab === 'config'">
-  <h3>Configuración</h3>
-</div>

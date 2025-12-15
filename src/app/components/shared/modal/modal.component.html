@@ -1,0 +1,15 @@
+<div class="modal" *ngIf="isOpen">
+  <div class="modal__overlay" (click)="onOverlayClick()"></div>
+
+  <div class="modal__container" [ngClass]="'modal--' + size" role="dialog" aria-modal="true">
+    <div class="modal__header">
+      <h3 *ngIf="title" class="modal__title">{{ title }}</h3>
+      <button class="modal__close" (click)="onCloseClick()" aria-label="Cerrar">✕</button>
+    </div>
+
+    <div class="modal__body">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>
+

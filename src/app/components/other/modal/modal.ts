@@ -1,10 +1,12 @@
 import { Component, HostListener } from '@angular/core';
 import {NgIf} from '@angular/common';
+import {Button} from '../../shared/button/button';
 
 @Component({
   selector: 'app-modal',
   imports: [
-    NgIf
+    NgIf,
+    Button
   ],
   templateUrl: './modal.html',
   styleUrl: './modal.css',

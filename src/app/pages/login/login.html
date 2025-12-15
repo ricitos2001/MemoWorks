@@ -27,7 +27,6 @@
     </div>
 
     <app-button type="submit" class="grid" [disabled]="loginForm.invalid || loginForm.pending">Iniciar sesión</app-button>
-    <a href="/recuperarContraseña">¿Has olvidado tu contraseña? Recuperala</a>
-    <a href="/register">¿No tienes cuenta? Registrate</a>
+    <a (click)="openRegister($event)">¿No tienes cuenta? Registrate</a>
   </fieldset>
 </form>
