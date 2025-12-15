@@ -1,0 +1,8 @@
+<app-toast></app-toast>
+<section class="notes" id="notes">
+  <app-tasks></app-tasks>
+</section>
+<app-task-form *ngIf="formStatus"></app-task-form>
+<article #buttons></article>
+<app-option-button (click)="createButtons($event)"></app-option-button>
+

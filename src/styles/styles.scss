@@ -1,4 +1,4 @@
-// 1. UserSettings (tokens)
+// 1. UserSettingsComponent (tokens)
 @use '00-settings/variables' as *;
 @use '00-settings/css-variables' as *;
 
@@ -12,8 +12,11 @@
 @use '03-elements/base' as *;
 
 // 5. Layout (grid, containers)
-@use '04-layout/layout' as *;
 @use '04-layout/grid' as *;
+@use '04-layout/header' as *;
+@use '04-layout/main' as *;
+@use '04-layout/footer' as *;
+@use '04-layout/sidebar' as *;
 
 // 6. Components (BEM components)
 @use '05-components/button' as *;
@@ -22,3 +25,8 @@
 
 // 7. Utilities
 @use '06-utilities/helpers' as *;
+
+// 8. Pages
+@use '07-pages/landing' as *;
+@use '07-pages/settings' as *;
+@use '07-pages/task' as *;

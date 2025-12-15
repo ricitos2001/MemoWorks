@@ -1,0 +1,8 @@
+.breadcrumb {
+  margin: 0 0 1rem;
+  padding: 0;
+  background: transparent;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+  content: '>';
+}

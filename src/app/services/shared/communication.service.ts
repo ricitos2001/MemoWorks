@@ -2,10 +2,13 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 export interface AppNotification {
-  source?: string;
+  source: 'taskForm' | 'dashboard';
+  type: 'success' | 'error' | 'info' | 'warning';
+  message: string;
   payload?: any;
   timestamp?: number;
 }
+
 
 @Injectable({
   providedIn: 'root',

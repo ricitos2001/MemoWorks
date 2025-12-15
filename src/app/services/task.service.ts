@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {SpinnerComponent} from '../components/other/spinner/spinner.component';
+import {LoadingService} from './shared/loading.service';
+import {finalize} from 'rxjs/operators';
 
 export interface Task {
   id: number;
@@ -22,7 +25,7 @@ export interface Task {
 export class TaskService {
   token = localStorage.getItem('token');
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private loadingService: LoadingService) { }
 
   getTasksByUserId(id: string | null): Observable<Task[]> {
     return this.http.get<Task[]>(`http://localhost:8080/api/v1/tasks/myTasks/${id}`, {
@@ -33,11 +36,12 @@ export class TaskService {
   }
 
   getTask(id: string): Observable<Task> {
+    this.loadingService.show();
     return this.http.get<Task>(`http://localhost:8080/api/v1/tasks/id/${id}`, {
       headers: {
         Authorization: `Bearer ${this.token}`
       }
-    });
+    }).pipe(finalize(() => this.loadingService.hide()));
   }
 
   createTask(task: any): Observable<any> {

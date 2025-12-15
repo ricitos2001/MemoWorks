@@ -5,41 +5,33 @@ export type ToastType = 'success' | 'error' | 'info' | 'warning';
 
 export interface ToastMessage {
   id: string;
+  type: 'success' | 'error' | 'info' | 'warning';
   message: string;
-  type: ToastType;
-  duration?: number; // ms; 0 o undefined => persistente hasta dismiss
+  duration?: number;
   createdAt: number;
 }
 
 @Injectable({ providedIn: 'root' })
 export class ToastService {
   private toastsSubject = new BehaviorSubject<ToastMessage[]>([]);
-  public toasts$: Observable<ToastMessage[]> = this.toastsSubject.asObservable();
+  toasts$ = this.toastsSubject.asObservable();
 
-  private nextId() { return Math.random().toString(36).slice(2, 9); }
-
-  show(message: string, type: ToastType = 'info', duration = 5000) {
-    const toast: ToastMessage = {
-      id: this.nextId(),
-      message,
-      type,
-      duration,
-      createdAt: Date.now()
+  show(toast: Omit<ToastMessage, 'id' | 'createdAt'>): void {
+    const newToast: ToastMessage = {
+      id: crypto.randomUUID(),
+      createdAt: Date.now(),
+      ...toast,
     };
-    this.toastsSubject.next([...this.toastsSubject.getValue(), toast]);
-    return toast.id;
+
+    this.toastsSubject.next([
+      ...this.toastsSubject.getValue(),
+      newToast
+    ]);
   }
 
-  success(message: string, duration?: number) { return this.show(message, 'success', duration ?? 4000); }
-  error(message: string, duration?: number) { return this.show(message, 'error', duration ?? 8000); }
-  info(message: string, duration?: number) { return this.show(message, 'info', duration ?? 3000); }
-  warning(message: string, duration?: number) { return this.show(message, 'warning', duration ?? 6000); }
-
-  dismiss(id: string) {
-    this.toastsSubject.next(this.toastsSubject.getValue().filter(t => t.id !== id));
-  }
-
-  clearAll() {
-    this.toastsSubject.next([]);
+  dismiss(id: string): void {
+    this.toastsSubject.next(
+      this.toastsSubject.getValue().filter(t => t.id !== id)
+    );
   }
 }

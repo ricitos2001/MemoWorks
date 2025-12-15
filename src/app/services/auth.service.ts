@@ -7,6 +7,8 @@ import {FormGroup} from '@angular/forms';
   providedIn: 'root'
 })
 export class AuthService {
+
+  isLoggedIn = !!localStorage.getItem('token');
   private API_URL = 'http://localhost:8080/api/v1/auth';
 
   loggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
@@ -32,6 +34,8 @@ export class AuthService {
 
   saveToken(token: string) {
     localStorage.setItem('token', token);
+    this.isLoggedIn = true;
+    this.loggedInSubject.next(true);
   }
 
   getUserIdFromToken() {
@@ -46,5 +50,11 @@ export class AuthService {
   removeUserData() {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
+    this.isLoggedIn = false;
+    this.loggedInSubject.next(false);
+  }
+
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token') || this.isLoggedIn;
   }
 }

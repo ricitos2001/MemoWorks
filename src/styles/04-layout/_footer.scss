@@ -1,0 +1,25 @@
+@use '../00-settings/css-variables' as *;
+@use '../01-tools/mixins' as *;
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  justify-content: space-between;
+  background: var(--components);
+}
+
+.footer__copyright {
+  max-width: 8%;
+}
+
+.footer__icon {
+  max-width: 2.5rem;
+}
+
+.footer__texto{
+  color: var(--letters);
+  font-weight: var(--font-weight-regular);
+}

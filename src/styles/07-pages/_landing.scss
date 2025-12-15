@@ -1,0 +1,19 @@
+@use '../00-settings/css-variables' as *;
+@use '../01-tools/mixins' as *;
+
+.landing__section{
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-24);
+}
+
+.landing__space {
+  padding: var(--spacing-24);
+}
+
+.landing__icon {
+  max-width: 50%;
+  padding: var(--spacing-6) var(--spacing-6) var(--spacing-6) var(--spacing-6);
+  background: var(--components);
+  border-radius: var(--radius-xl);
+}

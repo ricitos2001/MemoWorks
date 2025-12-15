@@ -1,32 +1,30 @@
 import { Routes } from '@angular/router';
-import {Landing} from './pages/landing/landing';
-import {Login} from './pages/login/login';
-import {Register} from './pages/register/register';
-import {Dasboard} from './pages/dasboard/dasboard';
-import {Calendar} from './pages/calendar/calendar';
-import {UserSettings} from './pages/user-settings/user-settings';
-import {RecoverPassword} from './pages/recover-password/recover-password';
-import {FamiliarGroupSettings} from './pages/familiar-group-settings/familiar-group-settings';
-import {NotFoundComponent} from './pages/notfoundcomponent/not-found-component';
-import {Settings} from './pages/settings/settings';
-import {TaskCard} from './components/other/task-card/task-card';
+import {LandingComponent} from './pages/landing/landing.component';
+import {LoginComponent} from './pages/login/login.component';
+import {RegisterComponent} from './pages/register/register.component';
+import {DasboardComponent} from './pages/dasboard/dasboard.component';
+import {Calendarcomponent} from './pages/calendar/calendarcomponent';
+import {RecoverPasswordComponent} from './pages/recover-password/recover-password.component';
+import {NotFoundComponentComponent} from './pages/notfoundcomponent/not-found-component.component';
+import {TaskCardComponent} from './components/other/task-card/task-card.component';
+import {authGuard} from './guards/auth-guard';
+import {taskResolver} from './resolvers/task-resolver';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'landing', pathMatch: 'full' },
-  { path: 'landing', component: Landing },
-  { path: 'login', component: Login},
-  { path: 'register', component: Register},
-  { path: 'recuperarContraseña', component: RecoverPassword},
-
-  { path: 'dashboard', component: Dasboard },
-  { path: 'dashboard/:id', component: TaskCard },
-
-  { path: 'calendar', component: Calendar },
-  { path: 'settings', component: Settings, children: [
+  { path: '', redirectTo: 'landing', pathMatch: 'full'},
+  { path: 'landing', component: LandingComponent, data: { breadcrumb: 'landing'}},
+  { path: 'login', component: LoginComponent, data: { breadcrumb: 'login'}},
+  { path: 'register', component: RegisterComponent, data: {breadcrumb: 'register'}},
+  { path: 'recuperarContraseña', component: RecoverPasswordComponent, data: {breadcrumb: 'recover-password'}},
+  { path: 'dashboard', component: DasboardComponent, canActivate: [authGuard], data: { breadcrumb: 'dashboard' } },
+  { path: 'dashboard/:id', component: TaskCardComponent, canActivate: [authGuard], resolve: { task: taskResolver }, data: { breadcrumb: 'task-details'}},
+  { path: 'calendar', component: Calendarcomponent, canActivate: [authGuard], data: { breadcrumb: 'calendar'}},
+  { path: 'calendar/:id', component: TaskCardComponent, canActivate: [authGuard], data: { breadcrumb: 'task-details'}},
+  { path: 'settings', canActivate: [authGuard], loadComponent: () => import('./pages/settings/settings.component').then(m => m.SettingsComponent), data: {breadcrumb: 'settings'} , children: [
       { path: '', redirectTo: 'userSettings', pathMatch: 'full' },
-      { path: 'userSettings', component: UserSettings},
-      { path: 'familiarGroups', component: FamiliarGroupSettings },
+      { path: 'userSettings', loadChildren: () => import('./pages/user-settings/user-settings-module').then(m => m.UserSettingsModule), data: { breadcrumb: 'user-settings'}},
+      { path: 'familiarGroups', loadChildren: () => import('./pages/familiar-group-settings/familiar-group-settings-module').then(m => m.FamiliarGroupSettingsModule), data: { breadcrumb: 'familiar-group-settings'} },
     ] },
 
-  { path: '**', component: NotFoundComponent }
+  { path: '**', component: NotFoundComponentComponent, data: { breadcrumb: '404'}},
 ];

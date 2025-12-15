@@ -37,27 +37,4 @@ export class UserService {
         }
       });
   }
-
-
-  getUsers(): Observable<User[]> {
-    return this.http.get<any>('http://localhost:8080/api/v1/users', {
-      headers: { Authorization: `Bearer ${this.token}` }
-    }).pipe(
-      map(res => {
-        if (Array.isArray(res)) return res;
-        if (res.data && Array.isArray(res.data)) return res.data;
-        return [];
-      }),
-      catchError(err => {
-        this.toast.error('Error cargando usuarios');
-        return throwError(() => err);
-      })
-    );
-  }
-
-
-  saveUser(user: User) {
-    this.loading.show();
-    return this.http.post<User>('http://localhost:8080/api/v1/users', user).pipe(finalize(() => this.loading.hide()));
-  }
 }

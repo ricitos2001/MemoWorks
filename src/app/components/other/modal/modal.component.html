@@ -1,0 +1,9 @@
+<app-button (click)="open()">Abrir ModalComponent</app-button>
+
+<article class="overlay" *ngIf="isOpen" (click)="close()"></article>
+
+<article class="modal" *ngIf="isOpen">
+  <h2>Contenido del modal</h2>
+  <p>Texto del modal…</p>
+  <button (click)="close()">Cerrar</button>
+</article>

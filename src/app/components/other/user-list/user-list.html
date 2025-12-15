@@ -1,4 +1,0 @@
-<ul *ngIf="users$ | async as users">
-  <li *ngFor="let u of users" (click)="select(u)">{{ u.name }}</li>
-</ul>
-<div *ngIf="!users$">No hay usuarios</div>

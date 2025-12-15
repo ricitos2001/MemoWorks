@@ -161,7 +161,7 @@ this.toastService.error('Error crítico', 0); // persistente
 
 **Características:**
 
-* Spinner global controlado por `LoadingService`.
+* SpinnerComponent global controlado por `LoadingService`.
 * Conteo de peticiones concurrentes para evitar flickering.
 * Integración opcional con `HttpInterceptor` para mostrar spinner automáticamente en llamadas HTTP.
 * Señales locales en botones o componentes específicos para estados individuales.

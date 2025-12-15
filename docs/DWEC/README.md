@@ -107,18 +107,18 @@ event.stopPropagation();
 -   Cierre automático por click fuera
 -   `@HostListener('document:click')`
 
-## 5.2. Modal con cierre por ESC
+## 5.2. ModalComponent con cierre por ESC
 
 -   `@HostListener('document:keydown.escape')`
 -   Cierre en backdrop
 
-## 5.3. Tabs
+## 5.3. TabsComponent
 
 ``` ts
 activeTab: string = 'detalles';
 ```
 
-## 5.4. Tooltips
+## 5.4. TooltipsComponent
 
 ``` ts
 showTooltip = false;
@@ -164,8 +164,8 @@ document.documentElement.classList.add('theme-dark');
 # 8. Entregables
 
 -   Menú hamburguesa
--   Modal
--   Tabs
+-   ModalComponent
+-   TabsComponent
 -   Tooltip
 -   Manipulación DOM con Renderer2
 -   Theme Switcher con persistencia

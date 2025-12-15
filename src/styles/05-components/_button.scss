@@ -1,4 +1,42 @@
 @use "../00-settings/css-variables" as *;
 @use "../01-tools/mixins" as *;
 
+.optionButton {
+  padding: var(--spacing-4);
+  background: var(--color-secondary-3);
+  border-radius: var(--radius-sm);
+  position: fixed;
+  right: var(--spacing-24);
+  bottom: var(--spacing-24);
+  transform: translateY(-50%);
+}
 
+.addButton {
+  padding: var(--spacing-4);
+  background: var(--color-secondary-3);
+  border-radius: var(--radius-sm);
+  position: fixed;
+  right: var(--spacing-24);
+  bottom: 24rem;
+  transform: translateY(-50%);
+}
+
+.editButton {
+  padding: var(--spacing-4);
+  background: var(--color-secondary-3);
+  border-radius: var(--radius-sm);
+  position: fixed;
+  right: var(--spacing-24);
+  bottom: 18rem;
+  transform: translateY(-50%);
+}
+
+.removeButton {
+  padding: var(--spacing-4);
+  background: var(--color-secondary-3);
+  border-radius: var(--radius-sm);
+  position: fixed;
+  right: var(--spacing-24);
+  bottom: 12rem;
+  transform: translateY(-50%);
+}
