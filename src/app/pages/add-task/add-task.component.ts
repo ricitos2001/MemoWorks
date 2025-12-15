@@ -1,16 +1,16 @@
 import {ChangeDetectorRef, Component, EventEmitter, Output, ViewChild} from '@angular/core';
-import {ButtonComponent} from '../button/button.component';
-import {FormInputComponent} from '../form-input/form-input.component';
+import {ButtonComponent} from '../../components/shared/button/button.component';
+import {FormInputComponent} from '../../components/shared/form-input/form-input.component';
 import {FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import { TaskService } from '../../../services/task.service';
-import {CommunicationService} from '../../../services/shared/communication.service';
+import { TaskService } from '../../services/task.service';
+import {CommunicationService} from '../../services/shared/communication.service';
 import {NgForOf, NgIf} from '@angular/common';
-import { FormComponent, hasPendingChanges } from '../../../guards/pending-chances-guard';
-import {TaskFormModalComponent} from '../modal/task-form-modal.component';
+import { FormComponent, hasPendingChanges } from '../../guards/pending-chances-guard';
+import {TaskFormModalComponent} from '../../components/shared/modal/task-form-modal.component';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-task-form',
+  selector: 'app-add-task',
   imports: [
     ButtonComponent,
     FormsModule,
@@ -19,11 +19,11 @@ import {Router} from '@angular/router';
     NgIf,
     NgForOf,
   ],
-  templateUrl: './task-form.component.html',
-  styleUrl: '../../../../styles/styles.css',
+  templateUrl: './add-task.component.html',
+  styleUrl: '../../../styles/styles.css',
 })
 
-export class TaskFormComponent {
+export class AddTaskComponent {
   taskForm: FormGroup;
 
   constructor(

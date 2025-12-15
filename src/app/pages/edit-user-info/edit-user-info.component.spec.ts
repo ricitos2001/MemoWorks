@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaskFormComponent } from './task-form.component';
+import { EditUserInfoComponent } from './edit-user-info.component';
 
-describe('TaskFormComponent', () => {
-  let component: TaskFormComponent;
-  let fixture: ComponentFixture<TaskFormComponent>;
+describe('EditUserInfoComponent', () => {
+  let component: EditUserInfoComponent;
+  let fixture: ComponentFixture<EditUserInfoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TaskFormComponent]
+      imports: [EditUserInfoComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TaskFormComponent);
+    fixture = TestBed.createComponent(EditUserInfoComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
