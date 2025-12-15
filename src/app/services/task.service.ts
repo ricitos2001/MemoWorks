@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {SpinnerComponent} from '../components/other/spinner/spinner.component';
+import {SpinnerComponent} from '../components/shared/spinner/spinner.component';
 import {LoadingService} from './shared/loading.service';
 import {finalize} from 'rxjs/operators';
 

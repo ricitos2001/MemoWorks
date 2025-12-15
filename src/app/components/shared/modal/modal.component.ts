@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css']
+  styleUrl: '../../../../styles/styles.css'
 })
 export class ModalComponent {
   @Input() isOpen = false;

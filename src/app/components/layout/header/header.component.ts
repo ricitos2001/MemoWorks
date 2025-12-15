@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {DarkModeButtonComponent} from '../../other/dark-mode-button/dark-mode-button.component';
-import {HamburgerMenuComponent} from '../../other/hamburger-menu/hamburger-menu.component';
+import {DarkModeButtonComponent} from '../../shared/dark-mode-button/dark-mode-button.component';
+import {HamburgerMenuComponent} from '../../shared/hamburger-menu/hamburger-menu.component';
 import {ThemeService} from '../../../services/shared/theme.service';
 
 @Component({

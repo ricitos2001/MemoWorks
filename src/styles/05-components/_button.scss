@@ -3,7 +3,7 @@
 
 .optionButton {
   padding: var(--spacing-4);
-  background: var(--color-secondary-3);
+  background: var(--components);
   border-radius: var(--radius-sm);
   position: fixed;
   right: var(--spacing-24);
@@ -13,7 +13,7 @@
 
 .addButton {
   padding: var(--spacing-4);
-  background: var(--color-secondary-3);
+  background: var(--components);
   border-radius: var(--radius-sm);
   position: fixed;
   right: var(--spacing-24);
@@ -23,7 +23,7 @@
 
 .editButton {
   padding: var(--spacing-4);
-  background: var(--color-secondary-3);
+  background: var(--components);
   border-radius: var(--radius-sm);
   position: fixed;
   right: var(--spacing-24);
@@ -33,7 +33,7 @@
 
 .removeButton {
   padding: var(--spacing-4);
-  background: var(--color-secondary-3);
+  background: var(--components);
   border-radius: var(--radius-sm);
   position: fixed;
   right: var(--spacing-24);

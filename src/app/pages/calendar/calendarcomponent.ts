@@ -1,8 +1,8 @@
 import {Component, DestroyRef, inject, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
-import {OptionButtonComponent} from '../../components/other/option-button/option-button.component';
-import {AddButtonComponent} from '../../components/other/add-button/add-button.component';
-import {EditButtonComponent} from '../../components/other/edit-button/edit-button.component';
-import {RemoveButtonComponent} from '../../components/other/remove-button/remove-button.component';
+import {OptionButtonComponent} from '../../components/shared/option-button/option-button.component';
+import {AddButtonComponent} from '../../components/shared/add-button/add-button.component';
+import {EditButtonComponent} from '../../components/shared/edit-button/edit-button.component';
+import {RemoveButtonComponent} from '../../components/shared/remove-button/remove-button.component';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {CommunicationService} from '../../services/shared/communication.service';
 

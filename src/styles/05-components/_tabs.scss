@@ -1,0 +1,12 @@
+@use "../00-settings/css-variables" as *;
+@use "../01-tools/mixins" as *;
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+}
+
+button.active {
+  font-weight: bold;
+  border-bottom: 2px solid blue;
+}

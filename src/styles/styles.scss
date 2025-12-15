@@ -22,6 +22,15 @@
 @use '05-components/button' as *;
 @use '05-components/card' as *;
 @use '05-components/form-input' as *;
+@use '05-components/auth-modal' as *;
+@use '05-components/breadcrumb' as *;
+@use '05-components/dark-mode-button' as *;
+@use '05-components/hamburger-menu' as *;
+@use '05-components/modal' as *;
+@use '05-components/spinner' as *;
+@use '05-components/tabs' as *;
+@use '05-components/toast' as *;
+@use '05-components/tooltip' as *;
 
 // 7. Utilities
 @use '06-utilities/helpers' as *;

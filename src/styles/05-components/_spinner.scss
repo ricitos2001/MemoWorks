@@ -1,0 +1,11 @@
+@use "../00-settings/css-variables" as *;
+@use "../01-tools/mixins" as *;
+
+.overlay{
+  position: fixed; inset:0; display:flex; align-items:center; justify-content:center; z-index:9998;
+  background: rgba(0,0,0,0.18);
+}
+.spinner{
+  width:56px; height:56px; border-radius:50%; border:6px solid rgba(255,255,255,0.18); border-top-color:white; animation: spin .9s linear infinite;
+}
+@keyframes spin { to{ transform: rotate(360deg); } }

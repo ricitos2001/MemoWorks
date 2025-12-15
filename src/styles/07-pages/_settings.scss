@@ -9,19 +9,19 @@
 }
 
 .settings__choices{
-  background: var(--color-secondary-2);
+  background: var(--settings-options-box);
   padding: var(--spacing-4);
 }
 
 .settings__choice{
   color: var(--color-primary-1);
-  background: var(--color-secondary-3);
+  background: var(--components);
   font-weight: var(--font-weight-regular);
   padding: var(--spacing-4) var(--spacing-24) var(--spacing-4) var(--spacing-4);
 }
 
 .settings__info {
-  background: var(--color-secondary-4);
+  background: var(--settings-option-box);
   padding: var(--spacing-4);
 }
 
@@ -37,13 +37,13 @@
 .settings__name{
   padding: var(--spacing-4);
   color: var(--color-primary-1);
-  background: var(--color-secondary-1);
+  background: var(--buttons);
   flex: 0 0 16.25rem;
 }
 
 .settings__value{
   padding: var(--spacing-4);
-  color: var(--color-secondary-1);
+  color: var(--background);
   background: var(--color-primary-1);
   flex: 0 0 16.25rem;
 }
@@ -60,7 +60,7 @@
 .settings__users {
   display: flex;
   flex-direction: row;
-  color: var(--color-secondary-1);
+  color: var(--background);
   background: var(--color-primary-1);
   flex: 0 0 auto;
 }

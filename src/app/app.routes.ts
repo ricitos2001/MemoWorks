@@ -6,7 +6,7 @@ import {DasboardComponent} from './pages/dasboard/dasboard.component';
 import {Calendarcomponent} from './pages/calendar/calendarcomponent';
 import {RecoverPasswordComponent} from './pages/recover-password/recover-password.component';
 import {NotFoundComponentComponent} from './pages/notfoundcomponent/not-found-component.component';
-import {TaskCardComponent} from './components/other/task-card/task-card.component';
+import {TaskCardComponent} from './components/shared/task-card/task-card.component';
 import {authGuard} from './guards/auth-guard';
 import {taskResolver} from './resolvers/task-resolver';
 

@@ -1,0 +1,11 @@
+@use "../00-settings/css-variables" as *;
+@use "../01-tools/mixins" as *;
+
+.breadcrumb {
+  margin: 0 0 var(--spacing-4);
+  padding: 0;
+  background: transparent;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+  content: '>';
+}

@@ -1,0 +1,45 @@
+@use "../00-settings/css-variables" as *;
+@use "../01-tools/mixins" as *;
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal__container {
+  position: relative;
+  background: var(--background, #fff);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  max-height: 90vh;
+  overflow: auto;
+  width: 90%;
+  max-width: 540px;
+}
+
+.modal--small .modal__container { max-width: 340px; }
+.modal--large .modal__container { max-width: 840px; }
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal__title { margin: 0; font-size: 1.125rem; }
+.modal__close { background: none; border: none; font-size: 1.25rem; cursor: pointer; }
+
+.modal__body { padding: 20px; }
+

@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ModalComponent } from './modal.component';
 import { LoginComponent } from '../../../pages/login/login.component';
 import { RegisterComponent } from '../../../pages/register/register.component';
-import { TabsComponent } from '../../other/tabs/tabs.component';
+import { TabsComponent } from '../tabs/tabs.component';
 
 @Component({
   selector: 'app-auth-modal',
   standalone: true,
   imports: [CommonModule, ModalComponent, TabsComponent, LoginComponent, RegisterComponent],
   templateUrl: './auth-modal.component.html',
-  styleUrls: ['./auth-modal.component.css']
+  styleUrls: ['../../../../styles/styles.css']
 })
 export class AuthModalComponent {
   @Output() authSuccess = new EventEmitter<void>();

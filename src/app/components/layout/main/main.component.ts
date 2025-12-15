@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import {SpinnerComponent} from '../../other/spinner/spinner.component';
-import {ToastComponent} from '../../other/toast/toast.component';
+import {SpinnerComponent} from '../../shared/spinner/spinner.component';
+import {ToastComponent} from '../../shared/toast/toast.component';
 
 @Component({
   selector: 'app-main',
