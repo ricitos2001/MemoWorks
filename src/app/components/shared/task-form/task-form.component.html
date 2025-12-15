@@ -48,24 +48,12 @@
       (keydown.enter)="addLabel(labelInput.value); labelInput.value=''; $event.preventDefault()"
       #labelInput
     ></app-form-input>
-    <section class="labels" *ngIf="labels.length > 0">
-      <article *ngFor="let labelCtrl of labelControls; let i = index">
-        <app-form-input
-          [name]="'label-' + i"
-          [formControl]="labelCtrl"
-          [disabled]="true"
-        ></app-form-input>
-        <button type="button" (click)="removeLabel(i)">✕</button>
-      </article>
-    </section>
-    <div class="grid">
-      <span *ngFor="let label of labels.controls; let i = index">
-        {{ label.value }}<app-button (click)="removeLabel(i)">✕</app-button>
-      </span>
-    </div>
+    <article *ngFor="let label of labels.controls; let i = index" class="flex-center">
+      {{ label.value }}<app-button (click)="removeLabel(i)">✕</app-button>
+    </article>
     <article>
       <app-button type="submit">crear tarea</app-button>
-      <app-button (click)="cancelTask()">cancelar</app-button>
+      <app-button type="button" (click)="cancelTask()">cancelar</app-button>
     </article>
   </fieldset>
 </form>

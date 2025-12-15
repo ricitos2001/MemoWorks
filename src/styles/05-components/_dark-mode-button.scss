@@ -9,25 +9,10 @@
   border-radius: 50%;
   font-size: 1.5rem;
   transition: all 0.3s ease;
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: var(--color-secondary-4);
 }
 
-/* Forma y color en modo oscuro */
 .theme-btn.dark {
-  background-color: #333;
-  color: #f0f0f0;
-  border-radius: 8px; /* Cambia de círculo a cuadrado redondeado */
-}
-
-/* Tema oscuro global */
-body.dark-theme {
-  background-color: #121212;
-  color: #ffffff;
-}
-
-/* Tema claro global */
-body {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--neutral-600);
+  border-radius: 8px;
 }

@@ -2,7 +2,7 @@
 <section class="notes" id="notes">
   <app-tasks></app-tasks>
 </section>
-<app-task-form *ngIf="formStatus"></app-task-form>
+<app-form-modal></app-form-modal>
 <article #buttons></article>
 <app-option-button (click)="createButtons($event)"></app-option-button>
 

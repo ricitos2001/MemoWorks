@@ -22,7 +22,7 @@ export class UserSettingsComponent implements OnInit{
   id = localStorage.getItem('userId');
   ngOnInit(): void {
     console.log(localStorage.getItem('token'));
-    this.userService.getUserById(this.id).subscribe({
+    this.userService.getUser(this.id).subscribe({
       next: (data) => {
         this.user = data;
         this.cd.detectChanges()
@@ -46,4 +46,8 @@ export class UserSettingsComponent implements OnInit{
     this.authService.removeAccount();
     this.router.navigate(['/landing']);
   };
+
+  editUserInfo() {
+    this.router.navigate(['/editUserInfo', localStorage.getItem('userId')]);
+  }
 }

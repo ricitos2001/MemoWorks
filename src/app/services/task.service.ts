@@ -44,9 +44,21 @@ export class TaskService {
     }).pipe(finalize(() => this.loadingService.hide()));
   }
 
-  createTask(task: any): Observable<any> {
-    return this.http.post(`http://localhost:8080/api/v1/tasks`, task, {
+  createTask(task: any): Observable<Task> {
+    return this.http.post<Task>(`http://localhost:8080/api/v1/tasks`, task, {
       headers: { Authorization: `Bearer ${this.token}`}
     });
+  }
+
+  editTask(task: any): Observable<Task> {
+    return this.http.put<Task>(`http://localhost:8080/api/v1/tasks/${task.id}`, task, {
+      headers: { Authorization: `Bearer ${this.token}`}
+    })
+  }
+
+  removeTask(task: any): Observable<Task> {
+    return this.http.delete<Task>(`http://localhost:8080/api/v1/tasks/${task.id}`, {
+      headers: { Authorization: `Bearer ${this.token}`}
+    })
   }
 }

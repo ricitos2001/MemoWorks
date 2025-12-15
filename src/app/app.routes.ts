@@ -9,6 +9,8 @@ import {NotFoundComponentComponent} from './pages/notfoundcomponent/not-found-co
 import {TaskCardComponent} from './components/shared/task-card/task-card.component';
 import {authGuard} from './guards/auth-guard';
 import {taskResolver} from './resolvers/task-resolver';
+import {UserSettingsComponent} from './pages/user-settings/user-settings.component';
+import {EditUserInfoComponent} from './pages/edit-user-info/edit-user-info.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full'},
@@ -25,6 +27,6 @@ export const routes: Routes = [
       { path: 'userSettings', loadChildren: () => import('./pages/user-settings/user-settings-module').then(m => m.UserSettingsModule), data: { breadcrumb: 'user-settings'}},
       { path: 'familiarGroups', loadChildren: () => import('./pages/familiar-group-settings/familiar-group-settings-module').then(m => m.FamiliarGroupSettingsModule), data: { breadcrumb: 'familiar-group-settings'} },
     ] },
-
+  { path: 'editUserInfo/:id', component: EditUserInfoComponent, data: { breadcrumb: 'edit-user-info'}},
   { path: '**', component: NotFoundComponentComponent, data: { breadcrumb: '404'}},
 ];

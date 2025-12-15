@@ -9,37 +9,33 @@ import {
 } from '@angular/core';
 import {OptionButtonComponent} from '../../components/shared/option-button/option-button.component';
 import {TasksComponent} from '../../components/shared/tasks/tasks.component';
-import {TaskFormComponent} from '../../components/shared/task-form/task-form.component';
-import {NgIf} from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {CommunicationService} from '../../services/shared/communication.service';
 import {ToastService} from '../../services/shared/toast.service';
 import {ToastComponent} from '../../components/shared/toast/toast.component';
+import {TaskFormModalComponent} from '../../components/shared/modal/task-form-modal.component';
 
 @Component({
   selector: 'app-dasboard',
   imports: [
     OptionButtonComponent,
     TasksComponent,
-    TaskFormComponent,
     ToastComponent,
-    NgIf,
+    TaskFormModalComponent,
   ],
   templateUrl: './dasboard.component.html',
   styleUrl: '../../../styles/styles.css',
 })
+
 export class DasboardComponent implements OnInit {
-
   @ViewChild('buttons', { static: false }) buttons!: ElementRef;
-
+  @ViewChild(TaskFormModalComponent)
+  private taskFormModal!: TaskFormModalComponent;
   status = false;
-  formStatus = false;
 
   private destroyRef = inject(DestroyRef);
-
   constructor(
     private renderer: Renderer2,
-    private cd: ChangeDetectorRef,
     private communicationService: CommunicationService,
     private toastService: ToastService,
   ) {}
@@ -72,7 +68,6 @@ export class DasboardComponent implements OnInit {
         this.renderer.removeChild(this.buttons.nativeElement, this.buttons.nativeElement.firstChild);
       }
       this.status = false;
-      this.formStatus = false;
     }
   }
 
@@ -81,8 +76,7 @@ export class DasboardComponent implements OnInit {
     this.renderer.setProperty(addButton, 'src', 'assets/img/File%20plus.svg');
     this.renderer.addClass(addButton, 'addButton');
     this.renderer.listen(addButton, 'click', () => {
-      this.formStatus = !this.formStatus;
-      this.cd.detectChanges();
+        this.taskFormModal.open('addTask');
     });
     this.renderer.appendChild(this.buttons.nativeElement, addButton);
   }
@@ -91,6 +85,9 @@ export class DasboardComponent implements OnInit {
     const editButton = this.renderer.createElement('img');
     this.renderer.setProperty(editButton, 'src', 'assets/img/Edit%203.svg');
     this.renderer.addClass(editButton, 'editButton');
+    this.renderer.listen(editButton, 'click', () => {
+
+    });
     this.renderer.appendChild(this.buttons.nativeElement, editButton);
   }
 
@@ -98,6 +95,9 @@ export class DasboardComponent implements OnInit {
     const removeButton = this.renderer.createElement('img');
     this.renderer.setProperty(removeButton, 'src', 'assets/img/File%20minus.svg');
     this.renderer.addClass(removeButton, 'removeButton');
+    this.renderer.listen(removeButton, 'click', () => {
+
+    });
     this.renderer.appendChild(this.buttons.nativeElement, removeButton);
   }
 }

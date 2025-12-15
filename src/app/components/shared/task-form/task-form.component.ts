@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, EventEmitter, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Output, ViewChild} from '@angular/core';
 import {ButtonComponent} from '../button/button.component';
 import {FormInputComponent} from '../form-input/form-input.component';
 import {FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -6,6 +6,8 @@ import { TaskService } from '../../../services/task.service';
 import {CommunicationService} from '../../../services/shared/communication.service';
 import {NgForOf, NgIf} from '@angular/common';
 import { FormComponent, hasPendingChanges } from '../../../guards/pending-chances-guard';
+import {TaskFormModalComponent} from '../modal/task-form-modal.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-task-form',
@@ -28,6 +30,7 @@ export class TaskFormComponent {
     private taskService: TaskService,
     private comm: CommunicationService,
     private fb: FormBuilder,
+    private router: Router,
   ) {
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
@@ -59,26 +62,19 @@ export class TaskFormComponent {
     this.labels.removeAt(index);
   }
 
-  get labelControls(): FormControl[] {
-    return this.labels.controls as FormControl[];
-  }
-
   @Output() cancel = new EventEmitter<void>();
   @Output() create = new EventEmitter<void>();
 
   onSubmit(event: Event): void {
     event.preventDefault();
-
     if (this.taskForm.invalid) {
       this.taskForm.markAllAsTouched();
       return;
     }
-
     const payload = {
       ...this.taskForm.value,
       labels: this.labels.value,
     };
-
     this.taskService.createTask(payload).subscribe({
       next: () => {
         this.comm.sendNotification({
@@ -86,7 +82,6 @@ export class TaskFormComponent {
           type: 'success',
           message: 'Tarea creada correctamente',
         });
-
         this.create.emit();
       },
       error: () => {

@@ -29,8 +29,34 @@ export class UserService {
 
   constructor(private http: HttpClient, private loading: LoadingService, private toast: ToastService) { }
 
-  getUserById(id: string | null): Observable<any> {
-    return this.http.get(`http://localhost:8080/api/v1/users/id/${id}`,
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`http://localhost:8080/api/v1/users`, {
+      headers: {
+        Authorization: `Bearer ${this.token}`
+      }
+    });
+  }
+
+  getUser(id: string | null): Observable<User> {
+    return this.http.get<User>(`http://localhost:8080/api/v1/users/id/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${this.token}`
+        }
+      });
+  }
+
+  editUser(id: string | null): Observable<User> {
+    return this.http.put<User>(`http://localhost:8080/api/v1/users/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${this.token}`
+        }
+      });
+  }
+
+  removeUser(id: string | null): Observable<User> {
+    return this.http.delete<User>(`http://localhost:8080/api/v1/users/${id}`,
       {
         headers: {
           Authorization: `Bearer ${this.token}`
