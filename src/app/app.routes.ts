@@ -11,8 +11,8 @@ import {authGuard} from './guards/auth-guard';
 import {taskResolver} from './resolvers/task-resolver';
 import {EditUserInfoComponent} from './pages/edit-user-info/edit-user-info.component';
 import {SelectTaskForEditComponent} from './pages/select-task-for-edit/select-task-for-edit.component';
-import {EditTask} from './pages/edit-task/edit-task';
-import {RemoveTask} from './pages/remove-task/remove-task';
+import {EditTaskComponent} from './pages/edit-task/edit-task.component';
+import {RemoveTaskComponent} from './pages/remove-task/remove-task.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full'},
@@ -23,8 +23,8 @@ export const routes: Routes = [
   { path: 'dashboard', component: DasboardComponent, canActivate: [authGuard], data: { breadcrumb: 'dashboard' } },
   { path: 'dashboard/:id', component: TaskCardComponent, canActivate: [authGuard], resolve: { task: taskResolver }, data: { breadcrumb: 'task-details'}},
   { path: 'selectTask', component: SelectTaskForEditComponent, canActivate: [authGuard], data: {breadcrumb: 'select-task'}},
-  { path: 'selectTask/:id', component: EditTask, canActivate: [authGuard], data: {breadcrumb: 'edit-task'}},
-  { path: 'removeTask', component: RemoveTask, canActivate: [authGuard], data: {breadcrumb: 'remove-task'}},
+  { path: 'selectTask/:id', component: EditTaskComponent, canActivate: [authGuard], data: {breadcrumb: 'edit-task'}},
+  { path: 'removeTask', component: RemoveTaskComponent, canActivate: [authGuard], data: {breadcrumb: 'remove-task'}},
   { path: 'calendar', component: Calendarcomponent, canActivate: [authGuard], data: { breadcrumb: 'calendar'}},
   { path: 'calendar/:id', component: TaskCardComponent, canActivate: [authGuard], data: { breadcrumb: 'task-details'}},
   { path: 'settings', canActivate: [authGuard], loadComponent: () => import('./pages/settings/settings.component').then(m => m.SettingsComponent), data: {breadcrumb: 'settings'} , children: [

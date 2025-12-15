@@ -50,14 +50,14 @@ export class TaskService {
     });
   }
 
-  editTask(task: any): Observable<Task> {
-    return this.http.put<Task>(`http://localhost:8080/api/v1/tasks/${task.id}`, task, {
+  editTask(id: string | null, task: any): Observable<Task> {
+    return this.http.put<Task>(`http://localhost:8080/api/v1/tasks/${id}`, task, {
       headers: { Authorization: `Bearer ${this.token}`}
     })
   }
 
-  removeTask(task: any): Observable<Task> {
-    return this.http.delete<Task>(`http://localhost:8080/api/v1/tasks/${task.id}`, {
+  removeTask(id: number): Observable<Task> {
+    return this.http.delete<Task>(`http://localhost:8080/api/v1/tasks/${id}`, {
       headers: { Authorization: `Bearer ${this.token}`}
     })
   }

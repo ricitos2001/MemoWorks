@@ -34,10 +34,6 @@ export class TasksComponent implements OnInit {
     });
   }
 
-
-
-
-
   loadTasks() {
     this.taskService.getTasksByUserId(this.id).subscribe({
       next: (response: any) => {

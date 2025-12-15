@@ -22,8 +22,8 @@ export class FormInputComponent implements ControlValueAccessor {
   @Input() name!: string;
   @Input() placeholder: string = '';
   @Input() required: boolean = false;
+  @Input() value: string = '';
 
-  value: string = '';
   disabled = false;
   touched = false;
 

@@ -1,23 +1,25 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Task, TaskService} from '../../services/task.service';
+import {ActivatedRoute, Router} from '@angular/router';
 import {DatePipe, NgForOf} from '@angular/common';
 import {ViewTaskButtonComponent} from '../../components/shared/view-task-button/view-task-button.component';
-import {Task, TaskService} from '../../services/task.service';
-import {Router} from '@angular/router';
+import {CommunicationService} from '../../services/shared/communication.service';
+import {FormBuilder} from '@angular/forms';
 
 @Component({
-  selector: 'app-select-task-for-edit',
+  selector: 'app-remove-task',
   imports: [
     DatePipe,
     NgForOf,
     ViewTaskButtonComponent
   ],
-  templateUrl: './select-task-for-edit.component.html',
+  templateUrl: './remove-task.component.html',
   styleUrl: '../../../styles/styles.css',
 })
-export class SelectTaskForEditComponent implements OnInit {
+export class RemoveTaskComponent implements OnInit {
   tasks: Task[] = [];
 
-  constructor(private taskService: TaskService, private cdr: ChangeDetectorRef, private router: Router) {}
+  constructor(private taskService: TaskService, private cdr: ChangeDetectorRef, private router: Router, private comm: CommunicationService) {}
 
   id = localStorage.getItem('userId');
   ngOnInit(): void {
@@ -39,9 +41,27 @@ export class SelectTaskForEditComponent implements OnInit {
     });
   }
 
-  editTask(taskId: number) {
-    this.router.navigate(['/selectTask', taskId]);
+  removeTask(taskId: number) {
+    if (!taskId) return;
+    this.taskService.removeTask(taskId).subscribe({
+      next: () => {
+        this.comm.sendNotification({
+          source: 'taskForm',
+          type: 'success',
+          message: 'Tarea eliminada correctamente',
+        });
+        this.loadTasks(); // refresca la lista
+      },
+      error: (err) => {
+        this.comm.sendNotification({
+          source: 'taskForm',
+          type: 'error',
+          message: err?.error?.message || 'Error al eliminar la tarea',
+        });
+      }
+    });
   }
+
 
   formatTime(timeStr: string): Date | null {
     if (!timeStr) return null;

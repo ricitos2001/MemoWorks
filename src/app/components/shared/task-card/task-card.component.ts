@@ -16,7 +16,6 @@ export class TaskCardComponent {
   task = signal<Task | null>(null);
 
   constructor() {
-    console.log(this.task());
     this.route.data.subscribe(({ task }) => {
       this.task.set(task);
     });

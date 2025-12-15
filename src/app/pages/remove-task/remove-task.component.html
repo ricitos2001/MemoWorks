@@ -21,7 +21,7 @@
           <article class="flex-center">
             <p class="task__text"><span>{{ task.title }}</span> - {{ task.description }}</p>
           </article>
-          <app-view-task-button (click)="editTask(task.id)"></app-view-task-button>
+          <app-view-task-button type="button" (click)="removeTask(task.id)"></app-view-task-button>
         </section>
       </section>
     </section>
