@@ -30,7 +30,6 @@ export class AddTaskComponent {
     private taskService: TaskService,
     private comm: CommunicationService,
     private fb: FormBuilder,
-    private router: Router,
   ) {
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
@@ -41,10 +40,6 @@ export class AddTaskComponent {
       status: true,
       labels: this.fb.array([]),
     });
-  }
-
-  get form() {
-    return this.taskForm;
   }
 
   get labels(): FormArray {
@@ -81,6 +76,7 @@ export class AddTaskComponent {
           source: 'taskForm',
           type: 'success',
           message: 'Tarea creada correctamente',
+          payload: { refreshTasks: true }
         });
         this.create.emit();
       },
@@ -92,11 +88,5 @@ export class AddTaskComponent {
         });
       }
     });
-  }
-
-  cancelTask() {
-    if (hasPendingChanges(this)) {
-      this.cancel.emit();
-    }
   }
 }

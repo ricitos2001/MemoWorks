@@ -1,12 +1,14 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {ModalComponent} from './modal.component';
 import {AddTaskComponent} from '../../../pages/add-task/add-task.component';
+import {ButtonComponent} from '../button/button.component';
 
 @Component({
   selector: 'app-form-modal',
   imports: [
     ModalComponent,
     AddTaskComponent,
+    ButtonComponent,
   ],
   templateUrl: './task-form-modal.component.html',
   styleUrl: '../../../../styles/styles.css',

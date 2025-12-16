@@ -1,5 +1,4 @@
 import {
-  ChangeDetectorRef,
   Component, DestroyRef,
   ElementRef,
   inject,

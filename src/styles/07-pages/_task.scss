@@ -6,8 +6,11 @@
 }
 
 .task {
+  position: relative;
   width: 25rem;
   height: 30rem;
+  background: var(--components);
+  overflow: hidden;
 }
 
 .task-details {
@@ -44,3 +47,4 @@
   background-image: url("/assets/img/funds/digital-dimensions-twilight-landscape-with-a-purple-haze-sunrise-designed-by-ppublish-colorful-reflections-perfect-942666541-1.jpg");
   background-size: cover;
 }
+

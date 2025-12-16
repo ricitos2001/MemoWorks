@@ -1,9 +1,11 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit} from '@angular/core';
 import { TaskService, Task } from '../../../services/task.service';
 import {DatePipe, NgForOf} from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
 import {ViewTaskButtonComponent} from '../view-task-button/view-task-button.component';
 import { Router } from '@angular/router';
+import {CommunicationService} from '../../../services/shared/communication.service';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-tasks',
@@ -19,13 +21,29 @@ export class TasksComponent implements OnInit {
   tasks: Task[] = [];
 
 
-  constructor(private taskService: TaskService, private cdr: ChangeDetectorRef, private router: Router) {}
+  constructor(private taskService: TaskService, private cdr: ChangeDetectorRef, private router: Router, private comm: CommunicationService) {}
+  private destroyRef = inject(DestroyRef);
+
 
 
 
   id = localStorage.getItem('userId');
+
+
   ngOnInit(): void {
     this.loadTasks();
+
+    this.comm.notifications$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(n => {
+        if (n?.payload?.refreshTasks) {
+          this.loadTasks();
+        }
+      });
+  }
+
+  private loadTasks(): void {
+    if (!this.id) return;
     this.taskService.getTasksByUserId(this.id).subscribe({
       next: (response: any) => {
         this.tasks = response.content;
@@ -34,14 +52,13 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  loadTasks() {
-    this.taskService.getTasksByUserId(this.id).subscribe({
-      next: (response: any) => {
-        this.tasks = response.content;
-        this.cdr.detectChanges();
-      },
-    });
-  }
+
+
+
+
+
+
+
 
   viewDetails(taskId: number) {
     this.router.navigate(['/dashboard', taskId]);

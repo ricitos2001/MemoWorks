@@ -49,6 +49,8 @@
   --neutral-700: #292929;
   --neutral-800: #1F1F1F;
   --neutral-900: #141414;
+  --card-opacity-light: rgba(78, 39, 84, 0.5);
+  --card-opacity-dark: rgba(41, 41, 41, 0.5);
   /* -------------------------
      Typography
   ------------------------- */
@@ -148,6 +150,7 @@
   --settings-info-box: var(--color-secondary-5);
   --settings-options-box: var(--color-secondary-2);
   --settings-option-box: var(--color-secondary-4);
+  --card-opacity: var(--card-opacity-light);
 }
 
 .theme-dark {
@@ -159,6 +162,7 @@
   --settings-info-box: var(--neutral-500);
   --settings-options-box: var(--neutral-800);
   --settings-option-box: var(--neutral-600);
+  --card-opacity: var(--card-opacity-dark);
 }
 
 html {
@@ -802,8 +806,11 @@ button.active {
 }
 
 .task {
+  position: relative;
   width: 25rem;
   height: 30rem;
+  background: var(--components);
+  overflow: hidden;
 }
 
 .task-details {
@@ -839,6 +846,30 @@ button.active {
   height: 15rem;
   background-image: url("/assets/img/funds/digital-dimensions-twilight-landscape-with-a-purple-haze-sunrise-designed-by-ppublish-colorful-reflections-perfect-942666541-1.jpg");
   background-size: cover;
+}
+
+.removeTask::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--card-opacity);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.task__trashButtton {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: var(--components);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
 }
 
 /*# sourceMappingURL=styles.css.map */

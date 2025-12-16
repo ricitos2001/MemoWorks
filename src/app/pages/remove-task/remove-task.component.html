@@ -1,6 +1,6 @@
 <ul>
   <li *ngFor="let task of tasks">
-    <section class="task">
+    <section class="task removeTask" (click)="removeTask(task.id)">
       <section class="task__image-box">
         <article id="etiquetas">
           {{ task.labels.join(', ') }}
@@ -21,10 +21,12 @@
           <article class="flex-center">
             <p class="task__text"><span>{{ task.title }}</span> - {{ task.description }}</p>
           </article>
-          <app-view-task-button type="button" (click)="removeTask(task.id)"></app-view-task-button>
+          <app-view-task-button type="button"></app-view-task-button>
         </section>
       </section>
+      <app-trash-button class="task__trashButtton"></app-trash-button>
     </section>
   </li>
+  <app-back-button></app-back-button>
 </ul>
 

@@ -1,5 +1,8 @@
 <app-modal [isOpen]="isOpen" [title]="getTitle()" size="medium" (close)="close()">
   <article class="auth-body" style="margin-top:12px;">
-    <app-add-task></app-add-task>
+    <app-add-task>
+      <app-button type="submit" (click)="close()">crear tarea</app-button>
+      <app-button type="button" (click)="close()">cancelar</app-button>
+    </app-add-task>
   </article>
 </app-modal>

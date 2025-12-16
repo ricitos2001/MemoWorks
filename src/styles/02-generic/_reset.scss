@@ -17,6 +17,7 @@
   --settings-info-box: var(--color-secondary-5);
   --settings-options-box: var(--color-secondary-2);
   --settings-option-box: var(--color-secondary-4);
+  --card-opacity: var(--card-opacity-light);
 
 }
 
@@ -29,7 +30,7 @@
   --settings-info-box: var(--neutral-500);
   --settings-options-box: var(--neutral-800);
   --settings-option-box: var(--neutral-600);
-
+  --card-opacity: var(--card-opacity-dark);
 }
 
 

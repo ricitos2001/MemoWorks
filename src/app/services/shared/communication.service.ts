@@ -24,8 +24,4 @@ export class CommunicationService {
       timestamp: Date.now()
     });
   }
-
-  get currentNotification(): AppNotification | null {
-    return this.notificationSubject.getValue();
-  }
 }

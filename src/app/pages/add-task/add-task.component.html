@@ -52,8 +52,7 @@
       {{ label.value }}<app-button (click)="removeLabel(i)">✕</app-button>
     </article>
     <article>
-      <app-button type="submit">crear tarea</app-button>
-      <app-button type="button" (click)="cancelTask()">cancelar</app-button>
+      <ng-content></ng-content>
     </article>
   </fieldset>
 </form>

@@ -5,13 +5,17 @@ import {DatePipe, NgForOf} from '@angular/common';
 import {ViewTaskButtonComponent} from '../../components/shared/view-task-button/view-task-button.component';
 import {CommunicationService} from '../../services/shared/communication.service';
 import {FormBuilder} from '@angular/forms';
+import {BackButton} from '../../components/shared/back-button/back-button';
+import {TrashButtonComponent} from '../../components/shared/trash-button/trash-button.component';
 
 @Component({
   selector: 'app-remove-task',
   imports: [
     DatePipe,
     NgForOf,
-    ViewTaskButtonComponent
+    ViewTaskButtonComponent,
+    BackButton,
+    TrashButtonComponent
   ],
   templateUrl: './remove-task.component.html',
   styleUrl: '../../../styles/styles.css',
@@ -50,7 +54,7 @@ export class RemoveTaskComponent implements OnInit {
           type: 'success',
           message: 'Tarea eliminada correctamente',
         });
-        this.loadTasks(); // refresca la lista
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         this.comm.sendNotification({
