@@ -1,9 +1,10 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ButtonComponent} from '../../components/shared/button/button.component';
 import {AuthService} from '../../services/auth.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {User, UserService} from '../../services/user.service';
 import {NgIf} from '@angular/common';
+import {CommunicationService} from '../../services/shared/communication.service';
 
 @Component({
   selector: 'app-user-settings',
@@ -16,7 +17,13 @@ import {NgIf} from '@angular/common';
 })
 
 export class UserSettingsComponent implements OnInit{
-  constructor(private authService: AuthService, private userService: UserService, private router: Router, private cd: ChangeDetectorRef) {}
+  constructor(private authService: AuthService,
+              private userService: UserService,
+              private router: Router,
+              private cd: ChangeDetectorRef,
+              private route: ActivatedRoute,
+              private comm: CommunicationService
+              ) {}
   user?: User;
 
   id = localStorage.getItem('userId');
@@ -41,10 +48,25 @@ export class UserSettingsComponent implements OnInit{
   }
 
   removeAccount() {
-    this.authService.removeUserData();
-    this.authService.loggedInSubject.next(false);
-    this.authService.removeAccount();
-    this.router.navigate(['/landing']);
+    this.userService.removeUser(this.id).subscribe({
+      next: () => {
+        this.comm.sendNotification({
+          source: 'userForm',
+          type: 'success',
+          message: 'Usuario eliminado correctamente',
+        });
+        this.authService.removeUserData();
+        this.authService.loggedInSubject.next(false);
+        this.router.navigate(['/landing']);
+      },
+      error: () => {
+        this.comm.sendNotification({
+          source: 'userForm',
+          type: 'error',
+          message: 'Error al eliminar el usuario',
+        });
+      }
+    });
   };
 
   editUserInfo() {

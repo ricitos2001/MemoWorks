@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import {ThemeService} from '../../services/shared/theme.service';
-import {AuthModalComponent} from '../../components/shared/modal/auth-modal.component';
+import {AuthModalComponent} from '../../components/shared/auth-modal/auth-modal.component';
 import {ButtonComponent} from '../../components/shared/button/button.component';
+import {AuthModalService} from '../../services/shared/auth-modal.service';
 
 @Component({
   selector: 'app-landing',
@@ -17,7 +18,7 @@ export class LandingComponent implements OnInit {
   @ViewChild('authModal') authModal!: AuthModalComponent;
   darkMode = false;
 
-  constructor(private router: Router, private themeService: ThemeService) {}
+  constructor(private router: Router, private themeService: ThemeService, private authModalService: AuthModalService) {}
 
   ngOnInit(): void {
        this.themeService.currentTheme$.subscribe(theme => {
@@ -27,15 +28,13 @@ export class LandingComponent implements OnInit {
 
   openAuthModal(tab: 'login' | 'register' | 'recover' = 'register') {
     if (tab === 'recover') {
-      // abrir la página de recuperar contraseña en una ruta separada
       this.router.navigate(['/recuperarContraseña']);
       return;
     }
-    this.authModal.open(tab);
+    this.authModalService.open(tab);
   }
 
   onAuthSuccess() {
-    // cerrar modal ya lo hace el AuthModalComponent; aquí navegas
     this.router.navigate(['/dashboard']);
   }
 }

@@ -8,12 +8,10 @@ import {AuthInterceptor} from './interceptors/auth-interceptor';
 import {LoadingInterceptor} from './interceptors/loading.interceptor-interceptor';
 import {ToastComponent} from './components/shared/toast/toast.component';
 import {SpinnerComponent} from './components/shared/spinner/spinner.component';
-import {TabsComponent} from './components/shared/tabs/tabs.component';
-import {ModalComponent} from './components/shared/modal/modal.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, MainComponent, HttpClientModule, ToastComponent, SpinnerComponent, TabsComponent, ModalComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, MainComponent, HttpClientModule, ToastComponent, SpinnerComponent],
   templateUrl: './app.html',
   styleUrl: '../styles/styles.css',
   providers: [

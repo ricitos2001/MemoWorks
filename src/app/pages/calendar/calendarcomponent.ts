@@ -5,7 +5,7 @@ import {EditButtonComponent} from '../../components/shared/edit-button/edit-butt
 import {RemoveButtonComponent} from '../../components/shared/remove-button/remove-button.component';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {CommunicationService} from '../../services/shared/communication.service';
-import {TaskFormModalComponent} from '../../components/shared/modal/task-form-modal.component';
+import {TaskFormModalComponent} from '../../components/shared/task-form-modal/task-form-modal.component';
 import {ToastService} from '../../services/shared/toast.service';
 import {Router} from '@angular/router';
 

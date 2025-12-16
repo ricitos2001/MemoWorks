@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalComponent } from './modal.component';
+import { ModalComponent } from '../modal/modal.component';
 import { LoginComponent } from '../../../pages/login/login.component';
 import { RegisterComponent } from '../../../pages/register/register.component';
 import { TabsComponent } from '../tabs/tabs.component';
+import {AuthModalService} from '../../../services/shared/auth-modal.service';
 
 @Component({
   selector: 'app-auth-modal',
@@ -12,7 +13,7 @@ import { TabsComponent } from '../tabs/tabs.component';
   templateUrl: './auth-modal.component.html',
   styleUrls: ['../../../../styles/styles.css']
 })
-export class AuthModalComponent {
+export class AuthModalComponent implements OnInit{
   @Output() authSuccess = new EventEmitter<void>();
 
   isOpen = false;
@@ -33,5 +34,14 @@ export class AuthModalComponent {
   getTitle() {
     return this.activeTab === 'register' ? 'Registrarse' : 'Iniciar sesión';
   }
+
+  constructor(private authModalService: AuthModalService) {}
+
+  ngOnInit() {
+    this.authModalService.openModal$.subscribe(tab => {
+      this.open(tab);
+    });
+  }
+
 }
 

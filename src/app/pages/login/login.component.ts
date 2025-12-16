@@ -6,7 +6,7 @@ import {FormInputComponent} from '../../components/shared/form-input/form-input.
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgIf} from '@angular/common';
 import {passwordStrength} from '../../validators/password-strength.validator';
-import { AuthModalComponent } from '../../components/shared/modal/auth-modal.component';
+import { AuthModalComponent } from '../../components/shared/auth-modal/auth-modal.component';
 
 @Component({
   selector: 'app-login',

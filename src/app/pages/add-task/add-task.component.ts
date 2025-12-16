@@ -6,7 +6,7 @@ import { TaskService } from '../../services/task.service';
 import {CommunicationService} from '../../services/shared/communication.service';
 import {NgForOf, NgIf} from '@angular/common';
 import { FormComponent, hasPendingChanges } from '../../guards/pending-chances-guard';
-import {TaskFormModalComponent} from '../../components/shared/modal/task-form-modal.component';
+import {TaskFormModalComponent} from '../../components/shared/task-form-modal/task-form-modal.component';
 import {Router} from '@angular/router';
 
 @Component({

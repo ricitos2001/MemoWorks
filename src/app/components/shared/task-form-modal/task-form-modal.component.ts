@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {ModalComponent} from './modal.component';
+import {ModalComponent} from '../modal/modal.component';
 import {AddTaskComponent} from '../../../pages/add-task/add-task.component';
 import {ButtonComponent} from '../button/button.component';
 

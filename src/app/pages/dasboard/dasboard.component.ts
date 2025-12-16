@@ -11,7 +11,7 @@ import {TasksComponent} from '../../components/shared/tasks/tasks.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {CommunicationService} from '../../services/shared/communication.service';
 import {ToastService} from '../../services/shared/toast.service';
-import {TaskFormModalComponent} from '../../components/shared/modal/task-form-modal.component';
+import {TaskFormModalComponent} from '../../components/shared/task-form-modal/task-form-modal.component';
 import {Router} from '@angular/router';
 
 @Component({

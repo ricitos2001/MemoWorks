@@ -1,1 +1,66 @@
-<p>edit-user-info.component works!</p>
+<form [formGroup]="editUserForm" (ngSubmit)="onSubmit($event)" novalidate>
+  <fieldset class="fieldset">
+    <legend>Registrate</legend>
+
+    <app-form-input
+      formControlName="email"
+      type="email"
+      name="email"
+      placeholder="Correo electrónico"
+      [required]="true"
+    ></app-form-input>
+    <div class="error" *ngIf="editUserForm.get('email')?.touched && editUserForm.get('email')?.invalid">
+      <small *ngIf="editUserForm.get('email')?.errors?.['required']">El correo es obligatorio.</small>
+      <small *ngIf="editUserForm.get('email')?.errors?.['email']">Correo no válido.</small>
+      <small *ngIf="editUserForm.get('email')?.errors?.['emailTaken']">Correo ya registrado.</small>
+    </div>
+
+    <app-form-input
+      formControlName="username"
+      name="username"
+      placeholder="Nombre de usuario"
+      [required]="true"
+    ></app-form-input>
+    <div class="error" *ngIf="editUserForm.get('username')?.touched && editUserForm.get('username')?.invalid">
+      <small *ngIf="editUserForm.get('username')?.errors?.['required']">El usuario es obligatorio.</small>
+      <small *ngIf="editUserForm.get('username')?.errors?.['usernameTaken']">Usuario ya existe.</small>
+    </div>
+
+    <app-form-input
+      formControlName="name"
+      name="name"
+      placeholder="Nombre"
+      [required]="true"
+    ></app-form-input>
+    <div class="error" *ngIf="editUserForm.get('name')?.touched && editUserForm.get('name')?.invalid">
+      <small>Nombre obligatorio</small>
+    </div>
+    <app-form-input
+      formControlName="surnames"
+      name="surnames"
+      placeholder="Apellidos"
+      [required]="true"
+    ></app-form-input>
+    <div class="error" *ngIf="editUserForm.get('surnames')?.touched && editUserForm.get('surnames')?.invalid">
+      <small>Apellidos obligatorios</small>
+    </div>
+    <app-form-input
+      formControlName="phoneNumber"
+      type="tel"
+      name="phoneNumber"
+      placeholder="Teléfono"
+      [required]="true"
+    ></app-form-input>
+    <div class="error" *ngIf="editUserForm.get('phoneNumber')?.touched && editUserForm.get('phoneNumber')?.invalid">
+      <small *ngIf="editUserForm.get('phoneNumber')?.errors?.['required']">Teléfono obligatorio.</small>
+      <small *ngIf="editUserForm.get('phoneNumber')?.errors?.['invalidPhoneNumber']">Teléfono no válido.</small>
+    </div>
+    <div class="error" *ngIf="editUserForm.errors?.['mismatch'] && editUserForm.get('repeatPassword')?.touched">
+      <small>Las contraseñas no coinciden.</small>
+    </div>
+    <article class="grid-center">
+      <app-button type="submit" class="grid" [disabled]="editUserForm.invalid || editUserForm.pending">editar perfil</app-button>
+      <app-button type="button" class="grid" (click)="cancelEdittion()">cancelar</app-button>
+    </article>
+  </fieldset>
+</form>

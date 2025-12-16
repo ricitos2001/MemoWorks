@@ -8,9 +8,9 @@ import {NgIf} from '@angular/common';
 import {RouterLink} from '@angular/router';
 import {passwordMatch} from '../../validators/password-match.validator';
 import {passwordStrength} from '../../validators/password-strength.validator';
-import {phoneNumberValidation} from '../../validators/spanish-formats.validator';
+import {phoneNumberValidation} from '../../validators/phone-number.validator';
 import {AsyncValidatorsService} from '../../services/async-validators.service';
-import { AuthModalComponent } from '../../components/shared/modal/auth-modal.component';
+import { AuthModalComponent } from '../../components/shared/auth-modal/auth-modal.component';
 
 @Component({
   selector: 'app-register',
@@ -41,14 +41,14 @@ export class RegisterComponent {
       email: ['', {
         validators: [Validators.required, Validators.email, Validators.maxLength(50)],
         asyncValidators: [this.asyncValidators.emailUnique()],
-        updateOn: 'change'
+        updateOn: 'blur'
       }],
       name: ['', [Validators.required, Validators.maxLength(50)]],
       surnames: ['', [Validators.required, Validators.maxLength(100)]],
       username: ['', {
         validators: [Validators.required, Validators.maxLength(50)],
         asyncValidators: [this.asyncValidators.usernameAvailable()],
-        updateOn: 'change'
+        updateOn: 'blur'
       }],
       phoneNumber: ['', [Validators.required, phoneNumberValidation()]],
       password: ['', [Validators.required, passwordStrength()]],
@@ -58,30 +58,28 @@ export class RegisterComponent {
   }
 
   onSubmit(event: Event) {
+    event.preventDefault();
 
     this.loading = true;
-    setTimeout(() => {
-      this.loading = false;
-      this.submitted = true;
-      event.preventDefault();
-      if (this.registerForm.invalid) {
-        this.registerForm.markAllAsTouched();
-        return;
-      }
-      this.authService.register(this.registerForm).subscribe({
-        next: (res) => {
-          localStorage.setItem('token', res.token);
-          this.authService.getUserIdFromToken();
-          this.authService.saveToken(res.token);
-          this.authService.loggedInSubject.next(true);
-          this.authSuccess.emit();
-          // navegación delegada al componente padre
+    this.submitted = true;
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
+    this.loading = false;
+
+    this.authService.register(this.registerForm).subscribe({
+      next: (res) => {
+        localStorage.setItem('token', res.token);
+        this.authService.getUserIdFromToken();
+        this.authService.saveToken(res.token);
+        this.authService.loggedInSubject.next(true);
+        this.authSuccess.emit();
         },
-        error: (err) => {
-          console.error('Error en registro', err);
-        }
-      });
-    }, 5000)
+      error: (err) => {
+        console.error('Error en registro', err);
+      }
+    });
   }
 
   openLogin(event: Event) {

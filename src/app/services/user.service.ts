@@ -27,7 +27,7 @@ export interface User {
 export class UserService {
   token = localStorage.getItem('token');
 
-  constructor(private http: HttpClient, private loading: LoadingService, private toast: ToastService) { }
+  constructor(private http: HttpClient, private loadingService: LoadingService, private toast: ToastService) { }
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`http://localhost:8080/api/v1/users`, {
@@ -43,11 +43,11 @@ export class UserService {
         headers: {
           Authorization: `Bearer ${this.token}`
         }
-      });
+      }).pipe(finalize(() => this.loadingService.hide()));
   }
 
-  editUser(id: string | null): Observable<User> {
-    return this.http.put<User>(`http://localhost:8080/api/v1/users/${id}`,
+  editUser(id: string | null, user: User): Observable<User> {
+    return this.http.put<User>(`http://localhost:8080/api/v1/users/${id}`, user,
       {
         headers: {
           Authorization: `Bearer ${this.token}`
