@@ -1,3 +1,37 @@
 @use "../00-settings/css-variables" as *;
 @use "../01-tools/mixins" as *;
 
+/* Cajas decorativas: animaciones sutiles y utilidades */
+.decor-box {
+  background: var(--components);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
+  box-shadow: 0 8px 24px rgba(41, 25, 45, 0.12);
+  overflow: hidden;
+}
+
+/* Animaciones decorativas (sutiles) */
+@keyframes decor-float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(-0.3deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes decor-pulse {
+  0% { transform: scale(1); box-shadow: 0 8px 24px rgba(41, 25, 45, 0.12);}
+  50% { transform: scale(1.01); box-shadow: 0 12px 32px rgba(41, 25, 45, 0.14);}
+  100% { transform: scale(1); box-shadow: 0 8px 24px rgba(41, 25, 45, 0.12);}
+}
+
+.decor-animate {
+  animation: decor-float 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.decor-animate--pulse {
+  animation: decor-pulse 4.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .decor-animate, .decor-animate--pulse { animation: none !important; }
+}

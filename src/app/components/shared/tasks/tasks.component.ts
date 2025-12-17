@@ -27,7 +27,7 @@ export class TasksComponent implements OnInit {
   constructor(private taskService: TaskService, private cdr: ChangeDetectorRef, private router: Router, private comm: CommunicationService) {}
   private destroyRef = inject(DestroyRef);
 
-  id = localStorage.getItem('userId');
+  email = localStorage.getItem('email');
 
   ngOnInit(): void {
     this.loadTasks();
@@ -41,8 +41,8 @@ export class TasksComponent implements OnInit {
   }
 
   private loadTasks(): void {
-    if (!this.id) return;
-    this.taskService.getTasksByUserId(this.id).subscribe({
+    if (!this.email) return;
+    this.taskService.getTasksByUserEmail(this.email).subscribe({
       next: (response: any) => {
         this.tasks = response.content;
         this.cdr.detectChanges();

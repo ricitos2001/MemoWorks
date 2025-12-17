@@ -22,6 +22,7 @@ import {NgForOf, NgIf} from '@angular/common';
 })
 export class EditTaskComponent implements OnInit {
   taskForm: FormGroup;
+  loading = false;
 
   constructor(
     private taskService: TaskService,
@@ -128,18 +129,19 @@ export class EditTaskComponent implements OnInit {
     });
   }
 
-  cancelTask(event: Event) {
-    event.stopPropagation();
-    event.preventDefault();
-    if (hasPendingChanges(this)) {
-      this.cancel.emit();
-      this.comm.sendNotification({
-        source: 'taskForm',
-        type: 'info',
-        message: 'Tarea cancelada',
-      });
-      this.router.navigate(['/dashboard']);
+  onCancel(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
     }
+    // Emitimos el evento para comunicar al padre que se ha cancelado
+    this.cancel.emit();
+    // Enviamos una notificación informativa
+    this.comm.sendNotification({
+      source: 'taskForm',
+      type: 'info',
+      message: 'Operación cancelada'
+    });
   }
 
   protected readonly event = event;

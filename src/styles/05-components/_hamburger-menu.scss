@@ -18,13 +18,13 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 480px) {
   .hamburger {
     display: none;
   }
 
   .menu {
-    display: flex !important;
+    display: flex;
     flex-direction: row;
   }
 }

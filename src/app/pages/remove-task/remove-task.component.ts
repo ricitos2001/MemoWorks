@@ -25,10 +25,10 @@ export class RemoveTaskComponent implements OnInit {
 
   constructor(private taskService: TaskService, private cdr: ChangeDetectorRef, private router: Router, private comm: CommunicationService) {}
 
-  id = localStorage.getItem('userId');
+  email = localStorage.getItem('email');
   ngOnInit(): void {
     this.loadTasks();
-    this.taskService.getTasksByUserId(this.id).subscribe({
+    this.taskService.getTasksByUserEmail(this.email).subscribe({
       next: (response: any) => {
         this.tasks = response.content;
         this.cdr.detectChanges();
@@ -37,7 +37,7 @@ export class RemoveTaskComponent implements OnInit {
   }
 
   loadTasks() {
-    this.taskService.getTasksByUserId(this.id).subscribe({
+    this.taskService.getTasksByUserEmail(this.email).subscribe({
       next: (response: any) => {
         this.tasks = response.content;
         this.cdr.detectChanges();

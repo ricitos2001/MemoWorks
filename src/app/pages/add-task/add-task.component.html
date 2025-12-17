@@ -1,10 +1,12 @@
-<form [formGroup]="taskForm" (ngSubmit)="onSubmit($event)">
+<form class="add-task-form" [formGroup]="taskForm" (ngSubmit)="onSubmit($event)">
   <fieldset>
-    <legend>Crear tarea</legend>
+    <legend>Agregar tarea</legend>
+
     <app-form-input
       formControlName="title"
       name="title"
-      placeholder="Título"
+      placeholder="Value"
+      label="Título"
       [required]="true"
       class="grid"
     ></app-form-input>
@@ -16,7 +18,8 @@
     <app-form-input
       formControlName="description"
       name="description"
-      placeholder="Descripción"
+      placeholder="Value"
+      label="Descripcion"
       type="textarea"
       [required]="true"
       class="grid"
@@ -26,33 +29,43 @@
       <small *ngIf="taskForm.get('description')?.errors?.['minlength']">Mínimo 10 caracteres</small>
     </div>
 
-    <app-form-input
-      formControlName="date"
-      type="date"
-      name="date"
-      placeholder="Fecha"
-      [required]="true"
-      class="grid"
-    ></app-form-input>
-    <app-form-input
-      formControlName="time"
-      type="time"
-      name="time"
-      placeholder="Hora"
-      [required]="true"
-      class="grid"
-    ></app-form-input>
+    <label class="label">Fecha y hora de realizacion</label>
+    <div class="date-time-group">
+      <app-form-input
+        formControlName="date"
+        type="date"
+        name="date"
+        placeholder="--/--/----"
+        label="Fecha"
+        [required]="true"
+      ></app-form-input>
+      <app-form-input
+        formControlName="time"
+        type="time"
+        name="time"
+        placeholder="--:--"
+        label="Hora"
+        [required]="true"
+      ></app-form-input>
+    </div>
+
     <app-form-input
       name="labelInput"
       placeholder="Añadir etiqueta"
+      label="Añadir etiqueta"
       (keydown.enter)="addLabel(labelInput.value, $event); labelInput.value='';"
       #labelInput
     ></app-form-input>
-    <article *ngFor="let label of labels.controls; let i = index" class="flex-center">
-      {{ label.value }}<app-button (click)="removeLabel(i, $event)">✕</app-button>
-    </article>
-    <article>
-      <ng-content></ng-content>
-    </article>
+
+    <div class="labels">
+      <article *ngFor="let label of labels.controls; let i = index" class="flex-center">
+        {{ label.value }}<app-button (click)="removeLabel(i, $event)">✕</app-button>
+      </article>
+    </div>
+
+    <div class="actions">
+      <app-button (click)="onSubmit($event)" [attr.aria-busy]="loading">Crear tarea</app-button>
+      <app-button class="secondary" (click)="!loading && cancel.emit()">Cancelar</app-button>
+    </div>
   </fieldset>
 </form>

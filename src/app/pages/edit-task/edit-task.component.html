@@ -1,59 +1,70 @@
-<form [formGroup]="taskForm" (ngSubmit)="onSubmit($event)">
+<form class="add-task-form" [formGroup]="taskForm" (ngSubmit)="onSubmit($event)">
   <fieldset>
     <legend>Editar tarea</legend>
+
     <app-form-input
       formControlName="title"
       name="title"
-      placeholder="Título"
+      placeholder="Value"
+      label="Título"
       [required]="true"
       class="grid"
     ></app-form-input>
-    <div class="error" *ngIf="taskForm.get('title')?.touched && taskForm.get('title')?.invalid">
+    <article class="error" *ngIf="taskForm.get('title')?.touched && taskForm.get('title')?.invalid">
       <small *ngIf="taskForm.get('title')?.errors?.['required']">Título obligatorio</small>
       <small *ngIf="taskForm.get('title')?.errors?.['minlength']">Mínimo 5 caracteres</small>
-    </div>
+    </article>
 
     <app-form-input
       formControlName="description"
       name="description"
-      placeholder="Descripción"
+      placeholder="Value"
+      label="Descripcion"
       type="textarea"
       [required]="true"
       class="grid"
     ></app-form-input>
-    <div class="error" *ngIf="taskForm.get('description')?.touched && taskForm.get('description')?.invalid">
+    <article class="error" *ngIf="taskForm.get('description')?.touched && taskForm.get('description')?.invalid">
       <small *ngIf="taskForm.get('description')?.errors?.['required']">Descripción obligatoria</small>
       <small *ngIf="taskForm.get('description')?.errors?.['minlength']">Mínimo 10 caracteres</small>
-    </div>
+    </article>
 
-    <app-form-input
-      formControlName="date"
-      type="date"
-      name="date"
-      placeholder="Fecha"
-      [required]="true"
-      class="grid"
-    ></app-form-input>
-    <app-form-input
-      formControlName="time"
-      type="time"
-      name="time"
-      placeholder="Hora"
-      [required]="true"
-      class="grid"
-    ></app-form-input>
+    <label class="label">Fecha y hora de realizacion</label>
+    <article class="date-time-group">
+      <app-form-input
+        formControlName="date"
+        type="date"
+        name="date"
+        placeholder="--/--/----"
+        label="Fecha"
+        [required]="true"
+      ></app-form-input>
+      <app-form-input
+        formControlName="time"
+        type="time"
+        name="time"
+        placeholder="--:--"
+        label="Hora"
+        [required]="true"
+      ></app-form-input>
+    </article>
+
     <app-form-input
       name="labelInput"
       placeholder="Añadir etiqueta"
+      label="Añadir etiqueta"
       (keydown.enter)="addLabel(labelInput.value, $event); labelInput.value='';"
       #labelInput
     ></app-form-input>
-    <article *ngFor="let label of labels.controls; let i = index" class="flex-center">
-      {{ label.value }}<app-button type="button" (click)="removeLabel(i, $event)">✕</app-button>
-    </article>
-    <article>
-      <app-button type="submit">editar tarea</app-button>
-      <app-button type="button" (click)="cancelTask($event)">cancelar</app-button>
+
+    <section class="labels">
+      <article *ngFor="let label of labels.controls; let i = index" class="flex-center">
+        {{ label.value }}<app-button (click)="removeLabel(i, $event)">✕</app-button>
+      </article>
+    </section>
+    <article class="actions">
+      <app-button (click)="onSubmit($event)" [attr.aria-busy]="loading">Editar tarea</app-button>
+      <app-button type="button" class="secondary" (click)="!loading && onCancel($event)">Cancelar</app-button>
     </article>
   </fieldset>
 </form>

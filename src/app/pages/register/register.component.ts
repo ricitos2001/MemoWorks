@@ -20,7 +20,6 @@ import { ToastService } from '../../services/shared/toast.service';
     FormInputComponent,
     ReactiveFormsModule,
     NgIf,
-    RouterLink
   ],
   templateUrl: './register.component.html',
   styleUrl: '../../../styles/styles.css',

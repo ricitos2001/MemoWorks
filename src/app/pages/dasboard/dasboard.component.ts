@@ -80,8 +80,19 @@ export class DasboardComponent implements OnInit {
     const addButton = this.renderer.createElement('img');
     this.renderer.setProperty(addButton, 'src', 'assets/img/File%20plus.svg');
     this.renderer.addClass(addButton, 'addButton');
+    this.renderer.setAttribute(addButton, 'alt', 'Agregar tarea');
+    this.renderer.setAttribute(addButton, 'title', 'Agregar tarea');
+    this.renderer.setAttribute(addButton, 'aria-label', 'Agregar tarea');
+    this.renderer.setAttribute(addButton, 'role', 'button');
+    this.renderer.setAttribute(addButton, 'tabindex', '0');
     this.renderer.listen(addButton, 'click', () => {
         this.taskFormModal.open('addTask');
+    });
+    this.renderer.listen(addButton, 'keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ' || e.code === 'Space') {
+        e.preventDefault();
+        this.taskFormModal.open('addTask');
+      }
     });
     this.renderer.appendChild(this.buttons.nativeElement, addButton);
   }
@@ -90,9 +101,21 @@ export class DasboardComponent implements OnInit {
     const editButton = this.renderer.createElement('img');
     this.renderer.setProperty(editButton, 'src', 'assets/img/Edit%203.svg');
     this.renderer.addClass(editButton, 'editButton');
+    this.renderer.setAttribute(editButton, 'alt', 'Editar tarea');
+    this.renderer.setAttribute(editButton, 'title', 'Editar tarea');
+    this.renderer.setAttribute(editButton, 'aria-label', 'Editar tarea');
+    this.renderer.setAttribute(editButton, 'role', 'button');
+    this.renderer.setAttribute(editButton, 'tabindex', '0');
     this.renderer.listen(editButton, 'click', () => {
       this.router.navigate(['selectTask'], { state: { from: 'dashboard' } });
     });
+    this.renderer.listen(editButton, 'keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ' || e.code === 'Space') {
+        e.preventDefault();
+        this.router.navigate(['selectTask'], { state: { from: 'dashboard' } });
+      }
+    });
+
     this.renderer.appendChild(this.buttons.nativeElement, editButton);
   }
 
@@ -100,8 +123,19 @@ export class DasboardComponent implements OnInit {
     const removeButton = this.renderer.createElement('img');
     this.renderer.setProperty(removeButton, 'src', 'assets/img/File%20minus.svg');
     this.renderer.addClass(removeButton, 'removeButton');
+    this.renderer.setAttribute(removeButton, 'alt', 'Eliminar tarea');
+    this.renderer.setAttribute(removeButton, 'title', 'Eliminar tarea');
+    this.renderer.setAttribute(removeButton, 'aria-label', 'Eliminar tarea');
+    this.renderer.setAttribute(removeButton, 'role', 'button');
+    this.renderer.setAttribute(removeButton, 'tabindex', '0');
     this.renderer.listen(removeButton, 'click', () => {
       this.router.navigate(['removeTask'], { state: { from: 'dashboard' } });
+    });
+    this.renderer.listen(removeButton, 'keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ' || e.code === 'Space') {
+        e.preventDefault();
+        this.router.navigate(['removeTask'], { state: { from: 'dashboard' } });
+      }
     });
     this.renderer.appendChild(this.buttons.nativeElement, removeButton);
   }

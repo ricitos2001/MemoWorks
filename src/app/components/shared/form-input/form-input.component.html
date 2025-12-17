@@ -1,4 +1,4 @@
-<label [for]="name">{{ placeholder }}</label>
+<label [for]="name">{{ label || placeholder }}</label>
 
 <input
   *ngIf="type !== 'textarea'"

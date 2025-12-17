@@ -18,7 +18,7 @@
   --settings-options-box: var(--color-secondary-2);
   --settings-option-box: var(--color-secondary-4);
   --card-opacity: var(--card-opacity-light);
-
+  --value-letters: var(--color-secondary-1);
 }
 
 .theme-dark {
@@ -31,6 +31,7 @@
   --settings-options-box: var(--neutral-800);
   --settings-option-box: var(--neutral-600);
   --card-opacity: var(--card-opacity-dark);
+  --value-letters: var(--neutral-900);
 }
 
 

@@ -21,6 +21,7 @@ export class FormInputComponent implements ControlValueAccessor {
   @Input() type: string = 'text';
   @Input() name!: string;
   @Input() placeholder: string = '';
+  @Input() label?: string;
   @Input() required: boolean = false;
   @Input() value: string = '';
 
@@ -57,5 +58,3 @@ export class FormInputComponent implements ControlValueAccessor {
     this.onTouched();
   }
 }
-
-

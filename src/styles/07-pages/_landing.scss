@@ -4,16 +4,49 @@
 .landing__section{
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-24);
+  /* Reducir espaciado vertical en secciones para diseño más compacto */
+  padding: var(--spacing-8);
 }
 
 .landing__space {
-  padding: var(--spacing-24);
+  padding: var(--spacing-8);
 }
 
 .landing__icon {
-  max-width: 50%;
-  padding: var(--spacing-6) var(--spacing-6) var(--spacing-6) var(--spacing-6);
+  /* Reducir tamaño visual del icono y padding interior */
+  max-width: 35%;
+  padding: var(--spacing-4);
   background: var(--components);
   border-radius: var(--radius-xl);
+  /* Aplicar apariencia de caja decorativa y sombra */
+  box-shadow: 0 8px 24px rgba(41, 25, 45, 0.12);
+  overflow: hidden;
+}
+
+/* Si no se usa @extend en el flujo, añadir reglas directas para animar la landing icon */
+.landing__icon.decor-animate {
+  animation: decor-float 6s ease-in-out infinite;
+}
+
+.landing__icon.decor-animate--pulse {
+  animation: decor-pulse 4.5s ease-in-out infinite;
+}
+
+/* Regla global para imágenes dentro de secciones: reducir tamaño y margen */
+.landing__section img,
+.landing__icon img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  max-height: 12rem; /* limitar altura para pantallas grandes */
+}
+
+/* Aumentar ligeramente el tamaño de letra en títulos dentro de secciones */
+.landing__section h1, .landing__section h2, .landing__section h3 {
+  font-weight: var(--font-weight-bold);
+}
+
+/* Reducir márgenes internos generales en secciones */
+.landing__section > * {
+  margin: 0.5rem 0;
 }

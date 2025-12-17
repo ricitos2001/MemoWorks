@@ -27,8 +27,8 @@ export class TaskService {
 
   constructor(private http: HttpClient, private loadingService: LoadingService) { }
 
-  getTasksByUserId(id: string | null): Observable<Task[]> {
-    return this.http.get<Task[]>(`http://localhost:8080/api/v1/tasks/myTasks/${id}`, {
+  getTasksByUserEmail(email: string | null): Observable<Task[]> {
+    return this.http.get<Task[]>(`http://localhost:8080/api/v1/tasks/myTasks/${email}`, {
       headers: {
         Authorization: `Bearer ${this.token}`
       }

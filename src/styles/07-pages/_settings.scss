@@ -6,11 +6,18 @@
   flex-direction: row;
   justify-content: center;
   padding: var(--spacing-24);
+  margin: 0;
 }
 
 .settings__choices{
   background: var(--settings-options-box);
   padding: var(--spacing-4);
+  margin: 0;
+}
+
+.settings__content{
+  padding: 0;
+  margin: 0;
 }
 
 .settings__choice{
@@ -18,11 +25,13 @@
   background: var(--components);
   font-weight: var(--font-weight-regular);
   padding: var(--spacing-4) var(--spacing-24) var(--spacing-4) var(--spacing-4);
+  margin: 0;
 }
 
 .settings__info {
   background: var(--settings-option-box);
   padding: var(--spacing-4);
+  margin: 0;
 }
 
 .settings__item {
@@ -32,6 +41,8 @@
   padding-right: var(--spacing-4);
   padding-bottom: var(--spacing-4);
   align-items: center;
+  margin: 0;
+
 }
 
 .settings__name{
@@ -43,7 +54,7 @@
 
 .settings__value{
   padding: var(--spacing-4);
-  color: var(--background);
+  color: var(--value-letters);
   background: var(--color-primary-1);
   flex: 0 0 16.25rem;
 }

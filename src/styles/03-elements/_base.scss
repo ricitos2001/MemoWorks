@@ -1,25 +1,35 @@
 @use '../00-settings/css-variables' as *;
 @use '../01-tools/mixins' as *;
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html {
   box-sizing: border-box;
-  font-family: var(--font-primary), 'sans-serif';
+  font-family: var(--font-primary), sans-serif;
+  font-size: var(--font-size-base);
 }
 
 body {
   margin: 0;
   background: var(--background);
-  color: var(--neutral-900);
+  color: var(--landing-letters);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-primary), sans-serif;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-secondary), sans-serif;
   line-height: var(--line-height-tight);
   color: var(--landing-letters);
+  margin: 0 0 var(--spacing-4) 0;
 }
 
-h1 , legend{ font-size: var(--font-size-5xl); }
+h1, legend { font-size: var(--font-size-5xl); }
 h2 { font-size: var(--font-size-4xl); }
 h3 { font-size: var(--font-size-3xl); }
 h4 { font-size: var(--font-size-2xl); }
@@ -31,17 +41,19 @@ p {
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
   color: var(--landing-letters);
+  margin: 0 0 var(--spacing-4) 0;
 }
 
 a {
   font-family: var(--font-primary), sans-serif;
-  color: var(--color-primary-1);
+  color: var(--letters);
+  text-decoration: none;
 }
 
 button {
   cursor: pointer;
   font-family: var(--font-primary), sans-serif;
-  padding: var(--spacing-6) var(--spacing-24);
+  padding: var(--spacing-3) var(--spacing-6);
   color: var(--letters);
   background: var(--buttons);
   border-radius: var(--radius-md);
@@ -49,20 +61,29 @@ button {
 }
 
 ol, li {
-  padding: var(--spacing-6) var(--spacing-6) var(--spacing-6) ;
+  margin: 0 0 var(--spacing-2) 0;
+  padding-left: var(--spacing-6);
 }
 
-label { display: inline-block; margin-bottom: var(--spacing-2); font-weight: var(--font-weight-medium); font-family: var(--font-primary), sans-serif;}
+label {
+  display: inline-block;
+  margin-bottom: var(--spacing-2);
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-primary), sans-serif;
+}
+
 input, textarea, select {
   border: var(--border-thin) solid var(--neutral-300);
   padding: var(--spacing-3);
   border-radius: var(--radius-md);
-  background: var(--letters);
+  background: transparent;
+  color: var(--letters);
 }
 
 form {
-  margin: var(--spacing-24);
+  margin: var(--spacing-12);
   color: var(--letters);
   background: var(--components);
   border-radius: var(--radius-md);
+  padding: var(--spacing-6);
 }

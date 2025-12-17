@@ -1,0 +1,165 @@
+@use '../00-settings/css-variables' as *;
+@use '../01-tools/mixins' as *;
+
+.add-task-form {
+  background: var(--components);
+  padding: var(--spacing-6);
+  border-radius: 12px;
+  color: var(--letters);
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.add-task-form fieldset {
+  border: none;
+  padding: 0;
+}
+
+.add-task-form legend {
+  font-size: 3.2rem;
+  line-height: 0.9;
+  font-weight: var(--font-weight-bold);
+  margin: 0 0 0.6rem 0;
+  color: #FEFBEC;
+  padding: 0.2rem 0.6rem;
+  background: transparent;
+  display: block;
+}
+
+.add-task-form input,
+.add-task-form textarea,
+.add-task-form app-form-input input {
+  background: #FEFBEC;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 0.75rem 0.9rem;
+  font-size: 1rem;
+  color: #291a26;
+}
+
+.add-task-form input,
+.add-task-form app-form-input input {
+  height: 3rem;
+  padding: 0 0.9rem;
+}
+
+.add-task-form textarea,
+.add-task-form app-form-input textarea {
+  min-height: 10.5rem;
+  border-radius: 10px;
+}
+
+.add-task-form .date-time-group {
+  display: flex;
+  gap: var(--spacing-4);
+  align-items: center;
+  margin-bottom: var(--spacing-6);
+}
+
+.add-task-form .date-time-group input[type="date"],
+.add-task-form .date-time-group app-form-input input[type="date"] {
+  width: 9.5rem;
+  height: 3rem;
+  padding: 0 0.6rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.add-task-form .date-time-group input[type="time"],
+.add-task-form .date-time-group app-form-input input[type="time"] {
+  width: 8rem;
+  height: 3rem;
+  padding: 0 0.6rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* Etiquetas */
+.add-task-form .labels {
+  display:flex;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-6);
+}
+
+.add-task-form .labels article {
+  background: rgba(255,255,255,0.12);
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: #fff;
+}
+
+/* Botones grandes morados */
+.add-task-form .actions {
+  display:flex;
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-6);
+}
+
+.add-task-form .actions app-button button,
+.add-task-form .actions button {
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  background: var(--buttons);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.add-task-form .actions app-button.secondary button,
+.add-task-form .actions button.secondary {
+  background: var(--buttons);
+}
+
+/* Asegurar que los labels internos del componente form-input sean blancos y compactos */
+.add-task-form app-form-input label {
+  color: var(--letters);
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: var(--font-weight-medium);
+  font-size: 0.85rem;
+  opacity: 0.95;
+}
+
+.add-task-form app-form-input input,
+.add-task-form app-form-input textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--color-primary-1);
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 0.75rem 0.9rem;
+  color: #291a26;
+}
+
+
+.modal__container {
+  background: var(--background);
+  padding: 4rem;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  max-height: 95vh;
+  overflow: auto;
+}
+
+.modal__container .add-task-form {
+  margin: 0 auto;
+  max-width: 28rem;
+  background: var(--components);
+  border-radius: 14px;
+  padding: 1.25rem 1.25rem 1.75rem 1.25rem;
+  box-shadow: inset 0 4px 0 rgba(255,255,255,0.03);
+}
+
+.modal__container .modal__body {
+  padding: 0;
+}
+
+.modal__container { overflow: visible; }

@@ -2,8 +2,8 @@
   <div class="modal__overlay" (click)="onOverlayClick()"></div>
 
   <div class="modal__container" [ngClass]="'modal--' + size" role="dialog" aria-modal="true">
-    <div class="modal__header">
-      <h3 *ngIf="title" class="modal__title">{{ title }}</h3>
+    <div class="modal__header" *ngIf="title">
+      <h3 class="modal__title">{{ title }}</h3>
       <button class="modal__close" (click)="onCloseClick()" aria-label="Cerrar">✕</button>
     </div>
 
@@ -12,4 +12,3 @@
     </div>
   </div>
 </div>
-

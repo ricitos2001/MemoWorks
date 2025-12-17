@@ -1,13 +1,11 @@
-import {ChangeDetectorRef, Component, EventEmitter, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ButtonComponent} from '../../components/shared/button/button.component';
 import {FormInputComponent} from '../../components/shared/form-input/form-input.component';
-import {FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import { TaskService } from '../../services/task.service';
+import {FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {TaskService} from '../../services/task.service';
 import {CommunicationService} from '../../services/shared/communication.service';
 import {NgForOf, NgIf} from '@angular/common';
-import { FormComponent, hasPendingChanges } from '../../guards/pending-chances-guard';
-import {TaskFormModalComponent} from '../../components/shared/task-form-modal/task-form-modal.component';
-import {Router} from '@angular/router';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-add-task',
@@ -23,20 +21,23 @@ import {Router} from '@angular/router';
   styleUrl: '../../../styles/styles.css',
 })
 
-export class AddTaskComponent {
+export class AddTaskComponent implements OnInit {
   taskForm: FormGroup;
+  loading = false;
+  @Output() submitting = new EventEmitter<boolean>();
 
   constructor(
     private taskService: TaskService,
     private comm: CommunicationService,
     private fb: FormBuilder,
+    private userService: UserService,
   ) {
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.max(500)]],
       date: ['', [Validators.required, Validators.maxLength(50)]],
       time: ['', [Validators.required, Validators.maxLength(50)]],
-      assigmentFor: { id: `${localStorage.getItem('userId')}` },
+      assigmentFor: { id: null },
       status: true,
       labels: this.fb.array([]),
     });
@@ -62,16 +63,44 @@ export class AddTaskComponent {
   @Output() cancel = new EventEmitter<void>();
   @Output() create = new EventEmitter<void>();
 
+  ngOnInit(): void {
+    const email = localStorage.getItem('email');
+    if (!email) {
+      return;
+    }
+    this.userService.getUser(email).subscribe({
+      next: (user) => {
+        if (!user || user.id === undefined || user.id === null) {
+          return;
+        }
+        this.taskForm.patchValue({
+          assigmentFor: {id: user.id}
+        });
+      },
+      error: (err) => {
+        console.error('ERROR GET USER:', err);
+      }
+    });
+  }
+
   onSubmit(event: Event): void {
     event.preventDefault();
+
+    const assigmentFor = this.taskForm.value.assigmentFor;
+    console.log(assigmentFor);
     if (this.taskForm.invalid) {
       this.taskForm.markAllAsTouched();
       return;
     }
+
+    this.loading = true;
+    this.submitting.emit(true);
+
     const payload = {
       ...this.taskForm.value,
-      labels: this.labels.value,
+      labels: this.labels.value
     };
+
     this.taskService.createTask(payload).subscribe({
       next: () => {
         this.comm.sendNotification({
@@ -88,6 +117,12 @@ export class AddTaskComponent {
           type: 'error',
           message: 'Error al crear la tarea',
         });
+        this.loading = false;
+        this.submitting.emit(false);
+      },
+      complete: () => {
+        this.loading = false;
+        this.submitting.emit(false);
       }
     });
   }

@@ -11,15 +11,18 @@ import { CommonModule } from '@angular/common';
 export class ModalComponent {
   @Input() isOpen = false;
   @Input() title = '';
+  @Input() showHeader = false;
+  @Input() disableClose = false;
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
   @Output() close = new EventEmitter<void>();
 
   onOverlayClick() {
+    if (this.disableClose) return;
     this.close.emit();
   }
 
   onCloseClick() {
+    if (this.disableClose) return;
     this.close.emit();
   }
 }
-

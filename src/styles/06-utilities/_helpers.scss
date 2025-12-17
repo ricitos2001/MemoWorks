@@ -1,0 +1,14 @@
+@use "../00-settings/css-variables" as *;
+@use "../01-tools/mixins" as *;
+
+:root {
+  --scroll-offset: calc(var(--spacing-2) * 2 + 3rem);
+}
+
+h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], [id].anchor {
+  scroll-margin-top: var(--scroll-offset);
+}
+
+:target {
+  scroll-margin-top: var(--scroll-offset);
+}

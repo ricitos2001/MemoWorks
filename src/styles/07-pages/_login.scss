@@ -4,7 +4,7 @@
 .fieldset {
   border: none;
   background: var(--components);
-  padding: var(--spacing-12); /* volver a padding original */
+  padding: var(--spacing-8);
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 750px;
@@ -15,9 +15,8 @@
 legend {
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
-  margin-bottom: var(--spacing-12); /* volver al valor original */
+  margin-bottom: var(--spacing-8);
   letter-spacing: -0.02em;
-  /* mantener casing del HTML, no forzar capitalize */
   text-transform: none;
   color: var(--letters);
 }
@@ -25,8 +24,8 @@ legend {
 .form-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-8);
-  margin-bottom: var(--spacing-12);
+  gap: var(--spacing-6);
+  margin-bottom: var(--spacing-8);
 
   @include respond('md') {
     grid-template-columns: repeat(2, 1fr);
@@ -59,12 +58,12 @@ input:focus {
 app-button {
   width: 100%;
   font-size: var(--font-size-base); /* volver a valor original */
-  padding: var(--spacing-6);
+  padding: var(--spacing-4);
   font-weight: var(--font-weight-semibold);
 }
 
 .form-actions {
-  margin-top: var(--spacing-12);
+  margin-top: var(--spacing-8);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-6);
