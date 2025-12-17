@@ -37,8 +37,8 @@ export class UserService {
     });
   }
 
-  getUser(id: string | null): Observable<User> {
-    return this.http.get<User>(`http://localhost:8080/api/v1/users/id/${id}`,
+  getUser(email: string | null): Observable<User> {
+    return this.http.get<User>(`http://localhost:8080/api/v1/users/email/${email}`,
       {
         headers: {
           Authorization: `Bearer ${this.token}`
@@ -55,7 +55,7 @@ export class UserService {
       });
   }
 
-  removeUser(id: string | null): Observable<User> {
+  removeUser(id: number): Observable<User> {
     return this.http.delete<User>(`http://localhost:8080/api/v1/users/${id}`,
       {
         headers: {

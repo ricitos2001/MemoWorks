@@ -11,6 +11,7 @@ import {passwordStrength} from '../../validators/password-strength.validator';
 import {phoneNumberValidation} from '../../validators/phone-number.validator';
 import {AsyncValidatorsService} from '../../services/async-validators.service';
 import { AuthModalComponent } from '../../components/shared/auth-modal/auth-modal.component';
+import { ToastService } from '../../services/shared/toast.service';
 
 @Component({
   selector: 'app-register',
@@ -35,6 +36,7 @@ export class RegisterComponent {
     private router: Router,
     private fb: FormBuilder,
     private asyncValidators: AsyncValidatorsService,
+    private toast: ToastService,
     @Optional() @Host() private authModal?: AuthModalComponent
   ) {
     this.registerForm = this.fb.group({
@@ -60,24 +62,37 @@ export class RegisterComponent {
   onSubmit(event: Event) {
     event.preventDefault();
 
-    this.loading = true;
     this.submitted = true;
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
     }
-    this.loading = false;
 
-    this.authService.register(this.registerForm).subscribe({
+    this.loading = true;
+
+    this.authService.register(this.registerForm.value).subscribe({
       next: (res) => {
-        localStorage.setItem('token', res.token);
-        this.authService.getUserIdFromToken();
-        this.authService.saveToken(res.token);
-        this.authService.loggedInSubject.next(true);
-        this.authSuccess.emit();
-        },
+        if (res?.token) {
+          this.authService.saveToken(res.token);
+          this.authService.getUserIdFromToken();
+          this.toast.show({ type: 'success', message: 'Registro correcto', duration: 4000 });
+          this.authSuccess.emit();
+          if (this.authModal) {
+            this.authModal.close();
+          } else {
+            this.router.navigate(['/']);
+          }
+        } else {
+          this.toast.show({ type: 'error', message: 'Respuesta de registro inválida' , duration: 4000});
+        }
+      },
       error: (err) => {
         console.error('Error en registro', err);
+        const msg = err?.error?.message || 'Error al registrar usuario';
+        this.toast.show({ type: 'error', message: msg, duration: 6000 });
+      },
+      complete: () => {
+        this.loading = false;
       }
     });
   }

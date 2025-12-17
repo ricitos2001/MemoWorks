@@ -9,11 +9,17 @@ import { switchMap, map, catchError, take } from 'rxjs/operators';
 export class AsyncValidatorsService {
   constructor(private http: HttpClient) {}
 
-  emailUnique(): AsyncValidatorFn {
+  /**
+   * Validador para comprobar que el email no existe. Si se pasa excludeValue (por ejemplo el email del usuario
+   * que se está editando), se ignora ese valor (no se marca como 'taken').
+   */
+  emailUnique(excludeValue?: string): AsyncValidatorFn {
     return (control: AbstractControl) => {
-      if (!control.value) return of(null);
+      const val = control.value;
+      if (!val) return of(null);
+      if (excludeValue && val === excludeValue) return of(null); // permitir el valor actual
       return timer(500).pipe(
-        switchMap(() => this.http.get<{exists: boolean}>(`http://localhost:8080/api/v1/users/email-exists?email=${control.value}`)),
+        switchMap(() => this.http.get<{exists: boolean}>(`http://localhost:8080/api/v1/users/email-exists?email=${val}`)),
         map(res => res.exists ? { emailTaken: true } : null),
         catchError(() => of(null)),
         take(1)
@@ -21,11 +27,17 @@ export class AsyncValidatorsService {
     };
   }
 
-  usernameAvailable(): AsyncValidatorFn {
+  /**
+   * Validador para comprobar que el username no existe. Si se pasa excludeValue (por ejemplo el username actual
+   * del usuario en edición), se ignora ese valor.
+   */
+  usernameAvailable(excludeValue?: string): AsyncValidatorFn {
     return (control: AbstractControl) => {
-      if (!control.value || control.value.length < 3) return of(null);
+      const val = control.value;
+      if (!val || val.length < 3) return of(null);
+      if (excludeValue && val === excludeValue) return of(null);
       return timer(500).pipe(
-        switchMap(() => this.http.get<{exists: boolean}>(`http://localhost:8080/api/v1/users/username-exists?username=${control.value}`)),
+        switchMap(() => this.http.get<{exists: boolean}>(`http://localhost:8080/api/v1/users/username-exists?username=${val}`)),
         map(res => res.exists ? { usernameTaken: true } : null),
         catchError(() => of(null)),
         take(1)

@@ -16,12 +16,19 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(data: FormGroup) {
-    return this.http.post<any>(`${this.API_URL}/authenticate`, data.value);
+  private extractValue(data: any) {
+    // si es un FormGroup, usar data.value; si es un objeto plano, devolverlo tal cual
+    return data && data.value !== undefined ? data.value : data;
   }
 
-  register(data: FormGroup) {
-    return this.http.post<any>(`${this.API_URL}/register`, data.value);
+  login(data: FormGroup | any) {
+    const body = this.extractValue(data);
+    return this.http.post<any>(`${this.API_URL}/authenticate`, body);
+  }
+
+  register(data: FormGroup | any) {
+    const body = this.extractValue(data);
+    return this.http.post<any>(`${this.API_URL}/register`, body);
   }
 
   logout() {
@@ -43,13 +50,13 @@ export class AuthService {
     if (token) {
       const payload = token.split('.')[1];
       const userData = JSON.parse(atob(payload));
-      localStorage.setItem('userId', userData.id);
+      localStorage.setItem('email', userData.sub);
     }
   }
 
   removeUserData() {
     localStorage.removeItem('token');
-    localStorage.removeItem('userId');
+    localStorage.removeItem('email');
     this.isLoggedIn = false;
     this.loggedInSubject.next(false);
   }

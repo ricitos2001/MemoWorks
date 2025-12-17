@@ -5,7 +5,8 @@ export function passwordMatch(controlName: string, matchControlName: string): Va
     const control = group.get(controlName);
     const matchControl = group.get(matchControlName);
     if (!control || !matchControl) return null;
-    if (matchControl.errors && !matchControl.touched) return null;
+    // Si el campo coincidente tiene otros errores (distintos a mismatch), no sobreescribirlos
+    if (matchControl.errors && !matchControl.errors['mismatch']) return null;
 
     return control.value === matchControl.value ? null : { mismatch: true };
   };

@@ -26,10 +26,10 @@ export class UserSettingsComponent implements OnInit{
               ) {}
   user?: User;
 
-  id = localStorage.getItem('userId');
+  email = localStorage.getItem('email');
   ngOnInit(): void {
     console.log(localStorage.getItem('token'));
-    this.userService.getUser(this.id).subscribe({
+    this.userService.getUser(this.email).subscribe({
       next: (data) => {
         this.user = data;
         this.cd.detectChanges()
@@ -48,23 +48,32 @@ export class UserSettingsComponent implements OnInit{
   }
 
   removeAccount() {
-    this.userService.removeUser(this.id).subscribe({
-      next: () => {
-        this.comm.sendNotification({
-          source: 'userForm',
-          type: 'success',
-          message: 'Usuario eliminado correctamente',
+    this.userService.getUser(this.email).subscribe({
+      next: (data) => {
+        this.user = data;
+        const id = this.user.id;
+        this.userService.removeUser(id).subscribe({
+          next: () => {
+            this.comm.sendNotification({
+              source: 'userForm',
+              type: 'success',
+              message: 'Usuario eliminado correctamente',
+            });
+            this.authService.removeUserData();
+            this.authService.loggedInSubject.next(false);
+            this.router.navigate(['/landing']);
+          },
+          error: () => {
+            this.comm.sendNotification({
+              source: 'userForm',
+              type: 'error',
+              message: 'Error al eliminar el usuario',
+            });
+          }
         });
-        this.authService.removeUserData();
-        this.authService.loggedInSubject.next(false);
-        this.router.navigate(['/landing']);
       },
       error: () => {
-        this.comm.sendNotification({
-          source: 'userForm',
-          type: 'error',
-          message: 'Error al eliminar el usuario',
-        });
+        console.error('No se pudo cargar el usuario');
       }
     });
   };

@@ -1,0 +1,91 @@
+@use '../00-settings/css-variables' as *;
+@use '../01-tools/mixins' as *;
+
+.fieldset {
+  border: none;
+  background: var(--components);
+  padding: var(--spacing-12); /* volver a padding original */
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-md);
+}
+
+legend {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-12); /* volver al valor original */
+  letter-spacing: -0.02em;
+  /* mantener casing del HTML, no forzar capitalize */
+  text-transform: none;
+  color: var(--letters);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-8);
+  margin-bottom: var(--spacing-12);
+
+  @include respond('md') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+app-form-input {
+  width: 100%;
+}
+
+input {
+  height: 3.5rem; /* volver a valor original */
+  font-size: var(--font-size-base);
+  padding: var(--spacing-4) var(--spacing-6);
+  transition: var(--transition-base);
+}
+
+input:focus {
+  transform: scale(1.01);
+}
+
+.error {
+  min-height: 1.2rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-error-4);
+  margin-top: var(--spacing-2);
+  font-weight: var(--font-weight-medium);
+}
+
+app-button {
+  width: 100%;
+  font-size: var(--font-size-base); /* volver a valor original */
+  padding: var(--spacing-6);
+  font-weight: var(--font-weight-semibold);
+}
+
+.form-actions {
+  margin-top: var(--spacing-12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.form-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  text-align: center;
+
+  a {
+    font-size: var(--font-size-base);
+    color: var(--color-primary-1);
+    opacity: 0.85;
+    transition: var(--transition-base);
+    text-transform: none; /* no forzar casing */
+
+    &:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output, Optional, Host, OnInit, inject} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ButtonComponent} from '../../components/shared/button/button.component';
 import {FormInputComponent} from '../../components/shared/form-input/form-input.component';
@@ -57,8 +57,8 @@ export class EditUserInfoComponent implements OnInit {
     }
   }
 
-  getValues(id: string): void {
-    this.userService.getUser(id).subscribe({
+  getValues(email: string): void {
+    this.userService.getUser(email).subscribe({
       next: (user) => {
         if (!user) return;
         this.editUserForm.patchValue({
@@ -114,4 +114,3 @@ export class EditUserInfoComponent implements OnInit {
     this.router.navigate(['/settings/userSettings']);
   }
 }
-
