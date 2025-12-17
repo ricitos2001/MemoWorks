@@ -87,7 +87,6 @@
     <article class="grid-center">
       <app-button type="submit" class="grid" [disabled]="registerForm.invalid || registerForm.pending || loading"><ng-container *ngIf="!loading">Registrate</ng-container><ng-container *ngIf="loading">Registrando...</ng-container></app-button>
       <a (click)="openLogin($event)">¿Ya tienes cuenta? Iniciar sesión</a>
-      <a [routerLink]="['/recuperarContraseña']">¿Has olvidado tu contraseña? Recuperala</a>
     </article>
   </fieldset>
 </form>

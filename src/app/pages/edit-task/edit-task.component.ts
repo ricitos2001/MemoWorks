@@ -79,7 +79,8 @@ export class EditTaskComponent implements OnInit {
     });
   }
 
-  addLabel(value: string): void {
+  addLabel(value: string, event: Event): void {
+    event.preventDefault();
     const label = value.trim();
     if (!label) return;
     if (this.labels.value.includes(label)) return;
@@ -140,4 +141,6 @@ export class EditTaskComponent implements OnInit {
       this.router.navigate(['/dashboard']);
     }
   }
+
+  protected readonly event = event;
 }

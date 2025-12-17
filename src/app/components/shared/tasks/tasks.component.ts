@@ -1,11 +1,12 @@
-import {Component, DestroyRef, inject, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit, Output, EventEmitter} from '@angular/core';
 import { TaskService, Task } from '../../../services/task.service';
-import {DatePipe, NgForOf} from '@angular/common';
+import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
 import {ViewTaskButtonComponent} from '../view-task-button/view-task-button.component';
 import { Router } from '@angular/router';
 import {CommunicationService} from '../../../services/shared/communication.service';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {ButtonComponent} from '../button/button.component';
 
 @Component({
   selector: 'app-tasks',
@@ -13,11 +14,14 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     NgForOf,
     DatePipe,
     ViewTaskButtonComponent,
+    ButtonComponent,
+    NgIf
   ],
   templateUrl: './tasks.component.html',
   styleUrl: '../../../../styles/styles.css',
 })
 export class TasksComponent implements OnInit {
+  @Output() createFromEmpty = new EventEmitter<void>();
   tasks: Task[] = [];
 
   constructor(private taskService: TaskService, private cdr: ChangeDetectorRef, private router: Router, private comm: CommunicationService) {}

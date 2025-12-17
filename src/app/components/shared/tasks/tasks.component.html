@@ -1,9 +1,9 @@
-<ul>
+<ul *ngIf="tasks.length; else emptyState">
   <li *ngFor="let task of tasks">
     <section class="task">
       <section class="task__image-box">
-        <article id="etiquetas">
-          {{ task.labels.join(', ') }}
+        <article class="card__labels">
+          <span *ngFor="let lbl of task.labels" class="card__label">{{ lbl }}</span>
         </article>
       </section>
       <section class="task__box">
@@ -28,5 +28,10 @@
   </li>
 </ul>
 
-
-
+<ng-template #emptyState>
+  <div class="card card--empty grid-center">
+    <h3>Empecemos a organizarnos</h3>
+    <p>Aún no tienes tareas. Crea la primera para empezar a organizar tu día.</p>
+    <app-button class="btn btn--primary" (click)="createFromEmpty.emit()">Crear primera tarea</app-button>
+  </div>
+</ng-template>

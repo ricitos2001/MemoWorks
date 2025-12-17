@@ -55,4 +55,11 @@ export class HamburgerMenuComponent implements OnInit {
     this.authModalService.open(tab);
     this.isOpen = false;
   }
+
+  logout() {
+    this.authService.removeUserData();
+    this.authService.loggedInSubject.next(false);
+    this.authService.logout();
+    this.router.navigate(['/landing']);
+  }
 }

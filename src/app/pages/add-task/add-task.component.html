@@ -45,11 +45,11 @@
     <app-form-input
       name="labelInput"
       placeholder="Añadir etiqueta"
-      (keydown.enter)="addLabel(labelInput.value); labelInput.value=''; $event.preventDefault()"
+      (keydown.enter)="addLabel(labelInput.value, $event); labelInput.value='';"
       #labelInput
     ></app-form-input>
     <article *ngFor="let label of labels.controls; let i = index" class="flex-center">
-      {{ label.value }}<app-button (click)="removeLabel(i)">✕</app-button>
+      {{ label.value }}<app-button (click)="removeLabel(i, $event)">✕</app-button>
     </article>
     <article>
       <ng-content></ng-content>

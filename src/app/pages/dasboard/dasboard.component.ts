@@ -54,6 +54,12 @@ export class DasboardComponent implements OnInit {
       });
   }
 
+  onCreateFromEmpty() {
+    if (this.taskFormModal) {
+      this.taskFormModal.open('addTask');
+    }
+  }
+
   createButtons(event: MouseEvent) {
     event.stopPropagation();
 

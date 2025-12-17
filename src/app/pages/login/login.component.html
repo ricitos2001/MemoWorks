@@ -25,8 +25,8 @@
     <div class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
       <small>Contraseña obligatoria</small>
     </div>
-
     <app-button type="submit" class="grid" [disabled]="loginForm.invalid || loginForm.pending">Iniciar sesión</app-button>
     <a (click)="openRegister($event)">¿No tienes cuenta? Registrate</a>
+    <a [routerLink]="['/recoverPassword']">¿Has olvidado tu contraseña? Recuperala</a>
   </fieldset>
 </form>

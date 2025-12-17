@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, Optional, Host } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {ButtonComponent} from '../../components/shared/button/button.component';
 import {FormInputComponent} from '../../components/shared/form-input/form-input.component';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -15,6 +15,7 @@ import { AuthModalComponent } from '../../components/shared/auth-modal/auth-moda
     FormInputComponent,
     ReactiveFormsModule,
     NgIf,
+    RouterLink,
   ],
   templateUrl: './login.component.html',
   styleUrl: '../../../styles/styles.css',
