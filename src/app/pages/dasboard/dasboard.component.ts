@@ -85,7 +85,7 @@ export class DasboardComponent implements OnInit {
     this.renderer.setProperty(editButton, 'src', 'assets/img/Edit%203.svg');
     this.renderer.addClass(editButton, 'editButton');
     this.renderer.listen(editButton, 'click', () => {
-      this.router.navigate(['selectTask']);
+      this.router.navigate(['selectTask'], { state: { from: 'dashboard' } });
     });
     this.renderer.appendChild(this.buttons.nativeElement, editButton);
   }
@@ -95,7 +95,7 @@ export class DasboardComponent implements OnInit {
     this.renderer.setProperty(removeButton, 'src', 'assets/img/File%20minus.svg');
     this.renderer.addClass(removeButton, 'removeButton');
     this.renderer.listen(removeButton, 'click', () => {
-      this.router.navigate(['removeTask']);
+      this.router.navigate(['removeTask'], { state: { from: 'dashboard' } });
     });
     this.renderer.appendChild(this.buttons.nativeElement, removeButton);
   }

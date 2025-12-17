@@ -10,7 +10,7 @@ import {AuthModalService} from '../../../services/shared/auth-modal.service';
 
 @Component({
   selector: 'app-hamburger-menu',
-  imports: [NgIf],
+  imports: [NgIf, ButtonComponent],
   templateUrl: './hamburger-menu.component.html',
   styleUrl: '../../../../styles/styles.css',
 })

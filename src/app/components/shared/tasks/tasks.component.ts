@@ -20,19 +20,13 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 export class TasksComponent implements OnInit {
   tasks: Task[] = [];
 
-
   constructor(private taskService: TaskService, private cdr: ChangeDetectorRef, private router: Router, private comm: CommunicationService) {}
   private destroyRef = inject(DestroyRef);
 
-
-
-
   id = localStorage.getItem('userId');
-
 
   ngOnInit(): void {
     this.loadTasks();
-
     this.comm.notifications$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(n => {
@@ -52,16 +46,8 @@ export class TasksComponent implements OnInit {
     });
   }
 
-
-
-
-
-
-
-
-
   viewDetails(taskId: number) {
-    this.router.navigate(['/dashboard', taskId]);
+    this.router.navigate(['/task', taskId], { state: { fromCalendar: false } });
   }
 
   formatTime(timeStr: string): Date | null {
