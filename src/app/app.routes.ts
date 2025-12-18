@@ -17,10 +17,16 @@ import {PrivacyComponent} from './pages/privacy/privacy.component';
 import {WarningComponent} from './pages/warning/warning.component';
 import {TermsComponent} from './pages/terms/terms.component';
 import {CookiesComponent} from './pages/cookies/cookies.component';
+import {StyleGuideComponent} from './pages/style-guide/style-guide.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full'},
   { path: 'landing', component: LandingComponent, data: { breadcrumb: 'landing'}},
+  { path: 'terms', component: TermsComponent, data: { breadcrumb: 'terms'}},
+  { path: 'warning', component: WarningComponent, data: { breadcrumb: 'warning'}},
+  { path: 'privacy', component: PrivacyComponent, data: { breadcrumb: 'privacy'}},
+  { path: 'cookies', component: CookiesComponent, data: { breadcrumb: 'cookies'}},
+  { path: 'styles', component: StyleGuideComponent, data: { breadcrumb: 'style-guide'}},
   { path: 'login', component: LoginComponent, data: { breadcrumb: 'login'}},
   { path: 'register', component: RegisterComponent, data: {breadcrumb: 'register'}},
   { path: 'recoverPassword', component: RecoverPasswordComponent, data: {breadcrumb: 'recover-password'}},
@@ -37,8 +43,4 @@ export const routes: Routes = [
   { path: 'selectTask/:id', component: EditTaskComponent, canActivate: [authGuard], data: {breadcrumb: 'edit-task'}},
   { path: 'removeTask', component: RemoveTaskComponent, canActivate: [authGuard], data: {breadcrumb: 'remove-task'}},
   { path: '**', component: NotFoundComponent, data: { breadcrumb: '404'}},
-  { path: 'terms', component: TermsComponent, data: { breadcrumb: 'terms'}},
-  { path: 'warning', component: WarningComponent, data: { breadcrumb: 'warning'}},
-  { path: 'privacy', component: PrivacyComponent, data: { breadcrumb: 'privacy'}},
-  { path: 'cookies', component: CookiesComponent, data: { breadcrumb: 'cookies'}},
 ];

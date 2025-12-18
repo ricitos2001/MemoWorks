@@ -1,11 +1,11 @@
 import {Component, signal, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { DatePipe, NgIf } from '@angular/common';
+import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import { Task } from '../../../services/task.service';
 
 @Component({
   selector: 'app-task-card',
-  imports: [DatePipe, NgIf],
+  imports: [DatePipe, NgIf, NgForOf],
   templateUrl: './task-card.component.html',
   styleUrl: '../../../../styles/styles.css',
 })

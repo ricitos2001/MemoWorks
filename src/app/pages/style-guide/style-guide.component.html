@@ -1,0 +1,213 @@
+<section class="container grid style-guide">
+  <h1>Guía de estilos — MemoWorks</h1>
+  <p>Esta página recoge las decisiones de estilo y las clases/variables más importantes utilizadas en todo el proyecto.</p>
+  <article>
+    <h2>1. Tipografía</h2>
+    <p>Fuente principal: Montserrat</p>
+    <p>Fuente secondaria: Montserrat alternates</p>
+    <p>Fuente alterna: sans-Sherif</p>
+    <ul>
+      <li>tamaños de fuente usados:</li>
+      <li>decoracion usada: </li>
+    </ul>
+  </article>
+  <section>
+    <h2>2. Paleta de colores</h2>
+    <p>La paleta principal se gestiona en las variables SCSS. En el proyecto hay soporte para modo claro/oscuro; las clases y assets alternan según la variable <code>--theme</code> y la lógica en <code>ThemeService</code>.</p>
+    <ul>
+      <li><strong>Primario: </strong> usado inicialmente como color de fondo, color de los inputs color de letra</li>
+      <li><strong>Secundario: </strong>usado para los componentes botones, formularios, etc...</li>
+      <li><strong>Neutros: </strong>utilizados para el color de letra del landing page y el modo oscuro</li>
+      <li><strong>Otros colores: </strong> usados para el toast y la pagina de error 404</li>
+    </ul>
+    <h3>Colores usados en el proyecto</h3>
+    <section class="palette flex-center">
+      <!-- Primarios -->
+      <section>
+        <article class="box box--primary-1">
+          <span class="box__hex">#FEFBEC</span>
+        </article>
+        <article class="box box--primary-2">
+          <span class="box__hex">#FDF7D8</span>
+        </article>
+        <article class="box box--primary-3">
+          <span class="box__hex">#FCF4C5</span>
+        </article>
+        <article class="box box--primary-4">
+          <span class="box__hex">#FBF0B1</span>
+        </article>
+        <article class="box box--primary-5">
+          <span class="box__hex">#FAEC9E</span>
+        </article>
+      </section>
+      <!-- Secundarios -->
+      <section>
+        <article class="box box--secondary-1">
+          <span class="box__hex">#341A38</span>
+        </article>
+        <article class="box box--secondary-2">
+          <span class="box__hex">#412046</span>
+        </article>
+        <article class="box box--secondary-3">
+          <span class="box__hex">#4E2754</span>
+        </article>
+        <article class="box box--secondary-4">
+          <span class="box__hex">#5B2D62</span>
+        </article>
+        <article class="box box--secondary-5">
+          <span class="box__hex">#683370</span>
+        </article>
+      </section>
+      <!-- Success -->
+      <section>
+        <article class="box box--success-1">
+          <span class="box__hex">#EBF9C8</span>
+        </article>
+        <article class="box box--success-2">
+          <span class="box__hex">#E4F6B6</span>
+        </article>
+        <article class="box box--success-3">
+          <span class="box__hex">#DDF4A4</span>
+        </article>
+        <article class="box box--success-4">
+          <span class="box__hex">#D7F291</span>
+        </article>
+        <article class="box box--success-5">
+          <span class="box__hex">#D0F07F</span>
+        </article>
+      </section>
+      <!-- Error -->
+      <section>
+        <article class="box box--error-1">
+          <span class="box__hex">#F8C9C9</span>
+        </article>
+        <article class="box box--error-2">
+          <span class="box__hex">#F6B6B6</span>
+        </article>
+        <article class="box box--error-3">
+          <span class="box__hex">#F4A4A4</span>
+        </article>
+        <article class="box box--error-4">
+          <span class="box__hex">#F29191</span>
+        </article>
+        <article class="box box--error-5">
+          <span class="box__hex">#F07F7F</span>
+        </article>
+      </section>
+      <!-- Warning -->
+      <section>
+        <article class="box box--warning-1">
+          <span class="box__hex">#F8E2C9</span>
+        </article>
+        <article class="box box--warning-2">
+          <span class="box__hex">#F6D8B6</span>
+        </article>
+        <article class="box box--warning-3">
+          <span class="box__hex">#F4CFA4</span>
+        </article>
+        <article class="box box--warning-4">
+          <span class="box__hex">#F2C591</span>
+        </article>
+        <article class="box box--warning-5">
+          <span class="box__hex">#F0BB7F</span>
+        </article>
+      </section>
+      <!-- Info -->
+      <section>
+        <article class="box box--info-1">
+          <span class="box__hex">#C9DAF8</span>
+        </article>
+        <article class="box box--info-2">
+          <span class="box__hex">#B6CDF6</span>
+        </article>
+        <article class="box box--info-3">
+          <span class="box__hex">#A4C0F4</span>
+        </article>
+        <article class="box box--info-4">
+          <span class="box__hex">#91B3F2</span>
+        </article>
+        <article class="box box--info-5">
+          <span class="box__hex">#7FA7F0</span>
+        </article>
+      </section>
+      <!-- Neutros -->
+      <section>
+        <article class="box box--neutral-1">
+          <span class="box__hex">#7A7A7A</span>
+        </article>
+        <article class="box box--neutral-2">
+          <span class="box__hex">#707070</span>
+        </article>
+        <article class="box box--neutral-3">
+          <span class="box__hex">#666666</span>
+        </article>
+        <article class="box box--neutral-4">
+          <span class="box__hex">#525252</span>
+        </article>
+        <article class="box box--neutral-5">
+          <span class="box__hex">#474747</span>
+        </article>
+      </section>
+    </section>
+  </section>
+
+  <section>
+    <h2>3. Iconografia</h2>
+    <p>Se usan iconos SVG, WEBP y PNG personalizados. dichos iconos están en <code>src/assets/img/</code> y se incluyen en templates con <code>&lt;img&gt;</code> o como background en CSS.</p>
+  </section>
+  <article>
+    <h2>4. Espaciado y layout</h2>
+    <p>Se usan utilidades y clases tipo <code>container</code>, <code>grid</code>, <code>flex</code> y <code>grid-center</code> para los layouts. La escala de espaciado está definida en variables SCSS (márgenes y paddings reutilizables).</p>
+  </article>
+
+  <article>
+    <h2>5. Componentes reutilizables</h2>
+    <ul>
+      <li><code><app-button>button</app-button></code>: botón base con variantes (primario, secundario, outline).</li>
+      <li><code>&lt;app-auth-modal&gt;</code>: modal de autenticación usado en landing y otras rutas. Este componente solo es visible cuando pulsas un boton</li>
+      <li><code><app-form-input placeholder="form input"></app-form-input></code>, <code>&lt;app-task-card&gt;</code>componente utilizado en formularios</li>
+      <li>Botones de acción dinámicos en el dashboard usan imágenes dentro de elementos creados con Renderer2 y clases como <code>addButton</code>, <code>editButton</code>, <code>removeButton</code>.</li>
+    </ul>
+  </article>
+  <section>
+    <h2>6. Formularios y validación</h2>
+    <p>Los formularios usan validadores personalizados (por ejemplo verificaciones de contraseña y teléfono) en <code>validators/</code> y validadores asíncronos en <code>services/async-validators.service.ts</code>. Mostrar errores sigue el patrón de clases de estado (error/success) y mensajes inline.</p>
+    <article class="styles__grid">
+      <app-login></app-login>
+      <app-register></app-register>
+      <app-add-task></app-add-task>
+      <app-edit-task></app-edit-task>
+      <app-recover-password></app-recover-password>
+    </article>
+  </section>
+  <article>
+    <h2>7. Utilidades CSS</h2>
+    <p>Revisar la carpeta <code>src/styles/</code> para utilidades: colores, variables, helpers de layout y estilos globales. Los nombres de carpeta empiezan por código numérico para orden semántico (ej. <code>00-settings</code>, <code>02-generic</code>, etc.).</p>
+  </article>
+  <article>
+    <h2>8. Modo oscuro</h2>
+    <p>El modo oscuro se gestiona desde <code>ThemeService</code>. En templates se alternan imágenes con binding a <code>darkMode</code> (ej. <code>[src]="darkMode ? 'img1' : 'img2'"</code>) y las variables CSS se adaptan al tema.</p>
+  </article>
+  <article>
+    <h2>9. Accesibilidad (a11y)</h2>
+    <ul>
+      <li>Elementos interactivos tienen <code>role</code>, <code>aria-label</code> y <code>tabindex</code> cuando se crean dinámicamente.</li>
+      <li>Los botones gestionan eventos de teclado (Enter / Space) para cumplir accesibilidad.</li>
+    </ul>
+  </article>
+
+  <article>
+    <h2>10. Cómo contribuir</h2>
+    <p>Si añades estilos, sigue estas pautas:</p>
+    <ol>
+      <li>Usa variables SCSS para colores y tamaños.</li>
+      <li>Añade clases utilitarias en <code>styles/</code> y evita estilos inline.</li>
+      <li>Documenta la nueva variable/clase en esta página.</li>
+    </ol>
+  </article>
+
+  <article>
+    <p>Última actualización: consulta el repositorio para ver cambios en <code>src/styles/</code>.</p>
+  </article>
+</section>
+

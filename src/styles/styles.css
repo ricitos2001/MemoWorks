@@ -771,9 +771,6 @@ app-form-input input::placeholder,
 app-form-input textarea::placeholder {
   color: rgba(0, 0, 0, 0.45);
 }
-app-form-input {
-  /* Ajustes para inputs en filas de dos columnas para mantener altura igual */
-}
 app-form-input.compact input, app-form-input.compact textarea {
   padding: 12px 14px;
 }
@@ -2328,6 +2325,254 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], [id].anchor {
 .dashboard .tasks-grid > li, .tasks-grid > li {
   width: 100%;
   display: block;
+}
+
+.box {
+  width: 6.25rem;
+  height: 3.125rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  text-align: center;
+  color: var(--neutral-900);
+  font-size: 0.675rem;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(16, 16, 16, 0.04);
+}
+
+/* Nombre de la variable (arriba) y valor hex (debajo) */
+.box__var {
+  font-size: 0.625rem;
+  opacity: 0.95;
+}
+
+.box__hex {
+  font-size: 0.675rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* Overrides para fondos oscuros: usar texto claro */
+.box--secondary-1,
+.box--secondary-2,
+.box--secondary-3,
+.box--secondary-4,
+.box--secondary-5,
+.box--neutral-6,
+.box--neutral-7,
+.box--neutral-8,
+.box--neutral-9,
+.box--neutral-10,
+.box--error-4,
+.box--error-5 {
+  color: var(--color-primary-1);
+}
+
+@media (max-width: 480px) {
+  .box {
+    width: 5.25rem;
+    height: 3rem;
+    font-size: 0.625rem;
+  }
+}
+.box--primary-1 {
+  background-color: var(--color-primary-1);
+  color: var(--color-secondary-1);
+}
+
+.box--primary-2 {
+  background-color: var(--color-primary-2);
+  color: var(--color-secondary-2);
+}
+
+.box--primary-3 {
+  background-color: var(--color-primary-3);
+  color: var(--color-secondary-3);
+}
+
+.box--primary-4 {
+  background-color: var(--color-primary-4);
+  color: var(--color-secondary-4);
+}
+
+.box--primary-5 {
+  background-color: var(--color-primary-5);
+  color: var(--color-secondary-5);
+}
+
+.box--secondary-1 {
+  background-color: var(--color-secondary-1);
+  color: var(--color-primary-1);
+}
+
+.box--secondary-2 {
+  background-color: var(--color-secondary-2);
+  color: var(--color-primary-2);
+}
+
+.box--secondary-3 {
+  background-color: var(--color-secondary-3);
+  color: var(--color-primary-3);
+}
+
+.box--secondary-4 {
+  background-color: var(--color-secondary-4);
+  color: var(--color-primary-4);
+}
+
+.box--secondary-5 {
+  background-color: var(--color-secondary-5);
+  color: var(--color-primary-5);
+}
+
+.box--success-1 {
+  background-color: var(--color-success-1);
+  color: var(--color-error-1);
+}
+
+.box--success-2 {
+  background-color: var(--color-success-2);
+  color: var(--color-error-2);
+}
+
+.box--success-3 {
+  background-color: var(--color-success-3);
+  color: var(--color-error-3);
+}
+
+.box--success-4 {
+  background-color: var(--color-success-4);
+  color: var(--color-error-4);
+}
+
+.box--success-5 {
+  background-color: var(--color-success-5);
+  color: var(--color-error-5);
+}
+
+.box--warning-1 {
+  background-color: var(--color-warning-1);
+  color: var(--color-info-1);
+}
+
+.box--warning-2 {
+  background-color: var(--color-warning-2);
+  background: var(--color-info-2);
+}
+
+.box--warning-3 {
+  background-color: var(--color-warning-3);
+  background: var(--color-info-3);
+}
+
+.box--warning-4 {
+  background-color: var(--color-warning-4);
+  background: var(--color-info-4);
+}
+
+.box--warning-5 {
+  background-color: var(--color-warning-5);
+  background: var(--color-info-5);
+}
+
+.box--info-1 {
+  background-color: var(--color-info-1);
+  color: var(--color-warning-1);
+}
+
+.box--info-2 {
+  background-color: var(--color-info-2);
+  color: var(--color-warning-2);
+}
+
+.box--info-3 {
+  background-color: var(--color-info-3);
+  color: var(--color-warning-3);
+}
+
+.box--info-4 {
+  background-color: var(--color-info-4);
+  color: var(--color-warning-4);
+}
+
+.box--info-5 {
+  background-color: var(--color-info-5);
+  color: var(--color-warning-5);
+}
+
+.box--error-1 {
+  background-color: var(--color-error-1);
+  color: var(--color-success-1);
+}
+
+.box--error-2 {
+  background-color: var(--color-error-2);
+  color: var(--color-success-2);
+}
+
+.box--error-3 {
+  background-color: var(--color-error-3);
+  color: var(--color-success-3);
+}
+
+.box--error-4 {
+  background-color: var(--color-error-4);
+  color: var(--color-success-4);
+}
+
+.box--error-5 {
+  background-color: var(--color-error-5);
+  color: var(--color-success-5);
+}
+
+.box--neutral-1 {
+  background-color: var(--neutral-50);
+}
+
+.box--neutral-2 {
+  background-color: var(--neutral-100);
+}
+
+.box--neutral-3 {
+  background-color: var(--neutral-200);
+}
+
+.box--neutral-4 {
+  background-color: var(--neutral-300);
+}
+
+.box--neutral-5 {
+  background-color: var(--neutral-400);
+}
+
+.box--neutral-6 {
+  background-color: var(--neutral-500);
+}
+
+.box--neutral-7 {
+  background-color: var(--neutral-600);
+}
+
+.box--neutral-8 {
+  background-color: var(--neutral-700);
+}
+
+.box--neutral-9 {
+  background-color: var(--neutral-800);
+}
+
+.box--neutral-10 {
+  background-color: var(--neutral-900);
+}
+
+.styles__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 2fr);
+  gap: 1rem;
 }
 
 /*# sourceMappingURL=styles.css.map */

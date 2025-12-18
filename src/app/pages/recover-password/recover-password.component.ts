@@ -6,13 +6,15 @@ import {FormInputComponent} from '../../components/shared/form-input/form-input.
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {passwordStrength} from '../../validators/password-strength.validator';
 import {passwordMatch} from '../../validators/password-match.validator';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-recover-password',
   imports: [
     ButtonComponent,
     FormInputComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './recover-password.component.html',
   styleUrl: '../../../styles/styles.css',

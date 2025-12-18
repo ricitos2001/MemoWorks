@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
 import {ThemeService} from '../../../services/shared/theme.service';
 
 @Component({
