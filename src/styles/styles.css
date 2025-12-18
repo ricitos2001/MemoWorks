@@ -421,10 +421,11 @@ form {
   padding-top: var(--spacing-2);
   padding-bottom: var(--spacing-2);
   box-shadow: var(--shadow-md);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
   transition: box-shadow var(--transition-base), transform var(--transition-base);
 }
 
-/* Elevación opcional al pasar el ratón */
 .header.elevate-on-hover:hover {
   transform: translateY(-0.25rem);
   box-shadow: var(--shadow-lg);
@@ -437,22 +438,14 @@ form {
   width: 100%;
   max-width: 75rem;
   margin: 0 auto;
+  margin-top: var(--spacing-1);
   padding: 0;
-}
-
-.header {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
 }
 
 .header__nav {
   display: flex;
   flex-direction: row;
   gap: var(--spacing-5);
-  align-items: center;
-}
-
-.header__nav {
   align-items: center;
   justify-content: center;
 }
@@ -461,8 +454,7 @@ form {
   list-style: none;
 }
 
-.header__nav .header__link,
-.header__link {
+.header__nav .header__link, .header__link {
   color: var(--letters);
   text-decoration: none;
   font-size: 1.25rem;
@@ -475,6 +467,7 @@ form {
 .header__logo {
   max-width: 8rem;
   padding: var(--spacing-2) var(--spacing-2);
+  margin-bottom: var(--spacing-1);
 }
 
 @media (max-width: 480px) {
@@ -819,7 +812,6 @@ app-form-input.compact input, app-form-input.compact textarea {
   content: ">";
 }
 
-/* Botón base */
 .theme-btn {
   border: none;
   cursor: pointer;
@@ -828,6 +820,8 @@ app-form-input.compact input, app-form-input.compact textarea {
   font-size: 1.5rem;
   transition: all 0.3s ease;
   background-color: var(--color-secondary-4);
+  margin-left: var(--spacing-12);
+  margin-bottom: var(--spacing-2);
 }
 
 .theme-btn.dark {

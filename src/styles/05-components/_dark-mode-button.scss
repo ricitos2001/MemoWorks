@@ -1,7 +1,6 @@
 @use "../00-settings/css-variables" as *;
 @use "../01-tools/mixins" as *;
 
-/* Botón base */
 .theme-btn {
   border: none;
   cursor: pointer;
@@ -10,6 +9,8 @@
   font-size: 1.5rem;
   transition: all 0.3s ease;
   background-color: var(--color-secondary-4);
+  margin-left: var(--spacing-12);
+  margin-bottom: var(--spacing-2);
 }
 
 .theme-btn.dark {
