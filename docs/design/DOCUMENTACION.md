@@ -1,4 +1,4 @@
-# DOCUMENTACIÓN DE DISEÑO — MemoWorks
+# DOCUMENTACIÓN TECNICA — DIW
 
 ## Índice
 
