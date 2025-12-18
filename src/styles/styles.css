@@ -1297,10 +1297,32 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], [id].anchor {
 }
 
 .task-details {
-  width: 50rem;
-  height: 25rem;
+  width: min(95%, 50rem);
+  box-sizing: border-box;
+  padding: var(--spacing-6);
+  /* Centrar la card en el viewport (absoluto) */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* por encima de la mayoría para asegurar visibilidad */
 }
 
+@media (max-width: 720px) {
+  .task-details {
+    position: static;
+    transform: none;
+    top: auto;
+    left: auto;
+    right: auto;
+    min-height: auto;
+    padding: var(--spacing-4);
+    align-items: flex-start;
+  }
+}
 .task__text, .task-details__text {
   color: var(--letters);
   font-size: 1rem;
