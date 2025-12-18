@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {catchError, map, Observable, throwError} from 'rxjs';
+import { Observable } from 'rxjs';
 import {Task} from './task.service';
 import { LoadingService } from './shared/loading.service';
-import { ToastService } from './shared/toast.service';
 import {finalize} from 'rxjs/operators';
 
 
@@ -17,6 +16,7 @@ export interface User {
   password: string;
   tasks: Task[];
   rol: string;
+  avatar: string;
   active: boolean
 }
 
@@ -27,7 +27,8 @@ export interface User {
 export class UserService {
   token = localStorage.getItem('token');
 
-  constructor(private http: HttpClient, private loadingService: LoadingService, private toast: ToastService) { }
+  constructor(private http: HttpClient, private loadingService: LoadingService) {
+  }
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`http://localhost:8080/api/v1/users`, {
@@ -61,6 +62,29 @@ export class UserService {
         headers: {
           Authorization: `Bearer ${this.token}`
         }
+      });
+  }
+
+  // Devuelve la imagen como blob para poder usar URL.createObjectURL
+  getImageProfile(id: number, cacheBust: boolean = false): Observable<Blob> {
+    const url = cacheBust ? `http://localhost:8080/api/v1/users/${id}/avatar?t=${Date.now()}` : `http://localhost:8080/api/v1/users/${id}/avatar`;
+    return this.http.get(url,
+      {
+        headers: {
+          Authorization: `Bearer ${this.token}`
+        },
+        responseType: 'blob'
+      });
+  }
+
+  // Envía la imagen al servidor como FormData (multipart/form-data)
+  postImageProfile(id: number, imageFormData: FormData): Observable<any> {
+    return this.http.post(`http://localhost:8080/api/v1/users/${id}/avatar`, imageFormData,
+      {
+        headers: {
+          Authorization: `Bearer ${this.token}`
+        },
+        responseType: 'text' as 'json'
       });
   }
 }

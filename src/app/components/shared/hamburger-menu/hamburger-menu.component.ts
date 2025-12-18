@@ -5,7 +5,6 @@ import {AuthService} from '../../../services/auth.service';
 import {ButtonComponent} from '../button/button.component';
 import {AuthModalComponent} from '../auth-modal/auth-modal.component';
 import {Router} from '@angular/router';
-import {ThemeService} from '../../../services/shared/theme.service';
 import {AuthModalService} from '../../../services/shared/auth-modal.service';
 
 @Component({
