@@ -28,8 +28,10 @@
   </section>
 
   <section class="task-details__image-box">
-    <article id="etiquetas">
-      {{ task.labels.join(', ') }}
+    <article id="etiquetas" class="task__labels">
+      <ng-container *ngFor="let lbl of task.labels">
+        <span class="task__label">{{ lbl }}</span>
+      </ng-container>
     </article>
   </section>
 </section>

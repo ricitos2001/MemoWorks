@@ -104,4 +104,13 @@ export class RegisterComponent {
       this.router.navigate(['/login']);
     }
   }
+
+  close(event: Event) {
+    event.preventDefault();
+    if (this.authModal) {
+      this.authModal.close();
+    } else {
+      this.router.navigate(['/']);
+    }
+  }
 }

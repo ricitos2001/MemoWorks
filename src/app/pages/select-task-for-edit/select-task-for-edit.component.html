@@ -1,30 +1,34 @@
-<ul>
-  <li *ngFor="let task of tasks">
-    <section class="task">
-      <section class="task__image-box">
-        <article id="etiquetas">
-          {{ task.labels.join(', ') }}
-        </article>
-      </section>
-      <section class="task__box">
-        <section class="flex">
-          <article class="flex">
-            <img src="assets/img/Calendar.svg" alt="icon">
-            <p class="task__text">{{ task.date | date:'dd/MM/yyyy' }}</p>
-          </article>
-          <article class="flex">
-            <img src="assets/img/Clock.svg" alt="icon">
-            <p class="task__text">{{ formatTime(task.time) | date:'HH:mm' }}</p>
+<section class="dashboard select-task-for-edit">
+  <ul class="tasks-grid">
+    <li *ngFor="let task of tasks">
+      <section class="task">
+        <section class="task__image-box">
+          <article id="etiquetas" class="task__labels">
+            <ng-container *ngFor="let lbl of task.labels">
+              <span class="task__label task__label--small">{{ lbl }}</span>
+            </ng-container>
           </article>
         </section>
-        <section class="flex">
-          <article class="flex-center">
-            <p class="task__text"><span>{{ task.title }}</span> - {{ task.description }}</p>
-          </article>
-          <app-view-task-button (click)="editTask(task.id)"></app-view-task-button>
+        <section class="task__box">
+          <section class="flex">
+            <article class="flex">
+              <img src="assets/img/Calendar.svg" alt="icon">
+              <p class="task__text">{{ task.date | date:'dd/MM/yyyy' }}</p>
+            </article>
+            <article class="flex">
+              <img src="assets/img/Clock.svg" alt="icon">
+              <p class="task__text">{{ formatTime(task.time) | date:'HH:mm' }}</p>
+            </article>
+          </section>
+          <section class="flex">
+            <article class="flex-center">
+              <p class="task__text"><span>{{ task.title }}</span> - {{ task.description }}</p>
+            </article>
+            <app-view-task-button (click)="editTask(task.id)"></app-view-task-button>
+          </section>
         </section>
       </section>
-    </section>
-  </li>
-</ul>
+    </li>
+  </ul>
+</section>
 

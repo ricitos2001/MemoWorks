@@ -11,6 +11,14 @@
   background: var(--components);
   padding: var(--spacing-8) 0;
   gap: var(--spacing-8);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+/* Elevación opcional para footer */
+.footer.elevate-on-hover:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: var(--shadow-lg);
 }
 
 .footer__logo img {

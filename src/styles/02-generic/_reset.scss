@@ -19,6 +19,9 @@
   --settings-option-box: var(--color-secondary-4);
   --card-opacity: var(--card-opacity-light);
   --value-letters: var(--color-secondary-1);
+  --calendar-letters: var(--color-secondary-3);
+  --notfound-text: var(--color-error-3);
+  --label-letters: var(--color-secondary-3);
 }
 
 .theme-dark {
@@ -32,6 +35,9 @@
   --settings-option-box: var(--neutral-600);
   --card-opacity: var(--card-opacity-dark);
   --value-letters: var(--neutral-900);
+  --calendar-letters: var(--color-primary-1);
+  --notfound-text: var(--neutral-700);
+  --label-letters: var(--neutral-700);
 }
 
 

@@ -12,3 +12,35 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], [id].anchor {
 :target {
   scroll-margin-top: var(--scroll-offset);
 }
+
+/* Utilidades de sombra globales */
+.shadow-sm {
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md) !important;
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.shadow-xl {
+  box-shadow: var(--shadow-xl) !important;
+}
+
+/* Elevar ligeramente el elemento al pasar el ratón (útil en tarjetas y botones) */
+.elevate-on-hover {
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+  will-change: transform, box-shadow;
+  &:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: var(--shadow-xl);
+  }
+}
+
+/* Permitir desactivar sombras en contextos específicos */
+.no-shadow {
+  box-shadow: none !important;
+}

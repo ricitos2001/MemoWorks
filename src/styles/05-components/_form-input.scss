@@ -1,0 +1,39 @@
+@use '../00-settings/css-variables' as *;
+
+/* Estilos para el componente app-form-input, para que coincida con el diseño */
+app-form-input {
+  display: block;
+  width: 100%;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--color-primary-1);
+    font-size: 16px;
+    font-weight: var(--font-weight-regular);
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    background: var(--color-primary-1);
+    color: var(--color-secondary-1);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 16px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: none;
+    outline: none;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: rgba(0,0,0,0.45);
+  }
+
+  /* Ajustes para inputs en filas de dos columnas para mantener altura igual */
+  &.compact input,
+  &.compact textarea {
+    padding: 12px 14px;
+  }
+}

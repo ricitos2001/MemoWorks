@@ -1,4 +1,4 @@
-<ul *ngIf="tasks.length; else emptyState">
+<ul class="tasks-grid" *ngIf="tasks.length; else emptyState">
   <li *ngFor="let task of tasks">
     <section class="task">
       <section class="task__image-box">

@@ -1,7 +1,7 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit($event)" novalidate>
+<form class="add-task-form" [formGroup]="registerForm" (ngSubmit)="onSubmit($event)" novalidate>
   <fieldset class="fieldset">
-    <legend>Registrate</legend>
-
+    <legend class="form__legend">Registrate</legend>
+    <app-button class="form-close" aria-label="Cerrar" (click)="close($event)">✕</app-button>
     <app-form-input
       formControlName="email"
       type="email"
@@ -14,50 +14,51 @@
       <small *ngIf="registerForm.get('email')?.errors?.['email']">Correo no válido.</small>
       <small *ngIf="registerForm.get('email')?.errors?.['emailTaken']">Correo ya registrado.</small>
     </div>
-
-    <app-form-input
-      formControlName="username"
-      name="username"
-      placeholder="Nombre de usuario"
-      [required]="true"
-    ></app-form-input>
-    <div class="error" *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid">
-      <small *ngIf="registerForm.get('username')?.errors?.['required']">El usuario es obligatorio.</small>
-      <small *ngIf="registerForm.get('username')?.errors?.['usernameTaken']">Usuario ya existe.</small>
-    </div>
-
-    <app-form-input
-      formControlName="name"
-      name="name"
-      placeholder="Nombre"
-      [required]="true"
-    ></app-form-input>
-    <div class="error" *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.invalid">
-      <small>Nombre obligatorio</small>
-    </div>
-
-    <app-form-input
-      formControlName="surnames"
-      name="surnames"
-      placeholder="Apellidos"
-      [required]="true"
-    ></app-form-input>
-    <div class="error" *ngIf="registerForm.get('surnames')?.touched && registerForm.get('surnames')?.invalid">
-      <small>Apellidos obligatorios</small>
-    </div>
-
-    <app-form-input
-      formControlName="phoneNumber"
-      type="tel"
-      name="phoneNumber"
-      placeholder="Teléfono"
-      [required]="true"
-    ></app-form-input>
-    <div class="error" *ngIf="registerForm.get('phoneNumber')?.touched && registerForm.get('phoneNumber')?.invalid">
-      <small *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">Teléfono obligatorio.</small>
-      <small *ngIf="registerForm.get('phoneNumber')?.errors?.['invalidPhoneNumber']">Teléfono no válido.</small>
-    </div>
-
+    <section class="flex">
+      <section>
+        <app-form-input
+          formControlName="username"
+          name="username"
+          placeholder="Nombre de usuario"
+          [required]="true"
+        ></app-form-input>
+        <div class="error" *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid">
+          <small *ngIf="registerForm.get('username')?.errors?.['required']">El usuario es obligatorio.</small>
+          <small *ngIf="registerForm.get('username')?.errors?.['usernameTaken']">Usuario ya existe.</small>
+        </div>
+        <app-form-input
+          formControlName="name"
+          name="name"
+          placeholder="Nombre"
+          [required]="true"
+        ></app-form-input>
+        <div class="error" *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.invalid">
+          <small>Nombre obligatorio</small>
+        </div>
+      </section>
+      <section>
+        <app-form-input
+          formControlName="surnames"
+          name="surnames"
+          placeholder="Apellidos"
+          [required]="true"
+        ></app-form-input>
+        <div class="error" *ngIf="registerForm.get('surnames')?.touched && registerForm.get('surnames')?.invalid">
+          <small>Apellidos obligatorios</small>
+        </div>
+        <app-form-input
+          formControlName="phoneNumber"
+          type="tel"
+          name="phoneNumber"
+          placeholder="Teléfono"
+          [required]="true"
+        ></app-form-input>
+        <div class="error" *ngIf="registerForm.get('phoneNumber')?.touched && registerForm.get('phoneNumber')?.invalid">
+          <small *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">Teléfono obligatorio.</small>
+          <small *ngIf="registerForm.get('phoneNumber')?.errors?.['invalidPhoneNumber']">Teléfono no válido.</small>
+        </div>
+      </section>
+    </section>
     <app-form-input
       formControlName="password"
       type="password"
@@ -71,7 +72,7 @@
       <small *ngIf="registerForm.get('password')?.errors?.['noUppercase']">Debe incluir una mayúscula.</small>
       <small *ngIf="registerForm.get('password')?.errors?.['noLowercase']">Debe incluir una minúscula.</small>
       <small *ngIf="registerForm.get('password')?.errors?.['noNumber']">Debe incluir un número.</small>
-      <small *ngIf="registerForm.get('password')?.errors?.['noSpecial']">Debe incluir un carácter especial (@$!%*?&).</small>
+      <small *ngIf="registerForm.get('password')?.errors?.['noSpecial']">Debe incluir un carácter especial.</small>
     </div>
 
     <app-form-input

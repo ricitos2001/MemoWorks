@@ -1,6 +1,4 @@
-<app-modal [isOpen]="isOpen" [title]="getTitle()" [showHeader]="true" size="medium" (close)="close()">
-  <app-tabs [tabs]="[{key:'login', label:'Iniciar sesión'},{key:'register', label:'Registrarse'}]" [active]="activeTab" (activeChange)="activeTab = $any($event)"></app-tabs>
-
+<app-modal [isOpen]="isOpen" [showHeader]="false" size="medium" (close)="close()">
   <div class="auth-body" style="margin-top:12px;">
     <app-login *ngIf="activeTab === 'login'" (authSuccess)="onChildAuthSuccess()"></app-login>
     <app-register *ngIf="activeTab === 'register'" (authSuccess)="onChildAuthSuccess()"></app-register>

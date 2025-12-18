@@ -1,6 +1,8 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit($event)" novalidate>
+<form class="add-task-form" [formGroup]="loginForm" (ngSubmit)="onSubmit($event)" novalidate>
   <fieldset class="grid-center">
-    <legend>Iniciar sesión</legend>
+    <legend class="form__legend">Iniciar sesión</legend>
+    <app-button class="form-close" aria-label="Cerrar" (click)="close($event)">✕</app-button>
+
     <app-form-input
       formControlName="email"
       type="email"

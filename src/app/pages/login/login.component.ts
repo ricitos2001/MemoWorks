@@ -74,4 +74,13 @@ export class LoginComponent {
       this.router.navigate(['/register']);
     }
   }
+
+  close(event: Event) {
+    event.preventDefault();
+    if (this.authModal) {
+      this.authModal.close();
+    } else {
+      this.router.navigate(['/']);
+    }
+  }
 }

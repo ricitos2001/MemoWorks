@@ -1,0 +1,25 @@
+@use '../00-settings/css-variables' as *;
+@use '../01-tools/mixins' as *;
+
+.notFound {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: var(--notfound-text);
+}
+
+.notFound__number {
+  font-size: 12rem;
+  color: var(--notfound-text);
+}
+
+.notFound__text {
+  font-size: 3rem;
+  color: var(--notfound-text);
+}
+
+.notFound__link {
+  color: var(--notfound-text);
+}
+
+

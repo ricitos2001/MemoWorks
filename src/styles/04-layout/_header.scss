@@ -13,6 +13,14 @@
   background: var(--components);
   padding-top: var(--spacing-2);
   padding-bottom: var(--spacing-2);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+/* Elevación opcional al pasar el ratón */
+.header.elevate-on-hover:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: var(--shadow-lg);
 }
 
 .header__inner {
@@ -64,7 +72,7 @@
 
 @media (max-width: 480px) {
   .header {
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-base);
     padding-top: var(--spacing-1);
     padding-bottom: var(--spacing-1);
   }

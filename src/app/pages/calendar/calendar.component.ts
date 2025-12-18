@@ -53,6 +53,12 @@ export class CalendarComponent implements OnInit {
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
     locale: 'es',
+    firstDay: 1, // <- start week on Monday
+    dayHeaderFormat: { weekday: 'long' },
+    dayHeaderContent: (arg) => {
+      const name = arg.date.toLocaleDateString('es-ES', { weekday: 'long' });
+      return { html: name.charAt(0).toUpperCase() + name.slice(1) };
+    },
     events: [],
     eventClick: (info) => this.viewDetails(Number(info.event.id)),
     eventColor: '#28a745',
@@ -98,7 +104,6 @@ export class CalendarComponent implements OnInit {
             labels: t.labels,
             status: t.status
           },
-          color: t.status ? '#28a745' : '#dc3545'
         }));
         this.cdr.detectChanges();
       },
@@ -189,6 +194,3 @@ export class CalendarComponent implements OnInit {
     this.router.navigate(['/task', taskId], { state: { fromCalendar: true } });
   }
 }
-
-
-

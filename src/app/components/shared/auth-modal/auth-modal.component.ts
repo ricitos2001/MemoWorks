@@ -9,7 +9,7 @@ import {AuthModalService} from '../../../services/shared/auth-modal.service';
 @Component({
   selector: 'app-auth-modal',
   standalone: true,
-  imports: [CommonModule, ModalComponent, TabsComponent, LoginComponent, RegisterComponent],
+  imports: [CommonModule, ModalComponent, LoginComponent, RegisterComponent],
   templateUrl: './auth-modal.component.html',
   styleUrls: ['../../../../styles/styles.css']
 })
@@ -29,10 +29,6 @@ export class AuthModalComponent implements OnInit{
   onChildAuthSuccess() {
     this.close();
     this.authSuccess.emit();
-  }
-
-  getTitle() {
-    return this.activeTab === 'register' ? 'Registrarse' : 'Iniciar sesión';
   }
 
   constructor(private authModalService: AuthModalService) {}
