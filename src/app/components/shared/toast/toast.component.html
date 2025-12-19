@@ -1,8 +1,8 @@
-<div class="toast-container" aria-live="polite">
-  <div class="toast" *ngFor="let t of toasts()" [attr.data-type]="t.type">
-    <div class="toast-body">
-      <div class="toast-message">{{ t.message }}</div>
+<section class="toast-container" aria-live="polite">
+  <section class="toast" *ngFor="let t of toasts()" [attr.data-type]="t.type">
+    <section class="toast-body">
+      <article class="toast-message">{{ t.message }}</article>
       <button class="toast-close" (click)="dismiss(t.id)" aria-label="Cerrar">×</button>
-    </div>
-  </div>
-</div>
+    </section>
+  </section>
+</section>

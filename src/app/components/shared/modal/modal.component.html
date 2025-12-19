@@ -1,14 +1,14 @@
-<div class="modal" *ngIf="isOpen">
-  <div class="modal__overlay" (click)="onOverlayClick()"></div>
+<section class="modal" *ngIf="isOpen">
+  <article class="modal__overlay" (click)="onOverlayClick()"></article>
 
-  <div class="modal__container" [ngClass]="'modal--' + size" role="dialog" aria-modal="true">
-    <div class="modal__header" *ngIf="showHeader">
+  <section class="modal__container" [ngClass]="'modal--' + size" role="dialog" aria-modal="true">
+    <article class="modal__header" *ngIf="showHeader">
       <h3 class="modal__title">{{ title }}</h3>
       <button class="modal__close" (click)="onCloseClick()" aria-label="Cerrar">✕</button>
-    </div>
+    </article>
 
-    <div class="modal__body">
+    <article class="modal__body">
       <ng-content></ng-content>
-    </div>
-  </div>
-</div>
+    </article>
+  </section>
+</section>

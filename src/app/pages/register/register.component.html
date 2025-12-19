@@ -9,11 +9,11 @@
       placeholder="Correo electrónico"
       [required]="true"
     ></app-form-input>
-    <div class="error" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
+    <article class="error" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
       <small *ngIf="registerForm.get('email')?.errors?.['required']">El correo es obligatorio.</small>
       <small *ngIf="registerForm.get('email')?.errors?.['email']">Correo no válido.</small>
       <small *ngIf="registerForm.get('email')?.errors?.['emailTaken']">Correo ya registrado.</small>
-    </div>
+    </article>
     <section class="flex">
       <section>
         <app-form-input
@@ -22,19 +22,19 @@
           placeholder="Nombre de usuario"
           [required]="true"
         ></app-form-input>
-        <div class="error" *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid">
+        <article class="error" *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid">
           <small *ngIf="registerForm.get('username')?.errors?.['required']">El usuario es obligatorio.</small>
           <small *ngIf="registerForm.get('username')?.errors?.['usernameTaken']">Usuario ya existe.</small>
-        </div>
+        </article>
         <app-form-input
           formControlName="name"
           name="name"
           placeholder="Nombre"
           [required]="true"
         ></app-form-input>
-        <div class="error" *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.invalid">
+        <article class="error" *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.invalid">
           <small>Nombre obligatorio</small>
-        </div>
+        </article>
       </section>
       <section>
         <app-form-input
@@ -43,9 +43,9 @@
           placeholder="Apellidos"
           [required]="true"
         ></app-form-input>
-        <div class="error" *ngIf="registerForm.get('surnames')?.touched && registerForm.get('surnames')?.invalid">
+        <article class="error" *ngIf="registerForm.get('surnames')?.touched && registerForm.get('surnames')?.invalid">
           <small>Apellidos obligatorios</small>
-        </div>
+        </article>
         <app-form-input
           formControlName="phoneNumber"
           type="tel"
@@ -53,10 +53,10 @@
           placeholder="Teléfono"
           [required]="true"
         ></app-form-input>
-        <div class="error" *ngIf="registerForm.get('phoneNumber')?.touched && registerForm.get('phoneNumber')?.invalid">
+        <article class="error" *ngIf="registerForm.get('phoneNumber')?.touched && registerForm.get('phoneNumber')?.invalid">
           <small *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">Teléfono obligatorio.</small>
           <small *ngIf="registerForm.get('phoneNumber')?.errors?.['invalidPhoneNumber']">Teléfono no válido.</small>
-        </div>
+        </article>
       </section>
     </section>
     <app-form-input
@@ -66,14 +66,14 @@
       placeholder="Contraseña"
       [required]="true"
     ></app-form-input>
-    <div class="error" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+    <article class="error" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
       <small *ngIf="registerForm.get('password')?.errors?.['required']">Contraseña obligatoria.</small>
       <small *ngIf="registerForm.get('password')?.errors?.['minLength']">Debe tener al menos 8 caracteres.</small>
       <small *ngIf="registerForm.get('password')?.errors?.['noUppercase']">Debe incluir una mayúscula.</small>
       <small *ngIf="registerForm.get('password')?.errors?.['noLowercase']">Debe incluir una minúscula.</small>
       <small *ngIf="registerForm.get('password')?.errors?.['noNumber']">Debe incluir un número.</small>
       <small *ngIf="registerForm.get('password')?.errors?.['noSpecial']">Debe incluir un carácter especial.</small>
-    </div>
+    </article>
 
     <app-form-input
       formControlName="repeatPassword"
@@ -82,9 +82,9 @@
       placeholder="Repetir contraseña"
       [required]="true"
     ></app-form-input>
-    <div class="error" *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('repeatPassword')?.touched">
+    <article class="error" *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('repeatPassword')?.touched">
       <small>Las contraseñas no coinciden.</small>
-    </div>
+    </article>
     <article class="grid-center">
       <app-button type="submit" class="grid" [disabled]="registerForm.invalid || registerForm.pending || loading"><ng-container *ngIf="!loading">Registrate</ng-container><ng-container *ngIf="loading">Registrando...</ng-container></app-button>
       <a (click)="openLogin($event)">¿Ya tienes cuenta? Iniciar sesión</a>

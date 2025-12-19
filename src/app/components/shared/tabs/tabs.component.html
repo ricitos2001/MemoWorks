@@ -1,8 +1,8 @@
-<div class="tabs">
+<article class="tabs">
   <button *ngFor="let t of tabs"
     [class.active]="active === t.key"
     (click)="selectTab(t.key)">
     {{ t.label }}
   </button>
-</div>
+</article>
 

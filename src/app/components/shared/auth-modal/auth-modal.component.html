@@ -1,6 +1,6 @@
 <app-modal [isOpen]="isOpen" [showHeader]="false" size="medium" (close)="close()">
-  <div class="auth-body" style="margin-top:12px;">
+  <article class="auth-body" style="margin-top:12px;">
     <app-login *ngIf="activeTab === 'login'" (authSuccess)="onChildAuthSuccess()"></app-login>
     <app-register *ngIf="activeTab === 'register'" (authSuccess)="onChildAuthSuccess()"></app-register>
-  </div>
+  </article>
 </app-modal>

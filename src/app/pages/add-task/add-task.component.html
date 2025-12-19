@@ -10,10 +10,10 @@
       [required]="true"
       class="grid"
     ></app-form-input>
-    <div class="error" *ngIf="taskForm.get('title')?.touched && taskForm.get('title')?.invalid">
+    <article class="error" *ngIf="taskForm.get('title')?.touched && taskForm.get('title')?.invalid">
       <small *ngIf="taskForm.get('title')?.errors?.['required']">Título obligatorio</small>
       <small *ngIf="taskForm.get('title')?.errors?.['minlength']">Mínimo 5 caracteres</small>
-    </div>
+    </article>
 
     <app-form-input
       formControlName="description"
@@ -24,13 +24,13 @@
       [required]="true"
       class="grid"
     ></app-form-input>
-    <div class="error" *ngIf="taskForm.get('description')?.touched && taskForm.get('description')?.invalid">
+    <article class="error" *ngIf="taskForm.get('description')?.touched && taskForm.get('description')?.invalid">
       <small *ngIf="taskForm.get('description')?.errors?.['required']">Descripción obligatoria</small>
       <small *ngIf="taskForm.get('description')?.errors?.['minlength']">Mínimo 10 caracteres</small>
-    </div>
+    </article>
 
     <label class="label">Fecha y hora de realizacion</label>
-    <div class="date-time-group">
+    <article class="date-time-group">
       <app-form-input
         formControlName="date"
         type="date"
@@ -47,7 +47,7 @@
         label="Hora"
         [required]="true"
       ></app-form-input>
-    </div>
+    </article>
 
     <app-form-input
       name="labelInput"
@@ -57,15 +57,15 @@
       #labelInput
     ></app-form-input>
 
-    <div class="labels">
+    <article class="labels">
       <article *ngFor="let label of labels.controls; let i = index" class="flex-center">
         {{ label.value }}<app-button (click)="removeLabel(i, $event)">✕</app-button>
       </article>
-    </div>
+    </article>
 
-    <div class="actions">
+    <article class="actions">
       <app-button (click)="onSubmit($event)" [attr.aria-busy]="loading">Crear tarea</app-button>
       <app-button class="secondary" (click)="!loading && cancel.emit()">Cancelar</app-button>
-    </div>
+    </article>
   </fieldset>
 </form>

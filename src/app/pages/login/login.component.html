@@ -11,10 +11,10 @@
       [required]="true"
       class="grid"
     ></app-form-input>
-    <div class="error" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+    <article class="error" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
       <small *ngIf="loginForm.get('email')?.errors?.['required']">El correo es obligatorio.</small>
       <small *ngIf="loginForm.get('email')?.errors?.['email']">Correo no válido.</small>
-    </div>
+    </article>
 
     <app-form-input
       formControlName="password"
@@ -24,9 +24,9 @@
       [required]="true"
       class="grid"
     ></app-form-input>
-    <div class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+    <article class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
       <small>Contraseña obligatoria</small>
-    </div>
+    </article>
     <app-button type="submit" class="grid" [disabled]="loginForm.invalid || loginForm.pending">Iniciar sesión</app-button>
     <a (click)="openRegister($event)">¿No tienes cuenta? Registrate</a>
     <a [routerLink]="['/recoverPassword']">¿Has olvidado tu contraseña? Recuperala</a>
