@@ -51,5 +51,6 @@ Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo LICENSE
 Para cualquier consulta o soporte, por favor contacta a [cuchsou815@g.educaand.es] o a [cesar2001ricitos@gmail.com]
 ¡Gracias por usar MemoWorks!
 
-
+URL de la web: https://frontend-memoworks.onrender.com
+URL del backend: https://backend-memoworks-production.up.railway.app
 
