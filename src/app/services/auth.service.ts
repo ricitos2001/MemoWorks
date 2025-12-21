@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import {FormGroup} from '@angular/forms';
+import {environment} from '../../enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,6 @@ import {FormGroup} from '@angular/forms';
 export class AuthService {
 
   isLoggedIn = !!localStorage.getItem('token');
-  private API_URL = 'http://localhost:8080/api/v1/auth';
 
   loggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
   loggedIn$ = this.loggedInSubject.asObservable();
@@ -23,20 +23,20 @@ export class AuthService {
 
   login(data: FormGroup | any) {
     const body = this.extractValue(data);
-    return this.http.post<any>(`${this.API_URL}/authenticate`, body);
+    return this.http.post<any>(`${environment.apiUrl}/api/v1/auth/authenticate`, body);
   }
 
   register(data: FormGroup | any) {
     const body = this.extractValue(data);
-    return this.http.post<any>(`${this.API_URL}/register`, body);
+    return this.http.post<any>(`${environment.apiUrl}/api/v1/auth/register`, body);
   }
 
   logout() {
-    return this.http.post(`${this.API_URL}/logout`, {});
+    return this.http.post(`${environment.apiUrl}/api/v1/auth/logout`, {});
   }
 
   removeAccount() {
-    return this.http.post(`${this.API_URL}/logout`, {});
+    return this.http.post(`${environment.apiUrl}/api/v1/auth/logout`, {});
   }
 
   saveToken(token: string) {

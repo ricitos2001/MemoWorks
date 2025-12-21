@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import {Task} from './task.service';
 import { LoadingService } from './shared/loading.service';
 import {finalize} from 'rxjs/operators';
-
+import { environment } from '../../enviroments/enviroment';
 
 export interface User {
   id: number;
@@ -30,8 +30,10 @@ export class UserService {
   constructor(private http: HttpClient, private loadingService: LoadingService) {
   }
 
+
+
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`http://localhost:8080/api/v1/users`, {
+    return this.http.get<User[]>(`${environment.apiUrl}/api/v1/users`, {
       headers: {
         Authorization: `Bearer ${this.token}`
       }
@@ -39,7 +41,7 @@ export class UserService {
   }
 
   getUser(email: string | null): Observable<User> {
-    return this.http.get<User>(`http://localhost:8080/api/v1/users/email/${email}`,
+    return this.http.get<User>(`${environment.apiUrl}/api/v1/users/email/${email}`,
       {
         headers: {
           Authorization: `Bearer ${this.token}`
@@ -48,7 +50,7 @@ export class UserService {
   }
 
   editUser(id: string | null, user: User): Observable<User> {
-    return this.http.put<User>(`http://localhost:8080/api/v1/users/${id}`, user,
+    return this.http.put<User>(`${environment.apiUrl}/api/v1/users/${id}`, user,
       {
         headers: {
           Authorization: `Bearer ${this.token}`
@@ -57,7 +59,7 @@ export class UserService {
   }
 
   removeUser(id: number): Observable<User> {
-    return this.http.delete<User>(`http://localhost:8080/api/v1/users/${id}`,
+    return this.http.delete<User>(`${environment.apiUrl}/api/v1/users/${id}`,
       {
         headers: {
           Authorization: `Bearer ${this.token}`
@@ -67,7 +69,7 @@ export class UserService {
 
   // Devuelve la imagen como blob para poder usar URL.createObjectURL
   getImageProfile(id: number, cacheBust: boolean = false): Observable<Blob> {
-    const url = cacheBust ? `http://localhost:8080/api/v1/users/${id}/avatar?t=${Date.now()}` : `http://localhost:8080/api/v1/users/${id}/avatar`;
+    const url = cacheBust ? `${environment.apiUrl}/api/v1/users/${id}/avatar?t=${Date.now()}` : `${environment.apiUrl}/api/v1/users/${id}/avatar`;
     return this.http.get(url,
       {
         headers: {
@@ -79,7 +81,7 @@ export class UserService {
 
   // Envía la imagen al servidor como FormData (multipart/form-data)
   postImageProfile(id: number, imageFormData: FormData): Observable<any> {
-    return this.http.post(`http://localhost:8080/api/v1/users/${id}/avatar`, imageFormData,
+    return this.http.post(`${environment.apiUrl}/api/v1/users/${id}/avatar`, imageFormData,
       {
         headers: {
           Authorization: `Bearer ${this.token}`

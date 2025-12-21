@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {SpinnerComponent} from '../components/shared/spinner/spinner.component';
 import {LoadingService} from './shared/loading.service';
 import {finalize} from 'rxjs/operators';
+import {environment} from '../../enviroments/enviroment';
 
 export interface Task {
   id: number;
@@ -28,7 +29,7 @@ export class TaskService {
   constructor(private http: HttpClient, private loadingService: LoadingService) { }
 
   getTasksByUserEmail(email: string | null): Observable<Task[]> {
-    return this.http.get<Task[]>(`http://localhost:8080/api/v1/tasks/myTasks/${email}`, {
+    return this.http.get<Task[]>(`${environment.apiUrl}/api/v1/tasks/myTasks/${email}`, {
       headers: {
         Authorization: `Bearer ${this.token}`
       }
@@ -37,7 +38,7 @@ export class TaskService {
 
   getTask(id: string): Observable<Task> {
     this.loadingService.show();
-    return this.http.get<Task>(`http://localhost:8080/api/v1/tasks/id/${id}`, {
+    return this.http.get<Task>(`${environment.apiUrl}/api/v1/tasks/id/${id}`, {
       headers: {
         Authorization: `Bearer ${this.token}`
       }
@@ -45,19 +46,19 @@ export class TaskService {
   }
 
   createTask(task: any): Observable<Task> {
-    return this.http.post<Task>(`http://localhost:8080/api/v1/tasks`, task, {
+    return this.http.post<Task>(`${environment.apiUrl}/api/v1/tasks`, task, {
       headers: { Authorization: `Bearer ${this.token}`}
     });
   }
 
   editTask(id: string | null, task: any): Observable<Task> {
-    return this.http.put<Task>(`http://localhost:8080/api/v1/tasks/${id}`, task, {
+    return this.http.put<Task>(`${environment.apiUrl}/api/v1/tasks/${id}`, task, {
       headers: { Authorization: `Bearer ${this.token}`}
     })
   }
 
   removeTask(id: number): Observable<Task> {
-    return this.http.delete<Task>(`http://localhost:8080/api/v1/tasks/${id}`, {
+    return this.http.delete<Task>(`${environment.apiUrl}/api/v1/tasks/${id}`, {
       headers: { Authorization: `Bearer ${this.token}`}
     })
   }
