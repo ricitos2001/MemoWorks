@@ -833,37 +833,32 @@ app-form-input.compact input, app-form-input.compact textarea {
   content: ">";
 }
 
-/* El contenedor host (cuando se usa class="dark-mode-button" en el elemento <app-dark-mode-button>)
-   debe ajustarse al contenido y no aplicar fondo/padding extra. */
 .dark-mode-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0;
   margin: 0;
-  background: transparent !important; /* anula estilos inline o globales */
+  background: transparent;
 }
 
 .theme-btn {
   border: none;
   cursor: pointer;
-  /* Ajustar el botón al tamaño de la caja interna (icono) */
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0; /* sin padding extra: el tamaño lo controla width/height */
+  padding: 0;
   border-radius: 0.6rem;
   font-size: 1rem;
   transition: all 0.2s ease;
-  background-color: var(--color-secondary-4);
+  background: var(--color-secondary-4);
   margin-left: 2.5rem;
   margin-right: 0.5rem;
-  margin-bottom: 0.5rem;
-  width: 2.6rem; /* tamaño fijo para alinear con hamburguesa */
+  width: 2.6rem;
   height: 2.6rem;
 }
 
-/* Forzar tamaño del icono interno (img) para que el botón lo envuelva exactamente */
 .theme-btn img,
 .dark-mode-button img {
   display: block;
@@ -872,7 +867,7 @@ app-form-input.compact input, app-form-input.compact textarea {
 }
 
 .theme-btn.dark {
-  background-color: var(--neutral-600);
+  background: var(--neutral-600);
   border-radius: 0.6rem;
 }
 
@@ -1199,7 +1194,6 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], [id].anchor {
 .landing__section {
   align-items: center;
   justify-content: center;
-  /* Reducir espaciado vertical en secciones para diseño más compacto */
   padding: var(--spacing-8);
 }
 
@@ -1208,17 +1202,14 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], [id].anchor {
 }
 
 .landing__icon {
-  /* Reducir tamaño visual del icono y padding interior */
   max-width: 35%;
   padding: var(--spacing-4);
   background: var(--components);
   border-radius: var(--radius-xl);
-  /* Aplicar apariencia de caja decorativa y sombra */
   box-shadow: 0 8px 24px rgba(41, 25, 45, 0.12);
   overflow: hidden;
 }
 
-/* Si no se usa @extend en el flujo, añadir reglas directas para animar la landing icon */
 .landing__icon.decor-animate {
   animation: decor-float 6s ease-in-out infinite;
 }
@@ -1227,21 +1218,18 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], [id].anchor {
   animation: decor-pulse 4.5s ease-in-out infinite;
 }
 
-/* Regla global para imágenes dentro de secciones: reducir tamaño y margen */
 .landing__section img,
 .landing__icon img {
   max-width: 100%;
   height: auto;
   display: block;
-  max-height: 12rem; /* limitar altura para pantallas grandes */
+  max-height: 12rem;
 }
 
-/* Aumentar ligeramente el tamaño de letra en títulos dentro de secciones */
 .landing__section h1, .landing__section h2, .landing__section h3 {
   font-weight: var(--font-weight-bold);
 }
 
-/* Reducir márgenes internos generales en secciones */
 .landing__section > * {
   margin: 0.5rem 0;
 }
