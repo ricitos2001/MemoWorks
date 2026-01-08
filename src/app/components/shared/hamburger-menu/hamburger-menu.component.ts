@@ -1,5 +1,4 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
-import {DarkModeButtonComponent} from '../dark-mode-button/dark-mode-button.component';
 import {NgIf} from '@angular/common';
 import {AuthService} from '../../../services/auth.service';
 import {ButtonComponent} from '../button/button.component';

@@ -90,3 +90,11 @@ img[alt="copyright"] {
     padding: 0;
   }
 }
+
+@media(max-width: 720px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-8);
+  }
+}

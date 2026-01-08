@@ -437,8 +437,7 @@ form {
   justify-content: space-between;
   width: 100%;
   max-width: 75rem;
-  margin: 0 auto;
-  margin-top: var(--spacing-1);
+  margin: var(--spacing-1) auto 0;
   padding: 0;
 }
 
@@ -470,19 +469,37 @@ form {
   margin-bottom: var(--spacing-1);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 720px) {
   .header {
     font-size: var(--font-size-base);
     padding-top: var(--spacing-1);
     padding-bottom: var(--spacing-1);
   }
-  .header__nav .header__link,
-  .header__link {
+  .header__nav .header__link, .header__link {
     font-size: 1.1rem;
     padding: calc(var(--spacing-1)) var(--spacing-1);
   }
   .header__logo {
     max-width: 7.5rem;
+  }
+  .header__nav {
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background: var(--components);
+    gap: var(--spacing-4);
+  }
+  header.menu-open .header__logo {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+  }
+  header.menu-open .theme-btn {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
   }
 }
 .main {
@@ -580,6 +597,13 @@ img[alt=copyright] {
   }
   .footer article {
     padding: 0;
+  }
+}
+@media (max-width: 720px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-8);
   }
 }
 .optionButton {
@@ -809,21 +833,47 @@ app-form-input.compact input, app-form-input.compact textarea {
   content: ">";
 }
 
+/* El contenedor host (cuando se usa class="dark-mode-button" en el elemento <app-dark-mode-button>)
+   debe ajustarse al contenido y no aplicar fondo/padding extra. */
+.dark-mode-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  background: transparent !important; /* anula estilos inline o globales */
+}
+
 .theme-btn {
   border: none;
   cursor: pointer;
-  padding: 10px 15px;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  transition: all 0.3s ease;
+  /* Ajustar el botón al tamaño de la caja interna (icono) */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0; /* sin padding extra: el tamaño lo controla width/height */
+  border-radius: 0.6rem;
+  font-size: 1rem;
+  transition: all 0.2s ease;
   background-color: var(--color-secondary-4);
-  margin-left: var(--spacing-12);
-  margin-bottom: var(--spacing-2);
+  margin-left: 2.5rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  width: 2.6rem; /* tamaño fijo para alinear con hamburguesa */
+  height: 2.6rem;
+}
+
+/* Forzar tamaño del icono interno (img) para que el botón lo envuelva exactamente */
+.theme-btn img,
+.dark-mode-button img {
+  display: block;
+  width: 1.6rem;
+  height: 1.6rem;
 }
 
 .theme-btn.dark {
   background-color: var(--neutral-600);
-  border-radius: 8px;
+  border-radius: 0.6rem;
 }
 
 .hamburger {
@@ -842,7 +892,7 @@ app-form-input.compact input, app-form-input.compact textarea {
   display: flex;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 720px) {
   .hamburger {
     display: none;
   }
@@ -1034,7 +1084,7 @@ app-form-input.compact input, app-form-input.compact textarea {
 
 button.active {
   font-weight: bold;
-  border-bottom: 2px solid blue;
+  border-bottom: 2px solid var(--color-primary-1);
 }
 
 .toast-container {
@@ -1196,6 +1246,46 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], [id].anchor {
   margin: 0.5rem 0;
 }
 
+@media (max-width: 720px) {
+  .landing__section {
+    padding: var(--spacing-4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--spacing-4);
+  }
+  .landing__space {
+    padding: var(--spacing-4);
+  }
+  .landing__icon {
+    max-width: 80%;
+    padding: var(--spacing-3);
+    border-radius: calc(var(--radius-lg) / 1);
+    box-shadow: 0 6px 18px rgba(41, 25, 45, 0.08);
+    margin: 0 auto;
+  }
+  .landing__section img,
+  .landing__icon img {
+    max-width: 90%;
+    max-height: 10rem;
+    margin: 0 auto;
+  }
+  .landing__section h1 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+  .landing__section h2 {
+    font-size: 1.25rem;
+  }
+  .landing__section .landing__article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
 .settings {
   display: flex;
   flex-direction: row;
@@ -1221,6 +1311,11 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], [id].anchor {
   font-weight: var(--font-weight-regular);
   padding: var(--spacing-4) var(--spacing-24) var(--spacing-4) var(--spacing-4);
   margin: 0;
+}
+
+.settings__user {
+  display: flex;
+  flex-direction: row;
 }
 
 .settings__info {
@@ -1280,6 +1375,91 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], [id].anchor {
   border-radius: 50%;
 }
 
+@media (max-width: 720px) {
+  .settings {
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-8);
+  }
+  .settings__choices {
+    max-width: 360px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
+  .settings__choice {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: var(--spacing-4);
+    text-align: left;
+    font-size: var(--font-size-xl);
+    background: var(--components);
+  }
+  .settings__user, .settings__item {
+    flex-direction: column;
+    align-items: center;
+  }
+  .settings__name, .settings__value {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    text-align: center;
+    font-size: var(--font-size-base);
+    padding: var(--spacing-3);
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    white-space: normal;
+  }
+  .settings__texto {
+    text-align: center;
+    width: 100%;
+  }
+  .settings__users {
+    flex-direction: column;
+    padding: var(--spacing-4);
+    gap: var(--spacing-4);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .settings__imgUser {
+    width: 6rem;
+    height: 6rem;
+    margin: 0 auto;
+  }
+  .settings__img-profile {
+    max-width: 10rem;
+  }
+  .settings__item {
+    padding: var(--spacing-2) var(--spacing-4);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .settings__info input,
+  .settings__info textarea,
+  .settings__info select,
+  .settings__info button,
+  .settings__info .button,
+  .settings__info .btn {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    white-space: normal;
+  }
+  .settings__info {
+    width: 100%;
+    box-sizing: border-box;
+    white-space: normal;
+  }
+}
 .task, .task-details {
   background: var(--components);
 }

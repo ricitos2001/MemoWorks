@@ -1,4 +1,7 @@
-<button class="hamburger" (click)="toggleMenu()">☰</button>
+<button class="hamburger" (click)="toggleMenu()" [attr.aria-label]="isOpen ? 'Cerrar menú' : 'Abrir menú'">
+  <span *ngIf="!isOpen">☰</span>
+  <span *ngIf="isOpen">✕</span>
+</button>
 <nav class="menu" [class.open]="isOpen">
   <ul class="header__nav">
     <ng-container *ngIf="!loggedIn">
