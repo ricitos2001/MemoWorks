@@ -3,10 +3,10 @@ import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from
 import {TaskService} from '../../services/task.service';
 import {CommunicationService} from '../../services/shared/communication.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {hasPendingChanges} from '../../guards/pending-chances-guard';
 import {ButtonComponent} from '../../components/shared/button/button.component';
 import {FormInputComponent} from '../../components/shared/form-input/form-input.component';
 import {NgForOf, NgIf} from '@angular/common';
+import {TasksSignalStore} from '../../stores/tasks.signal.store';
 
 @Component({
   selector: 'app-edit-task',
@@ -30,6 +30,7 @@ export class EditTaskComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
+    private tasksSignalStore: TasksSignalStore
   ) {
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
@@ -104,12 +105,30 @@ export class EditTaskComponent implements OnInit {
       return;
     }
     const id = this.route.snapshot.paramMap.get('id');
-    const payload = {
+    const payload: any = {
       ...this.taskForm.value,
       labels: this.labels.value,
     };
+
+    if (id) {
+      payload.id = Number(id);
+    }
+    if (payload.assigmentFor && typeof payload.assigmentFor === 'object') {
+      payload.assigmentFor.id = Number(payload.assigmentFor.id);
+    } else {
+      payload.assigmentFor = { id: Number(localStorage.getItem('userId')) };
+    }
+
     this.taskService.editTask(id, payload).subscribe({
-      next: () => {
+      next: (updatedTask) => {
+        const taskToUpdate: any = (updatedTask && (updatedTask as any).id) ? updatedTask : payload;
+        if (taskToUpdate.id) {
+          taskToUpdate.id = Number(taskToUpdate.id);
+        }
+        if (taskToUpdate.assigmentFor && typeof taskToUpdate.assigmentFor === 'object') {
+          taskToUpdate.assigmentFor.id = Number(taskToUpdate.assigmentFor.id);
+        }
+        this.tasksSignalStore.update(taskToUpdate);
         this.comm.sendNotification({
           source: 'taskForm',
           type: 'success',
@@ -134,9 +153,7 @@ export class EditTaskComponent implements OnInit {
       event.preventDefault();
       event.stopPropagation();
     }
-    // Emitimos el evento para comunicar al padre que se ha cancelado
     this.cancel.emit();
-    // Enviamos una notificación informativa
     this.comm.sendNotification({
       source: 'taskForm',
       type: 'info',

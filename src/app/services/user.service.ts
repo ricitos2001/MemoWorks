@@ -30,8 +30,6 @@ export class UserService {
   constructor(private http: HttpClient, private loadingService: LoadingService) {
   }
 
-
-
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${environment.apiUrl}/api/v1/users`, {
       headers: {

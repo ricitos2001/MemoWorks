@@ -1,42 +1,47 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {DatePipe, NgForOf} from '@angular/common';
+import {ChangeDetectorRef, Component, DestroyRef, inject, OnInit} from '@angular/core';
+import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import {ViewTaskButtonComponent} from '../../components/shared/view-task-button/view-task-button.component';
 import {Task, TaskService} from '../../services/task.service';
 import {Router} from '@angular/router';
+import {TasksSignalStore} from '../../stores/tasks.signal.store';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {CommunicationService} from '../../services/shared/communication.service';
+import {BackButton} from '../../components/shared/back-button/back-button';
 
 @Component({
   selector: 'app-select-task-for-edit',
   imports: [
     DatePipe,
     NgForOf,
-    ViewTaskButtonComponent
+    ViewTaskButtonComponent,
+    NgIf,
+    BackButton
   ],
   templateUrl: './select-task-for-edit.component.html',
   styleUrl: '../../../styles/styles.css',
 })
 export class SelectTaskForEditComponent implements OnInit {
-  tasks: Task[] = [];
 
-  constructor(private taskService: TaskService, private cdr: ChangeDetectorRef, private router: Router) {}
-
+  constructor(private router: Router, private comm: CommunicationService) {}
+  private destroyRef = inject(DestroyRef);
+  private tasksSignalStore = inject(TasksSignalStore);
   email = localStorage.getItem('email');
+  tasks = this.tasksSignalStore.tasks;
+  loading = this.tasksSignalStore.loading;
+  error = this.tasksSignalStore.error
+
   ngOnInit(): void {
-    this.loadTasks();
-    this.taskService.getTasksByUserEmail(this.email).subscribe({
-      next: (response: any) => {
-        this.tasks = response.content;
-        this.cdr.detectChanges();
-      },
-    });
+    this.comm.notifications$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(n => {
+        if (n?.payload?.refreshTasks) {
+          this.tasksSignalStore.load(this.email);
+        }
+      });
   }
 
-  loadTasks() {
-    this.taskService.getTasksByUserEmail(this.email).subscribe({
-      next: (response: any) => {
-        this.tasks = response.content;
-        this.cdr.detectChanges();
-      },
-    });
+  trackById(index: number, task: any) {
+    return task.id;
   }
 
   editTask(taskId: number) {

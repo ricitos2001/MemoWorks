@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {SpinnerComponent} from '../components/shared/spinner/spinner.component';
 import {LoadingService} from './shared/loading.service';

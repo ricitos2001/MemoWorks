@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 import {LandingComponent} from './pages/landing/landing.component';
 import {LoginComponent} from './pages/login/login.component';
 import {RegisterComponent} from './pages/register/register.component';
@@ -18,6 +18,7 @@ import {WarningComponent} from './pages/warning/warning.component';
 import {TermsComponent} from './pages/terms/terms.component';
 import {CookiesComponent} from './pages/cookies/cookies.component';
 import {StyleGuideComponent} from './pages/style-guide/style-guide.component';
+import {bootstrapApplication} from '@angular/platform-browser';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full'},

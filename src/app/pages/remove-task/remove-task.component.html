@@ -1,6 +1,8 @@
+<article *ngIf="loading()">Cargando...</article>
+<article *ngIf="error()">{{ error() }}</article>
 <section class="dashboard remove-task">
-  <ul class="tasks-grid">
-    <li *ngFor="let task of tasks">
+  <ul class="tasks-grid" *ngIf="tasks">
+    <li *ngFor="let task of tasks(); trackBy: trackById">
       <section class="task removeTask" (click)="removeTask(task.id)">
         <section class="task__image-box">
           <article id="etiquetas" class="task__labels">

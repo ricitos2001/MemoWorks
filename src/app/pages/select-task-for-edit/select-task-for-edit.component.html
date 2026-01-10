@@ -1,6 +1,8 @@
+<article *ngIf="loading()">Cargando...</article>
+<article *ngIf="error()">{{ error() }}</article>
 <section class="dashboard select-task-for-edit">
   <ul class="tasks-grid">
-    <li *ngFor="let task of tasks">
+    <li *ngFor="let task of tasks(); trackBy: trackById">
       <section class="task">
         <section class="task__image-box">
           <article id="etiquetas" class="task__labels">
@@ -30,5 +32,6 @@
       </section>
     </li>
   </ul>
+  <app-back-button></app-back-button>
 </section>
 

@@ -6,6 +6,7 @@ import {TaskService} from '../../services/task.service';
 import {CommunicationService} from '../../services/shared/communication.service';
 import {NgForOf, NgIf} from '@angular/common';
 import {UserService} from '../../services/user.service';
+import {TasksSignalStore} from '../../stores/tasks.signal.store';
 
 @Component({
   selector: 'app-add-task',
@@ -31,6 +32,7 @@ export class AddTaskComponent implements OnInit {
     private comm: CommunicationService,
     private fb: FormBuilder,
     private userService: UserService,
+    private tasksSignalStore: TasksSignalStore
   ) {
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
@@ -103,6 +105,7 @@ export class AddTaskComponent implements OnInit {
 
     this.taskService.createTask(payload).subscribe({
       next: () => {
+        this.tasksSignalStore.add(payload);
         this.comm.sendNotification({
           source: 'taskForm',
           type: 'success',
