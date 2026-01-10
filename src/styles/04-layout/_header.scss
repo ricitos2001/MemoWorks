@@ -62,6 +62,12 @@
   margin-bottom: var(--spacing-1);
 }
 
+.header__dark-mode-button{
+  margin-right: var(--spacing-2);
+  margin-left: var(--spacing-12);
+  margin-bottom: var(--spacing-2);
+}
+
 @media (max-width: 720px) {
   .header {
     font-size: var(--font-size-base);
