@@ -1,5 +1,7 @@
 <article *ngIf="loading()">Cargando...</article>
 <article *ngIf="error()">{{ error() }}</article>
+<app-shared-bar (search)="onSearch($event)" class="grid-center"></app-shared-bar>
+<article *ngIf="loading()">Buscando...</article>
 <ul class="tasks-grid" *ngIf="tasks(); else emptyState">
   <li *ngFor="let task of tasks(); trackBy: trackById">
     <section class="task">

@@ -26,7 +26,6 @@ export class TasksSignalStore {
     this.page.set(page);
     this.state.update(s => ({ ...s, loading: true }));
     this.error.set(null);
-
     this.api.getTasksByUserEmail(page, this.pageSize, this.email)
       .subscribe({
         next: res => {
@@ -92,6 +91,27 @@ export class TasksSignalStore {
       ...s,
       data: s.data.filter(t => t.id !== id),
       total: s.total - 1
+    }));
+  }
+
+  search(term: unknown) {
+    if (typeof term !== 'string') {
+      this.load(this.page());
+      return;
+    }
+    const t = term.toLowerCase().trim();
+    if (!t) {
+      this.load(this.page());
+      return;
+    }
+    const filtered = this.state().data.filter(task =>
+      task.title.toLowerCase().includes(t) ||
+      task.description.toLowerCase().includes(t) ||
+      task.labels.some(lbl => lbl.toLowerCase().includes(t))
+    );
+    this.state.update(s => ({
+      ...s,
+      data: filtered
     }));
   }
 }

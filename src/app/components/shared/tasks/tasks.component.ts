@@ -1,13 +1,5 @@
-import {
-  Component,
-  DestroyRef,
-  inject,
-  OnInit,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy
-} from '@angular/core';
-import {AsyncPipe, DatePipe, NgForOf, NgIf} from '@angular/common';
+import {Component, DestroyRef, inject, OnInit, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
+import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import {ViewTaskButtonComponent} from '../view-task-button/view-task-button.component';
 import { Router } from '@angular/router';
 import {CommunicationService} from '../../../services/shared/communication.service';
@@ -15,6 +7,8 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {ButtonComponent} from '../button/button.component';
 import {TasksSignalStore} from '../../../stores/tasks.signal.store';
 import {computed} from '@angular/core';
+import {SharedBarComponent} from '../shared-bar/shared-bar.component';
+import {FormInputComponent} from '../form-input/form-input.component';
 
 @Component({
   selector: 'app-tasks',
@@ -24,6 +18,7 @@ import {computed} from '@angular/core';
     ViewTaskButtonComponent,
     ButtonComponent,
     NgIf,
+    SharedBarComponent,
   ],
   templateUrl: './tasks.component.html',
   styleUrl:'../../../../styles/styles.css',
@@ -58,6 +53,10 @@ export class TasksComponent implements OnInit {
           this.tasksSignalStore.load(this.page());
         }
       });
+  }
+
+  onSearch(term: string) {
+    this.tasksSignalStore.search(term);
   }
 
   trackById(index: number, task: any) {
