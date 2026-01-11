@@ -29,6 +29,23 @@ export class AsyncValidatorsService {
   }
 
   /**
+   * Validador asíncrono que comprueba que un email SÍ existe en el sistema (útil para seleccionar administradores/miembros).
+   * Devuelve null cuando existe (usuario encontrado) o { userNotFound: true } cuando no existe.
+   */
+  emailExists(): AsyncValidatorFn {
+    return (control: AbstractControl) => {
+      const val = control.value;
+      if (!val) return of({ userNotFound: true }); // si está vacío consideramos no encontrado
+      return timer(400).pipe(
+        switchMap(() => this.http.get<{exists: boolean}>(`${environment.apiUrl}/api/v1/users/email-exists?email=${val}`)),
+        map(res => res.exists ? null : { userNotFound: true }),
+        catchError(() => of({ userNotFound: true })),
+        take(1)
+      );
+    };
+  }
+
+  /**
    * Validador para comprobar que el username no existe. Si se pasa excludeValue (por ejemplo el username actual
    * del usuario en edición), se ignora ese valor.
    */

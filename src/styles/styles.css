@@ -724,6 +724,11 @@ img[alt=copyright] {
   box-shadow: var(--shadow-lg);
 }
 
+.view-task-button {
+  max-width: 15rem;
+  max-height: 15rem;
+}
+
 /* Cajas decorativas: animaciones sutiles y utilidades */
 .decor-box {
   background: var(--components);

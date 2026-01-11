@@ -159,6 +159,7 @@ export class EditTaskComponent implements OnInit {
       type: 'info',
       message: 'Operación cancelada'
     });
+    this.router.navigate(['/dashboard']);
   }
 
   protected readonly event = event;

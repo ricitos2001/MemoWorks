@@ -38,7 +38,6 @@ export class SelectTaskForEditComponent implements OnInit {
     if (this.email) {
       this.tasksSignalStore.load(this.page());
     }
-
     this.comm.notifications$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(n => {
@@ -52,7 +51,7 @@ export class SelectTaskForEditComponent implements OnInit {
     return task.id;
   }
 
-  editTask(taskId: number) {
+  editTask(taskId: string) {
     this.router.navigate(['/selectTask', taskId]);
   }
 

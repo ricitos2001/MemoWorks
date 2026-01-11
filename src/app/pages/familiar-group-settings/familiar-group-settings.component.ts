@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ButtonComponent} from '../../components/shared/button/button.component';
 import {NgIf} from '@angular/common';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-familiar-group-user-settings',
@@ -14,11 +16,15 @@ import {NgIf} from '@angular/common';
 })
 export class FamiliarGroupSettingsComponent {
 
+  constructor(private router: Router) {
+  }
+
   inGroup: boolean = false;
 
   createGroup() {
-      this.inGroup = true;
+    this.inGroup = true;
   }
+
 
   leaveGroup() {
       this.inGroup = false;

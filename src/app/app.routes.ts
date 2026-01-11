@@ -18,7 +18,7 @@ import {WarningComponent} from './pages/warning/warning.component';
 import {TermsComponent} from './pages/terms/terms.component';
 import {CookiesComponent} from './pages/cookies/cookies.component';
 import {StyleGuideComponent} from './pages/style-guide/style-guide.component';
-import {bootstrapApplication} from '@angular/platform-browser';
+import {CreateGroupComponent} from './pages/create-group/create-group.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full'},
@@ -43,5 +43,7 @@ export const routes: Routes = [
   { path: 'selectTask', component: SelectTaskForEditComponent, canActivate: [authGuard], data: {breadcrumb: 'select-task'}},
   { path: 'selectTask/:id', component: EditTaskComponent, canActivate: [authGuard], data: {breadcrumb: 'edit-task'}},
   { path: 'removeTask', component: RemoveTaskComponent, canActivate: [authGuard], data: {breadcrumb: 'remove-task'}},
+  { path: 'createGroup', component: CreateGroupComponent, canActivate: [authGuard], data: {breadcrumb: 'create-group'}},
+
   { path: '**', component: NotFoundComponent, data: { breadcrumb: '404'}},
 ];

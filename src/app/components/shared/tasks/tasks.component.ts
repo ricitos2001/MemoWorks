@@ -64,7 +64,7 @@ export class TasksComponent implements OnInit {
     return task.id;
   }
 
-  viewDetails(taskId: number) {
+  viewDetails(taskId: string) {
     this.router.navigate(['/task', taskId], { state: { fromCalendar: false } });
   }
 
