@@ -1,5 +1,4 @@
 import {
-  ChangeDetectorRef,
   Component,
   DestroyRef,
   ElementRef,
@@ -7,7 +6,7 @@ import {
   OnInit,
   Renderer2,
   ViewChild,
-  ViewContainerRef
+  effect
 } from '@angular/core';
 import {OptionButtonComponent} from '../../components/shared/option-button/option-button.component';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
@@ -19,7 +18,7 @@ import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import {FullCalendarModule} from '@fullcalendar/angular';
-import { TaskService, Task } from '../../services/task.service';
+import {TasksSignalStore} from '../../stores/tasks.signal.store';
 
 @Component({
   selector: 'app-calendar',
@@ -29,36 +28,30 @@ import { TaskService, Task } from '../../services/task.service';
     TaskFormModalComponent
   ],
   templateUrl: './calendar.component.html',
-  styleUrl: '../../../styles/styles.css',
+  styleUrls: ['../../../styles/styles.css'],
+  standalone: true
 })
-
 export class CalendarComponent implements OnInit {
   @ViewChild('buttons', { static: false }) buttons!: ElementRef;
   @ViewChild(TaskFormModalComponent)
   private taskFormModal!: TaskFormModalComponent;
+
   status = false;
-
   private destroyRef = inject(DestroyRef);
-  constructor(
-    private renderer: Renderer2,
-    private communicationService: CommunicationService,
-    private toastService: ToastService,
-    private router: Router,
-    private taskService: TaskService,
-    private cdr: ChangeDetectorRef,
-  ) {}
+  private renderer = inject(Renderer2);
+  private comm = inject(CommunicationService);
+  private toastService = inject(ToastService);
+  private router = inject(Router);
+  private tasksSignalStore = inject(TasksSignalStore);
 
-  tasks: Task[] = [];
+  email = localStorage.getItem('email');
+
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
     locale: 'es',
-    firstDay: 1, // <- start week on Monday
+    firstDay: 1,
     dayHeaderFormat: { weekday: 'long' },
-    dayHeaderContent: (arg) => {
-      const name = arg.date.toLocaleDateString('es-ES', { weekday: 'long' });
-      return { html: name.charAt(0).toUpperCase() + name.slice(1) };
-    },
     events: [],
     eventClick: (info) => this.viewDetails(Number(info.event.id)),
     eventColor: '#28a745',
@@ -68,12 +61,28 @@ export class CalendarComponent implements OnInit {
       center: 'title',
       right: 'dayGridMonth,dayGridWeek,dayGridDay'
     },
-    dayMaxEvents: true,
+    dayMaxEvents: true
   };
 
+  constructor() {
+    effect(() => {
+      const tasks = this.tasksSignalStore.state().data;
+      this.calendarOptions.events = tasks.map(t => ({
+        id: t.id.toString(),
+        title: t.title,
+        date: `${t.date}T${t.time}`,
+        extendedProps: {
+          description: t.description,
+          labels: t.labels,
+          status: t.status
+        }
+      }));
+    });
+  }
+
   ngOnInit() {
-    this.loadTasks();
-    this.communicationService.notifications$
+    this.tasksSignalStore.loadAll();
+    this.comm.notifications$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(n => {
         if (!n) return;
@@ -83,32 +92,9 @@ export class CalendarComponent implements OnInit {
             message: n.message,
             duration: 5000
           });
-          this.loadTasks();
+          this.tasksSignalStore.loadAll();
         }
       });
-  }
-
-  private loadTasks() {
-    const email = localStorage.getItem('email');
-    if (!email) return;
-    this.taskService.getTasksByUserEmail(email).subscribe({
-      next: (response: any) => {
-        this.tasks = response.content;
-        this.cdr.detectChanges();
-        this.calendarOptions.events = this.tasks.map(t => ({
-          id: t.id.toString(),
-          title: t.title,
-          date: t.date + 'T' + t.time,
-          extendedProps: {
-            description: t.description,
-            labels: t.labels,
-            status: t.status
-          },
-        }));
-        this.cdr.detectChanges();
-      },
-      error: (err) => console.error(err)
-    });
   }
 
   createButtons(event: MouseEvent) {
@@ -165,7 +151,6 @@ export class CalendarComponent implements OnInit {
         this.router.navigate(['selectTask'], { state: { from: 'dashboard' } });
       }
     });
-
     this.renderer.appendChild(this.buttons.nativeElement, editButton);
   }
 

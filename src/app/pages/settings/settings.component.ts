@@ -25,6 +25,7 @@ export class SettingsComponent {
     // sincronizar con la ruta actual al crear el componente
     const url = this.router.url.split('/').pop() || 'userSettings';
     this.setActiveByKey(url);
+    console.log(localStorage.getItem('token'));
   }
 
   onTabChange(key: string) {

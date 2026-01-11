@@ -33,5 +33,9 @@
       </section>
     </li>
   </ul>
+  <article class="pagination" *ngIf="total() > pageSize">
+    <button (click)="prevPage()" [disabled]="page() <= 0">Anterior</button>
+    <button (click)="nextPage()" [disabled]="page() >= total()">Siguiente</button>
+  </article>
   <app-back-button></app-back-button>
 </section>

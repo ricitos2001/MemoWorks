@@ -6,8 +6,20 @@ import {LoadingService} from './shared/loading.service';
 import {finalize} from 'rxjs/operators';
 import {environment} from '../../enviroments/enviroment';
 
+export interface PaginatedResponse<T> {
+  content: T[];
+  pageable: any;
+  totalPages: number;
+  totalElements: number;
+  last: boolean;
+  first: boolean;
+  number: number;
+  size: number;
+  numberOfElements: number;
+}
+
 export interface Task {
-  id: number;
+  id: string;
   title: string;
   description: string;
   date: string;
@@ -28,13 +40,19 @@ export class TaskService {
 
   constructor(private http: HttpClient, private loadingService: LoadingService) { }
 
-  getTasksByUserEmail(email: string | null): Observable<Task[]> {
-    return this.http.get<Task[]>(`${environment.apiUrl}/api/v1/tasks/myTasks/${email}`, {
-      headers: {
-        Authorization: `Bearer ${this.token}`
+  getTasksByUserEmail(page: number, pageSize: number, email: string | null): Observable<PaginatedResponse<Task>> {
+    const params = new HttpParams()
+      .set('page', page)
+      .set('pageSize', pageSize);
+    return this.http.get<PaginatedResponse<Task>>(
+      `${environment.apiUrl}/api/v1/tasks/myTasks/${email}`,
+      {
+        headers: { Authorization: `Bearer ${this.token}` },
+        params
       }
-    });
+    );
   }
+
 
   getTask(id: string): Observable<Task> {
     this.loadingService.show();
@@ -57,7 +75,7 @@ export class TaskService {
     })
   }
 
-  removeTask(id: number): Observable<Task> {
+  removeTask(id: string): Observable<Task> {
     return this.http.delete<Task>(`${environment.apiUrl}/api/v1/tasks/${id}`, {
       headers: { Authorization: `Bearer ${this.token}`}
     })

@@ -1,5 +1,4 @@
-import {ChangeDetectorRef, Component, DestroyRef, inject, OnInit} from '@angular/core';
-import {TaskService} from '../../services/task.service';
+import {ChangeDetectorRef, Component, computed, DestroyRef, inject, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import {ViewTaskButtonComponent} from '../../components/shared/view-task-button/view-task-button.component';
@@ -8,6 +7,7 @@ import {BackButton} from '../../components/shared/back-button/back-button';
 import {TrashButtonComponent} from '../../components/shared/trash-button/trash-button.component';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {TasksSignalStore} from '../../stores/tasks.signal.store';
+import {TaskService} from '../../services/task.service';
 
 @Component({
   selector: 'app-remove-task',
@@ -23,25 +23,37 @@ import {TasksSignalStore} from '../../stores/tasks.signal.store';
   styleUrl: '../../../styles/styles.css',
 })
 export class RemoveTaskComponent implements OnInit {
-  constructor(private taskService: TaskService, private cdr: ChangeDetectorRef, private router: Router, private comm: CommunicationService) {}
   private destroyRef = inject(DestroyRef);
   private tasksSignalStore = inject(TasksSignalStore);
+  private router = inject(Router);
+  private comm = inject(CommunicationService);
+  private taskService = inject(TaskService);
+
   email = localStorage.getItem('email');
-  tasks = this.tasksSignalStore.tasks;
-  loading = this.tasksSignalStore.loading;
-  error = this.tasksSignalStore.error
+
+  tasks = computed(() => this.tasksSignalStore.state().data);
+  loading = computed(() => this.tasksSignalStore.state().loading);
+  total = computed(() => this.tasksSignalStore.state().total);
+  error = computed(() => this.tasksSignalStore.error());
+  page = this.tasksSignalStore.page;
+  pageSize = this.tasksSignalStore.pageSize;
 
   ngOnInit(): void {
+    // Recargar tareas si llega notificación
     this.comm.notifications$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(n => {
         if (n?.payload?.refreshTasks) {
-          this.tasksSignalStore.load(this.email);
+          this.tasksSignalStore.load(this.page());
         }
       });
+
+    if (this.email) {
+      this.tasksSignalStore.load(this.page());
+    }
   }
 
-  removeTask(taskId: number) {
+  removeTask(taskId: string) {
     if (!taskId) return;
     this.taskService.removeTask(taskId).subscribe({
       next: () => {
@@ -73,5 +85,17 @@ export class RemoveTaskComponent implements OnInit {
     const date = new Date();
     date.setHours(+hours, +minutes, 0, 0);
     return date;
+  }
+
+  nextPage() {
+    if (this.page() < this.total()) {
+      this.tasksSignalStore.load(this.page() + 1);
+    }
+  }
+
+  prevPage() {
+    if (this.page() > 0) {
+      this.tasksSignalStore.load(this.page() - 1);
+    }
   }
 }
