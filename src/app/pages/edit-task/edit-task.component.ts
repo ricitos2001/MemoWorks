@@ -7,6 +7,7 @@ import {ButtonComponent} from '../../components/shared/button/button.component';
 import {FormInputComponent} from '../../components/shared/form-input/form-input.component';
 import {NgForOf, NgIf} from '@angular/common';
 import {TasksSignalStore} from '../../stores/tasks.signal.store';
+import {NotificationsService, Notification as AppNotification} from '../../services/notifications.service';
 
 @Component({
   selector: 'app-edit-task',
@@ -30,7 +31,8 @@ export class EditTaskComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private tasksSignalStore: TasksSignalStore
+    private tasksSignalStore: TasksSignalStore,
+    private notifications: NotificationsService,
   ) {
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
@@ -41,10 +43,6 @@ export class EditTaskComponent implements OnInit {
       status: true,
       labels: this.fb.array([]),
     });
-  }
-
-  get form() {
-    return this.taskForm;
   }
 
   get labels(): FormArray {
@@ -134,6 +132,18 @@ export class EditTaskComponent implements OnInit {
           type: 'success',
           message: 'Tarea actualizada correctamente',
         });
+
+        // Enviar notificación a la API
+        const apiNotification: AppNotification = {
+          title: 'Tarea actualizada',
+          message: `La tarea "${payload.title}" se ha actualizado correctamente.`,
+          createdAt: new Date(),
+        };
+        this.notifications.pushNotifications(apiNotification).subscribe({
+          next: () => {},
+          error: (err) => { console.warn('Error enviando notificación al API:', err); }
+        });
+
         this.create.emit();
         this.router.navigate(['/dashboard']);
 

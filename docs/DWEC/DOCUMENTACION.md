@@ -2,50 +2,66 @@
 
 ## Índice
 1. Fase 1 — Manipulación del DOM y eventos
-  1.1 Acceso y manipulación segura del DOM (ViewChild, ElementRef, Renderer2)
-  1.2 Sistema de eventos en Angular (event binding, $event, pseudoeventos)
-  1.3 Componentes interactivos implementados (menú, modal, tabs, tooltip)
-  1.4 Theme switcher
-  1.5 Entregables y checklist
+  - 1.1 Acceso y manipulación segura del DOM (ViewChild, ElementRef, Renderer2)
+  - 1.2 Sistema de eventos en Angular (event binding, $event, pseudoeventos)
+  - 1.3 Componentes interactivos implementados (menú, modal, tabs, tooltip)
+  - 1.4 Theme switcher
+  - 1.5 Entregables y checklist
 
 2. Fase 2 — Comunicación entre componentes y servicios
-  2.1 CommunicationService (BehaviorSubject)
-  2.2 ToastService y componente `app-toast`
-  2.3 LoadingService y manejo global de spinners
-  2.4 Separación de responsabilidades (Dumb vs Smart)
-  2.5 Entregables y checklist
+  - 2.1 CommunicationService (BehaviorSubject)
+  - 2.2 ToastService y componente `app-toast`
+  - 2.3 LoadingService y manejo global de spinners
+  - 2.4 Separación de responsabilidades (Dumb vs Smart)
+  - 2.5 Entregables y checklist
 
 3. Fase 3 — Formularios reactivos avanzados
-  3.1 FormBuilder y ReactiveFormsModule
-  3.2 Validadores personalizados síncronos y cross-field
-  3.3 Validadores asincrónicos y debounce
-  3.4 FormArray para colecciones dinámicas
-  3.5 Feedback visual y manejo de estados
-  3.6 Catálogo de validadores
-  3.7 Entregables y checklist
+  - 3.1 FormBuilder y ReactiveFormsModule
+  - 3.2 Validadores personalizados síncronos y cross-field
+  - 3.3 Validadores asincrónicos y debounce
+  - 3.4 FormArray para colecciones dinámicas
+  - 3.5 Feedback visual y manejo de estados
+  - 3.6 Catálogo de validadores
+  - 3.7 Entregables y checklist
 
 4. Fase 4 — Sistema de rutas y navegación
-  4.1 Configuración de rutas (app.routes.ts)
-  4.2 Navegación programática y NavigationExtras
-  4.3 Lazy loading y precarga
-  4.4 Route Guards (authGuard, pendingChangesGuard)
-  4.5 Resolvers y breadcrumbs dinámicos
-  4.6 Entregables y checklist
+  - 4.1 Configuración de rutas (app.routes.ts)
+  - 4.2 Navegación programática y NavigationExtras
+  - 4.3 Lazy loading y precarga
+  - 4.4 Route Guards (authGuard, pendingChangesGuard)
+  - 4.5 Resolvers y breadcrumbs dinámicos
+  - 4.6 Entregables y checklist
 
 5. Fase 5 — Servicios y comunicación HTTP
-  5.1 provideHttpClient y ApiService base
-  5.2 Interceptores (auth, error, logging)
-  5.3 Operaciones CRUD y manejo de respuestas
-  5.4 Formatos especiales (FormData, blobs)
-  5.5 Estados de carga, error y success
-  5.6 Entregables y checklist
+  - 5.1 provideHttpClient y ApiService base
+  - 5.2 Interceptores (auth, error, logging)
+  - 5.3 Operaciones CRUD y manejo de respuestas
+  - 5.4 Formatos especiales (FormData, blobs)
+  - 5.5 Estados de carga, error y success
+  - 5.6 Entregables y checklist
 
-6. Guía rápida de integración y uso
-7. Referencias y recursos
+6. Fase 6 — Gestión de estado y actualización dinámica
+  - 6.1 Resumen ejecutivo y decisión de arquitectura
+  - 6.2 Contrato para un store típico (ProductsStore)
+  - 6.3 Ejemplo completo: ProductsStore con Signals
+  - 6.4 Equivalente con BehaviorSubject
+  - 6.5 Guía de integración en componentes
+  - 6.6 Estrategias de testing (unit y e2e)
+  - 6.7 Checklist de rendimiento y seguridad
+  - 6.8 Mapping a criterios RA7.e, RA7.h, RA7.i
+  - 6.9 Notas de migración y tie-ins con el código existente
+  - 6.10 Recomendaciones operativas y de monitorización
+  - 6.11 Pasos de entrega (después de Navidad)
+  - 6.12 Resumen final
+
+7. Guía rápida de integración y uso
+8. Referencias y recursos
 
 ---
 
 # Fase 1 — Manipulación del DOM y eventos
+
+> Resumen: esta fase cubre técnicas seguras para acceder y manipular el DOM en Angular, patrones de evento y componentes interactivos básicos (menú, modal, tabs, tooltip).
 
 ## 1.1 Acceso y manipulación segura del DOM
 - Acceso: usar `@ViewChild('ref') miEl: ElementRef` y operar sobre `miEl.nativeElement` únicamente cuando el acceso esté disponible (ngAfterViewInit). Ejemplo:
@@ -99,6 +115,8 @@ Resumen de componentes interactivos mínimos a incluir y su comportamiento:
 
 # Fase 2 — Comunicación entre componentes y servicios
 
+> Resumen: patrones para comunicación entre componentes y servicios singleton; incluye ejemplos de `BehaviorSubject` para eventos y notificaciones.
+
 ## 2.1 CommunicationService
 - Servicio singleton (`providedIn: 'root'`) que expone `BehaviorSubject` o `Subject` para notificaciones y eventos entre componentes.
 - Ejemplo:
@@ -135,6 +153,8 @@ export class CommunicationService {
 ---
 
 # Fase 3 — Formularios reactivos avanzados
+
+> Resumen: formularios reactivos con validadores síncronos y asíncronos, FormArray y estrategias para feedback del usuario y control de estados.
 
 ## 3.1 FormBuilder y ReactiveFormsModule
 - Importar `ReactiveFormsModule` en `app.config.ts` o en los módulos correspondientes.
@@ -176,6 +196,8 @@ export class CommunicationService {
 
 # Fase 4 — Sistema de rutas y navegación
 
+> Resumen: configuración de rutas, lazy loading, guards y resolvers; buenas prácticas para navegación programática.
+
 ## 4.1 Configuración de rutas
 - Archivo central `app.routes.ts` con rutas principales y `path: '**'` al final para 404.
 - Ejemplo: `/{home, productos, productos/:id, usuario/**, login}`.
@@ -205,6 +227,8 @@ export class CommunicationService {
 ---
 
 # Fase 5 — Servicios y comunicación HTTP
+
+> Resumen: diseño de servicios HTTP, ApiService, interceptores y patrones para manejo consistente de estado de carga y errores.
 
 ## 5.1 provideHttpClient y ApiService
 - Registrar `provideHttpClient(withInterceptors([...]))` en `app.config.ts`.
@@ -252,5 +276,297 @@ export class CommunicationService {
 
 ---
 
-Si quieres que además genere los archivos TypeScript/SCSS mínimos (servicios, componentes y validadores) en el repo y ejecute checks (lint/build), dime y los creo ahora: puedo generar `shared/toast.service.ts`, `shared/loading.service.ts`, `shared/communication.service.ts`, `validators/*.ts`, `shared/toast.component.ts` junto con sus plantillas y estilos, y ejecutar la verificación de errores para asegurar que todo esté en orden.
+# Fase 6 — Gestión de estado y actualización dinámica
 
+Esta sección documenta el patrón de estado elegido, su contrato, ejemplos listos para copiar, estrategias de integración y testing, y recomendaciones operativas para la Fase 6. Está pensada para un proyecto docente Angular moderno (Angular 16+ cuando se usan Signals).
+
+### 1. Resumen ejecutivo y decisión de arquitectura
+
+Patrón elegido: Servicios de dominio (store por feature) basados en Signals de Angular, con RxJS/BehaviorSubject donde aporte valor (compatibilidad o casos existentes).
+
+Justificación breve:
+- Integración nativa con Angular (signals, computed, effect) y mejor encaje con ChangeDetection OnPush.
+- Código más explícito y menos boilerplate RxJS para lectura/actualización de estado desde componentes.
+- Fácil transición desde stores con BehaviorSubject y compatibilidad con APIs existentes (ProductService, ApiService, RealtimeService).
+
+### 2. Contrato (mini-"contract") para un store típico (ProductsStore)
+
+- Inputs: Peticiones HTTP desde `ProductService` / mensajes desde `RealtimeService` / acciones de UI (create/update/delete).
+- Outputs: Estado público (lista, loading, error) expuesto como signals o como observables (`products`, `loading`, `error`).
+- Formato de datos: Product { id: string; name: string; price: number; ... } (tipar según dominio real).
+- Modos de error: errores de red (retry/fallback), errores de validación en create/update (propagar al componente), desconexión WS (reconexión/backoff).
+- Criterios de éxito: operaciones CRUD reflejadas en el store y en todas las vistas suscritas sin recarga de página; preservación de scroll y mínimo re-render.
+
+
+### 3. Ejemplo completo: `ProductsStore` con Signals (lista y derived values)
+
+```ts
+// src/app/stores/products.store.ts
+import { Injectable, signal, computed } from '@angular/core';
+import { ProductService } from '../services/product.service';
+import type { Product } from '../models/product.model';
+import { tap, catchError, of } from 'rxjs';
+
+@Injectable({ providedIn: 'root' })
+export class ProductsStore {
+  private _products = signal<Product[]>([]);
+  private _loading = signal(false);
+  private _error = signal<string | null>(null);
+
+  // Exposición pública (lectura)
+  products = this._products.asReadonly();
+  loading = this._loading.asReadonly();
+  error = this._error.asReadonly();
+
+  // Derived values
+  totalCount = computed(() => this._products().length);
+  totalPrice = computed(() => this._products().reduce((s, p) => s + (p.price ?? 0), 0));
+
+  constructor(private api: ProductService) {
+    this.load();
+  }
+
+  load() {
+    this._loading.set(true);
+    this._error.set(null);
+
+    this.api.getAll().pipe(
+      tap(list => this._products.set(list)),
+      catchError(err => {
+        this._error.set('Error al cargar productos');
+        return of([] as Product[]);
+      })
+    ).subscribe(() => this._loading.set(false));
+  }
+
+  add(product: Product) {
+    // optimista: actualizar inmediatamente (opcional)
+    this._products.update(list => [...list, product]);
+  }
+
+  update(product: Product) {
+    this._products.update(list => list.map(p => p.id === product.id ? product : p));
+  }
+
+  remove(id: string) {
+    this._products.update(list => list.filter(p => p.id !== id));
+  }
+
+  // utility: refresh desde API
+  refresh() {
+    this.load();
+  }
+}
+```
+
+Notas:
+- Usamos `asReadonly()` para evitar que consumidores muten el state directamente.
+- `computed()` provee valores derivados (totales, contadores) que se actualizan automáticamente.
+- Manejo de errores simple; puede adaptarse para exponer códigos y mensajes más detallados.
+
+
+### 4. Equivalente con BehaviorSubject (cuando no se pueda usar Signals)
+
+```ts
+// src/app/stores/products-bs.store.ts
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { ProductService } from '../services/product.service';
+
+@Injectable({ providedIn: 'root' })
+export class ProductsBSStore {
+  private productsSubject = new BehaviorSubject<Product[]>([]);
+  products$ = this.productsSubject.asObservable();
+  private loadingSubject = new BehaviorSubject<boolean>(false);
+  loading$ = this.loadingSubject.asObservable();
+
+  constructor(private api: ProductService) { this.refresh(); }
+
+  refresh() {
+    this.loadingSubject.next(true);
+    this.api.getAll().subscribe(list => {
+      this.productsSubject.next(list);
+      this.loadingSubject.next(false);
+    }, () => this.loadingSubject.next(false));
+  }
+
+  add(p: Product) { this.productsSubject.next([...this.productsSubject.value, p]); }
+  update(p: Product) { this.productsSubject.next(this.productsSubject.value.map(x => x.id === p.id ? p : x)); }
+  remove(id: string) { this.productsSubject.next(this.productsSubject.value.filter(x => x.id !== id)); }
+}
+```
+
+Cuándo usar cada uno:
+- Signals: preferible en Angular 16+, menos boilerplate, mejor integración con OnPush y templates directos.
+- BehaviorSubject: si la base del proyecto ya usa RxJS extensivamente o estás en Angular <16.
+
+
+### 5. Guía de integración en componentes
+
+Contrato mínimo del componente:
+- Inyectar el store (no el ProductService directamente cuando la UI solo necesita estado).
+- Leer signals con llamadas () en el template o exponer observables con `toObservable()` si es necesario.
+- Usar `ChangeDetectionStrategy.OnPush` y `trackBy` en listas.
+
+Ejemplo de componente (standalone/sintético):
+
+```ts
+// product-list.component.ts
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { ProductsStore } from '../stores/products.store';
+
+@Component({
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class ProductListComponent {
+  store = inject(ProductsStore);
+
+  products = this.store.products; // signal readonly
+  loading = this.store.loading;
+}
+```
+
+Template:
+
+```html
+<div *ngIf="loading()" class="loading">Cargando...</div>
+<ul>
+  <li *ngFor="let p of products(); trackBy: trackById"> {{ p.name }} - {{ p.price | currency:'EUR' }} </li>
+</ul>
+<p>Total: {{ store.totalCount() }} productos — {{ store.totalPrice() | currency:'EUR' }}</p>
+```
+
+trackById:
+
+```ts
+import {Notification} from "./notifications.service";
+
+export class NotificationsComponent {
+  trackById(index: number, item: Notification) {
+    return item.id;
+  }
+}
+```
+
+Buenas prácticas:
+- Evitar subscribes manuales; si necesitas uno, usar `takeUntil` o patrón `destroy$`.
+- Preferir `async` pipe con observables o usar signals directamente.
+- Mantener inputs inmutables para maximizar beneficio de `OnPush`.
+
+
+### 6. Estrategias de testing (unit y e2e)
+
+Unit tests para el store:
+- Mockear `ProductService` para devolver datos predecibles o errores.
+- Probar `load()` (caso éxito y error), `add()`, `update()`, `remove()`, y valores derivados `totalCount`/`totalPrice`.
+
+Ejemplo rápido con TestBed (Karma/Jasmine):
+
+```ts
+// products.store.spec.ts
+import { TestBed } from '@angular/core/testing';
+import { ProductsStore } from './products.store';
+import { of, throwError } from 'rxjs';
+
+const mockProducts = [{ id: '1', name: 'A', price: 10 }];
+const mockApi = { getAll: () => of(mockProducts) };
+
+describe('ProductsStore', () => {
+  let store: ProductsStore;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({ providers: [ProductsStore, { provide: ProductService, useValue: mockApi }] });
+    store = TestBed.inject(ProductsStore);
+  });
+
+  it('carga productos inicialmente', () => {
+    expect(store.products().length).toBe(1);
+    expect(store.totalCount()).toBe(1);
+  });
+});
+```
+
+Notas de testing E2E:
+- Probar flujos: crear producto → comprobar que aparece en la lista sin recarga; editar → se actualiza; borrar → elemento desaparece y scroll se mantiene.
+- Simular eventos de tiempo real (websocket) mediante mocks en el backend de pruebas o interceptando la API.
+
+
+### 7. Checklist de rendimiento y seguridad
+
+Rendimiento:
+- [ ] ChangeDetectionStrategy.OnPush en componentes de lista y elementos puros.
+- [ ] `trackBy` siempre en `*ngFor` con ID estable.
+- [ ] Evitar mutaciones in-place; usar actualizaciones inmutables en stores.
+- [ ] Usar async pipe o signals; evitar subscribes manuales innecesarios.
+- [ ] Paginación/infinite scroll para grandes volúmenes.
+
+Seguridad y robustez:
+- [ ] No exponer tokens en stores o en templates; usar `AuthService`/interceptor para Authorization headers.
+- [ ] Manejo de errores centralizado (ErrorInterceptor + ToastService).
+- [ ] Validar datos antes de insertarlos en el store (normalización y sanitización mínima).
+
+
+### 8. Mapping a criterios RA7.e, RA7.h, RA7.i
+
+(Asumo estos criterios se refieren a: RA7.e — Actualización reactiva del UI; RA7.h — Optimización/performance; RA7.i — Robustez/seguridad.)
+
+- RA7.e (Actualización reactiva): La combinación store (signals) + componentes suscritos garantiza que cualquier CRUD o evento realtime actualice la UI automáticamente sin recarga de página ni navegación. Ejemplo: `ProductsStore.add()` actualiza `products()` y todos los templates reaccionan.
+
+- RA7.h (Optimización): Uso de OnPush, trackBy, actualizaciones inmutables y derived values (computed) minimizan re-render y trabajo de detección de cambios. Infinite scroll/paginación evitan cargar grandes volúmenes.
+
+- RA7.i (Robustez/Seguridad): Manejo centralizado de errores (ErrorInterceptor), no exponer secretos en el store, y estrategias de reconexión o fallback (polling) garantizan resiliencia ante fallos.
+
+
+### 9. Notas de migración y tie-ins con el código existente
+
+Dónde colocar los stores:
+- `src/app/stores/` — almacenar `products.store.ts`, `users.store.ts`, `tasks.signal.store.ts` (ya hay `tasks.signal.store.ts` en el proyecto; usar ese patrón como referencia).
+
+Servicios e interceptores a modificar/usar:
+- `src/app/services/product.service.ts` o `src/app/services/api.service.ts` — el store debe delegar en estos para llamadas HTTP.
+- `src/app/interceptors/auth-interceptor.ts` y `error-interceptor` — mantener para auth y manejo de errores.
+- `src/app/services/realtime.service.ts` — conectar eventos WebSocket al store (ej.: recibir `product.created` y llamar `store.add()`).
+
+Ejemplo de integración con realtime:
+
+```ts
+// en algún initializer o servicio
+this.realtime.listen<EventMessage>().subscribe(msg => {
+  if (msg.type === 'product.created') this.productsStore.add(msg.payload);
+  if (msg.type === 'product.updated') this.productsStore.update(msg.payload);
+});
+```
+
+Migración incremental recomendada:
+1. Implementar store con Signals para una feature pequeña (ej. products) y reemplazar las dependencias del componente por la store.
+2. Añadir trackBy y OnPush en los componentes de lista.
+3. Introducir reconexión WebSocket/polling en `realtime.service` y conectar al store.
+4. Probar e2e y ajustar performance.
+
+
+### 10. Recomendaciones operativas y de monitorización
+
+- Logs: Instrumentar puntos clave (errores de load, fallos WS) con un sistema de logging/monitorización (Sentry, LogRocket o similar) en producción.
+- Reconexión WS: implementar backoff exponencial con límite de reintentos y fallback a polling si la conexión no se restaura.
+- Métricas: monitorizar latencia de las peticiones principales, tasa de errores 5xx y número de reconexiones WS.
+- Fallback: si el WS falla, activar polling con `timer(0, interval)` y `shareReplay(1)` para mantener consistencia entre suscriptores.
+
+Parámetros sugeridos:
+- Reconexión inicial: 1s, 2s, 5s, 10s (hasta 5 reintentos), luego fallback a polling cada 30s.
+- Polling en entornos degradados: 30-60s según criticidad.
+
+
+### 11. Pasos de entrega
+
+- [ ] Implementar `ProductsStore` en `src/app/stores/products.store.ts` y adaptar `product-list` para usarlo.
+- [ ] Añadir tests unitarios para store (happy path + error) y e2e flows básicos.
+- [ ] Conectar `realtime.service` al store (eventos create/update/delete).
+- [ ] Revisar componentes de lista: OnPush + trackBy.
+- [ ] Desplegar en entorno de staging y validar métricas básicas (latencia, errores, reconexión WS).
+
+
+### 12. Resumen final
+
+La documentación anterior define un patrón claro y práctico (Services + Signals) que cumple los objetivos de la Fase 6: actualización reactiva sin recargas, rendimiento optimizado y robustez operativa. Se recomienda comenzar con una feature (products) como piloto y extender el patrón al resto del proyecto. La sección precedente incluye ejemplos listos para copiar, tests sugeridos y checklist operativo para la entrega posterior a Navidad.

@@ -7,6 +7,7 @@ import {CommunicationService} from '../../services/shared/communication.service'
 import {NgForOf, NgIf} from '@angular/common';
 import {UserService} from '../../services/user.service';
 import {TasksSignalStore} from '../../stores/tasks.signal.store';
+import {NotificationsService, Notification as AppNotification} from '../../services/notifications.service';
 
 @Component({
   selector: 'app-add-task',
@@ -21,7 +22,6 @@ import {TasksSignalStore} from '../../stores/tasks.signal.store';
   templateUrl: './add-task.component.html',
   styleUrl: '../../../styles/styles.css',
 })
-
 export class AddTaskComponent implements OnInit {
   taskForm: FormGroup;
   loading = false;
@@ -32,7 +32,8 @@ export class AddTaskComponent implements OnInit {
     private comm: CommunicationService,
     private fb: FormBuilder,
     private userService: UserService,
-    private tasksSignalStore: TasksSignalStore
+    private tasksSignalStore: TasksSignalStore,
+    private notifications: NotificationsService,
   ) {
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
@@ -104,7 +105,7 @@ export class AddTaskComponent implements OnInit {
     };
 
     this.taskService.createTask(payload).subscribe({
-      next: () => {
+      next: (_createdTask) => {
         this.tasksSignalStore.add(payload);
         this.comm.sendNotification({
           source: 'taskForm',
@@ -112,6 +113,18 @@ export class AddTaskComponent implements OnInit {
           message: 'Tarea creada correctamente',
           payload: { refreshTasks: true }
         });
+
+        // Enviar notificación a la API
+        const apiNotification: AppNotification = {
+          title: 'Tarea creada',
+          message: `La tarea "${payload.title}" se ha creado correctamente.`,
+          createdAt: new Date(),
+        };
+        this.notifications.pushNotifications(apiNotification).subscribe({
+          next: () => {},
+          error: (err) => { console.warn('Error enviando notificación al API:', err); }
+        });
+
         this.create.emit();
       },
       error: () => {

@@ -1,9 +1,9 @@
 <section class="modal" *ngIf="isOpen">
-  <article class="modal__overlay" (click)="onOverlayClick()"></article>
+  <article class="modal__overlay" (click)="onOverlayClick()" role="presentation" tabindex="-1"></article>
 
-  <section class="modal__container" [ngClass]="'modal--' + size" role="dialog" aria-modal="true">
+  <section #container class="modal__container" [ngClass]="'modal--' + size" role="dialog" aria-modal="true" [attr.aria-labelledby]="title ? 'modal-title' : null">
     <article class="modal__header" *ngIf="showHeader">
-      <h3 class="modal__title">{{ title }}</h3>
+      <h3 id="modal-title" class="modal__title">{{ title }}</h3>
       <button class="modal__close" (click)="onCloseClick()" aria-label="Cerrar">✕</button>
     </article>
 

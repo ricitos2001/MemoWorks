@@ -17,4 +17,25 @@ export class TabsComponent {
     this.active = tab;
     this.activeChange.emit(tab);
   }
+
+  onKeydown(event: KeyboardEvent, index: number) {
+    if (!this.tabs?.length) return;
+    const key = event.key;
+    let newIndex = index;
+    if (key === 'ArrowRight') {
+      newIndex = (index + 1) % this.tabs.length;
+    } else if (key === 'ArrowLeft') {
+      newIndex = (index - 1 + this.tabs.length) % this.tabs.length;
+    } else if (key === 'Home') {
+      newIndex = 0;
+    } else if (key === 'End') {
+      newIndex = this.tabs.length - 1;
+    } else {
+      return;
+    }
+    event.preventDefault();
+    const buttons = (event.currentTarget as HTMLElement).parentElement?.querySelectorAll('button');
+    if (buttons && buttons[newIndex]) { (buttons[newIndex] as HTMLElement).focus(); }
+    this.selectTab(this.tabs[newIndex].key);
+  }
 }

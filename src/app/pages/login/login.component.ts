@@ -7,6 +7,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {NgIf} from '@angular/common';
 import {passwordStrength} from '../../validators/password-strength.validator';
 import { AuthModalComponent } from '../../components/shared/auth-modal/auth-modal.component';
+import {NotificationsService, Notification as AppNotification} from '../../services/notifications.service';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +31,8 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
-    @Optional() @Host() private authModal?: AuthModalComponent
+    private notifications: NotificationsService,
+    @Optional() @Host() private authModal?: AuthModalComponent,
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -59,6 +61,17 @@ export class LoginComponent {
         this.authService.saveToken(res.token);
         this.authService.loggedInSubject.next(true);
         this.authSuccess.emit();
+
+        // Enviar notificación a la API
+        const apiNotification: AppNotification = {
+          title: 'Inicio de sesión',
+          message: `El usuario ${this.loginForm.value.email} ha iniciado sesión.`,
+          createdAt: new Date(),
+        };
+        this.notifications.pushNotifications(apiNotification).subscribe({
+          next: () => {},
+          error: (err) => { console.warn('Error enviando notificación al API:', err); }
+        });
       },
       error: (err) => {
         console.error('Error en login', err);

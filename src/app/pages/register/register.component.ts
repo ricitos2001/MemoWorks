@@ -5,13 +5,13 @@ import {ButtonComponent} from '../../components/shared/button/button.component';
 import {FormInputComponent} from '../../components/shared/form-input/form-input.component';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgIf} from '@angular/common';
-import {RouterLink} from '@angular/router';
 import {passwordMatch} from '../../validators/password-match.validator';
 import {passwordStrength} from '../../validators/password-strength.validator';
 import {phoneNumberValidation} from '../../validators/phone-number.validator';
 import {AsyncValidatorsService} from '../../services/async-validators.service';
 import { AuthModalComponent } from '../../components/shared/auth-modal/auth-modal.component';
 import { ToastService } from '../../services/shared/toast.service';
+import {NotificationsService, Notification as AppNotification} from '../../services/notifications.service';
 
 @Component({
   selector: 'app-register',
@@ -36,7 +36,8 @@ export class RegisterComponent {
     private fb: FormBuilder,
     private asyncValidators: AsyncValidatorsService,
     private toast: ToastService,
-    @Optional() @Host() private authModal?: AuthModalComponent
+    private notifications: NotificationsService,
+    @Optional() @Host() private authModal?: AuthModalComponent,
   ) {
     this.registerForm = this.fb.group({
       email: ['', {
@@ -76,11 +77,18 @@ export class RegisterComponent {
           this.authService.getUserIdFromToken();
           this.toast.show({ type: 'success', message: 'Registro correcto', duration: 4000 });
           this.authSuccess.emit();
-          if (this.authModal) {
-            this.authModal.close();
-          } else {
-            this.router.navigate(['/']);
-          }
+
+          // Enviar notificación a la API
+          const apiNotification: AppNotification = {
+            title: 'Nuevo registro',
+            message: `El usuario ${this.registerForm.value.email} se ha registrado.`,
+            createdAt: new Date(),
+          };
+          this.notifications.pushNotifications(apiNotification).subscribe({
+            next: () => {},
+            error: (err) => { console.warn('Error enviando notificación al API:', err); }
+          });
+
         } else {
           this.toast.show({ type: 'error', message: 'Respuesta de registro inválida' , duration: 4000});
         }

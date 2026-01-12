@@ -35,6 +35,8 @@ export class CalendarComponent implements OnInit {
   @ViewChild('buttons', { static: false }) buttons!: ElementRef;
   @ViewChild(TaskFormModalComponent)
   private taskFormModal!: TaskFormModalComponent;
+  // Almacena funciones de eliminación de listeners para limpiar al desmontar elementos dinámicos
+  private dynamicListeners: (() => void)[] = [];
 
   status = false;
   private destroyRef = inject(DestroyRef);
@@ -54,8 +56,8 @@ export class CalendarComponent implements OnInit {
     dayHeaderFormat: { weekday: 'long' },
     events: [],
     eventClick: (info) => this.viewDetails(Number(info.event.id)),
-    eventColor: '#28a745',
-    eventTextColor: '#fff',
+    eventColor: '#4E2754',
+    eventTextColor: '#FEFBEC',
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
@@ -97,6 +99,12 @@ export class CalendarComponent implements OnInit {
       });
   }
 
+  // Limpieza al destruir el componente
+  ngOnDestroy() {
+    this.dynamicListeners.forEach(unreg => { try { unreg(); } catch(e) { /* ignore */ } });
+    this.dynamicListeners = [];
+  }
+
   createButtons(event: MouseEvent) {
     event.stopPropagation();
     if (!this.status) {
@@ -105,6 +113,9 @@ export class CalendarComponent implements OnInit {
       this.createRemoveButton();
       this.status = true;
     } else {
+      // eliminar listeners registrados previamente
+      this.dynamicListeners.forEach(unreg => { try { unreg(); } catch(e) { /* ignore */ } });
+      this.dynamicListeners = [];
       while (this.buttons.nativeElement.firstChild) {
         this.renderer.removeChild(this.buttons.nativeElement, this.buttons.nativeElement.firstChild);
       }
@@ -124,12 +135,14 @@ export class CalendarComponent implements OnInit {
     this.renderer.listen(addButton, 'click', () => {
       this.taskFormModal.open('addTask');
     });
-    this.renderer.listen(addButton, 'keydown', (e: KeyboardEvent) => {
+    const un1 = this.renderer.listen(addButton, 'keydown', (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ' || e.code === 'Space') {
         e.preventDefault();
         this.taskFormModal.open('addTask');
       }
     });
+    // guardamos la función de eliminación para limpieza posterior
+    this.dynamicListeners.push(un1);
     this.renderer.appendChild(this.buttons.nativeElement, addButton);
   }
 
@@ -145,12 +158,13 @@ export class CalendarComponent implements OnInit {
     this.renderer.listen(editButton, 'click', () => {
       this.router.navigate(['selectTask'], { state: { from: 'dashboard' } });
     });
-    this.renderer.listen(editButton, 'keydown', (e: KeyboardEvent) => {
+    const un2 = this.renderer.listen(editButton, 'keydown', (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ' || e.code === 'Space') {
         e.preventDefault();
         this.router.navigate(['selectTask'], { state: { from: 'dashboard' } });
       }
     });
+    this.dynamicListeners.push(un2);
     this.renderer.appendChild(this.buttons.nativeElement, editButton);
   }
 
@@ -166,12 +180,13 @@ export class CalendarComponent implements OnInit {
     this.renderer.listen(removeButton, 'click', () => {
       this.router.navigate(['removeTask'], { state: { from: 'dashboard' } });
     });
-    this.renderer.listen(removeButton, 'keydown', (e: KeyboardEvent) => {
+    const un3 = this.renderer.listen(removeButton, 'keydown', (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ' || e.code === 'Space') {
         e.preventDefault();
         this.router.navigate(['removeTask'], { state: { from: 'dashboard' } });
       }
     });
+    this.dynamicListeners.push(un3);
     this.renderer.appendChild(this.buttons.nativeElement, removeButton);
   }
 

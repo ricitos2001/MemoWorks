@@ -1,36 +1,39 @@
 <article *ngIf="loading()">Cargando...</article>
 <article *ngIf="error()">{{ error() }}</article>
-<app-shared-bar (search)="onSearch($event)" class="grid-center"></app-shared-bar>
-<article *ngIf="loading()">Buscando...</article>
-<ul class="tasks-grid" *ngIf="tasks(); else emptyState">
-  <li *ngFor="let task of tasks(); trackBy: trackById">
-    <section class="task">
-      <section class="task__image-box">
-        <article class="card__labels">
-          <span *ngFor="let lbl of task.labels" class="card__label">{{ lbl }}</span>
-        </article>
-      </section>
-      <section class="task__box">
-        <section class="flex">
-          <article class="flex">
-            <img src="../../../../assets/img/Calendar.svg" alt="icon">
-            <p class="task__text">{{ task.date | date:'dd/MM/yyyy' }}</p>
-          </article>
-          <article class="flex">
-            <img src="../../../../assets/img/Clock.svg" alt="icon">
-            <p class="task__text">{{ formatTime(task.time) | date:'HH:mm' }}</p>
+<ng-container *ngIf="tasks() && tasks().length > 0; else emptyState">
+  <app-shared-bar (search)="onSearch($event)" class="grid-center"></app-shared-bar>
+  <article *ngIf="loading()">Buscando...</article>
+  <ul class="tasks-grid">
+    <li *ngFor="let task of tasks(); trackBy: trackById">
+      <section class="task">
+        <section class="task__image-box">
+          <article class="card__labels">
+            <span *ngFor="let lbl of task.labels" class="card__label">{{ lbl }}</span>
           </article>
         </section>
-        <section class="flex">
-          <article class="flex-center">
-            <p class="task__text"><span>{{ task.title }}</span> - {{ task.description }}</p>
-          </article>
-          <app-view-task-button (click)="viewDetails(task.id)"></app-view-task-button>
+        <section class="task__box">
+          <section class="flex">
+            <article class="flex">
+              <img src="../../../../assets/img/Calendar.svg" alt="icon">
+              <p class="task__text">{{ task.date | date:'dd/MM/yyyy' }}</p>
+            </article>
+            <article class="flex">
+              <img src="../../../../assets/img/Clock.svg" alt="icon">
+              <p class="task__text">{{ formatTime(task.time) | date:'HH:mm' }}</p>
+            </article>
+          </section>
+          <section class="flex">
+            <article class="flex-center">
+              <p class="task__text"><span>{{ task.title }}</span> - {{ task.description }}</p>
+            </article>
+            <app-view-task-button (click)="viewDetails(task.id)"></app-view-task-button>
+          </section>
         </section>
       </section>
-    </section>
-  </li>
-</ul>
+    </li>
+  </ul>
+</ng-container>
+
 <article class="pagination" *ngIf="total() > pageSize">
   <button (click)="prevPage()" [disabled]="page() <= 0">Anterior</button>
   <button (click)="nextPage()" [disabled]="page() >= total()">Siguiente</button>

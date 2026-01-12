@@ -1,11 +1,24 @@
 <section
   class="tooltip-wrapper"
-  (mouseenter)="showTooltip = true"
-  (mouseleave)="showTooltip = false"
+  (mouseenter)="show()"
+  (mouseleave)="hide()"
+  (focusin)="show()"
+  (focusout)="hide()"
 >
-  <button>Hover aquí</button>
+  <button
+    tabindex="0"
+    (keydown)="onKey($event)"
+    [attr.aria-describedby]="showTooltip ? tooltipId : null"
+  >
+    Hover aquí
+  </button>
 
-  <article class="tooltip" *ngIf="showTooltip">
+  <article
+    class="tooltip"
+    *ngIf="showTooltip"
+    [attr.id]="tooltipId"
+    role="tooltip"
+  >
     Este es un tooltip.
   </article>
 </section>

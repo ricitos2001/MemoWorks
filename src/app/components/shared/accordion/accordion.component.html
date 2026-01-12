@@ -1,0 +1,11 @@
+<div class="accordion">
+  <div *ngFor="let it of items; let i = index" class="accordion__item">
+    <button class="accordion__header" aria-expanded="{{isOpen(it.id)}}" (click)="toggle(it.id)" (keydown)="onKey($event, i)">
+      {{ it.title }}
+    </button>
+    <div class="accordion__panel" *ngIf="isOpen(it.id)" role="region">
+      <div class="accordion__content">{{ it.content }}</div>
+    </div>
+  </div>
+</div>
+

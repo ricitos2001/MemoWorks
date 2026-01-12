@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {SpinnerComponent} from '../components/shared/spinner/spinner.component';
 import {LoadingService} from './shared/loading.service';
 import {finalize} from 'rxjs/operators';
 import {environment} from '../../enviroments/enviroment';
@@ -29,6 +28,7 @@ export interface Task {
   };
   status: boolean;
   labels: string[];
+  image: String;
 }
 
 @Injectable({

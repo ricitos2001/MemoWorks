@@ -131,6 +131,8 @@
   --transition-fast: 150ms ease-in-out;
   --transition-base: 300ms ease-in-out;
   --transition-slow: 500ms ease-in-out;
+  --tray-offset-x: 4rem;
+  --tray-gap: 0.5rem;
 }
 
 *,
@@ -854,7 +856,7 @@ app-form-input.compact input, app-form-input.compact textarea {
   border-radius: 0.6rem;
   font-size: 1rem;
   transition: all 0.2s ease;
-  background: var(--color-secondary-4);
+  background: var(--components);
   width: 2.6rem;
   height: 2.6rem;
 }
@@ -885,6 +887,11 @@ app-form-input.compact input, app-form-input.compact textarea {
 }
 .menu.open {
   display: flex;
+}
+
+.bell-icon {
+  width: 1rem;
+  height: 1rem;
 }
 
 @media (min-width: 720px) {
@@ -1147,6 +1154,53 @@ button.active {
   white-space: nowrap;
 }
 
+.notifications-tray {
+  position: fixed;
+  right: 8rem;
+  bottom: var(--spacing-6);
+  width: 360px;
+  max-width: calc(100vw - 2rem);
+  max-height: 60vh;
+  background: var(--components);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  border-radius: 12px;
+  z-index: 1400;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  outline: none;
+  animation: tray-in 220ms ease-out;
+}
+
+.notifications-tray__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.notifications-tray__body {
+  overflow: auto;
+  padding: 0.75rem 1rem;
+}
+
+.notifications-tray .badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+}
+
+@keyframes tray-in {
+  from {
+    transform: translateY(12px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
 :root {
   --scroll-offset: calc(var(--spacing-2) * 2 + 3rem);
 }
@@ -1359,7 +1413,8 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], [id].anchor {
 }
 
 .settings__img-profile {
-  max-width: 25rem;
+  width: 25rem;
+  height: auto;
   border-radius: 50%;
 }
 

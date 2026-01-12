@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
@@ -25,6 +25,8 @@ export class UserSettingsComponent implements OnInit {
 
   private email = localStorage.getItem('email');
 
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+
   constructor(
     private authService: AuthService,
     private userService: UserService,
@@ -32,6 +34,7 @@ export class UserSettingsComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private comm: CommunicationService,
     private avatarService: AvatarService
+    , private renderer: Renderer2
   ) {}
 
   ngOnInit(): void {
@@ -80,11 +83,27 @@ export class UserSettingsComponent implements OnInit {
   }
 
   editImageProfile(): void {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
-    input.onchange = (event: Event) => this.onFileSelected(event);
-    input.click();
+    // Preferir input oculto en template referenciado con @ViewChild
+    try {
+      if (this.fileInput && this.fileInput.nativeElement) {
+        // resetear valor para permitir selección del mismo archivo consecutivamente
+        this.fileInput.nativeElement.value = '';
+        this.fileInput.nativeElement.click();
+        return;
+      }
+    } catch (e) {
+      // fallthrough: si por algún motivo ViewChild no está disponible, usar Renderer2 como fallback
+    }
+
+    // Fallback (rara vez necesario): crear input con Renderer2 y usar listen para el cambio
+    const input = this.renderer.createElement('input');
+    this.renderer.setProperty(input, 'type', 'file');
+    this.renderer.setProperty(input, 'accept', 'image/*');
+    const unregister = this.renderer.listen(input, 'change', (event: Event) => {
+      try { this.onFileSelected(event); } finally { unregister(); }
+    });
+    // Forzar click en el elemento creado (es necesario acceder al elemento nativo)
+    if ((input as any).click) { (input as any).click(); }
   }
 
   private fileToDataUrl(file: File): Promise<string> {
@@ -96,7 +115,7 @@ export class UserSettingsComponent implements OnInit {
     });
   }
 
-  private async onFileSelected(event: Event): Promise<void> {
+  async onFileSelected(event: Event): Promise<void> {
     const input = event.target as HTMLInputElement;
     if (!input.files?.length || !this.user?.id) return;
 

@@ -30,6 +30,7 @@ export class DasboardComponent implements OnInit {
   @ViewChild(TaskFormModalComponent)
   private taskFormModal!: TaskFormModalComponent;
   status = false;
+  private dynamicListeners: (() => void)[] = [];
 
   private destroyRef = inject(DestroyRef);
   constructor(
@@ -69,6 +70,8 @@ export class DasboardComponent implements OnInit {
       this.createRemoveButton();
       this.status = true;
     } else {
+      this.dynamicListeners.forEach(unreg => { try { unreg(); } catch(e) { /* ignore */ } });
+      this.dynamicListeners = [];
       while (this.buttons.nativeElement.firstChild) {
         this.renderer.removeChild(this.buttons.nativeElement, this.buttons.nativeElement.firstChild);
       }
@@ -88,12 +91,13 @@ export class DasboardComponent implements OnInit {
     this.renderer.listen(addButton, 'click', () => {
         this.taskFormModal.open('addTask');
     });
-    this.renderer.listen(addButton, 'keydown', (e: KeyboardEvent) => {
+    const u1 = this.renderer.listen(addButton, 'keydown', (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ' || e.code === 'Space') {
         e.preventDefault();
         this.taskFormModal.open('addTask');
       }
     });
+    this.dynamicListeners.push(u1);
     this.renderer.appendChild(this.buttons.nativeElement, addButton);
   }
 
@@ -109,12 +113,13 @@ export class DasboardComponent implements OnInit {
     this.renderer.listen(editButton, 'click', () => {
       this.router.navigate(['selectTask'], { state: { from: 'dashboard' } });
     });
-    this.renderer.listen(editButton, 'keydown', (e: KeyboardEvent) => {
+    const u2 = this.renderer.listen(editButton, 'keydown', (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ' || e.code === 'Space') {
         e.preventDefault();
         this.router.navigate(['selectTask'], { state: { from: 'dashboard' } });
       }
     });
+    this.dynamicListeners.push(u2);
 
     this.renderer.appendChild(this.buttons.nativeElement, editButton);
   }
@@ -131,12 +136,13 @@ export class DasboardComponent implements OnInit {
     this.renderer.listen(removeButton, 'click', () => {
       this.router.navigate(['removeTask'], { state: { from: 'dashboard' } });
     });
-    this.renderer.listen(removeButton, 'keydown', (e: KeyboardEvent) => {
+    const u3 = this.renderer.listen(removeButton, 'keydown', (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ' || e.code === 'Space') {
         e.preventDefault();
         this.router.navigate(['removeTask'], { state: { from: 'dashboard' } });
       }
     });
+    this.dynamicListeners.push(u3);
     this.renderer.appendChild(this.buttons.nativeElement, removeButton);
   }
 }

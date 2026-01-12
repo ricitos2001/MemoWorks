@@ -1,8 +1,11 @@
-<article class="tabs">
-  <button *ngFor="let t of tabs"
+<article class="tabs" role="tablist">
+  <button *ngFor="let t of tabs; let i = index"
+    role="tab"
+    [attr.aria-selected]="active === t.key"
+    [attr.tabindex]="active === t.key ? 0 : -1"
     [class.active]="active === t.key"
-    (click)="selectTab(t.key)">
+    (click)="selectTab(t.key)"
+    (keydown)="onKeydown($event, i)">
     {{ t.label }}
   </button>
 </article>
-

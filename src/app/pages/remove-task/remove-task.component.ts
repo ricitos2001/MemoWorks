@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, computed, DestroyRef, inject, OnInit} from '@angular/core';
+import {Component, computed, DestroyRef, inject, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import {ViewTaskButtonComponent} from '../../components/shared/view-task-button/view-task-button.component';
@@ -8,6 +8,7 @@ import {TrashButtonComponent} from '../../components/shared/trash-button/trash-b
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {TasksSignalStore} from '../../stores/tasks.signal.store';
 import {TaskService} from '../../services/task.service';
+import {NotificationsService, Notification as AppNotification} from '../../services/notifications.service';
 
 @Component({
   selector: 'app-remove-task',
@@ -28,6 +29,7 @@ export class RemoveTaskComponent implements OnInit {
   private router = inject(Router);
   private comm = inject(CommunicationService);
   private taskService = inject(TaskService);
+  private notifications = inject(NotificationsService);
 
   email = localStorage.getItem('email');
 
@@ -63,6 +65,18 @@ export class RemoveTaskComponent implements OnInit {
           type: 'success',
           message: 'Tarea eliminada correctamente',
         });
+
+        // Enviar notificación a la API
+        const apiNotification: AppNotification = {
+          title: 'Tarea eliminada',
+          message: `La tarea con id ${taskId} ha sido eliminada.`,
+          createdAt: new Date(),
+        };
+        this.notifications.pushNotifications(apiNotification).subscribe({
+          next: () => {},
+          error: (err) => { console.warn('Error enviando notificación al API:', err); }
+        });
+
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {

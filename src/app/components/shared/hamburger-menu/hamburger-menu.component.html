@@ -1,4 +1,4 @@
-<button class="hamburger" (click)="toggleMenu()" [attr.aria-label]="isOpen ? 'Cerrar menú' : 'Abrir menú'">
+<button #toggleButton class="hamburger" (click)="toggleMenu()" [attr.aria-label]="isOpen ? 'Cerrar menú' : 'Abrir menú'" [attr.aria-expanded]="isOpen">
   <span *ngIf="!isOpen">☰</span>
   <span *ngIf="isOpen">✕</span>
 </button>
@@ -14,7 +14,20 @@
       <li><a href="/dashboard" class="header__link">Dashboard</a></li>
       <li><a href="/calendar" class="header__link">Calendario</a></li>
       <li><a href="/settings" class="header__link">Configuración</a></li>
-      <li><app-button class="header__logout" (click)="logout()">Cerrar sesión</app-button></li>
+      <li class="flex-center">
+        <button class="theme-btn" (click)="toggleNotifications()" aria-label="Abrir bandeja de notificaciones" [attr.aria-expanded]="showNotifications"><img src="assets/img/Bell.svg" class="bell-icon" alt="Notificaciones"><span class="badge" *ngIf="hasNew"></span></button>
+        <app-button class="header__logout" (click)="logout()">Cerrar sesión</app-button>
+      </li>
     </ng-container>
   </ul>
 </nav>
+
+<aside #notificationsSidebar *ngIf="showNotifications" class="notifications-tray" role="dialog" aria-label="Bandeja de notificaciones" (keydown.escape)="closeNotifications()" tabindex="-1">
+  <div class="notifications-tray__header">
+    <h4>Notificaciones</h4>
+    <button class="notifications-close" (click)="closeNotifications()" aria-label="Cerrar notificaciones">✕</button>
+  </div>
+  <div class="notifications-tray__body">
+    <app-notification></app-notification>
+  </div>
+</aside>

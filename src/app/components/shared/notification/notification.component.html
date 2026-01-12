@@ -1,0 +1,29 @@
+<section class="notifications">
+  <ng-container>
+    <ng-container *ngIf="state().data.length > 0; else empty">
+      <ul class="notifications__list">
+        <li *ngFor="let notification of state().data; trackBy: trackById" class="notification__item">
+          <span class="notifications__title">{{ notification.title }}</span>
+          <p class="notifications__message">{{ notification.message }}</p>
+          <small class="notifications__date">{{ notification.createdAt | date: 'short' }}</small>
+          <hr>
+        </li>
+      </ul>
+
+      <div #anchor style="height: 1px; width: 100%;"></div>
+
+      <div *ngIf="state().loading" class="loading">
+        Cargando más notificaciones...
+      </div>
+
+      <div *ngIf="state().eof && !state().loading" class="end">
+        No hay más notificaciones.
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #empty>
+    <p class="empty-state" *ngIf="!state().loading">No hay notificaciones</p>
+    <p class="empty-state" *ngIf="state().loading">Cargando notificaciones...</p>
+  </ng-template>
+</section>
