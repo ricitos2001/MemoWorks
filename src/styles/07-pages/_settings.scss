@@ -13,6 +13,8 @@
   background: var(--settings-options-box);
   padding: var(--spacing-4);
   margin: 0;
+  border-top-left-radius: var(--radius-xl);
+  border-bottom-left-radius: var(--radius-xl);
 }
 
 .settings__content{
@@ -26,11 +28,13 @@
   font-weight: var(--font-weight-regular);
   padding: var(--spacing-4) var(--spacing-24) var(--spacing-4) var(--spacing-4);
   margin: 0;
+  border-top-right-radius: var(--radius-xl);
 }
 
 .settings__choices a.active {
   background: rgba(0,0,0,0.4);
   border-radius: 4px;
+  font-weight: var(--font-weight-bold);
 }
 
 .settings__user {
@@ -42,6 +46,7 @@
   background: var(--settings-option-box);
   padding: var(--spacing-4);
   margin: 0;
+  border-bottom-right-radius: var(--radius-xl);
 }
 
 .settings__item {
@@ -52,7 +57,6 @@
   padding-bottom: var(--spacing-4);
   align-items: center;
   margin: 0;
-
 }
 
 .settings__name{
@@ -60,6 +64,8 @@
   color: var(--color-primary-1);
   background: var(--buttons);
   flex: 0 0 16.25rem;
+  border-top-left-radius: var(--radius-md);
+  border-bottom-left-radius: var(--radius-md);
 }
 
 .settings__value{
@@ -67,6 +73,8 @@
   color: var(--value-letters);
   background: var(--color-primary-1);
   flex: 0 0 16.25rem;
+  border-top-right-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
 }
 
 .settings__texto{
@@ -97,7 +105,7 @@
   border-radius: 50%;
 }
 
-.settings__familiar-group {
+.settings__familiar-group , .settings__links{
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: var(--spacing-4);
@@ -125,6 +133,8 @@
     justify-content: center;
     align-items: center;
     padding: 2rem;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: var(--radius-xl);
   }
 
   .settings__choice{
@@ -136,9 +146,10 @@
     text-align: left;
     font-size: var(--font-size-xl);
     background: var(--components);
+    border-top-right-radius: 0;
   }
 
-  .settings__familiar-group {
+  .settings__familiar-group , .settings__links{
     place-items: center;
   }
 
@@ -161,6 +172,16 @@
     word-break: break-word;
     hyphens: auto;
     white-space: normal;
+  }
+
+  .settings__name {
+    border-bottom-left-radius: 0;
+    border-top-right-radius: var(--radius-md);
+  }
+
+  .settings__value {
+    border-top-right-radius: 0;
+    border-bottom-left-radius: var(--radius-md);
   }
 
   .settings__texto {
@@ -210,6 +231,7 @@
     width: 100%;
     box-sizing: border-box;
     white-space: normal;
+    border-bottom-left-radius: var(--radius-xl);
   }
 }
 
