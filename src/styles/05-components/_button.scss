@@ -9,7 +9,8 @@
   right: var(--spacing-6);
   bottom: var(--spacing-6);
   z-index: 9999;
-  box-shadow: var(--shadow-md);
+  /* sombra eliminada */
+  box-shadow: none;
 }
 
 .addButton {
@@ -20,7 +21,7 @@
   right: var(--spacing-6);
   bottom: calc(var(--spacing-6) + 18rem);
   z-index: 9999;
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
 }
 
 .editButton {
@@ -31,7 +32,7 @@
   right: var(--spacing-6);
   bottom: calc(var(--spacing-6) + 12rem);
   z-index: 9999;
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
 }
 
 .removeButton {
@@ -42,7 +43,7 @@
   right: var(--spacing-6);
   bottom: calc(var(--spacing-6) + 6rem);
   z-index: 9999;
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
 }
 
 .dashboard .optionButton,
@@ -74,14 +75,12 @@
   .dashboard .removeButton { bottom: calc(var(--spacing-4) + 12rem); }
 }
 
-/* Sombreado consistente para botones principales y componentes de botón */
+/* Sombreado eliminado para botones principales y componentes de botón */
 button, .theme-btn, app-button, .header__logout, .view-task-button,
 .optionButton, .addButton, .editButton, .removeButton {
-  box-shadow: var(--shadow-md);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
 }
 
-/* Hover / focus: sombra más profunda y ligera elevación */
 button:hover, button:focus,
 .theme-btn:hover, .theme-btn:focus,
 app-button:hover, app-button:focus,
@@ -92,17 +91,13 @@ app-button:hover, app-button:focus,
 .editButton:hover, .editButton:focus,
 .removeButton:hover, .removeButton:focus {
   transform: translateY(-0.18rem);
-  box-shadow: var(--shadow-md);
-  opacity: 1;
 }
 
-/* Mantener elevación para la clase 'elevate-on-hover' (combinable) */
 .optionButton.elevate-on-hover:hover,
 .addButton.elevate-on-hover:hover,
 .editButton.elevate-on-hover:hover,
 .removeButton.elevate-on-hover:hover {
   transform: translateY(-0.25rem);
-  box-shadow: var(--shadow-lg);
 }
 
 .view-task-button{
