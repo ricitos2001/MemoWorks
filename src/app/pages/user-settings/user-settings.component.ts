@@ -8,6 +8,8 @@ import { AuthService } from '../../services/auth.service';
 import { User, UserService } from '../../services/user.service';
 import { CommunicationService } from '../../services/shared/communication.service';
 import { AvatarService } from '../../services/shared/avatar.service';
+import { ToastService } from '../../services/shared/toast.service';
+import { NotificationsStore } from '../../stores/notifications.store';
 
 @Component({
   selector: 'app-user-settings',
@@ -35,6 +37,8 @@ export class UserSettingsComponent implements OnInit {
     private comm: CommunicationService,
     private avatarService: AvatarService
     , private renderer: Renderer2
+    , private toastService: ToastService
+    , private notificationsStore: NotificationsStore
   ) {}
 
   ngOnInit(): void {
@@ -192,6 +196,11 @@ export class UserSettingsComponent implements OnInit {
           type: 'success',
           message: 'Usuario eliminado correctamente',
         });
+
+        // limpiar UI relacionado con notificaciones/toasts
+        try { this.toastService.dismissAll(); } catch (e) {}
+        try { this.notificationsStore.clear(); } catch (e) {}
+
         this.authService.removeUserData();
         this.authService.loggedInSubject.next(false);
         // limpiar avatar local al eliminar cuenta
@@ -209,6 +218,10 @@ export class UserSettingsComponent implements OnInit {
   }
 
   logout(): void {
+    // limpiar UI relacionado con notificaciones/toasts
+    try { this.toastService.dismissAll(); } catch (e) {}
+    try { if (this.user?.id) this.notificationsStore.clear(); } catch (e) {}
+
     this.authService.removeUserData();
     this.authService.loggedInSubject.next(false);
     this.authService.logout();

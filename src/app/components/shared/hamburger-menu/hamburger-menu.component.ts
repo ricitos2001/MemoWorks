@@ -6,6 +6,8 @@ import {Router} from '@angular/router';
 import {AuthModalService} from '../../../services/shared/auth-modal.service';
 import {Subscription} from 'rxjs';
 import {NotificationComponent} from '../notification/notification.component';
+import { ToastService } from '../../../services/shared/toast.service';
+import { NotificationsStore } from '../../../stores/notifications.store';
 
 @Component({
   selector: 'app-hamburger-menu',
@@ -28,7 +30,9 @@ export class HamburgerMenuComponent implements OnInit, OnDestroy {
     private el: ElementRef,
     private router: Router,
     private authModalService: AuthModalService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private toastService: ToastService,
+    private notificationsStore: NotificationsStore
   ) {}
 
   toggleMenu() {
@@ -120,6 +124,12 @@ export class HamburgerMenuComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.authSub = this.authService.loggedIn$.subscribe(status => {
       this.loggedIn = status;
+      if (!status) {
+        // cerrar y limpiar notificaciones cuando el usuario ya no esté logueado
+        this.showNotifications = false;
+        try { this.toastService.dismissAll(); } catch (e) {}
+        try { this.notificationsStore.clear(); } catch (e) {}
+      }
     });
   }
 
@@ -138,6 +148,13 @@ export class HamburgerMenuComponent implements OnInit, OnDestroy {
   }
 
   logout() {
+    // cerrar UI relacionada con notificaciones
+    this.showNotifications = false;
+
+    // limpiar toasts y notificaciones en stores
+    try { this.toastService.dismissAll(); } catch (e) { /* ignore */ }
+    try { this.notificationsStore.clear(); } catch (e) { /* ignore */ }
+
     this.authService.removeUserData();
     this.authService.loggedInSubject.next(false);
     this.authService.logout();

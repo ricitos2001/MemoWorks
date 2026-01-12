@@ -19,4 +19,8 @@ export class NotificationsStore {
     const current = this.notificationsSubject.value;
     this.notificationsSubject.next([...current, notification]);
   }
+
+  clear() {
+    this.notificationsSubject.next([]);
+  }
 }

@@ -34,4 +34,8 @@ export class ToastService {
       this.toastsSubject.getValue().filter(t => t.id !== id)
     );
   }
+
+  dismissAll(): void {
+    this.toastsSubject.next([]);
+  }
 }
