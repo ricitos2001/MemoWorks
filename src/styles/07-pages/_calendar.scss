@@ -253,3 +253,34 @@
     max-width: 90vw;
   }
 }
+
+/* Modo compacto: iniciales de días en móvil */
+@media (max-width: 640px) {
+  .fc .fc-col-header-cell .fc-col-header-cell-cushion {
+    display: none; /* ocultar texto completo */
+  }
+
+  .fc .fc-col-header-cell {
+    position: relative;
+    min-width: 0; /* permitir que se reduzca */
+    font-size: 0.9rem;
+    padding: 6px 4px;
+  }
+
+  .fc .fc-col-header-cell::after {
+    content: '';
+    display: block;
+    text-align: center;
+    font-weight: 700;
+    color: var(--calendar-letters);
+  }
+
+  /* Asignar iniciales según la columna (L,M,X,J,V,S,D) - FullCalendar normalmente empieza por lunes */
+  .fc .fc-col-header-cell:nth-child(1)::after { content: 'L'; }
+  .fc .fc-col-header-cell:nth-child(2)::after { content: 'M'; }
+  .fc .fc-col-header-cell:nth-child(3)::after { content: 'X'; }
+  .fc .fc-col-header-cell:nth-child(4)::after { content: 'J'; }
+  .fc .fc-col-header-cell:nth-child(5)::after { content: 'V'; }
+  .fc .fc-col-header-cell:nth-child(6)::after { content: 'S'; }
+  .fc .fc-col-header-cell:nth-child(7)::after { content: 'D'; }
+}

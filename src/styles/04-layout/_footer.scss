@@ -6,7 +6,7 @@
   flex-direction: row;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 10;
   justify-content: space-between;
   background: var(--components);
   padding: var(--spacing-8) 0;
@@ -15,7 +15,6 @@
   transition: box-shadow var(--transition-base), transform var(--transition-base);
 }
 
-/* Elevación opcional para footer */
 .footer.elevate-on-hover:hover {
   transform: translateY(-0.25rem);
   box-shadow: var(--shadow-lg);
