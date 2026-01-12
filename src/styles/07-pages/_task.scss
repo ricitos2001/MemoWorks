@@ -30,6 +30,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  border-radius: var(--radius-xl);
 }
 
 @media (max-width: 720px) {
@@ -75,6 +76,10 @@
   height: 15rem;
   background-image: url("/assets/img/funds/digital-dimensions-twilight-landscape-with-a-purple-haze-sunrise-designed-by-ppublish-colorful-reflections-perfect-942666541-1.jpg");
   background-size: cover;
+}
+
+.task-details__image-box {
+  border-radius: var(--radius-xl);
 }
 
 
