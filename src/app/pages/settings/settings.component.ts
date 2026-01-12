@@ -22,15 +22,12 @@ export class SettingsComponent {
   currentLabel: string = 'Usuario';
 
   constructor(private router: Router) {
-    // sincronizar con la ruta actual al crear el componente
     const url = this.router.url.split('/').pop() || 'userSettings';
     this.setActiveByKey(url);
-    console.log(localStorage.getItem('token'));
   }
 
   onTabChange(key: string) {
     this.setActiveByKey(key);
-    // navega a la subruta correspondiente dentro de /settings
     this.router.navigate([`/settings/${key}`]);
   }
 
