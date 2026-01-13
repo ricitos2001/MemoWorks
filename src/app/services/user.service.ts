@@ -65,7 +65,6 @@ export class UserService {
       });
   }
 
-  // Devuelve la imagen como blob para poder usar URL.createObjectURL
   getImageProfile(id: number, cacheBust: boolean = false): Observable<Blob> {
     const url = cacheBust ? `${environment.apiUrl}/api/v1/users/${id}/avatar?t=${Date.now()}` : `${environment.apiUrl}/api/v1/users/${id}/avatar`;
     return this.http.get(url,

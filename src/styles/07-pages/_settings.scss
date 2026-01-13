@@ -96,9 +96,15 @@
   color: var(--color-primary-1);
 }
 
-.settings__nombre-grupo {
+.settings__nombre-grupo, settings > span {
   color: var(--color-primary-1);
   font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.settings__apartado {
+  font-weight: var(--font-weight-bold);
+  color: var(--letters);
 }
 
 .settings__users {

@@ -1,2 +1,46 @@
-<div>esta funcionalidad aun esta en proceso</div>
-
+<form class="add-task-form" [formGroup]="groupForm" (ngSubmit)="onSubmit($event)">
+  <fieldset>
+    <legend>Crear grupo</legend>
+    <app-form-input
+      formControlName="name"
+      name="name"
+      placeholder="Value"
+      label="Nombre del grupo"
+      [required]="true"
+      class="grid"
+    ></app-form-input>
+    <article class="error" *ngIf="groupForm.get('name')?.touched && groupForm.get('name')?.invalid">
+      <small *ngIf="groupForm.get('name')?.errors?.['required']">Título obligatorio</small>
+      <small *ngIf="groupForm.get('name')?.errors?.['minlength']">Mínimo 5 caracteres</small>
+    </article>
+    <app-form-input
+      formControlName="description"
+      name="description"
+      placeholder="Value"
+      label="Descripcion"
+      type="textarea"
+      [required]="true"
+      class="grid"
+    ></app-form-input>
+    <article class="error" *ngIf="groupForm.get('description')?.touched && groupForm.get('description')?.invalid">
+      <small *ngIf="groupForm.get('description')?.errors?.['required']">Descripción obligatoria</small>
+      <small *ngIf="groupForm.get('description')?.errors?.['minlength']">Mínimo 10 caracteres</small>
+    </article>
+    <app-form-input
+      name="users"
+      placeholder="users"
+      label="Añadir usuario por nombre"
+      (keydown.enter)="addUser(labelInput.value, $event); labelInput.value='';"
+      #labelInput
+    ></app-form-input>
+    <article class="users">
+      <article *ngFor="let user of users.controls; let i = index" class="flex-center">
+        {{ user.value }}<app-button (click)="removeUser(i, $event)">✕</app-button>
+      </article>
+    </article>
+    <article class="actions">
+      <app-button (click)="onSubmit($event)" [attr.aria-busy]="loading">Crear grupo</app-button>
+      <app-button class="secondary" (click)="!loading && onCancel($event)">Cancelar</app-button>
+    </article>
+  </fieldset>
+</form>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 export interface AppNotification {
-  source: 'taskForm' | 'dashboard' | 'userForm';
+  source: 'taskForm' | 'dashboard' | 'userForm'| 'groupForm' | 'other';
   type: 'success' | 'error' | 'info' | 'warning';
   message: string;
   payload?: any;
