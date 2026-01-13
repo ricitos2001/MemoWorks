@@ -1,10 +1,10 @@
 @use '../00-settings/css-variables' as *;
 @use '../01-tools/mixins' as *;
 
-.main{
+.main {
   align-items: center;
-  justify-content: center;
-  padding: var(--spacing-8);
-  min-height: 56.25rem;
   background: var(--background);
+  justify-content: center;
+  min-height: 56.25rem;
+  padding: var(--spacing-8);
 }

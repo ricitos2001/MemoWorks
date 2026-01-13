@@ -23,11 +23,11 @@
 </nav>
 
 <aside #notificationsSidebar *ngIf="showNotifications" class="notifications-tray" role="dialog" aria-label="Bandeja de notificaciones" (keydown.escape)="closeNotifications()" tabindex="-1">
-  <div class="notifications-tray__header">
-    <h4>Notificaciones</h4>
+  <article class="notifications-tray__header">
+    <h4 class="notifications-tray__title">Notificaciones</h4>
     <button class="notifications-close" (click)="closeNotifications()" aria-label="Cerrar notificaciones">✕</button>
-  </div>
-  <div class="notifications-tray__body">
+  </article>
+  <article class="notifications-tray__body">
     <app-notification></app-notification>
-  </div>
+  </article>
 </aside>

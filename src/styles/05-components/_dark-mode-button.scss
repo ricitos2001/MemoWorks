@@ -2,28 +2,27 @@
 @use "../01-tools/mixins" as *;
 
 .theme-btn {
+  align-items: center;
+  background: var(--components);
   border: none;
+  border-radius: 0.6rem;
   cursor: pointer;
   display: inline-flex;
-  align-items: center;
+  font-size: 1rem;
+  height: 2.6rem;
   justify-content: center;
   padding: 0;
-  border-radius: 0.6rem;
-  font-size: 1rem;
   transition: all 0.2s ease;
-  background: var(--components);
   width: 2.6rem;
-  height: 2.6rem;
 }
 
 .theme-btn img,
 .dark-mode-button img {
   display: block;
-  width: 1.6rem;
   height: 1.6rem;
+  width: 1.6rem;
 }
 
 .theme-btn.dark {
   background: var(--neutral-600);
-  border-radius: 0.6rem;
 }

@@ -1,26 +1,51 @@
 @use "../00-settings/css-variables" as *;
 @use "../01-tools/mixins" as *;
 
-/* Cajas decorativas: animaciones sutiles y utilidades */
+/* ============================================================
+   Decorative boxes
+   ============================================================ */
+
 .decor-box {
   background: var(--components);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-6);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
+  padding: var(--spacing-6);
 }
 
-/* Animaciones decorativas (sutiles) */
+/* ============================================================
+   Decorative animations (subtle)
+   ============================================================ */
+
 @keyframes decor-float {
-  0% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-6px) rotate(-0.3deg); }
-  100% { transform: translateY(0) rotate(0deg); }
+  0% {
+    transform: rotate(0deg) translateY(0);
+  }
+
+  50% {
+    transform: rotate(-0.3deg) translateY(-6px);
+  }
+
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
 }
 
 @keyframes decor-pulse {
-  0% { transform: scale(1); box-shadow: var(--shadow-lg);}
-  50% { transform: scale(1.01); box-shadow: 0 12px 32px rgba(41, 25, 45, 0.14);} // mantener un pulso ligeramente distinto
-  100% { transform: scale(1); box-shadow: var(--shadow-lg);}
+  0% {
+    box-shadow: var(--shadow-lg);
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow: 0 12px 32px rgba(41, 25, 45, 0.14);
+    transform: scale(1.01);
+  }
+
+  100% {
+    box-shadow: var(--shadow-lg);
+    transform: scale(1);
+  }
 }
 
 .decor-animate {
@@ -32,6 +57,13 @@
   animation: decor-pulse 4.5s ease-in-out infinite;
 }
 
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+
 @media (prefers-reduced-motion: reduce) {
-  .decor-animate, .decor-animate--pulse { animation: none !important; }
+  .decor-animate,
+  .decor-animate--pulse {
+    animation: none !important;
+  }
 }

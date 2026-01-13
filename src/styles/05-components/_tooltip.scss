@@ -1,18 +1,26 @@
 @use "../00-settings/css-variables" as *;
 @use "../01-tools/mixins" as *;
 
+/* ============================================================
+   Tooltip wrapper
+   ============================================================ */
+
 .tooltip-wrapper {
-  position: relative;
   display: inline-block;
+  position: relative;
 }
 
+/* ============================================================
+   Tooltip
+   ============================================================ */
+
 .tooltip {
+  background: black;
+  border-radius: 4px;
+  color: white;
+  left: 0;
+  padding: 0.5rem 1rem;
   position: absolute;
   top: 120%;
-  left: 0;
-  background: black;
-  color: white;
-  padding: .5rem 1rem;
-  border-radius: 4px;
   white-space: nowrap;
 }

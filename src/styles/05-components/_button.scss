@@ -1,95 +1,131 @@
 @use "../00-settings/css-variables" as *;
 @use "../01-tools/mixins" as *;
 
-.optionButton {
-  padding: var(--spacing-4);
+/* ============================================================
+   Base floating action buttons
+   ============================================================ */
+
+.optionButton,
+.addButton,
+.editButton,
+.removeButton {
   background: var(--components);
   border-radius: var(--radius-sm);
+  bottom: var(--spacing-6);
+  padding: var(--spacing-4);
   position: fixed;
   right: var(--spacing-6);
-  bottom: var(--spacing-6);
   z-index: 9999;
-  /* sombra eliminada */
-  box-shadow: none;
 }
 
+/* Offsets */
 .addButton {
-  padding: var(--spacing-4);
-  background: var(--components);
-  border-radius: var(--radius-sm);
-  position: fixed;
-  right: var(--spacing-6);
   bottom: calc(var(--spacing-6) + 18rem);
-  z-index: 9999;
-  box-shadow: none;
 }
 
 .editButton {
-  padding: var(--spacing-4);
-  background: var(--components);
-  border-radius: var(--radius-sm);
-  position: fixed;
-  right: var(--spacing-6);
   bottom: calc(var(--spacing-6) + 12rem);
-  z-index: 9999;
-  box-shadow: none;
 }
 
 .removeButton {
-  padding: var(--spacing-4);
-  background: var(--components);
-  border-radius: var(--radius-sm);
-  position: fixed;
-  right: var(--spacing-6);
   bottom: calc(var(--spacing-6) + 6rem);
-  z-index: 9999;
-  box-shadow: none;
 }
 
-.dashboard .optionButton,
-.dashboard .addButton,
-.dashboard .editButton,
-.dashboard .removeButton {
-  position: absolute;
-  right: var(--spacing-6);
-  z-index: 9999;
+/* ============================================================
+   Dashboard context
+   ============================================================ */
+
+.dashboard {
+  .optionButton,
+  .addButton,
+  .editButton,
+  .removeButton {
+    position: absolute;
+  }
+
+  .optionButton {
+    bottom: var(--spacing-6);
+  }
+
+  .addButton {
+    bottom: calc(var(--spacing-6) + 13.8rem);
+  }
+
+  .editButton {
+    bottom: calc(var(--spacing-6) + 9.2rem);
+  }
+
+  .removeButton {
+    bottom: calc(var(--spacing-6) + 4.6rem);
+  }
 }
 
-.dashboard .optionButton { bottom: var(--spacing-6); }
-.dashboard .addButton { bottom: calc(var(--spacing-6) + 13.8rem); }
-.dashboard .editButton { bottom: calc(var(--spacing-6) + 9.2rem); }
-.dashboard .removeButton { bottom: calc(var(--spacing-6) + 4.6rem); }
+/* ============================================================
+   Responsive
+   ============================================================ */
 
 @media (max-width: 720px) {
-  .optionButton, .addButton, .editButton, .removeButton {
+  .optionButton,
+  .addButton,
+  .editButton,
+  .removeButton {
     right: var(--spacing-4);
   }
-  .optionButton { bottom: calc(var(--spacing-4)); }
-  .addButton { bottom: calc(var(--spacing-4) + 4rem); }
-  .editButton { bottom: calc(var(--spacing-4) + 8rem); }
-  .removeButton { bottom: calc(var(--spacing-4) + 12rem); }
-  /* dashboard-specific responsive adjustments */
-  .dashboard .optionButton { bottom: calc(var(--spacing-4)); }
-  .dashboard .addButton { bottom: calc(var(--spacing-4) + 4rem); }
-  .dashboard .editButton { bottom: calc(var(--spacing-4) + 8rem); }
-  .dashboard .removeButton { bottom: calc(var(--spacing-4) + 12rem); }
+
+  .optionButton {
+    bottom: var(--spacing-4);
+  }
+
+  .addButton {
+    bottom: calc(var(--spacing-4) + 4rem);
+  }
+
+  .editButton {
+    bottom: calc(var(--spacing-4) + 8rem);
+  }
+
+  .removeButton {
+    bottom: calc(var(--spacing-4) + 12rem);
+  }
 }
 
-/* Sombreado eliminado para botones principales y componentes de botón */
-button, .theme-btn, app-button, .header__logout, .view-task-button,
-.optionButton, .addButton, .editButton, .removeButton {
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
+/* ============================================================
+   Button interactions (no shadow)
+   ============================================================ */
+
+button,
+.theme-btn,
+app-button,
+.header__logout,
+.view-task-button,
+.optionButton,
+.addButton,
+.editButton,
+.removeButton {
+  transition:
+    box-shadow var(--transition-fast),
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
 }
 
-button:hover, button:focus,
-.theme-btn:hover, .theme-btn:focus,
-app-button:hover, app-button:focus,
-.header__logout:hover, .header__logout:focus,
-.view-task-button:hover, .view-task-button:focus,
-.optionButton:hover, .optionButton:focus,
-.addButton:hover, .addButton:focus,
-.editButton:hover, .editButton:focus,
-.removeButton:hover, .removeButton:focus {
+button:hover,
+button:focus,
+.theme-btn:hover,
+.theme-btn:focus,
+app-button:hover,
+app-button:focus,
+.header__logout:hover,
+.header__logout:focus,
+.view-task-button:hover,
+.view-task-button:focus,
+.optionButton:hover,
+.optionButton:focus,
+.addButton:hover,
+.addButton:focus,
+.editButton:hover,
+.editButton:focus,
+.removeButton:hover,
+.removeButton:focus {
   transform: translateY(-0.18rem);
 }
 
@@ -100,7 +136,11 @@ app-button:hover, app-button:focus,
   transform: translateY(-0.25rem);
 }
 
-.view-task-button{
-  max-width: 15rem;
+/* ============================================================
+   View task button
+   ============================================================ */
+
+.view-task-button {
   max-height: 15rem;
+  max-width: 15rem;
 }

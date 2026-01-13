@@ -12,18 +12,18 @@
 
       <div #anchor style="height: 1px; width: 100%;"></div>
 
-      <div *ngIf="state().loading" class="loading">
+      <div *ngIf="state().loading" class="notifications__loading">
         Cargando más notificaciones...
       </div>
 
-      <div *ngIf="state().eof && !state().loading" class="end">
+      <div *ngIf="state().eof && !state().loading" class="notifications__end">
         No hay más notificaciones.
       </div>
     </ng-container>
   </ng-container>
 
   <ng-template #empty>
-    <p class="empty-state" *ngIf="!state().loading">No hay notificaciones</p>
-    <p class="empty-state" *ngIf="state().loading">Cargando notificaciones...</p>
+    <p class="notifications__empty-state" *ngIf="!state().loading">No hay notificaciones</p>
+    <p class="notifications__empty-state" *ngIf="state().loading">Cargando notificaciones...</p>
   </ng-template>
 </section>

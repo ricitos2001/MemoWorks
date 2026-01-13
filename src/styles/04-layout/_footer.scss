@@ -2,52 +2,45 @@
 @use '../01-tools/mixins' as *;
 
 .footer {
+  background: var(--components);
+  box-shadow: var(--shadow-md);
   display: flex;
-  flex-direction: row;
+  gap: var(--spacing-8);
+  justify-content: space-between;
+  padding: var(--spacing-8) 0;
   position: sticky;
   top: 0;
-  z-index: 10;
-  justify-content: space-between;
-  background: var(--components);
-  padding: var(--spacing-8) 0;
-  gap: var(--spacing-8);
-  box-shadow: var(--shadow-md);
   transition: box-shadow var(--transition-base), transform var(--transition-base);
+  z-index: 10;
 }
 
 .footer.elevate-on-hover:hover {
-  transform: translateY(-0.25rem);
   box-shadow: var(--shadow-lg);
-}
-
-.footer__logo img {
-  max-width: 6rem;
-  height: auto;
+  transform: translateY(-0.25rem);
 }
 
 .footer__brand {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: var(--spacing-4);
 }
 
-.footer__copyright {
-  max-width: 2.2rem;
+.footer__logo img {
   height: auto;
-  display: inline-block;
+  max-width: 6rem;
 }
 
-img[alt="copyright"] {
-  max-width: 2.2rem;
-  height: auto;
+.footer__copyright {
   display: inline-block;
+  height: auto;
+  max-width: 2.2rem;
 }
 
 .footer__icon {
   max-width: 2.5rem;
 }
 
-.footer__texto{
+.footer__texto {
   color: var(--letters);
   font-weight: var(--font-weight-regular);
   margin-bottom: var(--spacing-4);
@@ -58,42 +51,43 @@ img[alt="copyright"] {
 }
 
 .footer ul {
-  padding-left: 0;
-  margin: 0;
-  list-style: none;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-3);
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
 }
 
 .footer a {
   color: var(--letters);
-  text-decoration: none;
-  padding: var(--spacing-1) 0;
   display: inline-block;
+  padding: var(--spacing-1) 0;
+  text-decoration: none;
 }
 
 @include respond('sm') {
   .footer {
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
     gap: var(--spacing-8);
   }
+
   .footer__logo img {
     max-width: 5rem;
   }
+
   .footer__copyright {
     max-width: 1.4rem;
   }
+
   .footer article {
     padding: 0;
   }
 }
 
-@media(max-width: 720px) {
+@media (max-width: 720px) {
   .footer {
-    flex-direction: column;
-    align-items: center;
     padding: var(--spacing-8);
   }
 }

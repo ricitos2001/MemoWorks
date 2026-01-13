@@ -1,7 +1,10 @@
 @use '../00-settings/css-variables' as *;
 @use '../01-tools/mixins' as *;
 
-.settings{
+/* ============================================================
+   Componente Settings
+   ============================================================ */
+.settings {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -9,20 +12,21 @@
   margin: 0;
 }
 
-.settings__choices{
+.settings__choices {
   background: var(--settings-options-box);
   padding: var(--spacing-4);
   margin: 0;
   border-top-left-radius: var(--radius-xl);
   border-bottom-left-radius: var(--radius-xl);
+
+  a.active {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+    font-weight: var(--font-weight-bold);
+  }
 }
 
-.settings__content{
-  padding: 0;
-  margin: 0;
-}
-
-.settings__choice{
+.settings__choice {
   color: var(--color-primary-1);
   background: var(--components);
   font-weight: var(--font-weight-regular);
@@ -31,10 +35,9 @@
   border-top-right-radius: var(--radius-xl);
 }
 
-.settings__choices a.active {
-  background: rgba(0,0,0,0.4);
-  border-radius: 4px;
-  font-weight: var(--font-weight-bold);
+.settings__content {
+  padding: 0;
+  margin: 0;
 }
 
 .settings__user {
@@ -47,19 +50,31 @@
   padding: var(--spacing-4);
   margin: 0;
   border-bottom-right-radius: var(--radius-xl);
+
+  input,
+  textarea,
+  select,
+  button,
+  .button,
+  .btn {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    white-space: normal;
+  }
 }
 
 .settings__item {
   display: flex;
   flex-direction: row;
-  padding-top: var(--spacing-4);
-  padding-right: var(--spacing-4);
-  padding-bottom: var(--spacing-4);
+  padding: var(--spacing-4);
   align-items: center;
   margin: 0;
 }
 
-.settings__name{
+.settings__name {
   padding: var(--spacing-4);
   color: var(--color-primary-1);
   background: var(--buttons);
@@ -68,7 +83,7 @@
   border-bottom-left-radius: var(--radius-md);
 }
 
-.settings__value{
+.settings__value {
   padding: var(--spacing-4);
   color: var(--value-letters);
   background: var(--color-primary-1);
@@ -77,11 +92,11 @@
   border-bottom-right-radius: var(--radius-md);
 }
 
-.settings__texto{
+.settings__texto {
   color: var(--color-primary-1);
 }
 
-.settings__nombre-grupo{
+.settings__nombre-grupo {
   color: var(--color-primary-1);
   font-size: var(--font-size-xl);
 }
@@ -94,25 +109,29 @@
   flex: 0 0 auto;
 }
 
-.settings__imgUser{
+.settings__imgUser {
   width: var(--spacing-24);
   height: var(--spacing-24);
 }
 
-.settings__img-profile{
+.settings__img-profile {
   width: 25rem;
   height: auto;
   border-radius: 50%;
 }
 
-.settings__familiar-group , .settings__links{
+.settings__familiar-group,
+.settings__links {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: var(--spacing-4);
 }
 
-@media(max-width: 720px) {
-  .settings{
+/* ============================================================
+   Responsive: max-width 720px
+   ============================================================ */
+@media (max-width: 720px) {
+  .settings {
     flex-direction: column;
     align-items: center;
     padding: var(--spacing-8);
@@ -127,7 +146,7 @@
     align-items: stretch;
   }
 
-  .settings__choices{
+  .settings__choices {
     max-width: 360px;
     display: flex;
     justify-content: center;
@@ -137,7 +156,7 @@
     border-top-right-radius: var(--radius-xl);
   }
 
-  .settings__choice{
+  .settings__choice {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
@@ -149,16 +168,19 @@
     border-top-right-radius: 0;
   }
 
-  .settings__familiar-group , .settings__links{
+  .settings__familiar-group,
+  .settings__links {
     place-items: center;
   }
 
-  .settings__user, .settings__item{
+  .settings__user,
+  .settings__item {
     flex-direction: column;
     align-items: center;
   }
 
-  .settings__name, .settings__value{
+  .settings__name,
+  .settings__value {
     flex: 1 1 auto;
     width: 100%;
     max-width: 100%;
@@ -189,7 +211,7 @@
     width: 100%;
   }
 
-  .settings__users{
+  .settings__users {
     flex-direction: column;
     padding: var(--spacing-4);
     gap: var(--spacing-4);
@@ -197,46 +219,26 @@
     box-sizing: border-box;
   }
 
-  .settings__imgUser{
+  .settings__imgUser {
     width: 6rem;
     height: 6rem;
     margin: 0 auto;
   }
 
-  .settings__img-profile{
+  .settings__img-profile {
     max-width: 10rem;
   }
 
-  .settings__item{
+  .settings__item {
     padding: var(--spacing-2) var(--spacing-4);
     width: 100%;
     box-sizing: border-box;
   }
 
-  .settings__info input,
-  .settings__info textarea,
-  .settings__info select,
-  .settings__info button,
-  .settings__info .button,
-  .settings__info .btn{
-    max-width: 100%;
-    width: 100%;
-    box-sizing: border-box;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-    white-space: normal;
-  }
-
-  .settings__info{
+  .settings__info {
     width: 100%;
     box-sizing: border-box;
     white-space: normal;
     border-bottom-left-radius: var(--radius-xl);
   }
 }
-
-
-
-
-
-

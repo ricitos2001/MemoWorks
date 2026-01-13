@@ -1,35 +1,69 @@
 @use "../00-settings/css-variables" as *;
 @use "../01-tools/mixins" as *;
 
+/* ============================================================
+   Toast container
+   ============================================================ */
+
 .toast-container {
-  position: fixed;
-  top: 16px;
-  right: 16px;
-  z-index: 9999;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  position: fixed;
+  right: 16px;
+  top: 16px;
+  z-index: 9999;
 }
 
+/* ============================================================
+   Individual toast
+   ============================================================ */
+
 .toast {
-  min-width: 220px;
-  max-width: 420px;
-  padding: 12px 14px;
+  align-items: center;
   border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
   color: var(--color-primary-1);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  display: flex;
+  gap: 0.5rem;
+  max-width: 420px;
+  min-width: 220px;
   opacity: 0.98;
-  transition: transform .18s ease, opacity .18s ease;
+  padding: 12px 14px;
+  transition: transform 0.18s ease, opacity 0.18s ease;
 
-  &[data-type='success'] { background: var(--color-success-3); }
-  &[data-type='error']   { background: var(--color-error-3); }
-  &[data-type='info']    { background: var(--color-info-3); }
-  &[data-type='warning'] { background: var(--color-warning-3); }
+  &[data-type='error'] {
+    background: var(--color-error-3);
+  }
 
-  .toast-body { display:flex; justify-content: space-between; align-items:center; }
-  .toast-message { padding-right: 8px; word-break: break-word; }
+  &[data-type='info'] {
+    background: var(--color-info-3);
+  }
+
+  &[data-type='success'] {
+    background: var(--color-success-3);
+  }
+
+  &[data-type='warning'] {
+    background: var(--color-warning-3);
+  }
+
+  .toast-body {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .toast-message {
+    padding-right: 8px;
+    word-break: break-word;
+  }
+
   .toast-close {
-    background: transparent; border: none; color: inherit; font-size: 18px;
+    background: transparent;
+    border: none;
+    color: inherit;
     cursor: pointer;
+    font-size: 18px;
   }
 }

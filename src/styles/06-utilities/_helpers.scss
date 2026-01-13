@@ -1,11 +1,25 @@
 @use "../00-settings/css-variables" as *;
 @use "../01-tools/mixins" as *;
 
+/* ============================================================
+   Variables globales
+   ============================================================ */
+
 :root {
   --scroll-offset: calc(var(--spacing-2) * 2 + 3rem);
 }
 
-h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], [id].anchor {
+/* ============================================================
+   Scroll para anclas internas
+   ============================================================ */
+
+h1[id],
+h2[id],
+h3[id],
+h4[id],
+h5[id],
+h6[id],
+[id].anchor {
   scroll-margin-top: var(--scroll-offset);
 }
 
@@ -13,34 +27,44 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], [id].anchor {
   scroll-margin-top: var(--scroll-offset);
 }
 
-/* Utilidades de sombra globales */
+/* ============================================================
+   Sombras utilitarias
+   ============================================================ */
+
 .shadow-sm {
-  box-shadow: var(--shadow-sm) !important;
+  box-shadow: var(--shadow-sm);
 }
 
 .shadow-md {
-  box-shadow: var(--shadow-md) !important;
+  box-shadow: var(--shadow-md);
 }
 
 .shadow-lg {
-  box-shadow: var(--shadow-lg) !important;
+  box-shadow: var(--shadow-lg);
 }
 
 .shadow-xl {
-  box-shadow: var(--shadow-xl) !important;
+  box-shadow: var(--shadow-xl);
 }
 
-/* Elevar ligeramente el elemento al pasar el ratón (útil en tarjetas y botones) */
+/* ============================================================
+   Elevar elementos al hover
+   ============================================================ */
+
 .elevate-on-hover {
   transition: box-shadow var(--transition-base), transform var(--transition-base);
-  will-change: transform, box-shadow;
+  will-change: box-shadow, transform;
+
   &:hover {
-    transform: translateY(-0.25rem);
     box-shadow: var(--shadow-xl);
+    transform: translateY(-0.25rem);
   }
 }
 
-/* Permitir desactivar sombras en contextos específicos */
+/* ============================================================
+   Desactivar sombras
+   ============================================================ */
+
 .no-shadow {
-  box-shadow: none !important;
+  box-shadow: none;
 }

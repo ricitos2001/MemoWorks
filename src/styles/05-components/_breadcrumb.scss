@@ -2,10 +2,11 @@
 @use "../01-tools/mixins" as *;
 
 .breadcrumb {
+  background: transparent;
   margin: 0 0 var(--spacing-4);
   padding: 0;
-  background: transparent;
 }
+
 .breadcrumb-item + .breadcrumb-item::before {
   content: '>';
 }

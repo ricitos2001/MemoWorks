@@ -1,57 +1,96 @@
 @use '../00-settings/css-variables' as *;
 @use '../01-tools/mixins' as *;
 
-.landing__section{
+/* ============================================================
+   Sección principal de landing
+   ============================================================ */
+.landing__section {
   align-items: center;
   justify-content: center;
   padding: var(--spacing-8);
+
+  > * {
+    margin: 0.5rem 0;
+  }
+
+  h1, h2, h3 {
+    font-weight: var(--font-weight-bold);
+  }
 }
 
+/* ============================================================
+   Espaciadores de landing
+   ============================================================ */
 .landing__space {
   padding: var(--spacing-8);
 }
 
+/* ============================================================
+   Iconos decorativos en landing
+   ============================================================ */
 .landing__icon {
-  max-width: 35%;
-  padding: var(--spacing-4);
   background: var(--components);
   border-radius: var(--radius-xl);
   box-shadow: 0 8px 24px rgba(41, 25, 45, 0.12);
+  max-width: 35%;
   overflow: hidden;
+  padding: var(--spacing-4);
+
+  &.decor-animate {
+    animation: decor-float 6s ease-in-out infinite;
+  }
+
+  &.decor-animate--pulse {
+    animation: decor-pulse 4.5s ease-in-out infinite;
+  }
+
+  img {
+    display: block;
+    height: auto;
+    max-height: 12rem;
+    max-width: 100%;
+  }
 }
 
-.landing__icon.decor-animate {
-  animation: decor-float 6s ease-in-out infinite;
-}
-
-.landing__icon.decor-animate--pulse {
-  animation: decor-pulse 4.5s ease-in-out infinite;
-}
-
-.landing__section img,
-.landing__icon img {
-  max-width: 100%;
-  height: auto;
+/* ============================================================
+   Imágenes en sección
+   ============================================================ */
+.landing__section img {
   display: block;
+  height: auto;
   max-height: 12rem;
+  max-width: 100%;
 }
 
-.landing__section h1, .landing__section h2, .landing__section h3 {
-  font-weight: var(--font-weight-bold);
-}
-
-.landing__section > * {
-  margin: 0.5rem 0;
-}
-
+/* ============================================================
+   Responsive: móviles (≤720px)
+   ============================================================ */
 @media (max-width: 720px) {
+
   .landing__section {
-    padding: var(--spacing-4);
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    padding: var(--spacing-4);
     gap: var(--spacing-4);
+
+    .landing__article {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+    }
   }
 
   .landing__space {
@@ -59,36 +98,17 @@
   }
 
   .landing__icon {
-    max-width: 80%;
-    padding: var(--spacing-3);
-    border-radius: calc(var(--radius-lg) / 1);
+    border-radius: var(--radius-lg);
     box-shadow: 0 6px 18px rgba(41, 25, 45, 0.08);
+    max-width: 80%;
     margin: 0 auto;
+    padding: var(--spacing-3);
   }
 
   .landing__section img,
   .landing__icon img {
-    max-width: 90%;
     max-height: 10rem;
+    max-width: 90%;
     margin: 0 auto;
   }
-
-  .landing__section h1 {
-    font-size: 1.6rem;
-    line-height: 1.2;
-  }
-
-  .landing__section h2 {
-    font-size: 1.25rem;
-  }
-
-  .landing__section .landing__article{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-
 }
-
