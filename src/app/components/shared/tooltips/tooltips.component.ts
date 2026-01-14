@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import {NgIf} from '@angular/common';
 
 let tooltipIdCounter = 0;
@@ -23,6 +23,14 @@ export class TooltipsComponent {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       this.toggle();
+    }
+  }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscape(event: Event) {
+    const keyboardEvent = event as KeyboardEvent;
+    if (this.showTooltip && keyboardEvent.key === 'Escape') {
+      this.hide();
     }
   }
 }

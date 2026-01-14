@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import {NgFor} from '@angular/common';
 
 @Component({
@@ -8,7 +8,7 @@ import {NgFor} from '@angular/common';
   templateUrl: './tabs.component.html',
   styleUrl: '../../../../styles/styles.css',
 })
-export class TabsComponent {
+export class TabsComponent implements AfterViewInit {
   @Input() tabs: Array<{ key: string; label: string }> = [];
   @Input() active: string = '';
   @Output() activeChange = new EventEmitter<string>();
@@ -16,6 +16,13 @@ export class TabsComponent {
   selectTab(tab: string) {
     this.active = tab;
     this.activeChange.emit(tab);
+  }
+
+  ngAfterViewInit(): void {
+    // Si no hay active explícito, seleccionar la primera pestaña
+    if (!this.active && this.tabs?.length) {
+      this.selectTab(this.tabs[0].key);
+    }
   }
 
   onKeydown(event: KeyboardEvent, index: number) {
@@ -38,4 +45,8 @@ export class TabsComponent {
     if (buttons && buttons[newIndex]) { (buttons[newIndex] as HTMLElement).focus(); }
     this.selectTab(this.tabs[newIndex].key);
   }
+
+  // Helper para templates: generar id de tab y panel
+  tabId(key: string) { return `tab-${key}`; }
+  panelId(key: string) { return `panel-${key}`; }
 }

@@ -20,6 +20,10 @@ export class HamburgerMenuComponent implements OnInit, OnDestroy {
   showNotifications = false;
   hasNew = false; // puede vincularse a un servicio de notificaciones real
 
+  // IDs accesibles para aria-controls
+  menuId = `menu-${Math.random().toString(36).slice(2, 9)}`;
+  notificationsId = `notifications-${Math.random().toString(36).slice(2, 9)}`;
+
   @ViewChild('toggleButton', { static: false }) toggleButton?: ElementRef<HTMLButtonElement>;
   @ViewChild('notificationsSidebar', { static: false }) notificationsSidebar?: ElementRef<HTMLElement>;
 
@@ -58,8 +62,8 @@ export class HamburgerMenuComponent implements OnInit, OnDestroy {
     if (this.showNotifications) {
       // abrir: enfocar el panel
       setTimeout(() => {
-        const sidebar = this.el.nativeElement.querySelector('.notifications-sidebar');
-        if (sidebar) { (sidebar as HTMLElement).focus(); }
+        const sidebarEl = this.notificationsSidebar?.nativeElement;
+        if (sidebarEl) { sidebarEl.focus(); }
       }, 0);
     } else {
       // al cerrar, devolver foco al botón de la campana
@@ -88,7 +92,7 @@ export class HamburgerMenuComponent implements OnInit, OnDestroy {
       }
       // Si la barra lateral está abierta y el click no está dentro de ella, cerrarla
       if (this.showNotifications) {
-        const sidebar = document.querySelector('.notifications-sidebar');
+        const sidebar = this.notificationsSidebar?.nativeElement;
         if (sidebar && !sidebar.contains(event.target as Node)) {
           this.showNotifications = false;
         }

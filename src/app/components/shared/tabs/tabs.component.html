@@ -1,6 +1,8 @@
 <article class="tabs" role="tablist">
   <button *ngFor="let t of tabs; let i = index"
     role="tab"
+    [attr.id]="tabId(t.key)"
+    [attr.aria-controls]="panelId(t.key)"
     [attr.aria-selected]="active === t.key"
     [attr.tabindex]="active === t.key ? 0 : -1"
     [class.active]="active === t.key"

@@ -157,6 +157,7 @@
   --calendar-letters: var(--color-secondary-3);
   --notfound-text: var(--color-error-3);
   --label-letters: var(--color-secondary-3);
+  --dark-mode-button: var(--color-secondary-4);
 }
 
 .theme-dark {
@@ -173,6 +174,7 @@
   --calendar-letters: var(--color-primary-1);
   --notfound-text: var(--neutral-700);
   --label-letters: var(--neutral-700);
+  --dark-mode-button: var(--neutral-600);
 }
 
 html {
@@ -853,7 +855,7 @@ app-form-input.compact textarea {
 
 .theme-btn {
   align-items: center;
-  background: var(--components);
+  background: var(--dark-mode-button);
   border: none;
   border-radius: 0.6rem;
   cursor: pointer;
@@ -1131,6 +1133,11 @@ app-form-input.compact textarea {
     transform: translateY(-6px) scale(1.01);
   }
 }
+/* Clase aplicada al <body> para bloquear scroll cuando un modal está abierto */
+body.modal-open {
+  overflow: hidden;
+}
+
 /* ============================================================
    Notifications Tray
    ============================================================ */

@@ -9,6 +9,7 @@
     tabindex="0"
     (keydown)="onKey($event)"
     [attr.aria-describedby]="showTooltip ? tooltipId : null"
+    [attr.aria-expanded]="showTooltip"
   >
     Hover aquí
   </button>

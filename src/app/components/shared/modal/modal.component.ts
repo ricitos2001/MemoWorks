@@ -64,12 +64,18 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
   private onOpen() {
     // Guardar foco previo
     this.previouslyFocused = document.activeElement as HTMLElement;
-    // Bloquear scroll del body
+    // Bloquear scroll del body usando clase CSS para evitar problemas de repaint
     try {
-      this.renderer.setStyle(document.body, 'overflow', 'hidden');
+      this.renderer.addClass(document.body, 'modal-open');
     } catch (e) {
       // En entornos donde document no existe, ignorar
     }
+
+    // Intentar marcar el main/app content como aria-hidden para lectores
+    try {
+      const main = document.querySelector('main') as HTMLElement | null;
+      if (main) { this.renderer.setAttribute(main, 'aria-hidden', 'true'); }
+    } catch (e) {}
 
     // Esperar a que container exista y enfocar el primer elemento focusable
     setTimeout(() => {
@@ -103,10 +109,16 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
   private onClose() {
     // Restaurar scroll
     try {
-      this.renderer.removeStyle(document.body, 'overflow');
+      this.renderer.removeClass(document.body, 'modal-open');
     } catch (e) {
       // ignore
     }
+    // Restaurar aria-hidden en main
+    try {
+      const main = document.querySelector('main') as HTMLElement | null;
+      if (main) { this.renderer.removeAttribute(main, 'aria-hidden'); }
+    } catch (e) {}
+
     // Restaurar focus
     try {
       this.previouslyFocused?.focus();
@@ -125,7 +137,11 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
       this.unlistenKeydown();
       this.unlistenKeydown = null;
     }
-    try { this.renderer.removeStyle(document.body, 'overflow'); } catch (e) {}
+    try { this.renderer.removeClass(document.body, 'modal-open'); } catch (e) {}
+    try {
+      const main = document.querySelector('main') as HTMLElement | null;
+      if (main) { this.renderer.removeAttribute(main, 'aria-hidden'); }
+    } catch (e) {}
   }
 
 }

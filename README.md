@@ -59,25 +59,25 @@ URL del backend: https://backend-memoworks.onrender.com
 
 ## Arquitectura de eventos (DOM y Angular)
 
-Arquitectura y decisiones de diseño (resumen extendido)
+Arquitectura y decisiones de diseño (documentación exhaustiva)
 
-En MemoWorks se ha seguido una política clara y documentada para el manejo de eventos en la capa de presentación. El objetivo es garantizar accesibilidad (A11Y), separación de responsabilidades, pruebas fáciles y compatibilidad con renderizado en servidor (SSR) cuando proceda.
+En MemoWorks hemos seguido un enfoque consistente y documentado para el manejo de eventos en la capa de presentación con el objetivo de maximizar la accesibilidad (A11Y), la mantenibilidad y la compatibilidad con distintos entornos (incluido SSR). Las plantillas Angular usan bindings declarativos siempre que es posible: `(click)`, `(submit)`, `(input)`, `(keydown)`, `(focusin)` y `(focusout)` enlazan a métodos de componente que realizan la lógica de negocio o delegan en servicios. Este patrón mantiene la UI libre de lógica compleja y facilita las pruebas unitarias.
 
-Detalles (500+ palabras):
+Para eventos globales o que afectan al documento entero (por ejemplo detectar la tecla Escape o clicks fuera de un componente) empleamos `@HostListener('document:...')` o, cuando se requiere mayor control de ciclo de vida, `Renderer2.listen(...)`. Las escuchas creadas por `Renderer2.listen` se almacenan y se limpian en `ngOnDestroy()` ejecutando las funciones de cancelación devueltas por el `listen`. Esto evita fugas de memoria y comportamientos no deseados tras desmontar componentes dinámicos.
 
-La capa de interfaz usa bindings declarativos en las plantillas Angular siempre que sea posible: `(click)`, `(submit)`, `(input)`, `(keydown)`, `(focusin)` y `(focusout)` para capturar interacciones del usuario. Estos handlers llaman a métodos del componente que realizan validaciones, emiten eventos a servicios o actualizan el estado local. Evitamos el uso de manejadores inline de bajo nivel (`onclick` en HTML) o manipulación directa del DOM sin control.
+Manipulación del DOM: cuando es necesario crear, eliminar o modificar nodos dinámicamente utilizamos `Renderer2` (`createElement`, `appendChild`, `setAttribute`, `addClass`, `removeClass`, `listen`) en lugar de `document.createElement` o `nativeElement` directo. Esto preserva compatibilidad con Universal (SSR) y reduce riesgo XSS. Los accesos a `nativeElement` se limitan y se realizan dentro de `ngAfterViewInit()` cuando el elemento ya existe en el DOM. Además, `ngOnDestroy()` restaura cualquier cambio global (por ejemplo quitar la clase `modal-open` del body y eliminar atributos `aria-hidden`).
 
-Para eventos globales (por ejemplo detectar Escape para cerrar modales o menús) se emplea `@HostListener('document:keydown.escape')` o `@HostListener('document:click')` en componentes que necesitan ese comportamiento. El uso de `@HostListener` centraliza la lógica de escucha sin crear listeners manuales dispersos. Donde se crean listeners directamente (por ejemplo `renderer.listen(...)` para traps de foco) se guarda el callback de limpieza y se ejecuta en `ngOnDestroy()` para evitar fugas de memoria.
+Gestión de foco y accesibilidad: los componentes modales guardan el foco previo, lo trasladan al primer elemento focusable al abrir y lo restauran al cerrar. Implementamos un trap de Tab para mantener la navegación limitada dentro del modal y evitamos que el usuario tabule elementos del background. El menú hamburguesa y la bandeja de notificaciones actualizan `aria-expanded` y usan `aria-controls` para enlazar el trigger con el panel controlado. Las pestañas (`app-tabs`) implementan `role="tablist"`, `role="tab"`, `aria-selected`, `aria-controls` y navegación por teclado con flechas, Home y End; además solo la pestaña activa tiene `tabindex=0` (las demás `-1`). Los tooltips exponen `role="tooltip"`, `aria-describedby` y soportan activación por teclado y cierre con Escape.
 
-Accesibilidad y teclado: los componentes interactivos implementan soporte completo por teclado: los modales capturan `Escape` para cerrar, el menú hamburguesa también cierra con `Escape` y con click fuera; las pestañas (`app-tabs`) soportan `ArrowLeft`, `ArrowRight`, `Home` y `End` para navegar entre tabs, y la gestión de `tabindex` asegura que sólo la pestaña activa sea alcanzable por tabulador (tabindex=0) mientras que las demás tienen tabindex=-1. Los tooltips soportan `focusin`/`focusout` y activación por teclado (`Enter` / `Space`) y exponen `aria-describedby` con un id único por instancia.
+Control de eventos (preventDefault y stopPropagation): en acciones de teclado que pudieran interferir con el comportamiento nativo (por ejemplo flechas en tabs) usamos `event.preventDefault()` para evitar scroll o comportamiento por defecto; `stopPropagation()` se aplica únicamente en casos controlados cuando es necesario impedir que un evento burbujee hasta un listener global (por ejemplo evitar que un click dentro de un menú cierre un listener `document:click`). Todas estas decisiones están documentadas in situ con comentarios breves justificando la razón.
 
-Manipulación del DOM: cuando es necesario crear o modificar nodos dinámicamente (botones en dashboard, overlays), se usa `Renderer2` para `createElement`, `setAttribute`, `appendChild`, `removeChild`, `setStyle`, `removeStyle` y `listen`. Esto evita operaciones directas sobre `nativeElement` que pueden romper la compatibilidad con entornos SSR o producir vulnerabilidades XSS. Además, los accesos a `nativeElement` están protegidos con comprobaciones de existencia y se realiza la manipulación dentro de `ngAfterViewInit` cuando es necesario.
+Comunicación entre componentes: usamos servicios singleton (por ejemplo `AuthModalService`, `ThemeService`) con Subjects/Signals/BehaviorSubjects para comunicar acciones entre componentes no relacionados jerárquicamente. Esto desacopla la UI de detalles de implementación del DOM y facilita testing.
 
-Control de eventos y flujo: el flujo típico es: usuario → template (binding) → handler del componente → servicio/store (BehaviorSubject / Signal) → otros componentes suscritos actualizan su vista. En casos de comunicación entre componentes no relacionados jerárquicamente se usan servicios singleton (`AuthModalService`, `ThemeService`) que exponen APIs para abrir/cerrar componentes UI sin que el emisor conozca la estructura del DOM.
-
-preventDefault / stopPropagation: en handlers de teclado y algunos clicks (por ejemplo navegación por flechas en tabs) se usa `event.preventDefault()` para evitar el comportamiento nativo que interfiere con la accesibilidad, y `event.stopPropagation()` sólo en casos controlados donde es necesario evitar burbujeo hacia listeners globales (por ejemplo, si un click interno no debe disparar el `document:click` de cierre de menú). El uso de estas APIs está comentado y justificado en los puntos donde aparece.
-
-Gestión de foco: los modales guardan el foco previo al abrir y lo restauran al cerrar; además bloquean el scroll del body mientras el modal está abierto (`overflow: hidden`) y aplican un trap de Tab para mantener el foco dentro del diálogo. El menú hamburguesa devuelve el foco al botón toggler al cerrarse. Los tabs enfocan la pestaña activada y mantienen un manejo predecible del foco para lectores de pantalla.
+Buenas prácticas aplicadas:
+- Evitar listeners dispersos y usar `@HostListener` o `Renderer2.listen` con limpieza en `ngOnDestroy()`.
+- Evitar `document.createElement` y manipulaciones directas del DOM desde templates; usar `Renderer2` o `ViewChild`.
+- Gestionar foco y atributos ARIA (aria-hidden, aria-expanded, aria-controls, role) en componentes interactivos.
+- Documentar en README los eventos globales usados y su propósito.
 
 Diagrama de flujo de eventos (Mermaid)
 
@@ -92,6 +92,8 @@ flowchart LR
   User --> Template --> Component --> Service --> Other
   Component -->|@HostListener| Document[(document/window)]
   Document --> Component
+  Component -->|Renderer2.listen| Document
+  Service -->|BehaviorSubject| Other
 ```
 
 Tabla de compatibilidad (resumen por evento / API)
@@ -100,24 +102,20 @@ Tabla de compatibilidad (resumen por evento / API)
 |---|---:|---:|---:|---:|---|
 | click | ✅ | ✅ | ✅ | ✅ | Nativo, no requiere polyfill |
 | keydown (Escape/Arrows/Enter/Space) | ✅ | ✅ | ✅ | ✅ | Usado para accesibilidad; usar preventDefault cuando corresponda |
-| mouseenter / mouseleave | ✅ | ✅ | ✅ | ✅ | nativo; no burbujea como mouseover/mouseout |
 | focusin / focusout | ✅ | ✅ | ✅ | ✅ | Recomendado frente a focus/blur por propagación |
 | matchMedia('(prefers-color-scheme)') | ✅ (76+) | ✅ (67+) | ✅ (12.1+) | ✅ (79+) | Escuchar cambios con addEventListener('change') o addListener para compatibilidad incremental |
 | document / window listeners (HostListener) | ✅ | ✅ | ✅ | ✅ | Requiere comprobaciones SSR (typeof window !== 'undefined') si se usa en Universal |
 
-Cómo probar (pasos rápidos)
+Cómo probar (resumen rápido)
 
-1. Modal: abrir modal → Tab debe enfocar el primer control dentro del modal; Escape cierra; al cerrar el foco vuelve al disparador; el body no debe scrollear cuando modal abierto.
-2. Menú hamburguesa: abrir menú → Escape cierra; click fuera cierra; atributo `aria-expanded` del botón actualiza correctamente.
-3. Tabs: navegar con ArrowLeft/ArrowRight/Home/End y verificar que `aria-selected` y `tabindex` reflejan el estado.
-4. Tooltip: foco en trigger + Enter/Space muestra tooltip; `aria-describedby` apunta correctamente al elemento tooltip.
+- Modal: abrir modal → tab debe enfocar el primer control dentro del modal; Escape cierra; al cerrar el foco vuelve al disparador; el body no debe scrollear cuando modal abierto (clase `modal-open`).
+- Menú hamburguesa: abrir menú → Escape cierra; click fuera cierra; atributo `aria-expanded` del botón actualiza correctamente; `aria-controls` enlaza con el panel.
+- Tabs: navegar con ArrowLeft/ArrowRight/Home/End y verificar que `aria-selected` y `tabindex` reflejan el estado; panels deben tener `role="tabpanel"` y `aria-labelledby` apuntando a la pestaña.
+- Tooltip: foco en trigger + Enter/Space muestra tooltip; `aria-describedby` apunta correctamente al elemento tooltip; Escape lo cierra.
 
-Comandos útiles
+Comandos útiles (desarrollo)
 
-- Tests unitarios (Karma/Jasmine): `npm test`
-- Linter/compilación (Angular CLI): `npm run build` o `ng build`
-
-
----
-
-A partir de la sección anterior, el repositorio implementa las prácticas descritas: `@HostListener` para eventos globales, `Renderer2` para manipulación segura del DOM, manejo explícito de foco y atributos ARIA en los componentes interactivos (modal, hamburger, tabs, tooltips). Si necesitas que añada diagramas adicionales o casos de test automáticos (Karma/Cypress) puedo crearlos en la próxima iteración.
+- Instalar dependencias: `npm ci --legacy-peer-deps`
+- Servir en desarrollo: `npm start`
+- Build producción: `npm run build`
+- Ejecutar tests unitarios (Karma/Jasmine): `npm test`

@@ -166,3 +166,8 @@
     transform: translateY(-6px) scale(1.01);
   }
 }
+
+/* Clase aplicada al <body> para bloquear scroll cuando un modal está abierto */
+body.modal-open {
+  overflow: hidden;
+}
