@@ -1,67 +1,84 @@
-import {Component, DestroyRef, inject, OnInit, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
-import {DatePipe, NgForOf, NgIf} from '@angular/common';
-import {ViewTaskButtonComponent} from '../view-task-button/view-task-button.component';
+import {
+  Component, DestroyRef, EventEmitter, inject, OnInit, Output, ChangeDetectionStrategy, computed} from '@angular/core';
+import { NgForOf, NgIf, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
-import {CommunicationService} from '../../../services/shared/communication.service';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {ButtonComponent} from '../button/button.component';
-import {TasksSignalStore} from '../../../stores/tasks.signal.store';
-import {computed} from '@angular/core';
-import {SharedBarComponent} from '../shared-bar/shared-bar.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+import { TasksSignalStore } from '../../../stores/tasks.signal.store';
+import { CommunicationService } from '../../../services/shared/communication.service';
+
+import { ViewTaskButtonComponent } from '../view-task-button/view-task-button.component';
+import { ButtonComponent } from '../button/button.component';
+import { SharedBarComponent } from '../shared-bar/shared-bar.component';
 
 @Component({
   selector: 'app-tasks',
+  standalone: true,
   imports: [
     NgForOf,
+    NgIf,
     DatePipe,
     ViewTaskButtonComponent,
     ButtonComponent,
-    NgIf,
-    SharedBarComponent,
+    SharedBarComponent
   ],
   templateUrl: './tasks.component.html',
-  styleUrl:'../../../../styles/styles.css',
-  standalone: true,
+  styleUrl: '../../../../styles/styles.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TasksComponent implements OnInit {
+
   @Output() createFromEmpty = new EventEmitter<void>();
-  private tasksSignalStore = inject(TasksSignalStore);
+
+  private store = inject(TasksSignalStore);
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
   private comm = inject(CommunicationService);
-  email = localStorage.getItem('email');
 
-  tasks = computed(() => this.tasksSignalStore.state().data);
-  loading = computed(() => this.tasksSignalStore.state().loading);
-  error = computed(() => this.tasksSignalStore.error());
-  total = computed(() => this.tasksSignalStore.state().total);
-  page = this.tasksSignalStore.page;
-  pageSize = this.tasksSignalStore.pageSize;
+  tasks = computed(() => this.store.state().data);
+  loading = computed(() => this.store.state().loading);
+  error = computed(() => this.store.error());
+  total = computed(() => this.store.state().total);
+
+  hasTasks = computed(() =>
+    this.store.state().allData.length > 0
+  );
+
+  hasResults = computed(() =>
+    this.store.state().data.length > 0
+  );
+
+  page = this.store.page;
+  pageSize = this.store.pageSize;
+
+  email = localStorage.getItem('email');
 
   ngOnInit(): void {
     if (this.email) {
-      this.tasksSignalStore.load(this.page());
+      this.store.load(this.page());
     }
+
     this.comm.notifications$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(n => {
         if (n?.payload?.refreshTasks) {
-          this.tasksSignalStore.load(this.page());
+          this.store.load(this.page());
         }
       });
   }
 
   onSearch(term: string) {
-    this.tasksSignalStore.search(term);
-  }
-
-  trackById(index: number, task: any) {
-    return task.id;
+    this.store.search(term);
   }
 
   viewDetails(taskId: string) {
-    this.router.navigate(['/task', taskId], { state: { fromCalendar: false } });
+    this.router.navigate(['/task', taskId], {
+      state: { fromCalendar: false }
+    });
+  }
+
+  trackById(_: number, task: any) {
+    return task.id;
   }
 
   formatTime(timeStr: string): Date | null {
@@ -74,13 +91,13 @@ export class TasksComponent implements OnInit {
 
   nextPage() {
     if (this.page() < this.total()) {
-      this.tasksSignalStore.load(this.page() + 1);
+      this.store.load(this.page() + 1);
     }
   }
 
   prevPage() {
     if (this.page() > 0) {
-      this.tasksSignalStore.load(this.page() - 1);
+      this.store.load(this.page() - 1);
     }
   }
 }

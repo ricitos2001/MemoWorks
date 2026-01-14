@@ -1,9 +1,16 @@
 <article *ngIf="loading()">Cargando...</article>
 <article *ngIf="error()">{{ error() }}</article>
-<ng-container *ngIf="tasks() && tasks().length > 0; else emptyState">
-  <app-shared-bar (search)="onSearch($event)" class="grid-center task__searcher"><h3>Que quieres buscar</h3></app-shared-bar>
-  <article *ngIf="loading()">Buscando...</article>
-  <ul class="tasks-grid">
+<ng-container *ngIf="hasTasks(); else emptyState">
+  <app-shared-bar
+    (search)="onSearch($event)"
+    class="grid-center task__searcher">
+    <h3>Qué quieres buscar</h3>
+  </app-shared-bar>
+  <article *ngIf="!hasResults() && !loading()" class="card card--empty grid-center">
+    <h3>Sin resultados</h3>
+    <p>No se encontraron tareas que coincidan con tu búsqueda.</p>
+  </article>
+  <ul *ngIf="hasResults()" class="tasks-grid">
     <li *ngFor="let task of tasks(); trackBy: trackById" class="task__li task">
       <section class="task__image-box">
         <article class="card__labels">
@@ -32,14 +39,15 @@
   </ul>
 </ng-container>
 
-<article class="pagination" *ngIf="total() > pageSize">
-  <button (click)="prevPage()" [disabled]="page() <= 0">Anterior</button>
-  <button (click)="nextPage()" [disabled]="page() >= total()">Siguiente</button>
-</article>
 <ng-template #emptyState>
   <article class="card card--empty grid-center">
     <h3>Empecemos a organizarnos</h3>
-    <p>Aún no tienes tareas. Crea la primera para empezar a organizar tu día.</p>
+    <p>Aún no tienes tareas. Crea la primera para empezar.</p>
     <app-button class="btn btn--primary" (click)="createFromEmpty.emit()">Crear primera tarea</app-button>
   </article>
 </ng-template>
+
+<article class="pagination" *ngIf="total() > pageSize && hasResults()">
+  <button (click)="prevPage()" [disabled]="page() <= 0">Anterior</button>
+  <button (click)="nextPage()" [disabled]="page() >= total()">Siguiente</button>
+</article>
