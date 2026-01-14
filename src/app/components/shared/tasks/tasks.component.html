@@ -12,7 +12,7 @@
   </article>
   <ul *ngIf="hasResults()" class="tasks-grid">
     <li *ngFor="let task of tasks(); trackBy: trackById" class="task__li task">
-      <section class="task__image-box">
+      <section lass="task__image-box">
         <article class="card__labels">
           <span *ngFor="let lbl of task.labels" class="card__label">{{ lbl }}</span>
         </article>
