@@ -1,4 +1,4 @@
-<section class="flex-center">
+<section class="settings__section-group">
   <ng-container *ngIf="(groups$ | async)?.length === 0">
     <article class="grid-center">
       <p class="settings__texto">Aun no estas dentro de un grupo familiar</p>
@@ -8,13 +8,13 @@
   </ng-container>
   <ng-container *ngIf="groups$ | async as groups; else null">
     <section class="settings__familiar-group" *ngFor="let group of groups; trackBy: trackById">
-      <article class="flex-center">
+      <article class="settings__familiar-group-info">
         <section>
           <p class="settings__nombre-grupo"><span class="settings__apartado">Nombre: </span>{{ group.name }}</p>
           <p class="settings__texto"><span class="settings__apartado">Descripcion: </span>{{ group.description }}</p>
           <section>
             <p class="settings__apartado">miembros principales:</p>
-            <article class="settings__item">
+            <article class="settings__users-container">
               <article class="settings__users" *ngFor="let user of group.users; trackBy: trackById">
                 <img [src]="'assets/img/logo.svg'" [alt]="user.name" class="settings__imgUser">
               </article>
@@ -24,7 +24,7 @@
         </section>
         <img src="assets/img/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector-removebg-preview.png" alt="user" class="settings__img-profile">
       </article>
-      <article class="flex">
+      <article class="settings__group-buttons">
         <app-button (click)="leaveGroup(group)">Abandonar grupo</app-button>
         <app-button (click)="deleteGroup(group)" *ngIf="group.adminUser.email === this.email">Eliminar grupo</app-button>
         <app-button (click)="editGroup(group.id)" *ngIf="group.adminUser.email === this.email">Editar grupo</app-button>
