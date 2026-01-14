@@ -133,6 +133,10 @@
   gap: var(--spacing-4);
 }
 
+.settings__members-button {
+  background: var(--value-letters);
+}
+
 /* ============================================================
    Responsive: max-width 720px
    ============================================================ */
