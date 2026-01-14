@@ -1,0 +1,7 @@
+@use "../00-settings/css-variables" as *;
+@use "../01-tools/mixins" as *;
+
+.shared-bar {
+  background: var(--searcher);
+  color: var(--letters);
+}

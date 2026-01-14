@@ -125,7 +125,7 @@
 .task-details__text {
   color: var(--letters);
   font-size: 1rem;
-  line-height: 1.4;
+  margin: 0;
 }
 
 .task-card {
@@ -216,7 +216,13 @@
   padding-top: var(--spacing-10);
 }
 
-/* Media Queries */
+.task-details__title {
+  color: var(--letters);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  margin: 0 0 var(--spacing-4);
+}
+
 @media (max-width: 720px) {
   .task-details {
     align-items: flex-start;

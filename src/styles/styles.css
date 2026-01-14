@@ -158,6 +158,7 @@
   --notfound-text: var(--color-error-3);
   --label-letters: var(--color-secondary-3);
   --dark-mode-button: var(--color-secondary-4);
+  --searcher: var(--color-secondary-3);
 }
 
 .theme-dark {
@@ -175,6 +176,7 @@
   --notfound-text: var(--neutral-700);
   --label-letters: var(--neutral-700);
   --dark-mode-button: var(--neutral-600);
+  --searcher: var(--color-primary-1);
 }
 
 html {
@@ -1354,6 +1356,17 @@ button.active {
     transform: scale(1) translateY(0);
   }
 }
+.shared-bar {
+  background: var(--searcher);
+  color: var(--letters);
+}
+
+.back-button {
+  color: var(--calendar-letters);
+  font-size: 1rem;
+  margin: 0;
+}
+
 /* ============================================================
    Variables globales
    ============================================================ */
@@ -1933,7 +1946,7 @@ h6[id],
 .task-details__text {
   color: var(--letters);
   font-size: 1rem;
-  line-height: 1.4;
+  margin: 0;
 }
 
 .task-card {
@@ -2024,7 +2037,13 @@ h6[id],
   padding-top: var(--spacing-10);
 }
 
-/* Media Queries */
+.task-details__title {
+  color: var(--letters);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  margin: 0 0 var(--spacing-4);
+}
+
 @media (max-width: 720px) {
   .task-details {
     align-items: flex-start;

@@ -32,6 +32,8 @@
 @use '05-components/toast' as *;
 @use '05-components/tooltip' as *;
 @use '05-components/notifications' as *;
+@use '05-components/shared-bar' as *;
+@use '05-components/back-button' as *;
 
 // 7. Utilities
 @use '06-utilities/helpers' as *;

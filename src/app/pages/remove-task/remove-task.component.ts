@@ -65,8 +65,6 @@ export class RemoveTaskComponent implements OnInit {
           type: 'success',
           message: 'Tarea eliminada correctamente',
         });
-
-        // Enviar notificación a la API
         const apiNotification: Notification = {
           title: 'Tarea eliminada',
           message: `La tarea con id ${taskId} ha sido eliminada.`,

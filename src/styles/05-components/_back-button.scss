@@ -1,0 +1,8 @@
+@use "../00-settings/css-variables" as *;
+@use "../01-tools/mixins" as *;
+
+.back-button {
+  color: var(--calendar-letters);
+  font-size: 1rem;
+  margin: 0;
+}

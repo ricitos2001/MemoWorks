@@ -117,22 +117,7 @@ export class EditTaskComponent implements OnInit {
     }
     this.taskService.editTask(id, payload).subscribe({
       next: (updatedTask) => {
-        const taskToUpdate: any = (updatedTask && (updatedTask as any).id) ? updatedTask : payload;
-        if (taskToUpdate.id) {
-          taskToUpdate.id = Number(taskToUpdate.id);
-        }
-        if (taskToUpdate.assigmentFor && typeof taskToUpdate.assigmentFor === 'object') {
-          taskToUpdate.assigmentFor.id = Number(taskToUpdate.assigmentFor.id);
-        }
-        const currentUserId = localStorage.getItem('userId');
-        const assigneeId = taskToUpdate?.assigmentFor?.id != null ? String(taskToUpdate.assigmentFor.id) : null;
-        if (assigneeId && currentUserId && assigneeId === currentUserId) {
-          this.tasksSignalStore.add(taskToUpdate);
-        } else {
-          if (taskToUpdate.id) {
-            this.tasksSignalStore.remove(String(taskToUpdate.id));
-          }
-        }
+        this.tasksSignalStore.update(updatedTask);
         this.comm.sendNotification({
           source: 'taskForm',
           type: 'success',

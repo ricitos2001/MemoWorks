@@ -11,13 +11,13 @@
     <section class="flex">
       <article class="flex">
         <img src="assets/img/Calendar.svg" alt="icon">
-        <p class="task-details__text">
+        <p class="flex-center task-details__text">
           {{ task.date | date:'dd/MM/yyyy' }}
         </p>
       </article>
       <article class="flex">
         <img src="assets/img/Clock.svg" alt="icon">
-        <p class="task-details__text">
+        <p class="flex-center task-details__text">
           {{ formatTime(task.time) | date:'HH:mm' }}
         </p>
       </article>
