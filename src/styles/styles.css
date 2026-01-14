@@ -442,7 +442,7 @@ form {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin: var(--spacing-1) auto 0;
+  margin: var(--spacing-1) auto;
   max-width: 75rem;
   padding: 0;
   width: 100%;
@@ -453,6 +453,10 @@ form {
   display: flex;
   gap: var(--spacing-5);
   justify-content: center;
+}
+
+.header__nav > li {
+  margin-bottom: 0;
 }
 
 .header__nav li {
@@ -471,15 +475,13 @@ form {
 }
 
 .header__logo {
-  margin-bottom: var(--spacing-1);
   max-width: 8rem;
   padding: var(--spacing-2);
 }
 
 .header__dark-mode-button {
-  margin-bottom: var(--spacing-2);
-  margin-left: var(--spacing-4);
-  margin-right: var(--spacing-2);
+  height: 2.6rem;
+  width: 2.6rem;
 }
 
 @media (max-width: 720px) {
@@ -866,6 +868,8 @@ app-form-input.compact textarea {
   padding: 0;
   transition: all 0.2s ease;
   width: 2.6rem;
+  margin-left: var(--spacing-6);
+  margin-right: var(--spacing-6);
 }
 
 .theme-btn img,
@@ -901,7 +905,6 @@ app-form-input.compact textarea {
 .menu {
   display: none;
   flex-direction: column;
-  gap: 0.5rem;
 }
 .menu.open {
   display: flex;
