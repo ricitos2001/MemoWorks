@@ -16,6 +16,7 @@ export class SettingsComponent {
   tabs = [
     { key: 'userSettings', label: 'Informacion del Usuario' },
     { key: 'familiarGroups', label: 'Grupo Familiar' },
+    { key: 'accessibility', label: 'Accesibilidad' },
   ];
 
   activeTab: string = 'userSettings';

@@ -1,5 +1,4 @@
 <section class="flex-center">
-  <!--article class="grid-center"><p class="settings__texto">PROXIMAMENTE</p></article-->
   <ng-container *ngIf="(groups$ | async)?.length === 0">
     <article class="grid-center">
       <p class="settings__texto">Aun no estas dentro de un grupo familiar</p>
@@ -21,7 +20,10 @@
           <a href="/allMembers" class="settings__boton-miembros">ver todos los miembros</a>
         </article>
       </section>
-      <app-button (click)="leaveGroup(group)">Abandonar grupo familiar</app-button>
+      <article class="flex">
+        <app-button (click)="leaveGroup(group)">Abandonar grupo</app-button>
+        <app-button (click)="deleteGroup(group)" *ngIf="group.adminUser.email === this.email">Eliminar grupo</app-button>
+      </article>
     </article>
   </ng-container>
   <ng-container *ngIf="(groups$ | async)?.length === 1">
@@ -31,3 +33,4 @@
     </article>
   </ng-container>
 </section>
+<app-confirm-modal #confirmModal></app-confirm-modal>

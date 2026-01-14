@@ -8,7 +8,6 @@ import {ButtonComponent} from '../button/button.component';
 import {TasksSignalStore} from '../../../stores/tasks.signal.store';
 import {computed} from '@angular/core';
 import {SharedBarComponent} from '../shared-bar/shared-bar.component';
-import {FormInputComponent} from '../form-input/form-input.component';
 
 @Component({
   selector: 'app-tasks',
@@ -31,7 +30,6 @@ export class TasksComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
   private comm = inject(CommunicationService);
-
   email = localStorage.getItem('email');
 
   tasks = computed(() => this.tasksSignalStore.state().data);
@@ -45,7 +43,6 @@ export class TasksComponent implements OnInit {
     if (this.email) {
       this.tasksSignalStore.load(this.page());
     }
-
     this.comm.notifications$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(n => {

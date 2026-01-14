@@ -11,7 +11,7 @@ import {phoneNumberValidation} from '../../validators/phone-number.validator';
 import {AsyncValidatorsService} from '../../services/async-validators.service';
 import { AuthModalComponent } from '../../components/shared/auth-modal/auth-modal.component';
 import { ToastService } from '../../services/shared/toast.service';
-import {NotificationsService, Notification as AppNotification} from '../../services/notifications.service';
+import {NotificationsService, Notification} from '../../services/notifications.service';
 
 @Component({
   selector: 'app-register',
@@ -79,7 +79,7 @@ export class RegisterComponent {
           this.authSuccess.emit();
 
           // Enviar notificación a la API
-          const apiNotification: AppNotification = {
+          const apiNotification: Notification = {
             title: 'Nuevo registro',
             message: `El usuario ${this.registerForm.value.email} se ha registrado.`,
             createdAt: new Date(),

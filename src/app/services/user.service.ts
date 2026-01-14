@@ -47,6 +47,15 @@ export class UserService {
       }).pipe(finalize(() => this.loadingService.hide()));
   }
 
+  getUserByName(username: string | null): Observable<User> {
+    return this.http.get<User>(`${environment.apiUrl}/api/v1/users/username/${username}`,
+      {
+        headers: {
+          Authorization: `Bearer ${this.token}`
+        }
+      }).pipe(finalize(() => this.loadingService.hide()));
+  }
+
   editUser(id: string | null, user: User): Observable<User> {
     return this.http.put<User>(`${environment.apiUrl}/api/v1/users/${id}`, user,
       {

@@ -294,3 +294,7 @@
   height: 30px;
   width: 30px;
 }
+
+.task__text > span {
+  font-weight: var(--font-weight-bold);
+}

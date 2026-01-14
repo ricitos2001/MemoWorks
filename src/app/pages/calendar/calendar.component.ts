@@ -6,7 +6,7 @@ import {
   OnInit,
   Renderer2,
   ViewChild,
-  effect
+  effect, OnDestroy
 } from '@angular/core';
 import {OptionButtonComponent} from '../../components/shared/option-button/option-button.component';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
@@ -31,7 +31,7 @@ import {TasksSignalStore} from '../../stores/tasks.signal.store';
   styleUrls: ['../../../styles/styles.css'],
   standalone: true
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnDestroy{
   @ViewChild('buttons', { static: false }) buttons!: ElementRef;
   @ViewChild(TaskFormModalComponent)
   private taskFormModal!: TaskFormModalComponent;
@@ -99,7 +99,6 @@ export class CalendarComponent implements OnInit {
       });
   }
 
-  // Limpieza al destruir el componente
   ngOnDestroy() {
     this.dynamicListeners.forEach(unreg => { try { unreg(); } catch(e) { /* ignore */ } });
     this.dynamicListeners = [];
@@ -113,7 +112,6 @@ export class CalendarComponent implements OnInit {
       this.createRemoveButton();
       this.status = true;
     } else {
-      // eliminar listeners registrados previamente
       this.dynamicListeners.forEach(unreg => { try { unreg(); } catch(e) { /* ignore */ } });
       this.dynamicListeners = [];
       while (this.buttons.nativeElement.firstChild) {
@@ -141,7 +139,6 @@ export class CalendarComponent implements OnInit {
         this.taskFormModal.open('addTask');
       }
     });
-    // guardamos la función de eliminación para limpieza posterior
     this.dynamicListeners.push(un1);
     this.renderer.appendChild(this.buttons.nativeElement, addButton);
   }

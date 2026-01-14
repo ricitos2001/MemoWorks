@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormArray, AbstractControl, ReactiveFormsModule} from '@angular/forms';
 import { AsyncValidatorsService } from '../../services/async-validators.service';
 import { GroupService } from '../../services/group.service';
-import { UserService } from '../../services/user.service';
+import {User, UserService} from '../../services/user.service';
 import {ButtonComponent} from '../../components/shared/button/button.component';
 import {FormInputComponent} from '../../components/shared/form-input/form-input.component';
 import {NgForOf, NgIf} from '@angular/common';
@@ -12,6 +12,11 @@ import {TasksSignalStore} from '../../stores/tasks.signal.store';
 import {Notification as AppNotification, NotificationsService} from '../../services/notifications.service';
 import {Router} from '@angular/router';
 import {GroupsStore} from '../../stores/groups.store';
+
+interface GroupUser {
+  id: number;
+  username: string;
+}
 
 @Component({
   selector: 'app-create-group',
@@ -25,9 +30,13 @@ import {GroupsStore} from '../../stores/groups.store';
     NgIf
   ]
 })
+
 export class CreateGroupComponent implements OnInit {
   groupForm: FormGroup;
   loading = false;
+  userNotFound = false;
+  userAlreadyAdded = false;
+  adminUserId: number | null = null;
   @Output() submitting = new EventEmitter<boolean>();
 
   constructor(
@@ -42,22 +51,48 @@ export class CreateGroupComponent implements OnInit {
   ) {
     this.groupForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(50)]],
-      description: ['', [Validators.required, Validators.max(500)]],
+      description: ['', [Validators.required, Validators.maxLength(500)]],
       adminUser: { id: null },
-      users: this.fb.array([]),
+      users: this.fb.array<FormGroup>([]),
     });
   }
 
-  get users(): FormArray {
-    return this.groupForm.get('users') as FormArray;
+  get users(): FormArray<FormGroup> {
+    return this.groupForm.get('users') as FormArray<FormGroup>;
   }
 
-  addUser(value: string, event: Event): void {
+  addUser(username: string, event: Event): void {
     event.preventDefault();
-    const user = value.trim();
-    if (!user) return;
-    if (this.users.value.includes(user)) return;
-    this.users.push(this.fb.control(user));
+
+    const value = username.trim();
+    if (!value) return;
+
+    this.userNotFound = false;
+    this.userAlreadyAdded = false;
+
+    const exists = this.users.value.some(u => u.username === value);
+    if (exists) {
+      this.userAlreadyAdded = true;
+      return;
+    }
+
+    this.userService.getUserByName(value).subscribe({
+      next: (user) => {
+        if (!user?.id) {
+          this.userNotFound = true;
+          return;
+        }
+        if (user.id === this.groupForm.value.adminUser?.id) return;
+        const userGroup = this.fb.group({
+          id: [user.id],
+          username: [user.username],
+        });
+        this.users.push(userGroup);
+      },
+      error: () => {
+        this.userNotFound = true;
+      },
+    });
   }
 
   removeUser(index: number, event: Event): void {
@@ -70,21 +105,23 @@ export class CreateGroupComponent implements OnInit {
 
   ngOnInit(): void {
     const email = localStorage.getItem('email');
-    if (!email) {
-      return;
-    }
+    if (!email) return;
+
     this.userService.getUser(email).subscribe({
       next: (user) => {
-        if (!user || user.id === undefined || user.id === null) {
-          return;
-        }
+        if (!user?.id) return;
         this.groupForm.patchValue({
-          adminUser: {id: user.id}
+          adminUser: { id: user.id },
         });
+        this.addAdminToForm({
+          id: user.id,
+          username: user.username,
+        });
+        this.adminUserId = user.id;
       },
       error: (err) => {
         console.error('ERROR GET USER:', err);
-      }
+      },
     });
   }
 
@@ -121,6 +158,7 @@ export class CreateGroupComponent implements OnInit {
           error: (err) => { console.warn('Error enviando notificación al API:', err); }
         });
         this.create.emit();
+        this.router.navigate(['/settings/familiarGroups']);
       },
       error: () => {
         this.comm.sendNotification({
@@ -144,4 +182,15 @@ export class CreateGroupComponent implements OnInit {
     this.router.navigate(['/settings/familiarGroups']);
   }
 
+  private addAdminToForm(user: { id: number; username: string }): void {
+    const exists = this.users.value.some(
+      (u: GroupUser) => u.id === user.id
+    );
+    if (exists) return;
+    const userGroup = this.fb.group({
+      id: [user.id],
+      username: [user.username],
+    });
+    this.users.push(userGroup);
+  }
 }

@@ -33,11 +33,18 @@
       (keydown.enter)="addUser(labelInput.value, $event); labelInput.value='';"
       #labelInput
     ></app-form-input>
-    <article class="users">
-      <article *ngFor="let user of users.controls; let i = index" class="flex-center">
-        {{ user.value }}<app-button (click)="removeUser(i, $event)">✕</app-button>
-      </article>
+    <article class="error" *ngIf="userNotFound">
+      <small>El usuario no existe</small>
     </article>
+    <article class="error" *ngIf="userAlreadyAdded">
+      <small>El usuario ya está añadido al grupo</small>
+    </article>
+    <ng-container *ngFor="let userCtrl of users.controls; let i = index">
+      <article class="flex-center" *ngIf="userCtrl.value.id !== adminUserId">
+        {{ userCtrl.value.username }}
+        <app-button (click)="removeUser(i, $event)">✕</app-button>
+      </article>
+    </ng-container>
     <article class="actions">
       <app-button (click)="onSubmit($event)" [attr.aria-busy]="loading">Crear grupo</app-button>
       <app-button class="secondary" (click)="!loading && onCancel($event)">Cancelar</app-button>

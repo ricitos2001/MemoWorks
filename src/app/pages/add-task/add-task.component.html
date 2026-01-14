@@ -49,6 +49,13 @@
       ></app-form-input>
     </article>
 
+    <article *ngIf="isAdmin$ | async" class="form-row" formGroupName="assigmentFor">
+      <label class="label">Asignar a</label>
+      <select class="form-select" formControlName="id">
+        <option *ngFor="let user of groupUsers" [ngValue]="user.id">{{ user.name || user.email }}</option>
+      </select>
+    </article>
+
     <app-form-input
       name="labelInput"
       placeholder="Añadir etiqueta"

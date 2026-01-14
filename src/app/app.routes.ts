@@ -38,12 +38,12 @@ export const routes: Routes = [
       { path: '', redirectTo: 'userSettings', pathMatch: 'full' },
       { path: 'userSettings', loadChildren: () => import('./pages/user-settings/user-settings-module').then(m => m.UserSettingsModule), data: { breadcrumb: 'user-settings'}},
       { path: 'familiarGroups', loadChildren: () => import('./pages/familiar-group-settings/familiar-group-settings-module').then(m => m.FamiliarGroupSettingsModule), data: { breadcrumb: 'familiar-group-settings'} },
+      { path: 'accessibility', loadChildren: () => import('./pages/accessibility/accessibility-module').then(m => m.AccessibilityModule), data: { breadcrumb: 'accessibility'} },
     ] },
   { path: 'editUserInfo/:id', component: EditUserInfoComponent, data: { breadcrumb: 'edit-user-info'}},
   { path: 'selectTask', component: SelectTaskForEditComponent, canActivate: [authGuard], data: {breadcrumb: 'select-task'}},
   { path: 'selectTask/:id', component: EditTaskComponent, canActivate: [authGuard], data: {breadcrumb: 'edit-task'}},
   { path: 'removeTask', component: RemoveTaskComponent, canActivate: [authGuard], data: {breadcrumb: 'remove-task'}},
   { path: 'createGroup', component: CreateGroupComponent, canActivate: [authGuard], data: {breadcrumb: 'create-group'}},
-
   { path: '**', component: NotFoundComponent, data: { breadcrumb: '404'}},
 ];

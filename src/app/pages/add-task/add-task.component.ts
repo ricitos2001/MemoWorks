@@ -1,16 +1,21 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ButtonComponent} from '../../components/shared/button/button.component';
-import {FormInputComponent} from '../../components/shared/form-input/form-input.component';
-import {FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {TaskService} from '../../services/task.service';
-import {CommunicationService} from '../../services/shared/communication.service';
-import {NgForOf, NgIf} from '@angular/common';
-import {UserService} from '../../services/user.service';
-import {TasksSignalStore} from '../../stores/tasks.signal.store';
-import {NotificationsService, Notification as AppNotification} from '../../services/notifications.service';
+import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
+import { map } from 'rxjs/operators';
+
+import { ButtonComponent } from '../../components/shared/button/button.component';
+import { FormInputComponent } from '../../components/shared/form-input/form-input.component';
+
+import { TaskService } from '../../services/task.service';
+import { CommunicationService } from '../../services/shared/communication.service';
+import { UserService } from '../../services/user.service';
+import { TasksSignalStore } from '../../stores/tasks.signal.store';
+import { NotificationsService, Notification } from '../../services/notifications.service';
+import { GroupsStore } from '../../stores/groups.store';
 
 @Component({
   selector: 'app-add-task',
+  standalone: true,
   imports: [
     ButtonComponent,
     FormsModule,
@@ -18,29 +23,49 @@ import {NotificationsService, Notification as AppNotification} from '../../servi
     FormInputComponent,
     NgIf,
     NgForOf,
+    AsyncPipe,
   ],
   templateUrl: './add-task.component.html',
   styleUrl: '../../../styles/styles.css',
 })
 export class AddTaskComponent implements OnInit {
+
+  groupsStore = inject(GroupsStore)
+  @Output() submitting = new EventEmitter<boolean>();
+  @Output() cancel = new EventEmitter<void>();
+  @Output() create = new EventEmitter<void>();
+
   taskForm: FormGroup;
   loading = false;
-  @Output() submitting = new EventEmitter<boolean>();
+
+  groupUsers: any[] = [];
+  currentGroupId: string | null = null;
+
+  /** 🔑 Estado de UI derivado (no mutable) */
+  isAdmin$ = this.groupsStore.groups$.pipe(
+    map(groups => {
+      const group = groups[0];
+      if (!group) return false;
+      return group.adminUser?.email === localStorage.getItem('email');
+    })
+  );
 
   constructor(
+    private fb: FormBuilder,
     private taskService: TaskService,
     private comm: CommunicationService,
-    private fb: FormBuilder,
     private userService: UserService,
     private tasksSignalStore: TasksSignalStore,
     private notifications: NotificationsService,
   ) {
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
-      description: ['', [Validators.required, Validators.max(500)]],
-      date: ['', [Validators.required, Validators.maxLength(50)]],
-      time: ['', [Validators.required, Validators.maxLength(50)]],
-      assigmentFor: { id: null },
+      description: ['', [Validators.required, Validators.maxLength(500)]],
+      date: ['', [Validators.required]],
+      time: ['', [Validators.required]],
+      assigmentFor: this.fb.group({
+        id: [null]
+      }),
       status: true,
       labels: this.fb.array([]),
     });
@@ -50,47 +75,63 @@ export class AddTaskComponent implements OnInit {
     return this.taskForm.get('labels') as FormArray;
   }
 
+  ngOnInit(): void {
+    this.initCurrentUser();
+    this.initGroupContext();
+  }
+
+  private initCurrentUser(): void {
+    const email = localStorage.getItem('email');
+    if (!email) return;
+    this.userService.getUser(email).subscribe(user => {
+      if (!user?.id) return;
+      const control = this.taskForm.get('assigmentFor.id');
+      const currentValue = control?.value;
+      const isDirty = control?.dirty;
+      if (currentValue == null && !isDirty) {
+        control?.setValue(user.id);
+      }
+    });
+  }
+
+  private initGroupContext(): void {
+    this.groupsStore.groups$
+      .pipe(map(groups => groups[0] || null))
+      .subscribe(group => {
+        if (!group) {
+          this.groupUsers = [];
+          this.currentGroupId = null;
+          return;
+        }
+        this.groupUsers = group.users ?? [];
+        this.currentGroupId = group.id ?? null;
+        const email = localStorage.getItem('email');
+        if (group.adminUser?.email !== email) {
+          const currentUser = this.groupUsers.find(u => u.email === email);
+          if (currentUser) {
+            this.taskForm.patchValue({
+              assigmentFor: { id: currentUser.id }
+            });
+          }
+        }
+      });
+  }
+
   addLabel(value: string, event: Event): void {
     event.preventDefault();
     const label = value.trim();
-    if (!label) return;
-    if (this.labels.value.includes(label)) return;
+    if (!label || this.labels.value.includes(label)) return;
     this.labels.push(this.fb.control(label));
   }
 
   removeLabel(index: number, event: Event): void {
-    event.preventDefault()
+    event.preventDefault();
     this.labels.removeAt(index);
-  }
-
-  @Output() cancel = new EventEmitter<void>();
-  @Output() create = new EventEmitter<void>();
-
-  ngOnInit(): void {
-    const email = localStorage.getItem('email');
-    if (!email) {
-      return;
-    }
-    this.userService.getUser(email).subscribe({
-      next: (user) => {
-        if (!user || user.id === undefined || user.id === null) {
-          return;
-        }
-        this.taskForm.patchValue({
-          assigmentFor: {id: user.id}
-        });
-      },
-      error: (err) => {
-        console.error('ERROR GET USER:', err);
-      }
-    });
   }
 
   onSubmit(event: Event): void {
     event.preventDefault();
 
-    const assigmentFor = this.taskForm.value.assigmentFor;
-    console.log(assigmentFor);
     if (this.taskForm.invalid) {
       this.taskForm.markAllAsTouched();
       return;
@@ -99,32 +140,48 @@ export class AddTaskComponent implements OnInit {
     this.loading = true;
     this.submitting.emit(true);
 
-    const payload = {
+    const payload: any = {
       ...this.taskForm.value,
-      labels: this.labels.value
+      labels: this.labels.value,
     };
 
+    if (payload.assigmentFor?.id != null) {
+      payload.assigmentFor.id = Number(payload.assigmentFor.id);
+    }
+
+    if (this.currentGroupId) {
+      payload.groupId = this.currentGroupId;
+    }
+
     this.taskService.createTask(payload).subscribe({
-      next: (_createdTask) => {
-        this.tasksSignalStore.add(payload);
+      next: (createdTask) => {
+        console.debug('[AddTask] payload sent:', payload);
+        console.debug('[AddTask] server response:', createdTask);
+        // Usar la tarea devuelta por la API si existe, para obtener id y demás campos reales
+        const taskToAdd = (createdTask && (createdTask as any).id) ? createdTask : payload;
+        // Sólo añadir al store si la tarea está asignada al usuario actual
+        const currentUserId = localStorage.getItem('userId');
+        const assigneeId = taskToAdd?.assigmentFor?.id != null ? String(taskToAdd.assigmentFor.id) : null;
+        if (assigneeId && currentUserId && assigneeId === currentUserId) {
+          this.tasksSignalStore.add(taskToAdd);
+        } else {
+          console.debug('[AddTask] tarea creada asignada a otro usuario, no se añade al store local');
+        }
+
         this.comm.sendNotification({
           source: 'taskForm',
           type: 'success',
           message: 'Tarea creada correctamente',
-          payload: { refreshTasks: true }
+          payload: { refreshTasks: true, taskId: (taskToAdd as any).id ?? null, reason: 'created' }
         });
 
-        // Enviar notificación a la API
-        const apiNotification: AppNotification = {
+        const notification: Notification = {
           title: 'Tarea creada',
           message: `La tarea "${payload.title}" se ha creado correctamente.`,
           createdAt: new Date(),
         };
-        this.notifications.pushNotifications(apiNotification).subscribe({
-          next: () => {},
-          error: (err) => { console.warn('Error enviando notificación al API:', err); }
-        });
 
+        this.notifications.pushNotifications(notification).subscribe();
         this.create.emit();
       },
       error: () => {
@@ -133,8 +190,6 @@ export class AddTaskComponent implements OnInit {
           type: 'error',
           message: 'Error al crear la tarea',
         });
-        this.loading = false;
-        this.submitting.emit(false);
       },
       complete: () => {
         this.loading = false;

@@ -14,7 +14,7 @@ export class GroupsStore {
   }
 
   refresh() {
-    this.api.getGroupsByUserEmail(localStorage.getItem('email')).subscribe(list => this.groupsSubject.next(list));
+    this.api.getGroupsByUserEmail(localStorage.getItem("email")).subscribe(list => this.groupsSubject.next(list));
   }
 
   add(group: Group) {

@@ -7,7 +7,7 @@ import {ButtonComponent} from '../../components/shared/button/button.component';
 import {FormInputComponent} from '../../components/shared/form-input/form-input.component';
 import {NgForOf, NgIf} from '@angular/common';
 import {TasksSignalStore} from '../../stores/tasks.signal.store';
-import {NotificationsService, Notification as AppNotification} from '../../services/notifications.service';
+import {NotificationsService, Notification} from '../../services/notifications.service';
 
 @Component({
   selector: 'app-edit-task',
@@ -107,7 +107,6 @@ export class EditTaskComponent implements OnInit {
       ...this.taskForm.value,
       labels: this.labels.value,
     };
-
     if (id) {
       payload.id = Number(id);
     }
@@ -116,7 +115,6 @@ export class EditTaskComponent implements OnInit {
     } else {
       payload.assigmentFor = { id: Number(localStorage.getItem('userId')) };
     }
-
     this.taskService.editTask(id, payload).subscribe({
       next: (updatedTask) => {
         const taskToUpdate: any = (updatedTask && (updatedTask as any).id) ? updatedTask : payload;
@@ -126,15 +124,21 @@ export class EditTaskComponent implements OnInit {
         if (taskToUpdate.assigmentFor && typeof taskToUpdate.assigmentFor === 'object') {
           taskToUpdate.assigmentFor.id = Number(taskToUpdate.assigmentFor.id);
         }
-        this.tasksSignalStore.update(taskToUpdate);
+        const currentUserId = localStorage.getItem('userId');
+        const assigneeId = taskToUpdate?.assigmentFor?.id != null ? String(taskToUpdate.assigmentFor.id) : null;
+        if (assigneeId && currentUserId && assigneeId === currentUserId) {
+          this.tasksSignalStore.add(taskToUpdate);
+        } else {
+          if (taskToUpdate.id) {
+            this.tasksSignalStore.remove(String(taskToUpdate.id));
+          }
+        }
         this.comm.sendNotification({
           source: 'taskForm',
           type: 'success',
           message: 'Tarea actualizada correctamente',
         });
-
-        // Enviar notificación a la API
-        const apiNotification: AppNotification = {
+        const apiNotification: Notification = {
           title: 'Tarea actualizada',
           message: `La tarea "${payload.title}" se ha actualizado correctamente.`,
           createdAt: new Date(),
@@ -157,7 +161,6 @@ export class EditTaskComponent implements OnInit {
       }
     });
   }
-
   onCancel(event?: Event): void {
     if (event) {
       event.preventDefault();
@@ -171,6 +174,4 @@ export class EditTaskComponent implements OnInit {
     });
     this.router.navigate(['/dashboard']);
   }
-
-  protected readonly event = event;
 }

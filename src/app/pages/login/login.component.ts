@@ -7,7 +7,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {NgIf} from '@angular/common';
 import {passwordStrength} from '../../validators/password-strength.validator';
 import { AuthModalComponent } from '../../components/shared/auth-modal/auth-modal.component';
-import {NotificationsService, Notification as AppNotification} from '../../services/notifications.service';
+import {NotificationsService, Notification} from '../../services/notifications.service';
 
 @Component({
   selector: 'app-login',
@@ -63,7 +63,7 @@ export class LoginComponent {
         this.authSuccess.emit();
 
         // Enviar notificación a la API
-        const apiNotification: AppNotification = {
+        const apiNotification: Notification = {
           title: 'Inicio de sesión',
           message: `El usuario ${this.loginForm.value.email} ha iniciado sesión.`,
           createdAt: new Date(),

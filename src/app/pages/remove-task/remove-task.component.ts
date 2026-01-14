@@ -8,7 +8,7 @@ import {TrashButtonComponent} from '../../components/shared/trash-button/trash-b
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {TasksSignalStore} from '../../stores/tasks.signal.store';
 import {TaskService} from '../../services/task.service';
-import {NotificationsService, Notification as AppNotification} from '../../services/notifications.service';
+import {NotificationsService, Notification} from '../../services/notifications.service';
 
 @Component({
   selector: 'app-remove-task',
@@ -67,7 +67,7 @@ export class RemoveTaskComponent implements OnInit {
         });
 
         // Enviar notificación a la API
-        const apiNotification: AppNotification = {
+        const apiNotification: Notification = {
           title: 'Tarea eliminada',
           message: `La tarea con id ${taskId} ha sido eliminada.`,
           createdAt: new Date(),
