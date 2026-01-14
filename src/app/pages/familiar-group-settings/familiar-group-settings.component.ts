@@ -144,4 +144,8 @@ export class FamiliarGroupSettingsComponent implements OnInit{
         }
       });
   }
+
+  editGroup(groupId: string) {
+    this.router.navigate(['/editGroup', groupId]);
+  }
 }

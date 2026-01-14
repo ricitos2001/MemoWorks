@@ -15,7 +15,7 @@ import { NgFor } from '@angular/common';
 export class SettingsComponent {
   tabs = [
     { key: 'userSettings', label: 'Informacion del Usuario' },
-    { key: 'familiarGroups', label: 'Grupo Familiar' },
+    { key: 'familiarGroups', label: 'Grupos Familiares' },
     { key: 'accessibility', label: 'Accesibilidad' },
   ];
 

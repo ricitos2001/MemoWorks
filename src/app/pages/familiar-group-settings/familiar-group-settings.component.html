@@ -23,6 +23,7 @@
       <article class="flex">
         <app-button (click)="leaveGroup(group)">Abandonar grupo</app-button>
         <app-button (click)="deleteGroup(group)" *ngIf="group.adminUser.email === this.email">Eliminar grupo</app-button>
+        <app-button (click)="editGroup(group.id)" *ngIf="group.adminUser.email === this.email">Editar grupo</app-button>
       </article>
     </article>
   </ng-container>

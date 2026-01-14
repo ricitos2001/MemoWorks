@@ -19,6 +19,7 @@ import {TermsComponent} from './pages/terms/terms.component';
 import {CookiesComponent} from './pages/cookies/cookies.component';
 import {StyleGuideComponent} from './pages/style-guide/style-guide.component';
 import {CreateGroupComponent} from './pages/create-group/create-group.component';
+import {EditGroupComponent} from './pages/edit-group/edit-group.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full'},
@@ -45,5 +46,6 @@ export const routes: Routes = [
   { path: 'selectTask/:id', component: EditTaskComponent, canActivate: [authGuard], data: {breadcrumb: 'edit-task'}},
   { path: 'removeTask', component: RemoveTaskComponent, canActivate: [authGuard], data: {breadcrumb: 'remove-task'}},
   { path: 'createGroup', component: CreateGroupComponent, canActivate: [authGuard], data: {breadcrumb: 'create-group'}},
+  { path: 'editGroup/:id', component: EditGroupComponent, canActivate: [authGuard], data: {breadcrumb: 'edit-group'}},
   { path: '**', component: NotFoundComponent, data: { breadcrumb: '404'}},
 ];

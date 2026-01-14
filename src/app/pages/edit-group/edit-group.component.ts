@@ -1,32 +1,28 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormArray, AbstractControl, ReactiveFormsModule} from '@angular/forms';
-import { AsyncValidatorsService } from '../../services/async-validators.service';
-import { GroupService } from '../../services/group.service';
-import {User, UserService} from '../../services/user.service';
-import {ButtonComponent} from '../../components/shared/button/button.component';
-import {FormInputComponent} from '../../components/shared/form-input/form-input.component';
-import {NgForOf, NgIf} from '@angular/common';
-import {TaskService} from '../../services/task.service';
+import {ButtonComponent} from "../../components/shared/button/button.component";
+import {FormInputComponent} from "../../components/shared/form-input/form-input.component";
+import {NgForOf, NgIf} from "@angular/common";
+import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {GroupService} from '../../services/group.service';
 import {CommunicationService} from '../../services/shared/communication.service';
-import {TasksSignalStore} from '../../stores/tasks.signal.store';
+import {User, UserService} from '../../services/user.service';
 import {Notification as AppNotification, NotificationsService} from '../../services/notifications.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {GroupsStore} from '../../stores/groups.store';
 
 @Component({
-  selector: 'app-create-group',
-  templateUrl: './create-group.component.html',
+  selector: 'app-edit-group',
+    imports: [
+        ButtonComponent,
+        FormInputComponent,
+        NgForOf,
+        NgIf,
+        ReactiveFormsModule
+    ],
+  templateUrl: './edit-group.component.html',
   styleUrl: '../../../styles/styles.css',
-  imports: [
-    ReactiveFormsModule,
-    ButtonComponent,
-    FormInputComponent,
-    NgForOf,
-    NgIf
-  ]
 })
-
-export class CreateGroupComponent implements OnInit {
+export class EditGroupComponent implements OnInit {
   groupForm: FormGroup;
   loading = false;
   userNotFound = false;
@@ -42,6 +38,7 @@ export class CreateGroupComponent implements OnInit {
     private notifications: NotificationsService,
     private router: Router,
     private groupsStore: GroupsStore,
+    private route: ActivatedRoute,
 
   ) {
     this.groupForm = this.fb.group({
@@ -58,19 +55,15 @@ export class CreateGroupComponent implements OnInit {
 
   addUser(username: string, event: Event): void {
     event.preventDefault();
-
     const value = username.trim();
     if (!value) return;
-
     this.userNotFound = false;
     this.userAlreadyAdded = false;
-
     const exists = this.users.value.some(u => u.username === value);
     if (exists) {
       this.userAlreadyAdded = true;
       return;
     }
-
     this.userService.getUserByName(value).subscribe({
       next: (user) => {
         if (!user?.id) {
@@ -89,7 +82,6 @@ export class CreateGroupComponent implements OnInit {
       },
     });
   }
-
   removeUser(index: number, event: Event): void {
     event.preventDefault()
     this.users.removeAt(index);
@@ -98,10 +90,38 @@ export class CreateGroupComponent implements OnInit {
   @Output() cancel = new EventEmitter<void>();
   @Output() create = new EventEmitter<void>();
 
+  getValues(id: string): void {
+    this.groupService.getGroup(id).subscribe({
+      next: (group) => {
+        if (!group) return;
+        this.groupForm.patchValue({
+          name: group.name,
+          description: group.description,
+          adminUser: group.adminUser,
+        });
+        this.users.clear();
+        if (Array.isArray(group.users)) {
+          group.users.forEach((user: User) => {
+            this.users.push(
+              this.fb.group({
+                id: [user.id],
+                username: [user.username],
+              })
+            );
+          });
+        }
+        this.groupForm.markAsPristine();
+      },
+    });
+  }
+
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.getValues(id);
+    }
     const email = localStorage.getItem('email');
     if (!email) return;
-
     this.userService.getUser(email).subscribe({
       next: (user) => {
         if (!user?.id) return;
@@ -132,8 +152,8 @@ export class CreateGroupComponent implements OnInit {
       ...this.groupForm.value,
       users: this.users.value
     };
-
-    this.groupService.createGroup(payload).subscribe({
+    const id = this.route.snapshot.paramMap.get('id');
+    this.groupService.editGroup(id, payload).subscribe({
       next: (_createGroup) => {
         this.groupsStore.add(payload);
         this.comm.sendNotification({
