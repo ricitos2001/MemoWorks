@@ -57,7 +57,7 @@ export class GroupService {
   }
 
   removeGroup(id: number): Observable<Group> {
-    return this.http.delete<Group>(`${environment.apiUrl}/api/v1/tasks/${id}`, {
+    return this.http.delete<Group>(`${environment.apiUrl}/api/v1/groups/${id}`, {
       headers: { Authorization: `Bearer ${this.token}`}
     })
   }

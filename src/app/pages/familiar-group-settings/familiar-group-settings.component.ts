@@ -14,6 +14,10 @@ import {GroupService} from '../../services/group.service';
   selector: 'app-familiar-group-user-settings',
   standalone: true,
   imports: [
+    ButtonComponent,
+    NgIf,
+    NgForOf,
+    AsyncPipe
 
   ],
   templateUrl: './familiar-group-settings.component.html',
@@ -46,15 +50,45 @@ export class FamiliarGroupSettingsComponent implements OnInit{
     return task.id;
   }
 
-  viewDetails(taskId: string) {
-    this.router.navigate(['/task', taskId], { state: { fromCalendar: false } });
-  }
-
   createGroup() {
     this.router.navigate(['/createGroup']);
   }
 
-  leaveGroup() {
-    // TODO implementar funcionalidad para salir de un grupo
+  leaveGroup(group: any) {
+    if (!this.email) return;
+
+    const isAdmin = group.adminUser?.email === this.email;
+
+    this.loading = true;
+
+    if (isAdmin) {
+      // 🔴 ADMIN → eliminar grupo
+      this.groupService.removeGroup(group.id)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe({
+          next: () => {
+            this.groupsStore.refresh();
+            this.router.navigate(['/settings']);
+          },
+          error: () => this.loading = false
+        });
+
+    } else {
+      // 🟢 USUARIO NORMAL → salir del grupo
+      const updatedUsers = group.users.filter(
+        (u: any) => u.email !== this.email
+      );
+
+      this.groupService.editGroup(group.id, updatedUsers)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe({
+          next: () => {
+            this.groupsStore.refresh();
+            this.router.navigate(['/settings']);
+          },
+          error: () => this.loading = false
+        });
+    }
   }
+
 }

@@ -1,6 +1,6 @@
 <section class="flex-center">
-  <article class="grid-center"><p class="settings__texto">PROXIMAMENTE</p></article>
-  <!--ng-container *ngIf="null">
+  <!--article class="grid-center"><p class="settings__texto">PROXIMAMENTE</p></article-->
+  <ng-container *ngIf="(groups$ | async)?.length === 0">
     <article class="grid-center">
       <p class="settings__texto">Aun no estas dentro de un grupo familiar</p>
       <p class="settings__texto">quieres formar parte de uno?</p>
@@ -21,7 +21,13 @@
           <a href="/allMembers" class="settings__boton-miembros">ver todos los miembros</a>
         </article>
       </section>
-      <app-button (click)="leaveGroup()">Abandonar grupo familiar</app-button>
+      <app-button (click)="leaveGroup(group)">Abandonar grupo familiar</app-button>
     </article>
-  </ng-container-->
+  </ng-container>
+  <ng-container *ngIf="(groups$ | async)?.length === 1">
+    <article class="grid-center">
+      <p class="settings__texto">Deseas ser admin de tu propio grupo?</p>
+      <app-button (click)="createGroup()">Crear grupo familiar</app-button>
+    </article>
+  </ng-container>
 </section>
