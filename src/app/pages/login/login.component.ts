@@ -61,8 +61,6 @@ export class LoginComponent {
         this.authService.saveToken(res.token);
         this.authService.loggedInSubject.next(true);
         this.authSuccess.emit();
-
-        // Enviar notificación a la API
         const apiNotification: Notification = {
           title: 'Inicio de sesión',
           message: `El usuario ${this.loginForm.value.email} ha iniciado sesión.`,
@@ -72,6 +70,7 @@ export class LoginComponent {
           next: () => {},
           error: (err) => { console.warn('Error enviando notificación al API:', err); }
         });
+        this.router.navigate(['dashboard']);
       },
       error: (err) => {
         console.error('Error en login', err);

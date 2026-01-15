@@ -77,8 +77,6 @@ export class RegisterComponent {
           this.authService.getUserIdFromToken();
           this.toast.show({ type: 'success', message: 'Registro correcto', duration: 4000 });
           this.authSuccess.emit();
-
-          // Enviar notificación a la API
           const apiNotification: Notification = {
             title: 'Nuevo registro',
             message: `El usuario ${this.registerForm.value.email} se ha registrado.`,
@@ -88,7 +86,7 @@ export class RegisterComponent {
             next: () => {},
             error: (err) => { console.warn('Error enviando notificación al API:', err); }
           });
-
+          this.router.navigate(['dashboard']);
         } else {
           this.toast.show({ type: 'error', message: 'Respuesta de registro inválida' , duration: 4000});
         }
