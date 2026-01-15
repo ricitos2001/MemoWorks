@@ -29,6 +29,30 @@ export class AvatarService {
     });
   }
 
+  // Public wrapper para reutilizar la conversión Blob -> dataURL desde otros servicios/componentes
+  public async blobToDataURLPublic(blob: Blob): Promise<string> {
+    return this.blobToDataURL(blob);
+  }
+
+  // Guardar un dataURL bajo una clave arbitraria en localStorage con fallback a objectURL
+  public saveDataUrlToLocalKey(key: string, dataUrl: string): void {
+    try {
+      localStorage.setItem(key, dataUrl);
+      console.info('[AvatarService] guardado dataURL en localStorage key=', key);
+      return;
+    } catch (e) {
+      console.warn('[AvatarService] no se pudo escribir localStorage (fallback a objectURL)', e);
+    }
+
+    try {
+      const blob = this.dataURLToBlob(dataUrl);
+      this.setObjectUrlFromBlob(blob);
+    } catch (err) {
+      console.error('[AvatarService] no se pudo convertir dataURL para fallback', err);
+      this.avatarSubject.next(null);
+    }
+  }
+
   private dataURLToBlob(dataUrl: string): Blob {
     const parts = dataUrl.split(',');
     const mimeMatch = parts[0].match(/:(.*?);/);

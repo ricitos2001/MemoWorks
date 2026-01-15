@@ -16,13 +16,17 @@
             <p class="settings__apartado">miembros principales:</p>
             <article class="settings__users-container">
               <article class="settings__users" *ngFor="let user of group.users; trackBy: trackById">
-                <img [src]="'assets/img/logo.svg'" [alt]="user.name" class="settings__imgUser">
+                <img [src]="getImage(user.id)" [alt]="user.name" class="settings__imgUser">
               </article>
               <a href="/allMembers" class="settings__members-button">ver todos los miembros</a>
             </article>
           </section>
         </section>
-        <img src="assets/img/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector-removebg-preview.png" alt="user" class="settings__img-profile">
+        <article class="grid-center">
+          <img [src]="group.image || 'assets/img/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector-removebg-preview.png'" alt="user" class="settings__img-profile">
+          <input type="file" id="groupFileInput_{{group.id}}" style="display:none" accept="image/*" (change)="onGroupFileSelected($event, group)">
+          <app-button (click)="editGroupImage(group)" *ngIf="group.adminUser.email === this.email">Editar imagen</app-button>
+        </article>
       </article>
       <article class="settings__group-buttons">
         <app-button (click)="leaveGroup(group)">Abandonar grupo</app-button>

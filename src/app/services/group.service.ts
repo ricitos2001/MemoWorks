@@ -13,6 +13,7 @@ export interface Group {
   description: string;
   adminUser: User;
   users: User[];
+  image: string;
 }
 
 @Injectable({
@@ -62,13 +63,28 @@ export class GroupService {
 
   editGroup(id: string | null, group: any): Observable<Group> {
     return this.http.put<Group>(`${environment.apiUrl}/api/v1/groups/${id}`, group, {
-      headers: { Authorization: `Bearer ${this.token}`}
+      headers: { Authorization: `Bearer ${this.token}` }
     })
   }
 
   removeGroup(id: number): Observable<Group> {
     return this.http.delete<Group>(`${environment.apiUrl}/api/v1/groups/${id}`, {
-      headers: { Authorization: `Bearer ${this.token}`}
+      headers: { Authorization: `Bearer ${this.token}` }
     })
+  }
+
+  getImage(groupId: string, cacheBust: boolean = false): Observable<Blob> {
+    const url = cacheBust ? `${environment.apiUrl}/api/v1/groups/${groupId}/avatar?t=${Date.now()}` : `${environment.apiUrl}/api/v1/groups/${groupId}/avatar`;
+    return this.http.get(url, {
+      headers: { Authorization: `Bearer ${this.token}` },
+      responseType: 'blob'
+    });
+  }
+
+  postImage(groupId: string, imageFormData: FormData): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/api/v1/groups/${groupId}/avatar`, imageFormData, {
+      headers: { Authorization: `Bearer ${this.token}` },
+      responseType: 'text' as 'json'
+    });
   }
 }

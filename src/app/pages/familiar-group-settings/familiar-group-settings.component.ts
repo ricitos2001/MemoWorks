@@ -1,12 +1,14 @@
-import {Component, DestroyRef, EventEmitter, inject, OnInit, Output, ViewChild} from '@angular/core';
-import {ButtonComponent} from '../../components/shared/button/button.component';
+import {Component, DestroyRef, EventEmitter, inject, OnInit, Output, ViewChild, Renderer2, ChangeDetectorRef} from '@angular/core';
+import {ButtonComponent}from '../../components/shared/button/button.component';
 import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
 import {Router} from '@angular/router';
 import {CommunicationService} from '../../services/shared/communication.service';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {GroupsStore} from '../../stores/groups.store';
-import {GroupService} from '../../services/group.service';
+import {GroupService, Group} from '../../services/group.service';
 import {ConfirmModalComponent} from '../../components/shared/confirm-modal/confirm-modal.component';
+import { AvatarService } from '../../services/shared/avatar.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-familiar-group-user-settings',
@@ -16,13 +18,13 @@ import {ConfirmModalComponent} from '../../components/shared/confirm-modal/confi
     NgIf,
     NgForOf,
     AsyncPipe,
-    ConfirmModalComponent
+    ConfirmModalComponent,
   ],
   templateUrl: './familiar-group-settings.component.html',
   styleUrl: '../../../styles/styles.css',
 })
 export class FamiliarGroupSettingsComponent implements OnInit{
-  constructor(private groupService: GroupService) {
+  constructor(private groupService: GroupService, private avatarService: AvatarService, private renderer: Renderer2, private cd: ChangeDetectorRef) {
   }
   @Output() createFromEmpty = new EventEmitter<void>();
   private groupsStore = inject(GroupsStore);
@@ -32,7 +34,6 @@ export class FamiliarGroupSettingsComponent implements OnInit{
   loading = false
   email = localStorage.getItem('email');
   groups$ = this.groupsStore.groups$;
-
   @ViewChild(ConfirmModalComponent) confirmModal!: ConfirmModalComponent;
   private groupToDelete: any = null;
 
@@ -44,7 +45,6 @@ export class FamiliarGroupSettingsComponent implements OnInit{
           this.groupsStore.refresh();
         }
       });
-    console.log(this.groupsStore.refresh());
   }
 
   trackById(index: number, task: any) {
@@ -147,5 +147,95 @@ export class FamiliarGroupSettingsComponent implements OnInit{
 
   editGroup(groupId: string) {
     this.router.navigate(['/editGroup', groupId]);
+  }
+
+  public editGroupImage(group: Group): void {
+    void this.editGroupImageInternal(group);
+  }
+
+  private async editGroupImageInternal(group: Group): Promise<void> {
+     if (!group?.id) return;
+    const el = document.getElementById(`groupFileInput_${group.id}`) as HTMLInputElement | null;
+    if (el) {
+      el.value = '';
+      el.click();
+      return;
+    }
+
+     const input = this.renderer.createElement('input');
+     this.renderer.setAttribute(input, 'type', 'file');
+     this.renderer.setAttribute(input, 'accept', 'image/*');
+    const unregister = this.renderer.listen(input, 'change', (event: Event) => {
+      this.handleGroupFileChange(event, group, unregister);
+    });
+    if ((input as any).click) (input as any).click();
+   }
+
+  private async handleGroupFileChange(
+    event: Event,
+    group: Group,
+    unregister: () => void
+  ): Promise<void> {
+    try {
+      await this.onGroupFileSelected(event, group);
+    } finally {
+      unregister();
+    }
+  }
+
+  async onGroupFileSelected(event: Event, group: Group): Promise<void> {
+    const input = event.target as HTMLInputElement;
+    if (!input.files?.length || !group?.id) return;
+    const file = input.files[0];
+    const maxSizeBytes = 5 * 1024 * 1024;
+    if (file.size > maxSizeBytes) {
+      this.comm.sendNotification({ source: 'groupForm', type: 'error', message: 'El archivo supera el tamaño máximo de 5MB.' });
+      return;
+    }
+    if (!file.type.startsWith('image/')) {
+      this.comm.sendNotification({ source: 'groupForm', type: 'error', message: 'Solo se permiten archivos de imagen.' });
+      return;
+    }
+    const formData = new FormData();
+    formData.append('file', file);
+    try {
+      this.loading = true;
+      await firstValueFrom(this.groupService.postImage(group.id, formData));
+      for (let i = 0; i < 8; i++) {
+        try {
+          const blob = await firstValueFrom(this.groupService.getImage(group.id, true));
+          if (blob && blob.size > 0) {
+            const dataUrl = await this.avatarService.blobToDataURLPublic(blob);
+            const key = `group_${group.id}`;
+            try {
+              this.avatarService.saveDataUrlToLocalKey(key, dataUrl);
+            } catch (e) { /* ignore */ }
+            try { group.image = dataUrl; this.cd.detectChanges(); } catch (e) { }
+            this.comm.sendNotification({ source: 'groupForm', type: 'success', message: 'Imagen de grupo actualizada.' });
+            this.loading = false;
+            return;
+          }
+        } catch (err) {
+          await new Promise(res => setTimeout(res, 800));
+        }
+      }
+
+      this.comm.sendNotification({ source: 'groupForm', type: 'error', message: 'No se pudo obtener la imagen del servidor tras subirla.' });
+    } catch (err) {
+      console.error('[FamiliarGroupSettings] error subiendo imagen de grupo:', err);
+      this.comm.sendNotification({ source: 'groupForm', type: 'error', message: 'Error al subir la imagen del grupo.' });
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  getImage(userId?: number | null): string {
+    const defaultImg = 'assets/img/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector-removebg-preview.png';
+    if (!userId) return defaultImg;
+    const key = `avatar_${userId}`;
+    const cached = localStorage.getItem(key);
+    if (cached) return cached;
+    this.avatarService.loadAvatar(userId);
+    return defaultImg;
   }
 }
