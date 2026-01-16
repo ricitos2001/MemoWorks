@@ -9,8 +9,8 @@ import {GroupService, Group} from '../../services/group.service';
 import {ConfirmModalComponent} from '../../components/shared/confirm-modal/confirm-modal.component';
 import { AvatarService } from '../../services/shared/avatar.service';
 import { firstValueFrom } from 'rxjs';
-import { environment } from '../../../enviroments/enviroment';
 import { AuthService } from '../../services/auth.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-familiar-group-user-settings',
@@ -46,6 +46,17 @@ export class FamiliarGroupSettingsComponent implements OnInit{
     this.auth.loggedIn$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(logged => {
       if (logged) {
         try { this.groupsStore.refresh(); } catch (e) {}
+      }
+    });
+
+    // Cuando la lista de grupos cambie, intentar precargar imágenes protegidas (evita tener que recargar página)
+    this.groups$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(groups => {
+      if (!groups || groups.length === 0) return;
+      for (const g of groups) {
+        try {
+          const key = `group_${g.id}`;
+          if (!localStorage.getItem(key)) this.ensureGroupImageLoaded(g);
+        } catch (e) {}
       }
     });
 
@@ -297,7 +308,23 @@ export class FamiliarGroupSettingsComponent implements OnInit{
     if (this._loadingGroups.has(group.id)) return; // already loading
     this._loadingGroups.add(group.id);
     try {
+      // Si no hay token en este momento, esperar a que el usuario haga login
+      if (!localStorage.getItem('token')) {
+        try {
+          console.log('[FamiliarGroupSettings] no token presente, esperando login antes de pedir imagen para group', group.id);
+          await firstValueFrom(this.auth.loggedIn$.pipe(filter(Boolean)));
+          console.log('[FamiliarGroupSettings] login detectado, procediendo a pedir imagen para group', group.id);
+        } catch (e) {
+          // si algo falla esperando al login, salir temprano
+          console.warn('[FamiliarGroupSettings] espera token cancelada o fallida', e);
+          this._loadingGroups.delete(group.id);
+          return;
+        }
+      } else {
+        console.log('[FamiliarGroupSettings] token ya presente, pidiendo imagen para group', group.id);
+      }
       const blob = await firstValueFrom(this.groupService.getImage(group.id, true));
+      console.log('[FamiliarGroupSettings] respuesta getImage para group', group.id, 'blob size=', blob?.size);
       if (blob && blob.size > 0) {
         try {
           const dataUrl = await this.avatarService.blobToDataURLPublic(blob);
