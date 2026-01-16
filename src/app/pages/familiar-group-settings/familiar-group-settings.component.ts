@@ -10,6 +10,7 @@ import {ConfirmModalComponent} from '../../components/shared/confirm-modal/confi
 import { AvatarService } from '../../services/shared/avatar.service';
 import { firstValueFrom } from 'rxjs';
 import { environment } from '../../../enviroments/enviroment';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-familiar-group-user-settings',
@@ -32,13 +33,22 @@ export class FamiliarGroupSettingsComponent implements OnInit{
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
   private comm = inject(CommunicationService);
+  private auth = inject(AuthService);
   loading = false
-  email = localStorage.getItem('email');
+  // leer email dinámicamente para que el componente reaccione a login/logout sin recargar
+  get email(): string | null { return localStorage.getItem('email'); }
   groups$ = this.groupsStore.groups$;
   @ViewChild(ConfirmModalComponent) confirmModal!: ConfirmModalComponent;
   private groupToDelete: any = null;
 
   ngOnInit(): void {
+    // Si el usuario se loguea en runtime, refrescar grupos (y por tanto las imágenes protegidas)
+    this.auth.loggedIn$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(logged => {
+      if (logged) {
+        try { this.groupsStore.refresh(); } catch (e) {}
+      }
+    });
+
     this.comm.notifications$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(n => {
