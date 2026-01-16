@@ -23,7 +23,7 @@
           </section>
         </section>
         <article class="grid-center">
-          <img [src]="group.image || 'assets/img/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector-removebg-preview.png'" alt="user" class="settings__img-profile">
+          <img [src]="getGroupImage(group)" alt="user" class="settings__img-profile" (error)="onGroupImgError($event, group)">
           <input type="file" id="groupFileInput_{{group.id}}" style="display:none" accept="image/*" (change)="onGroupFileSelected($event, group)">
           <app-button (click)="editGroupImage(group)" *ngIf="group.adminUser.email === this.email">Editar imagen</app-button>
         </article>
@@ -42,4 +42,4 @@
     </article>
   </ng-container>
 </section>
-<app-confirm-modal #confirmModal></app-confirm-modal>
+<app-confirm-modal></app-confirm-modal>

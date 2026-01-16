@@ -9,6 +9,7 @@ import {GroupService, Group} from '../../services/group.service';
 import {ConfirmModalComponent} from '../../components/shared/confirm-modal/confirm-modal.component';
 import { AvatarService } from '../../services/shared/avatar.service';
 import { firstValueFrom } from 'rxjs';
+import { environment } from '../../../enviroments/enviroment';
 
 @Component({
   selector: 'app-familiar-group-user-settings',
@@ -237,5 +238,96 @@ export class FamiliarGroupSettingsComponent implements OnInit{
     if (cached) return cached;
     this.avatarService.loadAvatar(userId);
     return defaultImg;
+  }
+
+  // Normalize group.image paths so the browser no longer requests them from the Angular dev server root
+  getGroupImage(group: Group | any): string {
+    const defaultImg = 'assets/img/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector-removebg-preview.png';
+    if (!group) return defaultImg;
+    const key = `group_${group.id}`;
+    const cached = localStorage.getItem(key);
+    if (cached) return cached;
+
+    const img = group.image;
+    if (!img) {
+      // Trigger background load from API if we have an id
+      if (group?.id) this.ensureGroupImageLoaded(group);
+      return defaultImg;
+    }
+
+    // If it's a data URL already
+    if (typeof img === 'string') {
+      if (img.startsWith('data:')) return img;
+
+      // If it's an absolute url, it might be protected (401) — fetch it via API instead
+      if (img.startsWith('http://') || img.startsWith('https://')) {
+        // try to fetch via API if we have group id
+        if (group?.id) this.ensureGroupImageLoaded(group);
+        return defaultImg;
+      }
+
+      // If the backend returned a path starting with '/', or a relative path, fetch via API
+      if (img.startsWith('/') || img.includes('/uploads/')) {
+        if (group?.id) this.ensureGroupImageLoaded(group);
+        return defaultImg;
+      }
+
+      // As fallback, return the string (encoded)
+      try { return encodeURI(img); } catch (e) { return img; }
+    }
+    return defaultImg;
+  }
+
+  private _loadingGroups = new Set<number | string>();
+
+  private async ensureGroupImageLoaded(group: Group | any): Promise<void> {
+    if (!group?.id) return;
+    const key = `group_${group.id}`;
+    if (localStorage.getItem(key)) return;
+    if (this._loadingGroups.has(group.id)) return; // already loading
+    this._loadingGroups.add(group.id);
+    try {
+      const blob = await firstValueFrom(this.groupService.getImage(group.id, true));
+      if (blob && blob.size > 0) {
+        try {
+          const dataUrl = await this.avatarService.blobToDataURLPublic(blob);
+          try { localStorage.setItem(key, dataUrl); } catch (e) { /* ignore storage errors */ }
+          try { group.image = dataUrl; this.cd.detectChanges(); } catch (e) { }
+        } catch (err) {
+          console.error('[FamiliarGroupSettings] error converting blob to dataURL', err);
+        }
+      }
+    } catch (err) {
+      console.warn('[FamiliarGroupSettings] no se pudo obtener imagen protegida para group', group?.id, err);
+    } finally {
+      this._loadingGroups.delete(group.id);
+    }
+  }
+
+  onGroupImgError(event: Event, group: Group | any): void {
+    try {
+      const imgEl = event.target as HTMLImageElement;
+      if (!imgEl) return;
+      const src = imgEl.src || '';
+      console.warn('[FamiliarGroupSettings] imagen fallo al cargar para group=', group?.id ?? group?.name ?? '<unknown>', ' src=', src);
+
+      // If src is not encoded, try re-encoding it once
+      try {
+        const decoded = decodeURI(src);
+        const reencoded = encodeURI(decoded);
+        if (reencoded !== src) {
+          console.info('[FamiliarGroupSettings] reintentando con URL codificada:', reencoded);
+          imgEl.src = reencoded;
+          return;
+        }
+      } catch (e) {
+        // ignore decode errors
+      }
+
+      // Si falla, usar fallback por defecto
+      imgEl.src = 'assets/img/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector-removebg-preview.png';
+    } catch (err) {
+      console.error('[FamiliarGroupSettings] onGroupImgError error', err);
+    }
   }
 }
