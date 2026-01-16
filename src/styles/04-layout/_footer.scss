@@ -66,11 +66,15 @@
   text-decoration: none;
 }
 
-@include respond('sm') {
+
+@media (max-width: 720px) {
   .footer {
     align-items: center;
     flex-direction: column;
     gap: var(--spacing-8);
+    padding: var(--spacing-8);
+    text-align: center;
+    justify-content: center;
   }
 
   .footer__logo img {
@@ -83,11 +87,5 @@
 
   .footer article {
     padding: 0;
-  }
-}
-
-@media (max-width: 720px) {
-  .footer {
-    padding: var(--spacing-8);
   }
 }

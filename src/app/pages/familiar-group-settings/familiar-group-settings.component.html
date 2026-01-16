@@ -10,23 +10,29 @@
     <section class="settings__familiar-group" *ngFor="let group of groups; trackBy: trackById">
       <article class="settings__familiar-group-info">
         <section>
-          <p class="settings__nombre-grupo"><span class="settings__apartado">Nombre: </span>{{ group.name }}</p>
-          <p class="settings__texto"><span class="settings__apartado">Descripcion: </span>{{ group.description }}</p>
-          <section>
-            <p class="settings__apartado">miembros principales:</p>
-            <article class="settings__users-container">
-              <article class="settings__users" *ngFor="let user of group.users; trackBy: trackById">
-                <img [src]="getImage(user.id)" [alt]="user.name" class="settings__imgUser">
-              </article>
-              <a href="/allMembers" class="settings__members-button">ver todos los miembros</a>
+          <section class="flex">
+            <article>
+              <p class="settings__nombre-grupo"><span class="settings__apartado">Nombre: </span>{{ group.name }}</p>
+              <p class="settings__texto"><span class="settings__apartado">Descripcion: </span>{{ group.description }}</p>
+            </article>
+            <article class="grid-center">
+              <img [src]="getGroupImage(group)" alt="user" class="settings__img-profile" (error)="onGroupImgError($event, group)">
+              <input type="file" id="groupFileInput_{{group.id}}" style="display:none" accept="image/*" (change)="onGroupFileSelected($event, group)">
+              <app-button (click)="editGroupImage(group)" *ngIf="group.adminUser.email === this.email">Editar imagen</app-button>
             </article>
           </section>
+          <section>
+            <p class="settings__apartado">miembros principales:</p>
+            <section class="settings__users-container">
+              <section class="settings__users">
+                <article *ngFor="let user of group.users; trackBy: trackById">
+                  <img [src]="getImage(user.id)" [alt]="user.name" class="settings__imgUser">
+                </article>
+              </section>
+              <a href="/allMembers" class="settings__members-button">ver todos los miembros</a>
+            </section>
+          </section>
         </section>
-        <article class="grid-center">
-          <img [src]="getGroupImage(group)" alt="user" class="settings__img-profile" (error)="onGroupImgError($event, group)">
-          <input type="file" id="groupFileInput_{{group.id}}" style="display:none" accept="image/*" (change)="onGroupFileSelected($event, group)">
-          <app-button (click)="editGroupImage(group)" *ngIf="group.adminUser.email === this.email">Editar imagen</app-button>
-        </article>
       </article>
       <article class="settings__group-buttons">
         <app-button (click)="leaveGroup(group)">Abandonar grupo</app-button>
@@ -36,7 +42,7 @@
     </section>
   </ng-container>
   <ng-container *ngIf="(groups$ | async)?.length === 1">
-    <article class="grid-center">
+    <article class="settings__create-group">
       <p class="settings__texto">Deseas ser admin de tu propio grupo?</p>
       <app-button (click)="createGroup()">Crear grupo familiar</app-button>
     </article>

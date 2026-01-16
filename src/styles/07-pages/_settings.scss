@@ -110,18 +110,22 @@
 .settings__users {
   display: flex;
   flex-direction: row;
-  color: var(--background);
+  padding: var(--spacing-4);
   background: var(--color-primary-1);
-  flex: 0 0 auto;
+  border-top-left-radius: var(--radius-md);
+  border-bottom-left-radius: var(--radius-md);
 }
 
 .settings__imgUser {
   width: var(--spacing-24);
-  height: var(--spacing-24);
+  height: auto;
+  border: 0.25rem solid var(--components);
+  border-radius: var(--radius-full);
+  margin: var(--spacing-4);
 }
 
 .settings__img-profile {
-  width: 25rem;
+  width: 15rem;
   height: auto;
   border-radius: 50%;
 }
@@ -134,7 +138,13 @@
 }
 
 .settings__members-button {
-  background: var(--value-letters);
+  padding: var(--spacing-4);
+  color: var(--letters);
+  background: var(--buttons);
+  flex: 0 0 auto;
+  text-align: center;
+  border-top-right-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
 }
 
 .settings__familiar-group-info, .settings__section-group{
@@ -142,6 +152,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.settings__familiar-group-info {
+  border-right: 0.25rem solid var(--color-primary-1);
+  padding: var(--spacing-4);
 }
 
 .settings__group-buttons {
@@ -153,6 +168,12 @@
 .settings__users-container{
   display: flex;
   flex-direction: row;
+}
+
+.settings__create-group{
+  display: grid;
+  place-items: center;
+  padding: var(--spacing-4);
 }
 
 /* ============================================================
@@ -203,6 +224,8 @@
 
   .settings__familiar-group-info {
     flex-direction: column-reverse;
+    border-right: none;
+    border-bottom: 0.25rem solid var(--color-primary-1);
   }
 
   .settings__user,
