@@ -72,6 +72,7 @@
   padding: var(--spacing-4);
   align-items: center;
   margin: 0;
+  flex-wrap: wrap;
 }
 
 .settings__name {
@@ -154,6 +155,10 @@
   justify-content: center;
 }
 
+.settings__section-group {
+  flex-wrap: wrap;
+}
+
 .settings__familiar-group-info {
   border-right: 0.25rem solid var(--color-primary-1);
   padding: var(--spacing-4);
@@ -163,6 +168,7 @@
   display: flex;
   flex-direction: row;
   gap: var(--spacing-4);
+  flex-wrap: wrap;
 }
 
 .settings__users-container{
@@ -256,6 +262,7 @@
 
   .settings__section-group {
     flex-direction: column;
+    flex-wrap: wrap;
   }
   .settings__name {
     border-bottom-left-radius: 0;

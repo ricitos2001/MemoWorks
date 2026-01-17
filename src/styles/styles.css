@@ -303,7 +303,6 @@ button {
 
 ol, li {
   margin: 0 0 var(--spacing-2) 0;
-  padding-left: var(--spacing-6);
 }
 
 label {
@@ -383,6 +382,7 @@ form {
   display: flex;
   flex-direction: row;
   gap: var(--spacing-4);
+  flex-wrap: wrap;
 }
 .flex-center {
   display: flex;
@@ -531,6 +531,7 @@ form {
   top: 0;
   transition: box-shadow var(--transition-base), transform var(--transition-base);
   z-index: 10;
+  flex-wrap: wrap;
 }
 
 .footer.elevate-on-hover:hover {
@@ -870,6 +871,11 @@ app-form-input.compact textarea {
   width: 2.6rem;
 }
 
+.spacing-button {
+  margin-right: var(--spacing-10);
+  margin-left: var(--spacing-5);
+}
+
 .theme-btn img,
 .dark-mode-button img {
   display: block;
@@ -894,6 +900,8 @@ app-form-input.compact textarea {
   height: 2.6rem;
   justify-content: center;
   padding: 0;
+  margin-left: var(--spacing-12);
+  margin-right: var(--spacing-12);
   width: 2.6rem;
 }
 
@@ -903,6 +911,8 @@ app-form-input.compact textarea {
 .menu {
   display: none;
   flex-direction: column;
+  margin-left: var(--spacing-12);
+  margin-right: var(--spacing-12);
 }
 .menu.open {
   display: flex;
@@ -922,11 +932,7 @@ app-form-input.compact textarea {
 @media (max-width: 720px) {
   .menu.open {
     align-items: stretch;
-    background: var(--components);
-    border-radius: 8px;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.36);
     min-width: 200px;
-    padding: 0.5rem;
     position: absolute;
     right: var(--spacing-4);
     top: calc(100% + 0.5rem);
@@ -940,6 +946,8 @@ app-form-input.compact textarea {
     list-style: none;
     margin: 0;
     padding: 0.25rem 0;
+    border-radius: var(--radius-md);
+    text-align: center;
   }
   .menu.open .header__nav li {
     width: 100%;
@@ -1593,6 +1601,7 @@ h6[id],
   padding: var(--spacing-4);
   align-items: center;
   margin: 0;
+  flex-wrap: wrap;
 }
 
 .settings__name {
@@ -1675,6 +1684,10 @@ h6[id],
   justify-content: center;
 }
 
+.settings__section-group {
+  flex-wrap: wrap;
+}
+
 .settings__familiar-group-info {
   border-right: 0.25rem solid var(--color-primary-1);
   padding: var(--spacing-4);
@@ -1684,6 +1697,7 @@ h6[id],
   display: flex;
   flex-direction: row;
   gap: var(--spacing-4);
+  flex-wrap: wrap;
 }
 
 .settings__users-container {
@@ -1768,6 +1782,7 @@ h6[id],
   }
   .settings__section-group {
     flex-direction: column;
+    flex-wrap: wrap;
   }
   .settings__name {
     border-bottom-left-radius: 0;

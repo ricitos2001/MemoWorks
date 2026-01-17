@@ -15,7 +15,7 @@
       <li><a href="/calendar" class="header__link">Calendario</a></li>
       <li><a href="/settings" class="header__link">Configuración</a></li>
       <li class="flex-center">
-        <button class="theme-btn" (click)="toggleNotifications()" aria-label="Abrir bandeja de notificaciones" [attr.aria-expanded]="showNotifications" [attr.aria-controls]="notificationsId"><img src="assets/img/Bell.svg" class="bell-icon" alt="Notificaciones"><span class="badge" *ngIf="hasNew"></span></button>
+        <button class="theme-btn spacing-button" (click)="toggleNotifications()" aria-label="Abrir bandeja de notificaciones" [attr.aria-expanded]="showNotifications" [attr.aria-controls]="notificationsId"><img src="assets/img/Bell.svg" class="bell-icon" alt="Notificaciones"><span class="badge" *ngIf="hasNew"></span></button>
         <app-button class="header__logout" (click)="logout()">Cerrar sesión</app-button>
       </li>
     </ng-container>

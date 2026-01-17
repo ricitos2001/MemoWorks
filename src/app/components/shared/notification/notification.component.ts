@@ -17,7 +17,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
   notificationsService = inject(NotificationsService);
   notificationsStore = inject(NotificationsStore);
 
-  // estado para infinite scroll
   state = signal<{ loading: boolean; data: Notification[]; page: number; eof: boolean }>({
     loading: false,
     data: [],
@@ -34,7 +33,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.notificationsStore.refresh();
-
     this.notificationsService.pollNotifications().subscribe(list => {
       const current = this.state().data;
       const ids = new Set(current.map(n => n.id));
@@ -68,7 +66,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
     const nextPage = page + 1; // empecemos en página 1
     this.notificationsService.getPage(nextPage, 20).subscribe(res => {
       const items = res.content || [];
-      // Merge evitando duplicados por id
       const existingIds = new Set(this.state().data.map(n => n.id));
       const merged = [...this.state().data, ...items.filter(i => i.id && !existingIds.has(i.id))];
 

@@ -65,6 +65,7 @@ export class LoginComponent {
           title: 'Inicio de sesión',
           message: `El usuario ${this.loginForm.value.email} ha iniciado sesión.`,
           createdAt: new Date(),
+          userEmail: this.loginForm.value.email,
         };
         this.notifications.pushNotifications(apiNotification).subscribe({
           next: () => {},

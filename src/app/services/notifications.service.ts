@@ -10,16 +10,18 @@ export interface Notification {
   title: string;
   message: string;
   createdAt: Date;
+  userEmail: string;
 }
 
 
 @Injectable({ providedIn: 'root' })
 export class NotificationsService {
   token = localStorage.getItem('token');
+  email = localStorage.getItem('email');
   constructor(private http: HttpClient) {}
   pollNotifications(intervalMs = 30000): Observable<Notification[]> {
     return timer(0, intervalMs).pipe(
-      switchMap(() => this.http.get<PaginatedResponse<Notification>>(`${environment.apiUrl}/api/v1/notifications`,
+      switchMap(() => this.http.get<PaginatedResponse<Notification>>(`${environment.apiUrl}/api/v1/notifications/myNotifications/${this.email}`,
         {
           headers: {
             Authorization: `Bearer ${this.token}`

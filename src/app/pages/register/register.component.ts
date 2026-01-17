@@ -81,6 +81,7 @@ export class RegisterComponent {
             title: 'Nuevo registro',
             message: `El usuario ${this.registerForm.value.email} se ha registrado.`,
             createdAt: new Date(),
+            userEmail: this.registerForm.value.email,
           };
           this.notifications.pushNotifications(apiNotification).subscribe({
             next: () => {},

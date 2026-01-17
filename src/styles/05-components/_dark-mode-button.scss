@@ -16,6 +16,11 @@
   width: 2.6rem;
 }
 
+.spacing-button {
+  margin-right: var(--spacing-10);
+  margin-left: var(--spacing-5);
+}
+
 .theme-btn img,
 .dark-mode-button img {
   display: block;

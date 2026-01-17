@@ -24,6 +24,7 @@ import {NotificationsService, Notification} from '../../services/notifications.s
 export class EditTaskComponent implements OnInit {
   taskForm: FormGroup;
   loading = false;
+  email = localStorage.getItem('email');
 
   constructor(
     private taskService: TaskService,
@@ -127,6 +128,7 @@ export class EditTaskComponent implements OnInit {
           title: 'Tarea actualizada',
           message: `La tarea "${payload.title}" se ha actualizado correctamente.`,
           createdAt: new Date(),
+          userEmail: this.email || '',
         };
         this.notifications.pushNotifications(apiNotification).subscribe({
           next: () => {},

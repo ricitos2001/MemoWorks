@@ -49,6 +49,7 @@
   display: flex;
   flex-direction: row;
   gap: var(--spacing-4);
+  flex-wrap: wrap;
 
   &-center {
     @include flex-center;

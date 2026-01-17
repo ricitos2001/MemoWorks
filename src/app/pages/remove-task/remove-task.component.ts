@@ -30,7 +30,6 @@ export class RemoveTaskComponent implements OnInit {
   private comm = inject(CommunicationService);
   private taskService = inject(TaskService);
   private notifications = inject(NotificationsService);
-
   email = localStorage.getItem('email');
 
   tasks = computed(() => this.tasksSignalStore.state().data);
@@ -69,6 +68,7 @@ export class RemoveTaskComponent implements OnInit {
           title: 'Tarea eliminada',
           message: `La tarea con id ${taskId} ha sido eliminada.`,
           createdAt: new Date(),
+          userEmail: this.email || '',
         };
         this.notifications.pushNotifications(apiNotification).subscribe({
           next: () => {},

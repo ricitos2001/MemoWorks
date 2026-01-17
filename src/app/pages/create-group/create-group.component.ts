@@ -32,6 +32,7 @@ export class CreateGroupComponent implements OnInit {
   userNotFound = false;
   userAlreadyAdded = false;
   adminUserId: number | null = null;
+  email = localStorage.getItem('email');
   @Output() submitting = new EventEmitter<boolean>();
 
   constructor(
@@ -147,6 +148,7 @@ export class CreateGroupComponent implements OnInit {
           title: 'Grupo creado',
           message: `La tarea "${payload.title}" se ha creado correctamente.`,
           createdAt: new Date(),
+          userEmail: this.email || '',
         };
         this.notifications.pushNotifications(apiNotification).subscribe({
           next: () => {},

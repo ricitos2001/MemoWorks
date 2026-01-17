@@ -34,14 +34,11 @@ export class AddTaskComponent implements OnInit {
   @Output() submitting = new EventEmitter<boolean>();
   @Output() cancel = new EventEmitter<void>();
   @Output() create = new EventEmitter<void>();
-
   taskForm: FormGroup;
   loading = false;
-
   groupUsers: any[] = [];
   currentGroupId: string | null = null;
-
-  /** 🔑 Estado de UI derivado (no mutable) */
+  email = localStorage.getItem('email');
   isAdmin$ = this.groupsStore.groups$.pipe(
     map(groups => {
       const group = groups[0];
@@ -155,17 +152,11 @@ export class AddTaskComponent implements OnInit {
 
     this.taskService.createTask(payload).subscribe({
       next: (createdTask) => {
-        console.debug('[AddTask] payload sent:', payload);
-        console.debug('[AddTask] server response:', createdTask);
-        // Usar la tarea devuelta por la API si existe, para obtener id y demás campos reales
         const taskToAdd = (createdTask && (createdTask as any).id) ? createdTask : payload;
-        // Sólo añadir al store si la tarea está asignada al usuario actual
         const currentUserId = localStorage.getItem('userId');
         const assigneeId = taskToAdd?.assigmentFor?.id != null ? String(taskToAdd.assigmentFor.id) : null;
         if (assigneeId && currentUserId && assigneeId === currentUserId) {
           this.tasksSignalStore.add(taskToAdd);
-        } else {
-          console.debug('[AddTask] tarea creada asignada a otro usuario, no se añade al store local');
         }
 
         this.comm.sendNotification({
@@ -179,6 +170,7 @@ export class AddTaskComponent implements OnInit {
           title: 'Tarea creada',
           message: `La tarea "${payload.title}" se ha creado correctamente.`,
           createdAt: new Date(),
+          userEmail: this.email || '',
         };
 
         this.notifications.pushNotifications(notification).subscribe();
