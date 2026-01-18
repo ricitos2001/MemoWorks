@@ -50,7 +50,7 @@ export class NotificationsService {
       .set('pageSize', String(pageSize));
 
     return this.http.get<PaginatedResponse<Notification>>(
-      `${environment.apiUrl}/api/v1/notifications`,
+      `${environment.apiUrl}/api/v1/notifications/myNotifications/${this.email}`,
       {
         headers: {
           Authorization: `Bearer ${this.token}`
