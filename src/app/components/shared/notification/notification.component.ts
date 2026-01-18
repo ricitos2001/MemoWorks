@@ -1,4 +1,4 @@
-import {Component, ElementRef, inject, OnDestroy, OnInit, ViewChild, signal} from '@angular/core';
+import {Component, ElementRef, inject, OnDestroy, OnInit, ViewChild, signal, ChangeDetectorRef} from '@angular/core';
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import {NotificationsService, Notification} from '../../../services/notifications.service';
 import {NotificationsStore} from '../../../stores/notifications.store';
@@ -16,7 +16,7 @@ import {NotificationsStore} from '../../../stores/notifications.store';
 export class NotificationComponent implements OnInit, OnDestroy {
   notificationsService = inject(NotificationsService);
   notificationsStore = inject(NotificationsStore);
-
+  cdr = inject(ChangeDetectorRef)
   state = signal<{ loading: boolean; data: Notification[]; page: number; eof: boolean }>({
     loading: false,
     data: [],
@@ -32,6 +32,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.notificationsStore.refresh();
     this.notificationsService.pollNotifications().subscribe(list => {
       const current = this.state().data;
       const ids = new Set(current.map(n => n.id));
@@ -39,7 +40,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
       if (newItems.length) {
         this.state.set({ ...this.state(), data: [...newItems, ...this.state().data] });
       }
-      this.notificationsStore.refresh();
+      this.cdr.detectChanges();
     });
 
     this.observer = new IntersectionObserver(entries => {
