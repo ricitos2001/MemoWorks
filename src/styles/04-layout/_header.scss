@@ -68,7 +68,7 @@
   width: 2.6rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-md)) {
   .header {
     font-size: var(--font-size-base);
     padding-bottom: var(--spacing-1);

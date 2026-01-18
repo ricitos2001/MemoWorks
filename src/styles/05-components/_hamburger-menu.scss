@@ -48,7 +48,7 @@
    Mobile styles (dropdown under header)
    ============================================================ */
 
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-md)) {
   .menu.open {
     align-items: stretch;
     min-width: 200px;

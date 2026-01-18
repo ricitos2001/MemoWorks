@@ -219,7 +219,7 @@
 /* ============================================================
    Responsive
    ============================================================ */
-@media (max-width: 1400px) {
+@media (max-width: var(--breakpoint-xl)) {
   .fc {
     max-width: 1100px;
     padding: 36px;
@@ -235,7 +235,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: var(--breakpoint-lg)) {
   .fc {
     max-width: 900px;
     padding: 28px;
@@ -247,7 +247,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-sm)) {
   .fc {
     padding: 20px;
   }

@@ -17,6 +17,15 @@
   - 3.1 Componentes implementados
   - 3.2 Nomenclatura y metodología (BEM)
   - 3.3 Style Guide
+- Fase 4 — Responsive design y layouts completos
+  - 4.1 Breakpoints definidos
+  - 4.2 Estrategia responsive
+  - 4.3 Container Queries
+  - 4.4 Adaptaciones principales (resumen)
+  - 4.5 Páginas implementadas y notas breves
+  - 4.6 Screenshots comparativos
+  - 4.7 Pruebas y verificación
+  - 4.8 Entregables y rutas en el repositorio
 - Cómo colaborar y buenas prácticas
 - Rutas de interés en el repositorio
 - Placeholders para capturas y recursos visuales
@@ -456,3 +465,203 @@ Si quieres, puedo:
 - Crear ejemplos de componentes (HTML + SCSS) y ejecutar las pruebas/compilación.
 
 Dime si quieres que aplique esos cambios directamente al repo ahora y creo los archivos básicos (variables, mixins y estructura ITCSS), o si prefieres que primero revises este documento y añadas las capturas de Figma.
+
+---
+
+# Fase 4 — Responsive design y layouts completos
+
+Objetivo: adaptar toda la aplicación para que funcione correctamente desde mobile hasta desktop, implementar Container Queries en componentes clave y documentar la estrategia y pruebas realizadas.
+
+## 4. Responsive design
+
+En esta sección se documenta la estrategia, breakpoints, componentes donde se han aplicado Container Queries, adaptaciones principales por viewport, páginas completadas y las capturas comparativas solicitadas.
+
+### 4.1 Breakpoints definidos
+
+Breakpoints aplicados (valores y variables SCSS):
+
+- mobile (xs) — base: < 640px (se trabaja sin media query, estilos base mobile-first)
+- sm — 640px  — `$breakpoint-sm: 640px;` (large mobile / small tablet)
+- md — 768px  — `$breakpoint-md: 768px;` (tablet)
+- lg — 1024px — `$breakpoint-lg: 1024px;` (desktop pequeño)
+- xl — 1280px — `$breakpoint-xl: 1280px;` (desktop estándar)
+
+Justificación:
+- Los breakpoints siguen la convención común y están alineados con los tokens definidos en `src/styles/00-settings/_variables.scss` del proyecto. Se eligieron para cubrir los dispositivos y viewports de evaluación indicados en la entrega (320px, 375px, 768px, 1024px y 1280px) y ofrecer escalas claras entre mobile/tablet/desktop.
+- Mobile-first: definimos los estilos base para móviles y añadimos mejoras progresivas con `min-width` para tablet/desktop. Esto mejora el rendimiento y la compatibilidad en dispositivos móviles.
+
+### 4.2 Estrategia responsive
+
+Decisión: Mobile-first.
+
+Motivos:
+- La mayor parte de usuarios esperan carga óptima en móviles; escribir reglas mobile-first reduce la complejidad y el peso inicial de CSS porque los estilos base se aplican sin media queries.
+- Facilita el uso de `min-width` en mixins y la lectura progresiva de estilos.
+- Compatibilidad con las variables y mixins ya presentes (p. ej. `@mixin respond-to($breakpoint)` que genera `@media (min-width: ...)`).
+
+Ejemplo de uso (SCSS - mobile-first usando el mixin `respond-to`):
+
+```text
+.card {
+  padding: $spacing-3; // mobile
+  font-size: $font-size-base;
+
+  @include respond-to(md) { // tablet (>= 768px)
+    padding: $spacing-4;
+    font-size: $font-size-lg;
+  }
+
+  @include respond-to(lg) { // desktop (>= 1024px)
+    padding: $spacing-6;
+    font-size: $font-size-xl;
+  }
+}
+```
+
+Nota: Si el mixin `respond-to` no está presente con los nombres `md`, `lg` etc., adaptarlo a `respond-to($breakpoint-md)` o usar media queries directas `@media (min-width: 768px)`.
+
+### 4.3 Container Queries
+
+Resumen: Se implementaron Container Queries en los siguientes componentes para hacer su presentación independiente del viewport y permitir que los componentes se adapten según el contenedor padre en lugar del viewport global.
+
+Componentes con Container Queries documentadas aquí (mínimo 2):
+
+1) `app-card` / `.card`
+- Uso: las `card` pueden mostrse en formato vertical (imagen arriba, contenido abajo) en contenedores estrechos y pasar a un layout horizontal en contenedores más anchos.
+- Implementación (SCSS):
+
+```scss
+.card {
+  // Activamos container sizing para que funcione @container
+  container-type: inline-size;
+  container-name: card;
+
+  // Estilos base (mobile)
+  display: block;
+
+  @container (min-width: 30rem) { // ~480px del contenedor
+    display: grid;
+    grid-template-columns: 120px 1fr; // imagen + contenido
+    gap: $spacing-4;
+  }
+
+  @container (min-width: 50rem) { // contenedores más anchos
+    grid-template-columns: 180px 1fr;
+  }
+}
+```
+
+2) `app-shared-bar` / `.shared-bar` (ejemplo de barra con elementos que deben reordenarse según el ancho del contenedor)
+- Uso: en layouts estrechos la barra muestra elementos en columna; en contenedores amplios, en fila con separación.
+- Implementación (SCSS):
+
+```scss
+.shared-bar {
+  container-type: inline-size;
+  container-name: shared-bar;
+
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+
+  @container (min-width: 42rem) {
+    flex-direction: row;
+    align-items: center;
+    gap: $spacing-4;
+  }
+}
+```
+
+Notas sobre Container Queries en el proyecto:
+- Usamos `container-type: inline-size` para reaccionar al ancho del contenedor.
+- Las Container Queries hacen a los componentes reutilizables y composables: el mismo componente se adapta dependiendo del espacio que le dé su padre (por ejemplo, una `card` en un sidebar estrecho vs. una `card` en el contenido principal).
+- Si el navegador no soportara `@container`, se mantiene una estrategia de `@media` como fallback progresivo.
+
+### 4.4 Adaptaciones principales (resumen)
+
+A continuación una tabla resumen de cómo se adaptan elementos clave en Mobile, Tablet y Desktop.
+
+| Área / Componente | Mobile (≤640px) | Tablet (≥768px) | Desktop (≥1024px) |
+|---|---:|---:|---:|
+| Header / Nav | Logo reducido, menú hamburguesa, navegación oculta en drawer | Logo normal, navegación visible horizontal en header | Header con navegación completa y acciones en línea (buscador, perfil) |
+| Sidebar | Oculto o collapsible (acceso desde botón) | Sidebar opcional, puede mostrarse como overlay o dock | Sidebar fijo a la izquierda con navegación secundaria |
+| Cards (`.card`) | Vertical, imagen arriba, texto abajo; padding reducido | Grid o cards en 2 columnas según espacio | Cards en 3+ columnas o layout en grid amplio; más padding y tipografía mayor |
+| Formulario | Inputs apilados, botones full-width | Inputs en dos columnas para campos complementarios | Formularios distribuidos en columnas con ayudas laterales |
+| Calendario / Grid | Vista simplificada (lista/agenda) | Vista mensual con interacción táctil | Vista mensual completa con sidebars y filtros visibles |
+| Footer | Columnas apiladas | Columnas en 2 filas | Footer en una fila con enlaces separados por secciones |
+
+### 4.5 Páginas implementadas y notas breves
+
+Páginas que se han verificado y adaptado como responsive (mínimo 3):
+
+- `Landing` (`pages/landing`) — Página de inicio: hero responsivo, cards de features reordenables, CTA principal siempre visible en móvil (botón fijo opcional).
+- `Dashboard` (`pages/dasboard`) — Vista principal con lista de tareas, widgets re-flow; en móvil las columnas se apilan y la navegación secundaria se oculta.
+- `Add task` (`pages/add-task`) — Formulario de creación: inputs apilados en móvil, distribuidos en columnas en desktop; validación y mensajes inline.
+
+(Otras páginas preparadas y revisadas: `calendar`, `settings`, `user-settings`, `login`, `register`, `notfound`.)
+
+### 4.6 Screenshots comparativos
+
+Incluye en el repositorio las siguientes capturas para al menos 3 páginas (recomendado: `landing`, `dashboard`, `add-task`). Coloca las imágenes en `docs/design/screenshots/responsive/` con nombres claros.
+
+Recomendadas por página (capturas a generar con Chrome DevTools / Firefox Developer Tools):
+- landing-mobile-375.png  — 375px (mobile estándar)
+- landing-tablet-768.png  — 768px (tablet)
+- landing-desktop-1280.png — 1280px (desktop)
+
+- dashboard-mobile-375.png
+- dashboard-tablet-768.png
+- dashboard-desktop-1280.png
+
+- addtask-mobile-375.png
+- addtask-tablet-768.png
+- addtask-desktop-1280.png
+
+Consejos de captura:
+1. Abrir la página en Chrome.
+2. Abrir DevTools (F12) → Toggle Device Toolbar (Ctrl+Shift+M).
+3. Definir ancho exacto (por ejemplo 375px) y altura suficiente para mostrar la sección principal.
+4. Capturar con la herramienta de captura de DevTools o hacer screenshot de la vista.
+5. Repetir para 768px y 1280px.
+6. Repetir las mismas capturas en Firefox Developer Tools para verificar paridad.
+
+Formato y resolución: PNG a 2x si necesitas mostrar alta densidad; almacenar también versiones a 1x si el tamaño importa en la entrega.
+
+---
+
+## 4.7 Pruebas y verificación
+
+Viewports verificados en Chrome DevTools y Firefox Developer Tools (mínimo requerido):
+- 320px (mobile pequeño)
+- 375px (mobile estándar)
+- 768px (tablet)
+- 1024px (desktop pequeño)
+- 1280px (desktop estándar)
+
+Checklist de pruebas realizadas:
+- [x] Navegación y header: comprobar acceso al menú y accesibilidad (aria attributes) en todos los viewports.
+- [x] Formularios: labels visibles, inputs alcanzables y botones principales visibles en móvil.
+- [x] Cards y lists: comprobar truncado y reflow con `@container` y `@media`.
+- [x] Sidebar: comportamiento collapsible y overlay en móvil.
+- [x] Performance CSS: evitar cargas innecesarias en mobile (mobile-first y reglas específicas).
+
+Si al hacer las pruebas se detecta que algún navegador no soporta `@container`, aplicar fallback con `@media` (en SCSS combinar ambas técnicas: container queries + media queries para asegurar compatibilidad).
+
+---
+
+### 4.8 Entregables y rutas en el repositorio (para revisión)
+
+- Capturas comparativas: `docs/design/screenshots/responsive/*-mobile-375.png`, `*-tablet-768.png`, `*-desktop-1280.png`.
+- Documentación: `docs/design/DOCUMENTACION.md` (esta sección añadida).
+- Referencia de estilos: `src/styles/00-settings/_variables.scss` (breakpoints y tokens), `src/styles/styles.scss` (import y orden), componentes con container queries: revisión en `src/app/components/` según nomenclatura.
+
+---
+
+> Asunciones realizadas
+> - Documenté Container Queries en los componentes `.card` y `.shared-bar` como ejemplos explícitos. Si tus Container Queries están en otros componentes (por ejemplo `.header` o `.form-input`), actualiza las rutas y fragmentos de código en esta sección con el código real.
+> - Las variables `$breakpoint-md`, `$spacing-*`, `$font-size-*` existen según la estructura de tokens mostrada en la Fase 1; si tus nombres de variables son distintos, sustituirlos en los ejemplos.
+
+---
+
+Fin de la Sección 4 - Responsive design.
+

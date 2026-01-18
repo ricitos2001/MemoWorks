@@ -109,7 +109,7 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-md)) {
   .box {
     width: 5.25rem;
     height: 3rem;
