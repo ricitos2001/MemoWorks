@@ -133,6 +133,10 @@
   --transition-slow: 500ms ease-in-out;
   --tray-offset-x: 4rem;
   --tray-gap: 0.5rem;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
 }
 
 *,
@@ -486,7 +490,7 @@ form {
   width: 2.6rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-md)) {
   .header {
     font-size: var(--font-size-base);
     padding-bottom: var(--spacing-1);
@@ -586,7 +590,7 @@ form {
   text-decoration: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-md)) {
   .footer {
     align-items: center;
     flex-direction: column;
@@ -659,7 +663,7 @@ form {
 /* ============================================================
    Responsive
    ============================================================ */
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-md)) {
   .optionButton,
   .addButton,
   .editButton,
@@ -929,7 +933,7 @@ app-form-input.compact textarea {
 /* ============================================================
    Mobile styles (dropdown under header)
    ============================================================ */
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-md)) {
   .menu.open {
     align-items: stretch;
     min-width: 200px;
@@ -1126,7 +1130,7 @@ app-form-input.compact textarea {
 /* ============================================================
    Responsive
    ============================================================ */
-@media (min-width: 480px) {
+@media (min-width: var(--breakpoint-sm)) {
   .modal__container {
     border-radius: 12px;
     max-width: 820px;
@@ -1492,7 +1496,7 @@ h6[id],
 /* ============================================================
    Responsive: móviles (≤720px)
    ============================================================ */
-@media (max-width: 720px) {
+@media (max-width: var(--breakpoint-md)) {
   .landing__section {
     display: flex;
     flex-direction: column;
@@ -1714,7 +1718,7 @@ h6[id],
 /* ============================================================
    Responsive: max-width 720px
    ============================================================ */
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-md)) {
   .settings {
     flex-direction: column;
     align-items: center;
@@ -2078,7 +2082,7 @@ h6[id],
   margin: 0 0 var(--spacing-4);
 }
 
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-md)) {
   .task-details {
     align-items: flex-start;
     padding: var(--spacing-4);
@@ -2098,7 +2102,7 @@ h6[id],
     height: 140px;
   }
 }
-@media (max-width: 420px) {
+@media (max-width: var(--breakpoint-sm)) {
   .tasks-grid {
     grid-template-columns: 1fr;
   }
@@ -2534,7 +2538,7 @@ h6[id],
 /* ============================================================
    Responsive
    ============================================================ */
-@media (max-width: 1400px) {
+@media (max-width: var(--breakpoint-xl)) {
   .fc {
     max-width: 1100px;
     padding: 36px;
@@ -2547,7 +2551,7 @@ h6[id],
     font-size: 2rem;
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: var(--breakpoint-lg)) {
   .fc {
     max-width: 900px;
     padding: 28px;
@@ -2557,7 +2561,7 @@ h6[id],
     margin: 8px 0;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-sm)) {
   .fc {
     padding: 20px;
   }
@@ -2794,7 +2798,7 @@ h6[id],
 .register-page {
   /* Ajustes responsivos */
 }
-@media (min-width: 900px) {
+@media (min-width: var(--breakpoint-md)) {
   .register-page .grid-center {
     grid-template-columns: 1fr;
   }
@@ -2802,7 +2806,7 @@ h6[id],
     grid-template-columns: 1fr 1fr;
   }
 }
-@media (max-width: 899px) {
+@media (max-width: var(--breakpoint-md)) {
   .register-page .fieldset {
     padding: 24px;
   }
@@ -3145,7 +3149,7 @@ h6[id],
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-md)) {
   .box {
     width: 5.25rem;
     height: 3rem;
