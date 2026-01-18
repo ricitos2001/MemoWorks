@@ -486,7 +486,7 @@ form {
   width: 2.6rem;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .header {
     font-size: var(--font-size-base);
     padding-bottom: var(--spacing-1);
@@ -586,7 +586,7 @@ form {
   text-decoration: none;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .footer {
     align-items: center;
     flex-direction: column;
@@ -659,7 +659,7 @@ form {
 /* ============================================================
    Responsive
    ============================================================ */
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .optionButton,
   .addButton,
   .editButton,
@@ -929,7 +929,7 @@ app-form-input.compact textarea {
 /* ============================================================
    Mobile styles (dropdown under header)
    ============================================================ */
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .menu.open {
     align-items: stretch;
     min-width: 200px;
@@ -1714,7 +1714,7 @@ h6[id],
 /* ============================================================
    Responsive: max-width 720px
    ============================================================ */
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .settings {
     flex-direction: column;
     align-items: center;
@@ -2078,7 +2078,7 @@ h6[id],
   margin: 0 0 var(--spacing-4);
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .task-details {
     align-items: flex-start;
     padding: var(--spacing-4);
@@ -2557,7 +2557,7 @@ h6[id],
     margin: 8px 0;
   }
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .fc {
     padding: 20px;
   }
@@ -3145,7 +3145,7 @@ h6[id],
 }
 
 /* Responsive */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .box {
     width: 5.25rem;
     height: 3rem;
