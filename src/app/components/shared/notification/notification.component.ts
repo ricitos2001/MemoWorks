@@ -40,7 +40,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
       if (newItems.length) {
         this.state.set({ ...this.state(), data: [...newItems, ...this.state().data] });
       }
-      this.cdr.detectChanges();
     });
 
     this.observer = new IntersectionObserver(entries => {
