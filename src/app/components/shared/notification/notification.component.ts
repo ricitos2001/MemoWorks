@@ -32,7 +32,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.notificationsStore.refresh();
     this.notificationsService.pollNotifications().subscribe(list => {
       const current = this.state().data;
       const ids = new Set(current.map(n => n.id));
@@ -40,6 +39,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
       if (newItems.length) {
         this.state.set({ ...this.state(), data: [...newItems, ...this.state().data] });
       }
+      this.notificationsStore.refresh();
     });
 
     this.observer = new IntersectionObserver(entries => {
