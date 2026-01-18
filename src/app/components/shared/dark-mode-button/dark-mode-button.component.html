@@ -1,5 +1,4 @@
 <button (click)="toggleTheme()" [class.dark]="isDarkMode" class="theme-btn">
-  <span *ngIf="!isDarkMode"><img src="../../../../assets/img/Sun.svg" alt="light"></span>
-  <span *ngIf="isDarkMode"><img src="../../../../assets/img/Moon.svg" alt="dark"></span>
+  <span *ngIf="!isDarkMode"><img src="../../../../assets/img/Sun.svg" alt="light" loading="lazy" decoding="async"></span>
+  <span *ngIf="isDarkMode"><img src="../../../../assets/img/Moon.svg" alt="dark" loading="lazy" decoding="async"></span>
 </button>
-

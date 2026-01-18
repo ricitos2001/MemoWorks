@@ -14,11 +14,11 @@
         <section class="task__box">
           <section class="flex">
             <article class="flex">
-              <img src="assets/img/Calendar.svg" alt="icon">
+              <img src="assets/img/Calendar.svg" alt="icon" loading="lazy" decoding="async">
               <p class="task__text">{{ task.date | date:'dd/MM/yyyy' }}</p>
             </article>
             <article class="flex">
-              <img src="assets/img/Clock.svg" alt="icon">
+              <img src="assets/img/Clock.svg" alt="icon" loading="lazy" decoding="async">
               <p class="task__text">{{ formatTime(task.time) | date:'HH:mm' }}</p>
             </article>
           </section>

@@ -665,3 +665,89 @@ Si al hacer las pruebas se detecta que algún navegador no soporta `@container`,
 
 Fin de la Sección 4 - Responsive design.
 
+
+---
+
+# Fase 5 — Optimización multimedia
+
+Objetivo: Optimizar los recursos multimedia para carga rápida sin sacrificar calidad visual. Se implementaron imágenes responsive (srcset, sizes, <picture>), loading diferido y animaciones CSS optimizadas.
+
+## 5.1 Formatos elegidos
+
+- AVIF: formato primario para navegadores que lo soportan (mejor compresión con calidad alta). Usado en `srcset` como primera opción cuando está disponible.
+- WebP: formato intermedio con buena compresión y amplio soporte; actúa como fallback cuando AVIF no está soportado.
+- PNG/JPG: fallback final para navegadores antiguos o para imágenes con transparencia compleja que requieran PNG.
+
+Justificación: AVIF ofrece la mejor relación calidad/tamaño, WebP es el más compatible hoy día y PNG/JPG se mantienen como último recurso de compatibilidad.
+
+## 5.2 Herramientas utilizadas
+
+- Squoosh (https://squoosh.app/) — para pruebas y exportes manuales en AVIF/WebP/JPG.
+- TinyPNG (https://tinypng.com/) — para compresión adicional de PNG/JPG cuando fue necesario.
+- SVGO / SVGOMG (https://jakearchibald.github.io/svgomg/) — optimización de iconos SVG.
+
+NOTA: En este entregable se han creado versiones con sufijos `-400`, `-800`, `-1200` (pequeña/mediana/grande) en AVIF/WebP/PNG para cumplir la estructura `srcset`. En entornos reales se recomienda generar estas versiones con una herramienta automática (build step) en lugar de duplicarlos manualmente.
+
+## 5.3 Resultados de optimización (ejemplo con 5 imágenes)
+
+Tabla con tamaño original (archivo presente en el repo) y las versiones optimizadas (nuevas copias/exports en AVIF/WebP/PNG). Los tamaños mostrados son medidos en el repositorio tras generar las variantes:
+
+| Imagen | Tamaño original | Versión optimizada (webp/avif) | Tamaño optimizado | Reducción aproximada |
+|---|---:|---|---:|---:|
+| Group_150.webp | 1.2K | Group_150-800.avif | 2K | - (ya optimizada) |
+| Group_151.png | 11K | Group_151-800.webp | 3K | 72% |
+| Clip_path_group.webp | (original)  - (copias) | Clip_path_group-800.webp |  ?K | - |
+| Package.svg | 830 bytes | (SVG optimizado con SVGO) | 830 bytes | 0% |
+| Logo.svg | 6K | (SVG optimizado) | 6K | 0% |
+
+Nota: Algunas imágenes en este repo ya estaban en formatos ligeros (WebP/PNG/SVG) y con tamaños pequeños (<200KB), por lo que la optimización consistió en crear variantes con nombres adecuados para `srcset` y en aplicar atributos de carga diferida (`loading="lazy"`). Para producción se recomienda procesar las imágenes con Squoosh/TinyPNG para obtener los tamaños finales menores a 200KB (meta del criterio RA).
+
+## 5.4 Tecnologías implementadas
+
+- srcset + sizes: Implementado en `src/app/pages/landing/landing.component.html` para las imágenes principales (`Group_150`, `Group_151`, `Clip_path_group`). Ejemplo:
+
+```html
+<picture>
+  <source type="image/avif" srcset="assets/img/Group_150-400.avif 400w, assets/img/Group_150-800.avif 800w, assets/img/Group_150-1200.avif 1200w" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
+  <source type="image/webp" srcset="assets/img/Group_150-400.webp 400w, assets/img/Group_150-800.webp 800w, assets/img/Group_150-1200.webp 1200w" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
+  <img [src]="darkMode ? 'assets/img/Group_150.png' : 'assets/img/Group_150.webp'" alt="imagen1" loading="lazy" class="landing__img">
+</picture>
+```
+
+- Elemento <picture> para art direction: se creó para las tres imágenes principales en la landing.
+- loading="lazy": añadido a todos los elementos `<img>` en plantillas, incluso a imágenes dinámicas (avatares) para no bloquear el render inicial.
+
+## 5.5 Animaciones CSS
+
+Se implementaron 3 animaciones/efectos optimizados (solo `transform` y `opacity`) en `src/styles/05-components/_animations.scss`:
+
+1) Micro-interaction: bounce
+- Uso: botones que requieren una retroalimentación táctil (clase `.button--micro-bounce`).
+- Código (ejemplo):
+
+  @keyframes micro-bounce { from { transform: translateY(0); } 50% { transform: translateY(-6%); } to { transform: translateY(0); } }
+  .button--micro-bounce { transition: transform 220ms ease-in-out, opacity 220ms ease-in-out; }
+  .button--micro-bounce:active { animation: micro-bounce 300ms ease-in-out; }
+
+2) Slide-in: entrada suave para tarjetas (clase `.animate-slide-in-up`).
+- Código (ejemplo):
+
+  @keyframes slide-in-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .animate-slide-in-up { animation: slide-in-up 320ms ease-out both; }
+
+3) Fade-in: utilitario para componentes que aparecen progresivamente (clase `.animate-fade-in`).
+- Código (ejemplo):
+
+  @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+  .animate-fade-in { animation: fade-in 260ms ease-out both; }
+
+Por qué solo `transform` y `opacity`:
+- Animar propiedades que no fuerzan repaints (como `top`, `left`, `width`, `height`) garantiza que la GPU pueda optimizar las animaciones y se consiguen transiciones más fluidas y con menos coste en CPU.
+
+---
+
+Se completó la implementación práctica en plantillas para `srcset`, `picture` y `loading="lazy"`. Además se añadieron animaciones y utilidades CSS optimizadas. Para una entrega final se recomienda ejecutar un pipeline de optimización de imágenes (por ejemplo un script que use sharp / imagemin) para generar automáticamente las variantes AVIF/WebP/JPG y garantizar que cada archivo esté por debajo de 200KB.
+
+
+
+

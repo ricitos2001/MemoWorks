@@ -22,7 +22,7 @@
     </article>
   </section>
   <article class="grid-center">
-    <img [src]="avatar || 'assets/img/logo.svg'" (error)="onAvatarImageError($event)" alt="user" class="settings__img-profile">
+    <img [src]="avatar || 'assets/img/logo.svg'" (error)="onAvatarImageError($event)" alt="user" class="settings__img-profile" loading="lazy" decoding="async">
     <p class="settings__texto">imagen de perfil</p>
     <input #fileInput type="file" accept="image/*" style="display:none" (change)="onFileSelected($event)" [attr.data-file-input-present]="!!fileInput" />
     <app-button (click)="editImageProfile()">editar imagen de perfil</app-button>

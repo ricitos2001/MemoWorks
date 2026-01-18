@@ -1204,6 +1204,61 @@ body.modal-open {
     transform: scale(1) translateY(0);
   }
 }
+/* Animaciones optimizadas - solo transform y opacity */
+/* 1) Micro-interaction: bounce (pequeño movimiento para botones) */
+@keyframes micro-bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.button--micro-bounce {
+  transition: transform 220ms ease-in-out, opacity 220ms ease-in-out;
+}
+
+.button--micro-bounce:active {
+  animation: micro-bounce 300ms ease-in-out;
+}
+
+/* 2) Slide-in (entrada suave de elementos) */
+@keyframes slide-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-slide-in-up {
+  animation: slide-in-up 320ms ease-out both;
+}
+
+/* 3) Fade-in utility */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate-fade-in {
+  animation: fade-in 260ms ease-out both;
+}
+
+/* Hover/focus transitions (solo transform y opacity) */
+.transition-compact {
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
+/* Ejemplos de uso: aplicar .transition-compact a .card, .button, .icon etc. */
 /* ============================================================
    Tabs container
    ============================================================ */

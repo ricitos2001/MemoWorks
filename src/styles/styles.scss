@@ -28,6 +28,7 @@
 @use '05-components/hamburger-menu' as *;
 @use '05-components/modal' as *;
 @use '05-components/spinner' as *;
+@use '05-components/animations' as *;
 @use '05-components/tabs' as *;
 @use '05-components/toast' as *;
 @use '05-components/tooltip' as *;
@@ -48,4 +49,3 @@
 @use '07-pages/forms' as *;
 @use '07-pages/dashboard' as *;
 @use '07-pages/styles-guide' as *;
-
