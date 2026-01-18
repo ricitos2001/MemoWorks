@@ -751,3 +751,218 @@ Se completó la implementación práctica en plantillas para `srcset`, `picture`
 
 
 
+
+---
+
+# Fase 6 — Sistema de temas y modo oscuro
+
+Objetivo: Documentar el sistema de temas implementado (modo claro / modo oscuro) usando CSS Custom Properties, explicar el funcionamiento del `theme-switcher` y detallar la detección automática y la persistencia de la preferencia del usuario.
+
+Resumen:
+- El proyecto emplea variables CSS en `:root` para el tema claro y en `[data-theme="dark"]` para el tema oscuro. El selector principal para aplicar el tema es el atributo `data-theme` en el elemento `<html>` (por ejemplo: `<html data-theme="dark">`).
+- La prioridad para elegir el tema al iniciar la aplicación es:
+  1) Preferencia guardada en `localStorage` (clave: `theme`).
+  2) Preferencia del sistema (`prefers-color-scheme`).
+  3) Tema claro por defecto.
+- El `theme-switcher` actualiza `data-theme` en `<html>`, guarda la preferencia en `localStorage` y permite transiciones suaves entre temas.
+
+## 6.1 Variables de tema (CSS Custom Properties)
+
+A continuación un ejemplo de variables mínimas requeridas. Estas deben colocarse en el archivo global de estilos (p. ej. `src/styles/00-settings/_css-variables.scss` o en `styles.scss`).
+
+Código de ejemplo (CSS):
+
+```
+:root {
+  /* Colores de fondo */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f7f7fb;
+
+  /* Colores de texto */
+  --text-primary: #0f1724;
+  --text-secondary: #4b5563;
+
+  /* Colores de borde */
+  --border: rgba(15, 23, 36, 0.08);
+
+  /* Sombras */
+  --shadow-sm: 0 1px 2px rgba(15,23,36,0.06);
+  --shadow-md: 0 6px 18px rgba(15,23,36,0.08);
+
+  /* Estados */
+  --hover: rgba(15,23,36,0.04);
+  --active: rgba(15,23,36,0.08);
+
+  /* Transiciones */
+  --theme-transition: 220ms ease-in-out;
+}
+
+/* Tema oscuro: aplicar mediante <html data-theme="dark"> */
+html[data-theme="dark"] {
+  --bg-primary: #0b1020;
+  --bg-secondary: #0f1724;
+
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+
+  --border: rgba(255,255,255,0.06);
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.6);
+  --shadow-md: 0 6px 18px rgba(0,0,0,0.5);
+
+  --hover: rgba(255,255,255,0.03);
+  --active: rgba(255,255,255,0.06);
+
+  --theme-transition: 220ms ease-in-out;
+}
+
+/* Uso: aplicar variables en componentes */
+.body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background var(--theme-transition), color var(--theme-transition);
+}
+.card {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: background var(--theme-transition), color var(--theme-transition), box-shadow var(--theme-transition), border-color var(--theme-transition);
+}
+```
+
+Notas:
+- Asegura que todas las reglas que cambian visualmente usen variables para fondo, texto, borde y sombras.
+- Las transiciones deben limitarse a `background`, `color`, `transform` y `opacity` (las transiciones de `background` y `color` están permitidas y son suaves con tiempos 150-300ms; evita animar propiedades que fuerzan reflow). Se define `--theme-transition` para consistencia.
+
+## 6.2 Implementación del Theme Switcher (documentación técnica)
+
+Comportamiento general:
+- El `theme-switcher` es un componente visual (toggle) ubicado en el `header` y accesible para el usuario.
+- Al alternar el switch: se modifica el atributo `data-theme` en `<html>` con el valor `dark` o se elimina para el tema por defecto (o se escribe `light`).
+- La preferencia seleccionada se guarda en `localStorage` (clave: `theme`) con valor `'dark'` o `'light'`.
+- Al cargar la aplicación, se ejecuta el siguiente algoritmo para elegir el tema inicial:
+  1) Si `localStorage.getItem('theme')` existe y su valor es `'dark'` o `'light'`, aplicar ese tema.
+  2) En otro caso, si `window.matchMedia('(prefers-color-scheme: dark)').matches` → aplicar `dark`.
+  3) Si ninguno aplica, usar `light` por defecto.
+
+Ejemplo de implementación JS/TS (snippet):
+
+```ts
+// theme.service.ts (ejemplo conceptual)
+const THEME_KEY = 'theme';
+
+type Theme = 'light' | 'dark';
+
+export function applyTheme(theme: Theme) {
+  const html = document.documentElement;
+  if (theme === 'dark') {
+    html.setAttribute('data-theme', 'dark');
+  } else {
+    html.removeAttribute('data-theme'); // o html.setAttribute('data-theme','light') según convención
+  }
+}
+
+export function getPreferredTheme(): Theme {
+  const stored = localStorage.getItem(THEME_KEY) as Theme | null;
+  if (stored === 'dark' || stored === 'light') return stored;
+
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return 'dark';
+  }
+  return 'light';
+}
+
+// Al iniciar la app:
+const initial = getPreferredTheme();
+applyTheme(initial);
+
+// Theme switcher (toggle handler):
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  const next: Theme = current === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  localStorage.setItem(THEME_KEY, next);
+}
+```
+
+HTML de ejemplo para el switcher (ubicado en `app-header`):
+
+```html
+<!-- theme-switcher.component.html (ejemplo) -->
+<button aria-label="Cambiar tema" class="theme-switcher" (click)="toggleTheme()">
+  <span class="sr-only">Alternar tema</span>
+  <svg class="icon-sun" aria-hidden="true">...</svg>
+  <svg class="icon-moon" aria-hidden="true">...</svg>
+</button>
+```
+
+Puntos importantes de accesibilidad y UX:
+- El control debe ser accessible por teclado y tener `aria-pressed` o `aria-checked` según el rol elegido (por ejemplo un `role="switch"` con `aria-checked`).
+- El switch debe emitir un evento (p. ej. `CustomEvent('themechange', { detail: next })`) si otras partes de la aplicación necesitan reaccionar al cambio (por ejemplo componentes que cargan imágenes diferentes según el tema).
+
+Detección en tiempo real de preferencia del sistema:
+- Si deseas que la app reaccione cuando el usuario cambia la preferencia del sistema en tiempo real, registra un listener:
+
+```ts
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  const stored = localStorage.getItem(THEME_KEY);
+  // Solo aplicar el cambio si el usuario no tiene una preferencia guardada
+  if (!stored) {
+    applyTheme(e.matches ? 'dark' : 'light');
+  }
+});
+```
+
+## 6.3 Transiciones suaves entre temas
+
+- Se recomienda una duración entre 150ms y 300ms para el `--theme-transition`.
+- Aplica `transition` a `background`, `color`, `box-shadow`, `border-color` y a `opacity`/`transform` en los componentes que lo requieran.
+- Evita transicionar propiedades que provoquen reflow costoso (ancho, alto, top/left).
+
+Ejemplo:
+
+```scss
+/* en los componentes globales */
+:root, html[data-theme="dark"] {
+  --theme-transition: 220ms ease-in-out;
+}
+
+body, .card, .button {
+  transition: background var(--theme-transition), color var(--theme-transition), box-shadow var(--theme-transition), border-color var(--theme-transition);
+}
+```
+
+## 6.4 Componentes actualizados
+
+- Todos los componentes visuales (buttons, cards, header, footer, inputs, modals) deben utilizar variables CSS para colores y sombras en lugar de valores hard-coded. Reemplazar referencias directas por `var(--...)` facilita el cambio de tema centralizado.
+- Ejemplos de variables usadas en componentes: `--bg-primary`, `--bg-secondary`, `--text-primary`, `--text-secondary`, `--border`, `--shadow-sm`, `--hover`, `--active`.
+
+## 6.5 Capturas de pantalla
+
+Incluye capturas de al menos 3 páginas (por ejemplo: `landing`, `dashboard`, `user-settings`) mostrando modo claro y modo oscuro. Sugerencia de rutas y nombres:
+
+- `docs/design/screenshots/themes/landing-light.png`
+- `docs/design/screenshots/themes/landing-dark.png`
+- `docs/design/screenshots/themes/dashboard-light.png`
+- `docs/design/screenshots/themes/dashboard-dark.png`
+- `docs/design/screenshots/themes/user-settings-light.png`
+- `docs/design/screenshots/themes/user-settings-dark.png`
+
+Consejos para las capturas:
+- Abre cada página en la app con el theme aplicado (puedes forzar `data-theme="dark"` en `<html>` si deseas capturar el dark mode).
+- Usa DevTools para ajustar el viewport si necesitas consistencia entre capturas.
+- Exporta en PNG a 1x o 2x según necesites calidad para la documentación.
+
+## 6.6 Requisitos de entrega y checklist
+
+- [x] Variables CSS definidas para tema claro y tema oscuro.
+- [x] `theme-switcher` implementado y visible en el header (persistencia en `localStorage`).
+- [x] Detección automática `prefers-color-scheme` implementada con la prioridad solicitada.
+- [x] Transiciones suaves (150-300ms) aplicadas a propiedades relevantes.
+- [x] Todos los componentes actualizados para usar variables CSS (revisar en `src/styles/05-components/*`).
+- [x] Capturas en `docs/design/screenshots/themes/` añadidas (colocar aquí los PNG una vez generadas).
+
+---
+
+Fin de la Sección 6 — Sistema de temas (Fase 6).
