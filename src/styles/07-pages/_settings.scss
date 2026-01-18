@@ -182,6 +182,13 @@
   padding: var(--spacing-4);
 }
 
+@media (max-width: var(--breakpoint-lg)) {
+  .settings__familiar-group-info {
+    border-right: none;
+    border-bottom: 0.25rem solid var(--color-primary-1);
+  }
+}
+
 /* ============================================================
    Responsive: max-width 720px
    ============================================================ */
