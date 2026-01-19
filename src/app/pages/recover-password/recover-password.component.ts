@@ -1,15 +1,23 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import {AuthService} from '../../services/auth.service';
-import {Router} from '@angular/router';
-import {ButtonComponent} from '../../components/shared/button/button.component';
-import {FormInputComponent} from '../../components/shared/form-input/form-input.component';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {passwordStrength} from '../../validators/password-strength.validator';
-import {passwordMatch} from '../../validators/password-match.validator';
-import {NgIf} from '@angular/common';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
+import { NgIf } from '@angular/common';
+
+import { ButtonComponent } from '../../components/shared/button/button.component';
+import { FormInputComponent } from '../../components/shared/form-input/form-input.component';
+
+import { PasswordResetService } from '../../services/password-reset.service';
+import { passwordStrength } from '../../validators/password-strength.validator';
+import { passwordMatch } from '../../validators/password-match.validator';
 
 @Component({
   selector: 'app-recover-password',
+  standalone: true,
   imports: [
     ButtonComponent,
     FormInputComponent,
@@ -17,51 +25,127 @@ import {NgIf} from '@angular/common';
     NgIf
   ],
   templateUrl: './recover-password.component.html',
-  styleUrl: '../../../styles/styles.css',
+  styleUrl: '../../../styles/styles.css'
 })
+export class RecoverPasswordComponent implements OnInit {
 
-export class RecoverPasswordComponent {
   @Output() authSuccess = new EventEmitter<void>();
 
   submitted = false;
+  tokenValid = false;
+  token?: string;
+  message?: string;
+  error?: string;
 
-  recoverPasswordForm: FormGroup;
+  recoverPasswordForm!: FormGroup;
 
   constructor(
-    private authService: AuthService,
-    private router: Router,
     private fb: FormBuilder,
-  ) {
-    this.recoverPasswordForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, passwordStrength()]],
-      newPassword: ['', [Validators.required, passwordStrength()]],
-      confirmPassword: ['', Validators.required]
-    }, { validators: passwordMatch('newPassword', 'confirmPassword') });
+    private passwordResetService: PasswordResetService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.token = this.route.snapshot.queryParamMap.get('token') ?? undefined;
+
+    if (this.token) {
+      this.verifyToken(this.token);
+    } else {
+      this.initEmailForm();
+    }
   }
 
-  onSubmit(event: Event) {
+  /* =========================
+     FORMULARIOS
+     ========================= */
+
+  private initEmailForm(): void {
+    this.recoverPasswordForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]]
+    });
+  }
+
+  private initResetForm(): void {
+    this.recoverPasswordForm = this.fb.group(
+      {
+        newPassword: ['', [Validators.required, passwordStrength()]],
+        confirmPassword: ['', Validators.required]
+      },
+      { validators: passwordMatch('newPassword', 'confirmPassword') }
+    );
+  }
+
+  /* =========================
+     TOKEN
+     ========================= */
+
+  private verifyToken(token: string): void {
+    this.passwordResetService.verifyToken(token).subscribe({
+      next: res => {
+        if (!res.valid) {
+          this.router.navigate(['/invalid-token']);
+          return;
+        }
+        this.tokenValid = true;
+        this.initResetForm();
+      },
+      error: () => this.router.navigate(['/invalid-token'])
+    });
+  }
+
+  /* =========================
+     SUBMIT
+     ========================= */
+
+  onSubmit(event: Event): void {
     event.preventDefault();
-    console.log('Formulario enviado sin recarga');
+
     if (this.recoverPasswordForm.invalid) {
       this.recoverPasswordForm.markAllAsTouched();
       return;
     }
+
     this.submitted = true;
-    this.authService.login(this.recoverPasswordForm).subscribe({
-      next: (res) => {
-        console.log(res);
-        localStorage.setItem('token', res.token);
-        this.authService.getUserIdFromToken();
-        this.authService.saveToken(res.token);
-        this.authService.loggedInSubject.next(true);
-        this.authSuccess.emit();
-        // navegación delegada al componente padre
+    this.error = undefined;
+    this.message = undefined;
+
+    if (!this.token) {
+      this.sendRecoveryEmail();
+    } else {
+      this.resetPassword();
+    }
+  }
+
+  private sendRecoveryEmail(): void {
+    const { email } = this.recoverPasswordForm.value;
+
+    this.passwordResetService.forgotPassword({ email }).subscribe({
+      next: res => {
+        this.message = res.message;
+        this.submitted = false;
       },
-      error: (err) => {
-        console.error('Error en login', err);
+      error: () => {
+        this.error = 'No se pudo procesar la solicitud';
+        this.submitted = false;
       }
     });
   }
-}
 
+  private resetPassword(): void {
+    const { newPassword } = this.recoverPasswordForm.value;
+
+    this.passwordResetService
+      .resetPassword({ token: this.token!, newPassword })
+      .subscribe({
+        next: res => {
+          this.message = res.message;
+          setTimeout(() => this.router.navigate(['/login']), 2000);
+        },
+        error: () => {
+          this.error = 'No se pudo actualizar la contraseña';
+          this.submitted = false;
+        }
+      });
+  }
+}
