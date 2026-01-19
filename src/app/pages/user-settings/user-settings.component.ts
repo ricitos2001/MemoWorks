@@ -71,6 +71,7 @@ export class UserSettingsComponent implements OnInit {
     this.userService.getUser(this.email).subscribe({
       next: user => {
         this.user = user;
+        // Cargar avatar: si ya existe en localStorage, loadAvatar omitirá la petición remota.
         this.avatarService.loadAvatar(this.user.id);
         this.cd.detectChanges()
       },
@@ -81,7 +82,8 @@ export class UserSettingsComponent implements OnInit {
   private reloadAvatar(): void {
     if (!this.user?.id) return;
 
-    this.avatarService.loadAvatar(this.user.id);
+    // Forzar fetch remoto para asegurarnos de tener la versión actualizada tras cambios.
+    this.avatarService.loadAvatar(this.user.id, true);
   }
 
   editImageProfile(): void {

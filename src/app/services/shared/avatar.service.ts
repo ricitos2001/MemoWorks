@@ -111,7 +111,7 @@ export class AvatarService {
     }
   }
 
-  async loadAvatar(userId: number): Promise<void> {
+  async loadAvatar(userId: number, forceFetch: boolean = false): Promise<void> {
     if (!userId) return;
 
     let cached: string | null = null;
@@ -125,6 +125,22 @@ export class AvatarService {
       console.warn('[AvatarService] no se pudo leer localStorage', e);
     }
 
+    // Si hay un avatar cacheado y no se fuerza fetch, evitamos la petición al servidor.
+    if (cached && !forceFetch) {
+      console.info('[AvatarService] avatar cacheado encontrado, omitiendo petición remota para userId=', userId);
+      return;
+    }
+
+    // Evitar hacer la petición si no hay token (evita 401 innecesarios en la consola).
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.info('[AvatarService] no hay token; se omite petición remota para avatar userId=', userId);
+      if (!cached) this.avatarSubject.next(null);
+      return;
+    }
+
+    // Asegurarse de que UserService usa el token más reciente almacenado
+    try { (this.userService as any).token = token; } catch (e) { /* ignore */ }
     this.userService.getImageProfile(userId).subscribe({
       next: async (blob: Blob) => {
         try {
@@ -133,10 +149,8 @@ export class AvatarService {
             if (!cached) this.avatarSubject.next(null);
             return;
           }
-
           let finalBlob: Blob | null = blob;
           let type = (blob.type || '').toLowerCase();
-
           if (!type.startsWith('image/')) {
             try {
               const buffer = await blob.arrayBuffer();
@@ -183,6 +197,16 @@ export class AvatarService {
 
   async pollForAvatar(userId: number, attempts = 5, intervalMs = 700): Promise<void> {
     if (!userId) return;
+
+    // Evitar polling si no hay token disponible
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.info('[AvatarService] pollForAvatar: no hay token, se omite polling para userId=', userId);
+      return;
+    }
+
+    // Asegurarse de que UserService usa el token más reciente almacenado
+    try { (this.userService as any).token = token; } catch (e) { /* ignore */ }
 
     for (let i = 0; i < attempts; i++) {
       try {
