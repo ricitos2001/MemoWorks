@@ -481,10 +481,10 @@ En esta sección se documenta la estrategia, breakpoints, componentes donde se h
 Breakpoints aplicados (valores y variables SCSS):
 
 - mobile (xs) — base: < 640px (se trabaja sin media query, estilos base mobile-first)
-- sm — 640px  — `$breakpoint-sm: 640px;` (large mobile / small tablet)
-- md — 768px  — `$breakpoint-md: 768px;` (tablet)
-- lg — 1024px — `$breakpoint-lg: 1024px;` (desktop pequeño)
-- xl — 1280px — `$breakpoint-xl: 1280px;` (desktop estándar)
+- sm — 640px  — (large mobile / small tablet)
+- md — 768px  — (tablet)
+- lg — 1024px — (desktop pequeño)
+- xl — 1280px — (desktop estándar)
 
 Justificación:
 - Los breakpoints siguen la convención común y están alineados con los tokens definidos en `src/styles/00-settings/_variables.scss` del proyecto. Se eligieron para cubrir los dispositivos y viewports de evaluación indicados en la entrega (320px, 375px, 768px, 1024px y 1280px) y ofrecer escalas claras entre mobile/tablet/desktop.

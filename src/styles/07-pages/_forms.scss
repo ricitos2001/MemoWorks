@@ -155,7 +155,7 @@
     .two-col { grid-template-columns: 1fr 1fr; }
   }
 
-  @media (max-width: var(--breakpoint-md)) {
+  @media (max-width: 768px) {
     .fieldset { padding: 24px; }
     .register-title { font-size: 28px; }
     .two-col { grid-template-columns: 1fr; border-bottom: none; padding-bottom: 0; }

@@ -48,7 +48,7 @@
    Mobile styles (dropdown under header)
    ============================================================ */
 
-@media (max-width: var(--breakpoint-md)) {
+@media (max-width: 768px) {
   .menu.open {
     align-items: stretch;
     min-width: 200px;
@@ -98,7 +98,7 @@
    Desktop styles (inline menu)
    ============================================================ */
 
-@media (min-width: 720px) {
+@media (min-width: 768px) {
   .hamburger {
     display: none;
   }

@@ -148,7 +148,7 @@
    Responsive
    ============================================================ */
 
-@media (min-width: var(--breakpoint-sm)) {
+@media (min-width: 640px) {
   .modal__container {
     border-radius: 12px;
     max-width: 820px;
