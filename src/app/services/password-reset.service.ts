@@ -31,19 +31,19 @@ export class PasswordResetService {
 
 
   forgotPassword(request: PasswordForgotRequest): Observable<MessageResponse> {
-    return this.http.post<MessageResponse>(`${environment.apiUrl}/forgot`, request
+    return this.http.post<MessageResponse>(`${environment.apiUrl}/password/forgot`, request
     );
   }
 
   verifyToken(token: string): Observable<TokenValidationResponse> {
     const params = new HttpParams().set('token', token);
 
-    return this.http.get<TokenValidationResponse>(`${environment.apiUrl}/verify`, { params }
+    return this.http.get<TokenValidationResponse>(`${environment.apiUrl}/password/verify`, { params }
     );
   }
 
   resetPassword(request: PasswordResetConfirm): Observable<MessageResponse> {
-    return this.http.post<MessageResponse>(`${environment.apiUrl}/reset`, request
+    return this.http.post<MessageResponse>(`${environment.apiUrl}/password/reset`, request
     );
   }
 }
