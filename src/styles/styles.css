@@ -2855,7 +2855,7 @@ h6[id],
 .register-page {
   /* Ajustes responsivos */
 }
-@media (min-width: var(--breakpoint-md)) {
+@media (min-width: 768px) {
   .register-page .grid-center {
     grid-template-columns: 1fr;
   }

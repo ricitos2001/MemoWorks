@@ -150,7 +150,7 @@
   a { color: rgba(255,255,255,0.95); text-decoration: none; font-size: 15px; margin-top: 6px; display: inline-block; }
 
   /* Ajustes responsivos */
-  @media (min-width: var(--breakpoint-md)) {
+  @media (min-width: 768px) {
     .grid-center { grid-template-columns: 1fr; }
     .two-col { grid-template-columns: 1fr 1fr; }
   }
