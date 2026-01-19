@@ -55,10 +55,11 @@ export class EditUserInfoComponent implements OnInit {
     if (id) {
       this.getValues(id);
     }
+    console.log(localStorage.getItem('email'));
   }
 
-  getValues(email: string): void {
-    this.userService.getUser(email).subscribe({
+  getValues(id: string): void {
+    this.userService.getUserById(id).subscribe({
       next: (user) => {
         if (!user) return;
         this.editUserForm.patchValue({

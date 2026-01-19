@@ -38,6 +38,15 @@ export class UserService {
     });
   }
 
+  getUserById(id: string | null): Observable<User> {
+    return this.http.get<User>(`${environment.apiUrl}/api/v1/users/id/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${this.token}`
+        }
+      }).pipe(finalize(() => this.loadingService.hide()));
+  }
+
   getUser(email: string | null): Observable<User> {
     return this.http.get<User>(`${environment.apiUrl}/api/v1/users/email/${email}`,
       {
