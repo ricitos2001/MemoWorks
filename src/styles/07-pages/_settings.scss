@@ -182,7 +182,7 @@
   padding: var(--spacing-4);
 }
 
-@media (max-width: var(--breakpoint-lg)) {
+@media (max-width: var(--breakpoint-md)) {
   .settings__familiar-group-info {
     border-right: none;
     border-bottom: 0.25rem solid var(--color-primary-1);
