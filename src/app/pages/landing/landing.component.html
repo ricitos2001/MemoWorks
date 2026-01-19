@@ -18,16 +18,16 @@
       <p>organiza tus tareas creando notas y asignándoles una fecha de realización y finalización</p>
     </article>
     <picture>
-      <source type="image/avif" srcset="assets/img/Group_150-400.avif 400w, assets/img/Group_150-800.avif 800w, assets/img/Group_150-1200.avif 1200w" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
-      <source type="image/webp" srcset="assets/img/Group_150-400.webp 400w, assets/img/Group_150-800.webp 800w, assets/img/Group_150-1200.webp 1200w" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
-      <img [src]="darkMode ? 'assets/img/Group_150.png' : 'assets/img/Group_150.webp'" alt="imagen1" loading="lazy" class="landing__img">
+      <source type="image/avif" [attr.srcset]="!darkMode ? 'assets/img/Group_150-400.avif 400w, assets/img/Group_150-800.avif 800w, assets/img/Group_150-1200.avif 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
+      <source type="image/webp" [attr.srcset]="!darkMode ? 'assets/img/Group_150-400.webp 400w, assets/img/Group_150-800.webp 800w, assets/img/Group_150-1200.webp 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
+      <img #themeImg [src]="darkMode ? 'assets/img/Group_150.png' : 'assets/img/Group_150-1200.webp'" alt="imagen1" loading="lazy" class="landing__img">
     </picture>
   </article>
   <article class="flex-center container landing__article">
     <picture>
-      <source type="image/avif" srcset="assets/img/Group_151-400.avif 400w, assets/img/Group_151-800.avif 800w, assets/img/Group_151-1200.avif 1200w" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
-      <source type="image/webp" srcset="assets/img/Group_151-400.webp 400w, assets/img/Group_151-800.webp 800w, assets/img/Group_151-1200.webp 1200w" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
-      <img [src]="darkMode ? 'assets/img/Group_151.png' : 'assets/img/Group_151.webp'" alt="imagen2" loading="lazy" class="landing__img">
+      <source type="image/avif" [attr.srcset]="!darkMode ? 'assets/img/Group_151-400.avif 400w, assets/img/Group_151-800.avif 800w, assets/img/Group_151-1200.avif 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
+      <source type="image/webp" [attr.srcset]="!darkMode ? 'assets/img/Group_151-400.webp 400w, assets/img/Group_151-800.webp 800w, assets/img/Group_151-1200.webp 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
+      <img #themeImg [src]="darkMode ? 'assets/img/Group_151.png' : 'assets/img/Group_151-1200.webp'" alt="imagen2" loading="lazy" class="landing__img">
     </picture>
     <article>
       <h3>Crea grupos de trabajo</h3>
@@ -41,9 +41,9 @@
     </article>
     <!-- Responsive picture: Clip_path_group -->
     <picture>
-      <source type="image/avif" srcset="assets/img/Clip_path_group-400.avif 400w, assets/img/Clip_path_group-800.avif 800w, assets/img/Clip_path_group-1200.avif 1200w" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
-      <source type="image/webp" srcset="assets/img/Clip_path_group-400.webp 400w, assets/img/Clip_path_group-800.webp 800w, assets/img/Clip_path_group-1200.webp 1200w" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
-      <img [src]="darkMode ? 'assets/img/Clip_path_group.png' : 'assets/img/Clip_path_group.webp'" alt="imagen3" loading="lazy" class="landing__img">
+      <source type="image/avif" [attr.srcset]="!darkMode ? 'assets/img/Clip_path_group-400.avif 400w, assets/img/Clip_path_group-800.avif 800w, assets/img/Clip_path_group-1200.avif 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
+      <source type="image/webp" [attr.srcset]="!darkMode ? 'assets/img/Clip_path_group-400.webp 400w, assets/img/Clip_path_group-800.webp 800w, assets/img/Clip_path_group-1200.webp 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
+      <img #themeImg [src]="darkMode ? 'assets/img/Clip_path_group.png' : 'assets/img/Clip_path_group-1200.webp'" alt="imagen3" loading="lazy" class="landing__img">
     </picture>
   </article>
 </section>
