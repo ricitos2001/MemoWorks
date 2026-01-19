@@ -16,7 +16,6 @@ import {NotificationsStore} from '../../../stores/notifications.store';
 export class NotificationComponent implements OnInit, OnDestroy {
   notificationsService = inject(NotificationsService);
   notificationsStore = inject(NotificationsStore);
-  cdr = inject(ChangeDetectorRef)
   state = signal<{ loading: boolean; data: Notification[]; page: number; eof: boolean }>({
     loading: false,
     data: [],
@@ -26,6 +25,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
   @ViewChild('anchor', { static: true }) anchor!: ElementRef<HTMLElement>;
   private observer!: IntersectionObserver;
+  email = localStorage.getItem('email');
 
   trackById(index: number, notification: Notification) {
     return notification.id;
@@ -33,7 +33,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.notificationsStore.refresh();
-    this.notificationsService.pollNotifications().subscribe(list => {
+    this.notificationsService.pollNotifications(30000, this.email).subscribe(list => {
       const current = this.state().data;
       const ids = new Set(current.map(n => n.id));
       const newItems = list.filter(n => n.id && !ids.has(n.id));
@@ -64,7 +64,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     this.state.set({ ...this.state(), loading: true });
 
     const nextPage = page + 1; // empecemos en página 1
-    this.notificationsService.getPage(nextPage, 20).subscribe(res => {
+    this.notificationsService.getPage(nextPage, 20, this.email).subscribe(res => {
       const items = res.content || [];
       const existingIds = new Set(this.state().data.map(n => n.id));
       const merged = [...this.state().data, ...items.filter(i => i.id && !existingIds.has(i.id))];

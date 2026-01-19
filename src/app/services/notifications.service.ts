@@ -17,11 +17,11 @@ export interface Notification {
 @Injectable({ providedIn: 'root' })
 export class NotificationsService {
   token = localStorage.getItem('token');
-  email = localStorage.getItem('email');
   constructor(private http: HttpClient) {}
-  pollNotifications(intervalMs = 30000): Observable<Notification[]> {
+
+  pollNotifications(intervalMs:number, email: string | null): Observable<Notification[]> {
     return timer(0, intervalMs).pipe(
-      switchMap(() => this.http.get<PaginatedResponse<Notification>>(`${environment.apiUrl}/api/v1/notifications/myNotifications/${this.email}`,
+      switchMap(() => this.http.get<PaginatedResponse<Notification>>(`${environment.apiUrl}/api/v1/notifications/myNotifications/${email}`,
         {
           headers: {
             Authorization: `Bearer ${this.token}`
@@ -44,13 +44,13 @@ export class NotificationsService {
     );
   }
 
-  getPage(page: number, pageSize: number) {
+  getPage(page: number, pageSize: number, email: string | null) {
     const params = new HttpParams()
       .set('page', String(page))
       .set('pageSize', String(pageSize));
 
     return this.http.get<PaginatedResponse<Notification>>(
-      `${environment.apiUrl}/api/v1/notifications/myNotifications/${this.email}`,
+      `${environment.apiUrl}/api/v1/notifications/myNotifications/${email}`,
       {
         headers: {
           Authorization: `Bearer ${this.token}`

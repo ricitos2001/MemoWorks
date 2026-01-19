@@ -24,17 +24,6 @@ export class GroupService {
   token = localStorage.getItem('token');
   constructor(private http: HttpClient, private loadingService: LoadingService) { }
 
-  getGroups(): Observable<Group[]> {
-    return this.http.get<PaginatedResponse<Group>>(
-      `${environment.apiUrl}/api/v1/groups`,
-      {
-        headers: { Authorization: `Bearer ${this.token}` }
-      }
-    ).pipe(
-      map(page => page.content ?? [])
-    );
-  }
-
   getGroupsByUserEmail(email: string | null): Observable<Group[]> {
     return this.http.get<PaginatedResponse<Group>>(
       `${environment.apiUrl}/api/v1/groups/myGroups/${email}`,

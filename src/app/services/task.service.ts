@@ -53,7 +53,6 @@ export class TaskService {
     );
   }
 
-
   getTask(id: string): Observable<Task> {
     this.loadingService.show();
     return this.http.get<Task>(`${environment.apiUrl}/api/v1/tasks/id/${id}`, {

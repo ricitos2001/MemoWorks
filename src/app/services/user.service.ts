@@ -85,7 +85,6 @@ export class UserService {
       });
   }
 
-  // Envía la imagen al servidor como FormData (multipart/form-data)
   postImageProfile(id: number, imageFormData: FormData): Observable<any> {
     return this.http.post(`${environment.apiUrl}/api/v1/users/${id}/avatar`, imageFormData,
       {
