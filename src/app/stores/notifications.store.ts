@@ -12,9 +12,10 @@ export class NotificationsStore implements OnDestroy {
   private pollSub?: Subscription;
 
   constructor(private api: NotificationsService, private auth: AuthService) {
-    this.refresh();
-    this.authSub = this.auth.loggedIn$.subscribe(() => {
-      this.refresh();
+    this.authSub = this.auth.loggedIn$.subscribe(logedIn => {
+      if (logedIn) {
+        this.refresh();
+      }
     });
   }
 
