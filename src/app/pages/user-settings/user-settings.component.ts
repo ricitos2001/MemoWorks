@@ -43,8 +43,6 @@ export class UserSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUser();
-
-    // Suscribirse al avatar global para actualizar automáticamente la vista cuando cambie
     this.avatarService.avatar$.subscribe(payload => {
       this.avatar = payload?.src ?? undefined;
       this.cd.detectChanges();
@@ -87,29 +85,19 @@ export class UserSettingsComponent implements OnInit {
   }
 
   editImageProfile(): void {
-    // Preferir input oculto en template referenciado con @ViewChild
-    try {
-      if (this.fileInput && this.fileInput.nativeElement) {
-        // resetear valor para permitir selección del mismo archivo consecutivamente
-        this.fileInput.nativeElement.value = '';
-        this.fileInput.nativeElement.click();
-        return;
-      }
-    } catch (e) {
-      // fallthrough: si por algún motivo ViewChild no está disponible, usar Renderer2 como fallback
+    if (this.fileInput && this.fileInput.nativeElement) {
+      this.fileInput.nativeElement.value = '';
+      this.fileInput.nativeElement.click();
+      return;
     }
-
-    // Fallback (rara vez necesario): crear input con Renderer2 y usar listen para el cambio
     const input = this.renderer.createElement('input');
     this.renderer.setProperty(input, 'type', 'file');
     this.renderer.setProperty(input, 'accept', 'image/*');
     const unregister = this.renderer.listen(input, 'change', (event: Event) => {
       try { this.onFileSelected(event); } finally { unregister(); }
     });
-    // Forzar click en el elemento creado (es necesario acceder al elemento nativo)
     if ((input as any).click) { (input as any).click(); }
   }
-
   private fileToDataUrl(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -122,7 +110,6 @@ export class UserSettingsComponent implements OnInit {
   async onFileSelected(event: Event): Promise<void> {
     const input = event.target as HTMLInputElement;
     if (!input.files?.length || !this.user?.id) return;
-
     const file = input.files[0];
     const maxSizeBytes = 5 * 1024 * 1024;
     if (file.size > maxSizeBytes) {
@@ -141,29 +128,16 @@ export class UserSettingsComponent implements OnInit {
       });
       return;
     }
-
-    try {
-      const dataUrl = await this.fileToDataUrl(file);
-      console.log('[UserSettings] setLocalAvatar (optimistic) for user', this.user.id);
-      this.avatarService.setLocalAvatar(this.user.id, dataUrl);
-      // asegurarnos de mostrar algo inmediatamente incluso si localStorage falla
-      try { this.avatarService.setObjectUrlFromFile(file); } catch (e) { /* ignore */ }
-      this.cd.detectChanges();
-    } catch (e) {
-      console.warn('[UserSettings] No se pudo convertir archivo a dataURL', e);
-      // intentar fallback inmediato con objectURL
-      try { this.avatarService.setObjectUrlFromFile(file); } catch (err) { console.warn('fallback objectURL fallido', err); }
-    }
-
+    const dataUrl = await this.fileToDataUrl(file);
+    this.avatarService.setLocalAvatar(this.user.id, dataUrl);
+    this.avatarService.setObjectUrlFromFile(file);
+    this.cd.detectChanges();
     const formData = new FormData();
     formData.append('file', file);
 
     try {
-      console.log('[UserSettings] subiendo imagen al servidor...');
       await firstValueFrom(this.userService.postImageProfile(this.user.id, formData));
-      console.log('[UserSettings] imagen subida, empezando pollForAvatar');
       await this.avatarService.pollForAvatar(this.user.id, 8, 800);
-      console.log('[UserSettings] pollForAvatar terminado. Avatar (localStorage):', localStorage.getItem(`avatar_${this.user.id}`));
       this.comm.sendNotification({
         source: 'userForm',
         type: 'success',
@@ -172,7 +146,6 @@ export class UserSettingsComponent implements OnInit {
       });
       this.cd.detectChanges();
     } catch (err) {
-      console.error('[UserSettings] error subiendo imagen o en poll:', err);
       this.comm.sendNotification({
         source: 'userForm',
         type: 'error',
@@ -196,14 +169,10 @@ export class UserSettingsComponent implements OnInit {
           type: 'success',
           message: 'Usuario eliminado correctamente',
         });
-
-        // limpiar UI relacionado con notificaciones/toasts
-        try { this.toastService.dismissAll(); } catch (e) {}
-        try { this.notificationsStore.clear(); } catch (e) {}
-
+        this.toastService.dismissAll();
+        this.notificationsStore.clear();
         this.authService.removeUserData();
         this.authService.loggedInSubject.next(false);
-        // limpiar avatar local al eliminar cuenta
         this.avatarService.clear(this.user.id);
         this.router.navigate(['/landing']);
       },
@@ -218,10 +187,10 @@ export class UserSettingsComponent implements OnInit {
   }
 
   logout(): void {
-    // limpiar UI relacionado con notificaciones/toasts
-    try { this.toastService.dismissAll(); } catch (e) {}
-    try { if (this.user?.id) this.notificationsStore.clear(); } catch (e) {}
-
+    this.toastService.dismissAll();
+    if (this.user?.id) {
+      this.notificationsStore.clear();
+    }
     this.authService.removeUserData();
     this.authService.loggedInSubject.next(false);
     this.authService.logout();

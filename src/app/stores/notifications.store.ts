@@ -2,7 +2,6 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {BehaviorSubject, Subscription} from 'rxjs';
 import {Notification, NotificationsService} from '../services/notifications.service';
 import {AuthService} from '../services/auth.service';
-import {email} from '@angular/forms/signals';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationsStore implements OnDestroy {
