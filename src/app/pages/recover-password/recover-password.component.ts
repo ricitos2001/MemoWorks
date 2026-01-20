@@ -47,6 +47,9 @@ export class RecoverPasswordComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Inicializamos un FormGroup vacío temprano para evitar errores si el template
+    // renderiza antes de que initEmailForm/initResetForm cree los controles.
+    this.recoverPasswordForm = this.fb.group({});
     this.token = this.route.snapshot.queryParamMap.get('token') ?? undefined;
 
     if (this.token) {
