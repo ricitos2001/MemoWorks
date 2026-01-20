@@ -32,6 +32,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent, data: { breadcrumb: 'login'}},
   { path: 'register', component: RegisterComponent, data: {breadcrumb: 'register'}},
   { path: 'recoverPassword', component: RecoverPasswordComponent, data: {breadcrumb: 'recover-password'}},
+  { path: 'reset-password', redirectTo: 'recoverPassword' },
   { path: 'dashboard', component: DasboardComponent, canActivate: [authGuard], data: { breadcrumb: 'dashboard' } },
   { path: 'calendar', component: CalendarComponent, canActivate: [authGuard], data: { breadcrumb: 'calendar'}},
   { path: 'task/:id', component: TaskCardComponent, canActivate: [authGuard], resolve: { task: taskResolver }, data: { breadcrumb: 'task-details'}},
