@@ -8,7 +8,7 @@
       <li><a href="#inicio" class="header__link">Inicio</a></li>
       <li><a href="#queOfrecemos" class="header__link">Que ofrecemos</a></li>
       <li><a href="#contacto" class="header__link">Contacto</a></li>
-      <li><a class="header__link" (click)="openAuthModal('register')">Empecemos</a></li>
+      <li><app-button class="header__link" (click)="openAuthModal('register')">Empecemos</app-button></li>
     </ng-container>
     <ng-container *ngIf="loggedIn">
       <li><a href="/dashboard" class="header__link">Dashboard</a></li>
