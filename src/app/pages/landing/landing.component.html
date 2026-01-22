@@ -3,11 +3,11 @@
   <app-button (click)="openAuthModal('register')" class="landing__space">Empecemos</app-button>
   <app-auth-modal #authModal (authSuccess)="onAuthSuccess()"></app-auth-modal>
   <article class="flex-center grid">
-    <img src="assets/img/Package.svg" alt="icono1" class="landing__icon" loading="lazy" decoding="async">
-    <img src="assets/img/Upload%20cloud.svg" alt="icono2" class="landing__icon" loading="lazy" decoding="async">
-    <img src="assets/img/Settings.svg" alt="icono3" class="landing__icon" loading="lazy" decoding="async">
-    <img src="assets/img/Zap.svg" alt="icono4" class="landing__icon" loading="lazy" decoding="async">
-    <img src="assets/img/Users.svg" alt="icono5" class="landing__icon" loading="lazy" decoding="async">
+    <img src="assets/img/Package.svg" alt="Paquetes" class="landing__icon" loading="lazy" decoding="async">
+    <img src="assets/img/Upload%20cloud.svg" alt="Subir archivos" class="landing__icon" loading="lazy" decoding="async">
+    <img src="assets/img/Settings.svg" alt="Ajustes" class="landing__icon" loading="lazy" decoding="async">
+    <img src="assets/img/Zap.svg" alt="Acciones rápidas" class="landing__icon" loading="lazy" decoding="async">
+    <img src="assets/img/Users.svg" alt="Usuarios" class="landing__icon" loading="lazy" decoding="async">
   </article>
 </section>
 <section class="grid-center landing__section" id="queOfrecemos">
@@ -20,14 +20,14 @@
     <picture>
       <source type="image/avif" [attr.srcset]="!darkMode ? 'assets/img/Group_150-400.avif 400w, assets/img/Group_150-800.avif 800w, assets/img/Group_150-1200.avif 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
       <source type="image/webp" [attr.srcset]="!darkMode ? 'assets/img/Group_150-400.webp 400w, assets/img/Group_150-800.webp 800w, assets/img/Group_150-1200.webp 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
-      <img #themeImg [src]="darkMode ? 'assets/img/Group_150.png' : 'assets/img/Group_150-1200.webp'" alt="imagen1" loading="lazy" class="landing__img">
+      <img [src]="darkMode ? 'assets/img/Group_150.png' : 'assets/img/Group_150-1200.webp'" alt="" aria-hidden="true" loading="lazy" class="landing__img">
     </picture>
   </article>
   <article class="flex-center container landing__article">
     <picture>
       <source type="image/avif" [attr.srcset]="!darkMode ? 'assets/img/Group_151-400.avif 400w, assets/img/Group_151-800.avif 800w, assets/img/Group_151-1200.avif 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
       <source type="image/webp" [attr.srcset]="!darkMode ? 'assets/img/Group_151-400.webp 400w, assets/img/Group_151-800.webp 800w, assets/img/Group_151-1200.webp 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
-      <img #themeImg [src]="darkMode ? 'assets/img/Group_151.png' : 'assets/img/Group_151-1200.webp'" alt="imagen2" loading="lazy" class="landing__img">
+      <img [src]="darkMode ? 'assets/img/Group_151.png' : 'assets/img/Group_151-1200.webp'" alt="" aria-hidden="true" loading="lazy" class="landing__img">
     </picture>
     <article>
       <h3>Crea grupos de trabajo</h3>
@@ -39,11 +39,10 @@
       <h3>No olvides lo pendiente</h3>
       <p>Recibe notificaciones por correo desde tu teléfono para no olvidar lo que tienes pendiente</p>
     </article>
-    <!-- Responsive picture: Clip_path_group -->
     <picture>
       <source type="image/avif" [attr.srcset]="!darkMode ? 'assets/img/Clip_path_group-400.avif 400w, assets/img/Clip_path_group-800.avif 800w, assets/img/Clip_path_group-1200.avif 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
       <source type="image/webp" [attr.srcset]="!darkMode ? 'assets/img/Clip_path_group-400.webp 400w, assets/img/Clip_path_group-800.webp 800w, assets/img/Clip_path_group-1200.webp 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
-      <img #themeImg [src]="darkMode ? 'assets/img/Clip_path_group.png' : 'assets/img/Clip_path_group-1200.webp'" alt="imagen3" loading="lazy" class="landing__img">
+      <img [src]="darkMode ? 'assets/img/Clip_path_group.png' : 'assets/img/Clip_path_group-1200.webp'" alt="" aria-hidden="true" loading="lazy" class="landing__img">
     </picture>
   </article>
 </section>
