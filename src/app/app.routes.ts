@@ -31,7 +31,7 @@ export const routes: Routes = [
   { path: 'styles', component: StyleGuideComponent, data: { breadcrumb: 'style-guide'}},
   { path: 'login', component: LoginComponent, data: { breadcrumb: 'login'}},
   { path: 'register', component: RegisterComponent, data: {breadcrumb: 'register'}},
-  { path: 'reset-password', redirectTo: 'recoverPassword' },
+  { path: 'reset-password', redirectTo: 'recoverPassword', pathMatch: "full" },
   { path: 'recoverPassword', component: RecoverPasswordComponent, data: {breadcrumb: 'recover-password'}},
   { path: 'dashboard', component: DasboardComponent, canActivate: [authGuard], data: { breadcrumb: 'dashboard' } },
   { path: 'calendar', component: CalendarComponent, canActivate: [authGuard], data: { breadcrumb: 'calendar'}},
