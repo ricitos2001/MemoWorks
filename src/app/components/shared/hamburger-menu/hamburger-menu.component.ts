@@ -2,7 +2,7 @@ import {Component, ElementRef, HostListener, OnInit, ViewChild, Renderer2, OnDes
 import {NgIf} from '@angular/common';
 import {AuthService} from '../../../services/auth.service';
 import {ButtonComponent} from '../button/button.component';
-import {Router, RouterLink} from '@angular/router';
+import {Router} from '@angular/router';
 import {AuthModalService} from '../../../services/shared/auth-modal.service';
 import {Subscription} from 'rxjs';
 import {NotificationComponent} from '../notification/notification.component';
@@ -11,7 +11,7 @@ import { NotificationsStore } from '../../../stores/notifications.store';
 
 @Component({
   selector: 'app-hamburger-menu',
-  imports: [NgIf, ButtonComponent, NotificationComponent, RouterLink],
+  imports: [NgIf, ButtonComponent, NotificationComponent],
   templateUrl: './hamburger-menu.component.html',
   styleUrl: '../../../../styles/styles.css',
 })

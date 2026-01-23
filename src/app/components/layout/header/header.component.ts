@@ -2,7 +2,6 @@ import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild} from
 import {DarkModeButtonComponent} from '../../shared/dark-mode-button/dark-mode-button.component';
 import {HamburgerMenuComponent} from '../../shared/hamburger-menu/hamburger-menu.component';
 import {ThemeService} from '../../../services/shared/theme.service';
-import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +9,6 @@ import {RouterLink} from '@angular/router';
   imports: [
     DarkModeButtonComponent,
     HamburgerMenuComponent,
-    RouterLink,
   ],
   styleUrl: '../../../../styles/styles.css',
 })
