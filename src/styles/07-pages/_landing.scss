@@ -47,10 +47,13 @@
   &.decor-animate--pulse {
     animation: decor-pulse 4.5s ease-in-out infinite;
   }
+}
 
-  img {
-
-  }
+.landing__img {
+  display: block;
+  height: auto;
+  max-height: 12rem;
+  max-width: 100%;
 }
 
 /* ============================================================
