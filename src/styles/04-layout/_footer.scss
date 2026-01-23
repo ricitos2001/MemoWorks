@@ -26,9 +26,11 @@
   gap: var(--spacing-4);
 }
 
-.footer__logo img {
-  height: auto;
+.footer__logo {
+  width: 64px;
+  height: 64px;
   max-width: 6rem;
+  max-height: 6rem;
 }
 
 .footer__copyright {

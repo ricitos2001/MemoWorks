@@ -545,9 +545,11 @@ form {
   gap: var(--spacing-4);
 }
 
-.footer__logo img {
-  height: auto;
+.footer__logo {
+  width: 64px;
+  height: 64px;
   max-width: 6rem;
+  max-height: 6rem;
 }
 
 .footer__copyright {
@@ -1514,10 +1516,14 @@ h6[id],
    Iconos decorativos en landing
    ============================================================ */
 .landing__icon {
+  display: block;
+  width: 128px;
+  height: 128px;
+  max-width: 100%;
+  max-height: 12rem;
   background: var(--components);
   border-radius: var(--radius-xl);
   box-shadow: 0 8px 24px rgba(41, 25, 45, 0.12);
-  max-width: 35%;
   overflow: hidden;
   padding: var(--spacing-4);
 }
@@ -1527,23 +1533,6 @@ h6[id],
 .landing__icon.decor-animate--pulse {
   animation: decor-pulse 4.5s ease-in-out infinite;
 }
-.landing__icon img {
-  display: block;
-  height: auto;
-  max-height: 12rem;
-  max-width: 100%;
-}
-
-/* ============================================================
-   Imágenes en sección
-   ============================================================ */
-.landing__img {
-  display: block;
-  height: auto;
-  max-height: 12rem;
-  max-width: 100%;
-}
-
 /* ============================================================
    Responsive: móviles (≤720px)
    ============================================================ */
