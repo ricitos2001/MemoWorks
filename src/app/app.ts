@@ -8,7 +8,6 @@ import {AuthInterceptor} from './interceptors/auth-interceptor';
 import {LoadingInterceptor} from './interceptors/loading.interceptor-interceptor';
 import {ToastComponent} from './components/shared/toast/toast.component';
 import {SpinnerComponent} from './components/shared/spinner/spinner.component';
-import { PageTitleService } from './services/page-title.service';
 
 @Component({
   selector: 'app-root',
@@ -23,9 +22,4 @@ import { PageTitleService } from './services/page-title.service';
 
 export class App {
   protected readonly title = signal('MemoWorks');
-
-  constructor(private pageTitleService: PageTitleService) {
-    // Forzar uso del servicio para evitar warnings; el servicio inicializa el título automáticamente
-    void this.pageTitleService;
-  }
 }

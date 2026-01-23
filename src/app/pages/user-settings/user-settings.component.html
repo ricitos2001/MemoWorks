@@ -22,11 +22,10 @@
     </article>
   </section>
   <article class="grid-center">
-    <img [src]="avatar || 'assets/img/logo.svg'" (error)="onAvatarImageError($event)" alt="Foto de perfil de {{ user.name }}" class="settings__img-profile" loading="lazy" decoding="async">
+    <img [src]="avatar || 'assets/img/logo.svg'" (error)="onAvatarImageError($event)" alt="user" class="settings__img-profile" loading="lazy" decoding="async">
     <p class="settings__texto">imagen de perfil</p>
-    <input #fileInput id="profileFileInput" type="file" accept="image/*" style="display:none" (change)="onFileSelected($event)" [attr.data-file-input-present]="!!fileInput" />
-    <label for="profileFileInput" class="visually-hidden">Seleccionar imagen de perfil</label>
-    <app-button (click)="fileInput.click()" aria-label="Seleccionar imagen de perfil">editar imagen de perfil</app-button>
+    <input #fileInput type="file" accept="image/*" style="display:none" (change)="onFileSelected($event)" [attr.data-file-input-present]="!!fileInput" />
+    <app-button (click)="editImageProfile()">editar imagen de perfil</app-button>
   </article>
 </section>
 <article class="settings__links">

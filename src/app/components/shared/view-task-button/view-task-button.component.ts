@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-view-task-button',
@@ -7,9 +7,5 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrl: '../../../../styles/styles.css',
 })
 export class ViewTaskButtonComponent {
-  @Output() click = new EventEmitter<Event>();
 
-  onClick(event: Event) {
-    this.click.emit(event);
-  }
 }

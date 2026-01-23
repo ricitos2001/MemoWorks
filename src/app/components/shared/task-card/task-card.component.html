@@ -1,7 +1,7 @@
 <section class="flex-center task-details" *ngIf="task() as task">
   <section class="grid task-details__padding">
     <a href="/dashboard" class="flex">
-      <img src="assets/img/Arrow%20left-circle-yellow.svg" alt="" aria-hidden="true" class="task-details__back-icon">
+      <img src="assets/img/Arrow%20left-circle-yellow.svg" alt="icon">
       <p class="flex-center task-details__text">volver</p>
     </a>
     <article class="grid">
@@ -10,13 +10,13 @@
     </article>
     <section class="flex">
       <article class="flex">
-        <img src="assets/img/Calendar.svg" alt="Fecha" class="task-details__icon">
+        <img src="assets/img/Calendar.svg" alt="icon">
         <p class="flex-center task-details__text">
           {{ task.date | date:'dd/MM/yyyy' }}
         </p>
       </article>
       <article class="flex">
-        <img src="assets/img/Clock.svg" alt="Hora" class="task-details__icon">
+        <img src="assets/img/Clock.svg" alt="icon">
         <p class="flex-center task-details__text">
           {{ formatTime(task.time) | date:'HH:mm' }}
         </p>
