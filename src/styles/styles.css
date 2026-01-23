@@ -1537,7 +1537,7 @@ h6[id],
 /* ============================================================
    Imágenes en sección
    ============================================================ */
-.landing__section img {
+.landing__img {
   display: block;
   height: auto;
   max-height: 12rem;
