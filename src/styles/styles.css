@@ -553,8 +553,9 @@ form {
 }
 
 .footer__copyright {
+  width: 1.5rem;
+  height: 1.5rem;
   display: inline-block;
-  height: auto;
 }
 
 .footer__icon {
@@ -566,7 +567,6 @@ form {
 .footer__texto {
   color: var(--letters);
   font-weight: var(--font-weight-regular);
-  margin-bottom: var(--spacing-4);
 }
 
 .footer article {
