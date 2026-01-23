@@ -1,6 +1,6 @@
 <header class="header" #header>
   <section class="container header__inner">
-    <a href="/landing" class="header__logo"><img [src]="darkMode ? 'assets/img/logo_dark.svg' : 'assets/img/logo.svg'" alt="MemoWorks — Ir a la página principal" class="footer__logo"></a>
+    <a href="/landing" class="header__logo"><img [src]="darkMode ? 'assets/img/logo_dark.svg' : 'assets/img/logo.svg'" alt="logo del header" class="footer__logo"></a>
     <article class="flex-center">
       <app-hamburger-menu></app-hamburger-menu>
       <app-dark-mode-button (click)="changeTheme(); toggle()" class="header__dark-mode-button"></app-dark-mode-button>
