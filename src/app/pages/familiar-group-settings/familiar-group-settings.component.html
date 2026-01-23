@@ -16,9 +16,10 @@
               <p class="settings__texto"><span class="settings__apartado">Descripcion: </span>{{ group.description }}</p>
             </article>
             <article class="grid-center">
-              <img [src]="getGroupImage(group)" alt="user" class="settings__img-profile" loading="lazy" decoding="async" (error)="onGroupImgError($event, group)">
+              <img [src]="getGroupImage(group)" alt="Logo del grupo {{ group.name }}" class="settings__img-profile" loading="lazy" decoding="async" (error)="onGroupImgError($event, group)">
               <input type="file" id="groupFileInput_{{group.id}}" style="display:none" accept="image/*" (change)="onGroupFileSelected($event, group)">
-              <app-button (click)="editGroupImage(group)" *ngIf="group.adminUser.email === this.email">Editar imagen</app-button>
+              <label for="groupFileInput_{{group.id}}" class="visually-hidden">Seleccionar imagen del grupo {{ group.name }}</label>
+              <app-button (click)="editGroupImage(group)" aria-label="Seleccionar imagen del grupo {{ group.name }}" *ngIf="group.adminUser.email === this.email">Editar imagen</app-button>
             </article>
           </section>
           <section>
