@@ -20,4 +20,6 @@ import {SpinnerComponent} from './components/shared/spinner/spinner.component';
   ]
 })
 
-export class App {}
+export class App {
+  protected readonly title = signal('MemoWorks');
+}
