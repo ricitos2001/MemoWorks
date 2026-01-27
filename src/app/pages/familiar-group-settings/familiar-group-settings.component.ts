@@ -1,7 +1,7 @@
 import {Component, DestroyRef, EventEmitter, inject, OnInit, Output, ViewChild, Renderer2, ChangeDetectorRef} from '@angular/core';
 import {ButtonComponent}from '../../components/shared/button/button.component';
 import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {CommunicationService} from '../../services/shared/communication.service';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {GroupsStore} from '../../stores/groups.store';
@@ -11,6 +11,7 @@ import { AvatarService } from '../../services/shared/avatar.service';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { filter } from 'rxjs/operators';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-familiar-group-user-settings',
@@ -21,12 +22,13 @@ import { filter } from 'rxjs/operators';
     NgForOf,
     AsyncPipe,
     ConfirmModalComponent,
+    TranslateModule,
   ],
   templateUrl: './familiar-group-settings.component.html',
   styleUrl: '../../../styles/styles.css',
 })
 export class FamiliarGroupSettingsComponent implements OnInit{
-  constructor(private groupService: GroupService, private avatarService: AvatarService, private renderer: Renderer2, private cd: ChangeDetectorRef) {
+  constructor(private groupService: GroupService, private avatarService: AvatarService, private renderer: Renderer2, private cd: ChangeDetectorRef, private translate: TranslateService) {
   }
   @Output() createFromEmpty = new EventEmitter<void>();
   private groupsStore = inject(GroupsStore);
@@ -35,11 +37,26 @@ export class FamiliarGroupSettingsComponent implements OnInit{
   private comm = inject(CommunicationService);
   private auth = inject(AuthService);
   loading = false
+
+
   // leer email dinámicamente para que el componente reaccione a login/logout sin recargar
   get email(): string | null { return localStorage.getItem('email'); }
   groups$ = this.groupsStore.groups$;
   @ViewChild(ConfirmModalComponent) confirmModal!: ConfirmModalComponent;
   private groupToDelete: any = null;
+
+  groupName = '';
+  groupDescription = '';
+  editGroupImageButton = '';
+  viewMembersText = '';
+  viewMembersButton = '';
+  leavelGroupButton = '';
+  editGroupButton = '';
+  removeGroupButton = '';
+  createGroupButton = '';
+  createGroupText1 = '';
+  createGroupText2 = '';
+  createGroupText3 = '';
 
   ngOnInit(): void {
     // Si el usuario se loguea en runtime, refrescar grupos (y por tanto las imágenes protegidas)
@@ -67,6 +84,9 @@ export class FamiliarGroupSettingsComponent implements OnInit{
           this.groupsStore.refresh();
         }
       });
+
+    this.setTranslations();
+    this.translate.onLangChange.subscribe(() => this.setTranslations());
   }
 
   trackById(index: number, task: any) {
@@ -366,5 +386,20 @@ export class FamiliarGroupSettingsComponent implements OnInit{
     } catch (err) {
       console.error('[FamiliarGroupSettings] onGroupImgError error', err);
     }
+  }
+
+  private setTranslations() {
+    this.groupName = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.GROUPNAME');
+    this.groupDescription = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.GROUPDESCRIPTION');
+    this.editGroupImageButton = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.EDITGROUPIMAGEBUTTON');
+    this.viewMembersText = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.VIEWMEMBERSTEXT');
+    this.viewMembersButton = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.VIEWMEMBERSBUTTON');
+    this.leavelGroupButton = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.LEAVEGROUPBUTTON');
+    this.editGroupButton = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.EDITGROUPBUTTON');
+    this.removeGroupButton = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.REMOVEGROUPBUTTON');
+    this.createGroupButton = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.CREATEGROUPBUTTON');
+    this.createGroupText1 = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.CREATEGROUPTEXT1');
+    this.createGroupText2 = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.CREATEGROUPTEXT2');
+    this.createGroupText3 = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.CREATEGROUPTEXT3');
   }
 }

@@ -1,0 +1,12 @@
+@use "../00-settings/css-variables" as *;
+@use "../01-tools/mixins" as *;
+
+.language-selector {
+  position: relative;
+  display: inline-block;
+}
+
+.language-selector__languages {
+  background-color: var(--components);
+  color: var(--letters);
+}

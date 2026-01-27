@@ -1,4 +1,4 @@
-<article *ngIf="loading()">Cargando...</article>
+<article *ngIf="loading()">{{loadingText | translate}}</article>
 <article *ngIf="error()">{{ error() }}</article>
 <section class="dashboard remove-task">
   <ul class="tasks-grid" *ngIf="tasks">
@@ -34,8 +34,8 @@
     </li>
   </ul>
   <article class="pagination" *ngIf="total() > pageSize">
-    <button (click)="prevPage()" [disabled]="page() <= 0">Anterior</button>
-    <button (click)="nextPage()" [disabled]="page() >= total()">Siguiente</button>
+    <button (click)="prevPage()" [disabled]="page() <= 0">{{nextButton | translate}}</button>
+    <button (click)="nextPage()" [disabled]="page() >= total()">{{backButton | translate}}</button>
   </article>
   <app-back-button></app-back-button>
 </section>

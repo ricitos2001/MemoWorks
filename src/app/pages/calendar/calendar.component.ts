@@ -17,8 +17,9 @@ import {Router} from '@angular/router';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import {FullCalendarModule} from '@fullcalendar/angular';
+import {FullCalendarModule, FullCalendarComponent} from '@fullcalendar/angular';
 import {TasksSignalStore} from '../../stores/tasks.signal.store';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-calendar',
@@ -35,6 +36,8 @@ export class CalendarComponent implements OnInit, OnDestroy{
   @ViewChild('buttons', { static: false }) buttons!: ElementRef;
   @ViewChild(TaskFormModalComponent)
   private taskFormModal!: TaskFormModalComponent;
+  @ViewChild(FullCalendarComponent) // reference to the calendar component to change options at runtime
+  private fullCalendarComp?: FullCalendarComponent;
   // Almacena funciones de eliminación de listeners para limpiar al desmontar elementos dinámicos
   private dynamicListeners: (() => void)[] = [];
 
@@ -45,13 +48,16 @@ export class CalendarComponent implements OnInit, OnDestroy{
   private toastService = inject(ToastService);
   private router = inject(Router);
   private tasksSignalStore = inject(TasksSignalStore);
+  private languageService = inject(LanguageService);
 
   email = localStorage.getItem('email');
+
+
 
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
-    locale: 'es',
+    locale: this.languageService.getCurrentLanguage() || 'en',
     firstDay: 1,
     dayHeaderFormat: { weekday: 'long' },
     events: [],
@@ -83,6 +89,27 @@ export class CalendarComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit() {
+    // Subscribe to language changes to update calendar locale at runtime
+    this.languageService.languageChanges$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(lang => {
+        if (!lang) return;
+        // Update the options object (helps FullCalendar re-render in some cases)
+        this.calendarOptions = {
+          ...this.calendarOptions,
+          locale: lang
+        };
+        // If the FullCalendar component API is available, set option at runtime
+        try {
+          const api = this.fullCalendarComp?.getApi && this.fullCalendarComp.getApi();
+          if (api && typeof api.setOption === 'function') {
+            api.setOption('locale', lang);
+          }
+        } catch (e) {
+          // ignore if not available
+        }
+      });
+
     this.tasksSignalStore.loadAll();
     this.comm.notifications$
       .pipe(takeUntilDestroyed(this.destroyRef))

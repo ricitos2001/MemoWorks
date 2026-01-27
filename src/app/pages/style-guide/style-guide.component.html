@@ -1,26 +1,26 @@
 <section class="container grid style-guide">
-  <h1>Guía de estilos — MemoWorks</h1>
-  <p>Esta página recoge las decisiones de estilo y las clases/variables más importantes utilizadas en todo el proyecto.</p>
+  <h1>{{title | translate}}</h1>
+  <p>{{intro | translate }}</p>
   <article>
-    <h2>1. Tipografía</h2>
-    <p>Fuente principal: Montserrat</p>
-    <p>Fuente secondaria: Montserrat alternates</p>
-    <p>Fuente alterna: sans-Sherif</p>
+    <h2>{{typographyTitle | translate}}</h2>
     <ul>
-      <li>tamaños de fuente usados:</li>
-      <li>decoracion usada: </li>
+      <li><strong>{{firstTypography | translate}}</strong>{{firstTypographyDescription | translate}}</li>
+      <li><strong>{{secondTypography | translate}}</strong>{{secondTypographyDescription | translate}}</li>
+      <li><strong>{{alternativeTypography | translate}}</strong>{{alternativeTypographyDescription | translate}}</li>
+      <li><strong>{{typographySizes | translate}}</strong>{{typographySizesDescription | translate}}</li>
+      <li><strong>{{typographyDecorations | translate}}</strong>{{typographyDecorationsDescription | translate}}</li>
     </ul>
   </article>
   <section>
-    <h2>2. Paleta de colores</h2>
-    <p>La paleta principal se gestiona en las variables SCSS. En el proyecto hay soporte para modo claro/oscuro; las clases y assets alternan según la variable <code>--theme</code> y la lógica en <code>ThemeService</code>.</p>
+    <h2>{{colorsTitle | translate}}</h2>
+    <p>{{colorsDescription1 | translate}}<code>--theme</code>{{colorsDescription2 | translate}}<code>ThemeService</code>.</p>
     <ul>
-      <li><strong>Primario: </strong> usado inicialmente como color de fondo, color de los inputs color de letra</li>
-      <li><strong>Secundario: </strong>usado para los componentes botones, formularios, etc...</li>
-      <li><strong>Neutros: </strong>utilizados para el color de letra del landing page y el modo oscuro</li>
-      <li><strong>Otros colores: </strong> usados para el toast y la pagina de error 404</li>
+      <li><strong>{{primaryColor | translate}}</strong>{{primaryColorDescription | translate}}</li>
+      <li><strong>{{secondaryColor | translate}}</strong>{{secondaryColorDescription | translate}}</li>
+      <li><strong>{{neutralColor | translate}}</strong>{{neutralColorDescription | translate}}</li>
+      <li><strong>{{othersColors | translate}}</strong>{{othersColorsDescription | translate}}</li>
     </ul>
-    <h3>Colores usados en el proyecto</h3>
+    <h3>{{usedColors | translate}}</h3>
     <section class="palette flex-center">
       <!-- Primarios -->
       <section>
@@ -152,62 +152,61 @@
   </section>
 
   <section>
-    <h2>3. Iconografia</h2>
-    <p>Se usan iconos SVG, WEBP y PNG personalizados. dichos iconos están en <code>src/assets/img/</code> y se incluyen en templates con <code>&lt;img&gt;</code> o como background en CSS.</p>
+    <h2>{{iconographyTitle | translate}}</h2>
+    <p>{{iconographyDescription1 | translate}}<code>src/assets/img/</code>{{iconographyDescription2 | translate}}<code>&lt;img&gt;</code>{{iconographyDescription3 | translate}}</p>
   </section>
   <article>
-    <h2>4. Espaciado y layout</h2>
-    <p>Se usan utilidades y clases tipo <code>container</code>, <code>grid</code>, <code>flex</code> y <code>grid-center</code> para los layouts. La escala de espaciado está definida en variables SCSS (márgenes y paddings reutilizables).</p>
+    <h2>{{spacingTitle | translate}}</h2>
+    <p>{{spacingText1 | translate}}<code>container</code>, <code>grid</code>, <code>flex</code> y <code>grid-center</code>{{spacingText2 | translate}}</p>
   </article>
 
   <article>
-    <h2>5. Componentes reutilizables</h2>
+    <h2>{{componentsTitle | translate}}</h2>
     <ul>
-      <li><code><app-button>button</app-button></code>: botón base con variantes (primario, secundario, outline).</li>
-      <li><code>&lt;app-auth-modal&gt;</code>: modal de autenticación usado en landing y otras rutas. Este componente solo es visible cuando pulsas un boton</li>
-      <li><code><app-form-input placeholder="form input"></app-form-input></code>, <code>&lt;app-task-card&gt;</code>componente utilizado en formularios</li>
-      <li>Botones de acción dinámicos en el dashboard usan imágenes dentro de elementos creados con Renderer2 y clases como <code>addButton</code>, <code>editButton</code>, <code>removeButton</code>.</li>
+      <li><code><app-button>button</app-button></code>{{componentItem1 | translate}}</li>
+      <li><code>&lt;app-auth-modal&gt;</code>{{componentItem2 | translate}}</li>
+      <li><code><app-form-input placeholder="form input"></app-form-input></code>, <code>&lt;app-task-card&gt;</code>{{componentItem3 | translate}}</li>
+      <li>{{componentItem4 | translate}}<code>addButton</code>, <code>editButton</code>, <code>removeButton</code>.</li>
     </ul>
   </article>
   <section>
-    <h2>6. Formularios y validación</h2>
-    <p>Los formularios usan validadores personalizados (por ejemplo verificaciones de contraseña y teléfono) en <code>validators/</code> y validadores asíncronos en <code>services/async-validators.service.ts</code>. Mostrar errores sigue el patrón de clases de estado (error/success) y mensajes inline.</p>
-    <article class="styles__grid">
+    <h2>{{formsTitle | translate}}</h2>
+    <p>{{formsText1 | translate}}<code>validators/</code>{{formsText2 | translate}}<code>services/async-validators.service.ts</code>{{formsText3 | translate}}</p>
+    <section class="styles__grid">
       <app-login></app-login>
+      <app-recover-password></app-recover-password>
       <app-register></app-register>
       <app-add-task></app-add-task>
       <app-edit-task></app-edit-task>
-      <app-recover-password></app-recover-password>
-    </article>
+    </section>
   </section>
   <article>
-    <h2>7. Utilidades CSS</h2>
-    <p>Revisar la carpeta <code>src/styles/</code> para utilidades: colores, variables, helpers de layout y estilos globales. Los nombres de carpeta empiezan por código numérico para orden semántico (ej. <code>00-settings</code>, <code>02-generic</code>, etc.).</p>
+    <h2>{{utilitiesTitle | translate}}</h2>
+    <p>{{utilitiesText1 | translate}}<code>src/styles/</code>{{utilitiesText2 | translate}}<code>00-settings</code>, <code>02-generic</code>{{utilitiesText3 | translate}}</p>
   </article>
   <article>
-    <h2>8. Modo oscuro</h2>
-    <p>El modo oscuro se gestiona desde <code>ThemeService</code>. En templates se alternan imágenes con binding a <code>darkMode</code> (ej. <code>[src]="darkMode ? 'img1' : 'img2'"</code>) y las variables CSS se adaptan al tema.</p>
+    <h2>{{darkmodeTitle | translate}}</h2>
+    <p>{{darkmodeText1 | translate}}<code>ThemeService</code>{{darkmodeText2 | translate}}<code>darkMode</code>{{darkmodeText3 | translate}}<code>[src]\="darkMode ? 'img1' : 'img2'"</code>{{darkmodeText4 | translate}}</p>
   </article>
   <article>
-    <h2>9. Accesibilidad (a11y)</h2>
+    <h2>{{a11yTitle | translate}}</h2>
     <ul>
-      <li>Elementos interactivos tienen <code>role</code>, <code>aria-label</code> y <code>tabindex</code> cuando se crean dinámicamente.</li>
-      <li>Los botones gestionan eventos de teclado (Enter / Space) para cumplir accesibilidad.</li>
+      <li>{{a11yItem1Part1 | translate}}<code>role</code>, <code>aria-label</code> y <code>tabindex</code>{{a11yItem1Part2 | translate}}</li>
+      <li>{{a11yItem2 | translate}}</li>
     </ul>
   </article>
 
   <article>
-    <h2>10. Cómo contribuir</h2>
-    <p>Si añades estilos, sigue estas pautas:</p>
+    <h2>{{contributingTitle | translate}}</h2>
+    <p>{{contributingText1 | translate}}</p>
     <ol>
-      <li>Usa variables SCSS para colores y tamaños.</li>
-      <li>Añade clases utilitarias en <code>styles/</code> y evita estilos inline.</li>
-      <li>Documenta la nueva variable/clase en esta página.</li>
+      <li>{{contributingLi1 | translate}}</li>
+      <li>{{contributingLi2Part1 | translate}}<code>styles/</code>{{contributingLi2Part2 | translate}}</li>
+      <li>{{contributingLi3 | translate}}</li>
     </ol>
   </article>
-
   <article>
-    <p>Última actualización: consulta el repositorio para ver cambios en <code>src/styles/</code>.</p>
+    <p>{{lastUpdatePart1 | translate}}<code>src/styles/</code>{{lastUpdatePart2 | translate}}</p>
   </article>
 </section>
 

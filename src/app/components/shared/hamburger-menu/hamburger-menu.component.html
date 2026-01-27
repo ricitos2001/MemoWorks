@@ -5,15 +5,15 @@
 <nav [attr.id]="menuId" class="menu" [class.open]="isOpen">
   <ul class="header__nav">
     <ng-container *ngIf="!loggedIn">
-      <li><a href="#inicio" class="header__link">Inicio</a></li>
-      <li><a href="#queOfrecemos" class="header__link">Que ofrecemos</a></li>
-      <li><a href="#contacto" class="header__link">Contacto</a></li>
-      <li><app-button class="header__link" (click)="openAuthModal('register')">Empecemos</app-button></li>
+      <li><a href="#inicio" class="header__link">{{ home | translate }}</a></li>
+      <li><a href="#queOfrecemos" class="header__link">{{whatOffer | translate}}</a></li>
+      <li><a href="#contacto" class="header__link">{{ contact | translate }}</a></li>
+      <li><app-button class="header__link" (click)="openAuthModal('register')">{{getstarted | translate}}</app-button></li>
     </ng-container>
     <ng-container *ngIf="loggedIn">
-      <li><a href="/dashboard" class="header__link">Dashboard</a></li>
-      <li><a href="/calendar" class="header__link">Calendario</a></li>
-      <li><a href="/settings" class="header__link">Configuración</a></li>
+      <li><a href="/dashboard" class="header__link">{{ dashboard | translate }}</a></li>
+      <li><a href="/calendar" class="header__link">{{ calendar | translate }}</a></li>
+      <li><a href="/settings" class="header__link">{{ configuration | translate }}</a></li>
       <li class="flex-center">
         <button class="theme-btn spacing-button" (click)="toggleNotifications()" aria-label="Abrir bandeja de notificaciones" [attr.aria-expanded]="showNotifications" [attr.aria-controls]="notificationsId"><img src="assets/img/Bell.svg" class="bell-icon" alt="Notificaciones"><span class="badge" *ngIf="hasNew"></span></button>
         <app-button class="header__logout" (click)="logout()">Cerrar sesión</app-button>

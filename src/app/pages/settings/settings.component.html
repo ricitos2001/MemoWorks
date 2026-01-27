@@ -1,9 +1,9 @@
 <section class="settings">
   <article class="grid settings__choices">
-    <a *ngFor="let t of tabs" [class.active]="activeTab === t.key" (click)="onTabChange(t.key)">{{ t.label }}</a>
+    <a *ngFor="let t of tabs" [class.active]="activeTab === t.route" (click)="onTabChange(t.route)">{{ ('PAGES.SETTINGS.TABS.' + t.key) | translate }}</a>
   </article>
   <section>
-    <h2 class="settings__choice">{{ currentLabel }}</h2>
+    <h2 class="settings__choice">{{ ('PAGES.SETTINGS.TABS.' + activeKey) | translate }}</h2>
     <article class="settings__info">
       <router-outlet></router-outlet>
     </article>

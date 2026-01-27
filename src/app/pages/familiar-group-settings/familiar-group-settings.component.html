@@ -1,9 +1,9 @@
 <section class="settings__section-group">
   <ng-container *ngIf="(groups$ | async)?.length === 0">
     <article class="grid-center">
-      <p class="settings__texto">Aun no estas dentro de un grupo familiar</p>
-      <p class="settings__texto">quieres formar parte de uno?</p>
-      <app-button (click)="createGroup()">Crear grupo familiar</app-button>
+      <p class="settings__texto">{{createGroupText1 | translate}}</p>
+      <p class="settings__texto">{{createGroupText2 | translate}}</p>
+      <app-button (click)="createGroup()">{{ createGroupButton | translate }}</app-button>
     </article>
   </ng-container>
   <ng-container *ngIf="groups$ | async as groups; else null">
@@ -12,39 +12,39 @@
         <section>
           <section class="flex">
             <article>
-              <p class="settings__nombre-grupo"><span class="settings__apartado">Nombre: </span>{{ group.name }}</p>
-              <p class="settings__texto"><span class="settings__apartado">Descripcion: </span>{{ group.description }}</p>
+              <p class="settings__nombre-grupo"><span class="settings__apartado"></span>{{ group.name }}</p>
+              <p class="settings__texto"><span class="settings__apartado"></span>{{ group.description }}</p>
             </article>
             <article class="grid-center">
               <img [src]="getGroupImage(group)" alt="user" class="settings__img-profile" loading="lazy" decoding="async" (error)="onGroupImgError($event, group)">
               <input type="file" id="groupFileInput_{{group.id}}" style="display:none" accept="image/*" (change)="onGroupFileSelected($event, group)">
-              <app-button (click)="editGroupImage(group)" *ngIf="group.adminUser.email === this.email">Editar imagen</app-button>
+              <app-button (click)="editGroupImage(group)" *ngIf="group.adminUser.email === this.email">{{editGroupImageButton | translate}}</app-button>
             </article>
           </section>
           <section>
-            <p class="settings__apartado">miembros principales:</p>
+            <p class="settings__apartado">{{viewMembersText | translate}}</p>
             <section class="settings__users-container">
               <section class="settings__users">
                 <article *ngFor="let user of group.users; trackBy: trackById">
                   <img [src]="getImage(user.id)" [alt]="user.name" class="settings__imgUser" loading="lazy" decoding="async">
                 </article>
               </section>
-              <a href="/allMembers" class="settings__members-button">ver todos los miembros</a>
+              <a href="/allMembers" class="settings__members-button">{{viewMembersButton | translate}}</a>
             </section>
           </section>
         </section>
       </article>
       <article class="settings__group-buttons">
-        <app-button (click)="leaveGroup(group)">Abandonar grupo</app-button>
-        <app-button (click)="deleteGroup(group)" *ngIf="group.adminUser.email === this.email">Eliminar grupo</app-button>
-        <app-button (click)="editGroup(group.id)" *ngIf="group.adminUser.email === this.email">Editar grupo</app-button>
+        <app-button (click)="leaveGroup(group)">{{leavelGroupButton | translate}}</app-button>
+        <app-button (click)="deleteGroup(group)" *ngIf="group.adminUser.email === this.email">{{removeGroupButton | translate}}</app-button>
+        <app-button (click)="editGroup(group.id)" *ngIf="group.adminUser.email === this.email">{{editGroupButton | translate}}</app-button>
       </article>
     </section>
   </ng-container>
   <ng-container *ngIf="(groups$ | async)?.length === 1">
     <article class="settings__create-group">
-      <p class="settings__texto">Deseas ser admin de tu propio grupo?</p>
-      <app-button (click)="createGroup()">Crear grupo familiar</app-button>
+      <p class="settings__texto">{{createGroupText3 | translate}}</p>
+      <app-button (click)="createGroup()">{{createGroupButton | translate}}</app-button>
     </article>
   </ng-container>
 </section>

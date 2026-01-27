@@ -1,6 +1,6 @@
 <section class="grid-center landing__section" id="inicio">
-  <h1>Organiza tu dia a dia con MemoWorks</h1>
-  <app-button (click)="openAuthModal('register')" class="landing__space">Empecemos</app-button>
+  <h1>{{title | translate}}</h1>
+  <app-button (click)="openAuthModal('register')" class="landing__space">{{ getStarted | translate }}</app-button>
   <app-auth-modal #authModal (authSuccess)="onAuthSuccess()"></app-auth-modal>
   <article class="flex-center grid">
     <img src="assets/img/Package.svg" alt="Paquetes" class="landing__icon" loading="lazy" decoding="async">
@@ -11,11 +11,11 @@
   </article>
 </section>
 <section class="grid-center landing__section" id="queOfrecemos">
-  <h2>Que ofrecemos</h2>
+  <h2>{{whatOffers | translate}}</h2>
   <article class="flex-center container landing__article">
     <article>
-      <h3>Organiza tu vida</h3>
-      <p>organiza tus tareas creando notas y asignándoles una fecha de realización y finalización</p>
+      <h3>{{subtitle1 | translate}}</h3>
+      <p>{{text1 | translate}}</p>
     </article>
     <picture>
       <source type="image/avif" [attr.srcset]="!darkMode ? 'assets/img/Group_150-400.avif 400w, assets/img/Group_150-800.avif 800w, assets/img/Group_150-1200.avif 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
@@ -30,14 +30,14 @@
       <img [src]="darkMode ? 'assets/img/Group_151.png' : 'assets/img/Group_151-1200.webp'" alt="segunda imagen decorativa" aria-hidden="true" loading="lazy" class="landing__img">
     </picture>
     <article>
-      <h3>Crea grupos de trabajo</h3>
-      <p>Crea grupos familiares o de trabajo con otros usuarios a los que les podrían asignar las tareas que se te ocurran</p>
+      <h3>{{subtitle2 | translate}}</h3>
+      <p>{{text2 | translate}}</p>
     </article>
   </article>
   <article class="flex-center container landing__article">
     <article>
-      <h3>No olvides lo pendiente</h3>
-      <p>Recibe notificaciones por correo desde tu teléfono para no olvidar lo que tienes pendiente</p>
+      <h3>{{subtitle3 | translate}}</h3>
+      <p>{{text3 | translate}}</p>
     </article>
     <picture>
       <source type="image/avif" [attr.srcset]="!darkMode ? 'assets/img/Clip_path_group-400.avif 400w, assets/img/Clip_path_group-800.avif 800w, assets/img/Clip_path_group-1200.avif 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">

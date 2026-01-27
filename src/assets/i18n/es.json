@@ -1,0 +1,272 @@
+{
+  "COMPONENTS": {
+    "LAYOUT": {
+      "FOOTER": {
+        "LEGALINFORMATION": "Información legal",
+        "HELP": "Ayuda",
+        "CONTACT": "Contacto",
+        "TERMS": "Términos y condiciones",
+        "STYLES": "Guia de estilos",
+        "WARNING": "Aviso legal",
+        "PRIVACY": "Política de privacidad",
+        "COOKIES": "Información sobre cookies"
+      }
+    },
+    "SHARED": {
+      "GETSTARTED": "Empecemos",
+      "BACKBUTTON": "volver",
+      "BREADCRUMB": {
+        "HOME": "Inicio",
+        "LANDING": "Página de inicio"
+      },
+      "CONFIRMMODAL": {
+        "CONFIRM": "Confirmar",
+        "CANCEL": "Cancelar"
+      },
+      "HAMBURGERMENU": {
+        "HOME": "Inicio",
+        "WHATOFFER": "Qué ofrecemos",
+        "CONTACT": "Contacto",
+        "GETSTARTED": "Empecemos",
+        "DASHBOARD": "Dashboard",
+        "CALENDAR": "Calendario",
+        "CONFIGURATION": "Configuración",
+        "LOGOUT": "Cerrar sesión"
+      },
+      "NOTIFICATIONLOAD": {
+        "MORENOTIFICATIONS": "Cargando más notificaciones...",
+        "NOMORENOTIFICATIONS": "No hay más notificaciones"
+      },
+      "TASKS": {
+        "LOADINGTEXT": "Cargando...",
+        "SEARCHER": "Qué quieres buscar",
+        "NORESULTS": "Sin resultados",
+        "TASKNOTFOUND": "No se encontraron tareas que coincidan con tu búsqueda.",
+        "STARTTOORGANIZE": "Empecemos a organizarnos",
+        "ZEROTASKS": "Aún no tienes tareas. Crea la primera para empezar.",
+        "CREATEFIRSTTASK": "Crear primera tarea",
+        "NEXTBUTTON": "Anterior",
+        "BACKBUTTON": "Siguiente"
+      }
+    }
+  },
+
+  "PAGES": {
+    "LANDING": {
+      "TITLE": "Organiza tu dia a dia con MemoWorks",
+      "GETSTARTED": "Empecemos",
+      "WHATOFFERS": "Que ofrecemos",
+      "SUBTITLE1": "Organiza tu vida",
+      "TEXT1": "Organiza tus tareas creando notas y asignándoles una fecha y hora de realización",
+      "SUBTITLE2": "Crea grupos de trabajo",
+      "TEXT2": "Crea grupos familiares o de trabajo con otros usuarios a los que les podrían asignar las tareas que se te ocurran",
+      "SUBTITLE3": "No olvides lo pendiente",
+      "TEXT3": "Recibe notificaciones por correo desde tu teléfono para no olvidar lo que tienes pendiente"
+    },
+    "SETTINGS": {
+      "USERSETTINGS": {
+        "NAME": "Nombre",
+        "SURNAMES": "Apellidos",
+        "USERNAMETEXT": "Nombre de usuario",
+        "PHONENUMBER": "Número de teléfono",
+        "USEREMAIL": "Correo electrónico",
+        "IMAGEPROFILETEXT": "Imagen de perfil",
+        "EDITIMAGEPROFILEBUTTON": "Editar imagen de perfil",
+        "EDITUSERINFOBUTTON": "Editar información del usuario",
+        "CLOSESESSIONBUTTON": "Cerrar sesión",
+        "REMOVEACCOUNTBUTTON": "Eliminar cuenta"
+      },
+      "FAMILIARGROUPSETTINGS": {
+        "GROUPNAME": "Nombre: ",
+        "GROUPDESCRIPTION": "Descripcion: ",
+        "EDITGROUPIMAGEBUTTON": "Editar imagen del grupo",
+        "VIEWMEMBERSTEXT": "Miembros principales:",
+        "VIEWMEMBERSBUTTON": "Ver todos los miembros",
+        "LEAVEGROUPBUTTON": "Abandonar grupo",
+        "EDITGROUPBUTTON": "Editar grupo",
+        "REMOVEGROUPBUTTON": "Eliminar grupo",
+        "CREATEGROUPBUTTON": "Crear grupo familiar",
+        "CREATEGROUPTEXT1": "Aun no estas dentro de un grupo familiar",
+        "CREATEGROUPTEXT2": "¿Quieres formar parte de uno?",
+        "CREATEGROUPTEXT3": "¿Deseas ser admin de tu propio grupo?"
+      },
+      "ACCESSIBILITYSETTINGS": {
+        "COMINGSOON": "PROXIMAMENTE"
+      },
+      "TABS": {
+        "USER": "Ajustes del usuario",
+        "FAMILIAR_GROUPS": "Grupos Familiares",
+        "ACCESSIBILITY": "Accesibilidad"
+      }
+    },
+    "PRIVACY": {
+      "TITLE": "Política de privacidad",
+      "WARNING": "AVISO: el contenido de esta pagina es de adorno y toda la información mostrada no implica la violación de alguna ley",
+      "DATE": "Fecha de entrada en vigor: 18 de diciembre de 2025",
+      "SUBTITLE1": "1. Responsable del tratamiento",
+      "TEXT1": "El responsable del tratamiento de los datos es MemoWorks. Para consultas sobre protección de datos puede contactar con nosotros mediante los canales disponibles en la aplicación.",
+      "SUBTITLE2": "2. Datos que recopilamos",
+      "TEXT2": "Recopilamos datos necesarios para proporcionar los servicios: nombre, correo electrónico, información de la cuenta y datos asociados a las tareas. También podemos recopilar datos de uso y telemetría anónima para mejorar el servicio.",
+      "SUBTITLE3": "3. Finalidad y base jurídica",
+      "TEXT3": "Los datos se procesan para prestar el servicio, gestionar cuentas y comunicarnos con los usuarios. La base jurídica es la ejecución del contrato y el consentimiento cuando proceda.",
+      "SUBTITLE4": "4. Conservación de datos",
+      "TEXT4": "Conservaremos los datos mientras la cuenta esté activa y durante el período necesario para cumplir obligaciones legales o para la defensa de reclamaciones.",
+      "SUBTITLE5": "5. Derechos de los interesados",
+      "TEXT5": "Los usuarios pueden ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad enviando una solicitud al responsable. Indicaremos el procedimiento y plazos legalmente aplicables.",
+      "SUBTITLE6": "6. Cesión de datos",
+      "TEXT6": "No se cederán datos a terceros salvo obligación legal o cuando sea necesario para la prestación del servicio (por ejemplo, proveedores de infraestructura) y siempre con las garantías adecuadas.",
+      "SUBTITLE7": "7. Seguridad",
+      "TEXT7": "Implementamos medidas técnicas y organizativas para proteger los datos frente a pérdida, uso indebido o accesos no autorizados. Sin embargo, ningún sistema es completamente infalible.",
+      "ABOUTDUDES": "Si tiene dudas sobre nuestra política de privacidad, contacte con nuestro equipo de soporte."
+    },
+    "TERMS": {
+      "TITLE": "Términos y condiciones",
+      "WARNING": "AVISO: el contenido de esta pagina es de adorno y toda la información mostrada no implica la violación de alguna ley",
+      "DATE": "Fecha de entrada en vigor: 18 de diciembre de 2025",
+      "SUBTITLE1": "1. Objeto",
+      "TEXT1": "Estos Términos y Condiciones regulan el uso de la aplicación y los servicios ofrecidos por MemoWorks. Al registrarse, acceder o utilizar la plataforma, usted acepta cumplir estos términos.",
+      "SUBTITLE2": "2. Acceso y registro",
+      "TEXT2": "El acceso a ciertas funcionalidades puede requerir la creación de una cuenta. El usuario se compromete a proporcionar información veraz y a mantenerla actualizada. La cuenta es personal e intransferible.",
+      "SUBTITLE3": "3. Uso aceptable",
+      "TEXT3": "Queda prohibido utilizar la plataforma para actividades ilegales, para vulnerar derechos de terceros, o para publicar contenido ofensivo. Nos reservamos el derecho de suspender o eliminar cuentas que incumplan estas normas.",
+      "SUBTITLE4": "4. Propiedad intelectual",
+      "TEXT4": "Todo el contenido, diseño, código y elementos gráficos de la aplicación son propiedad de sus respectivos titulares. Queda prohibida la reproducción no autorizada.",
+      "SUBTITLE5": "5. Limitación de responsabilidad",
+      "TEXT5": "En la medida máxima permitida por la ley, MemoWorks no será responsable por daños indirectos, pérdida de datos o lucro cesante derivados del uso o imposibilidad de uso de la plataforma.",
+      "SUBTITLE6": "6. Modificaciones",
+      "TEXT6": "Podemos modificar estos Términos en cualquier momento. Las modificaciones se publicarán en la aplicación y, cuando proceda, se notificará a los usuarios. El uso continuado implica la aceptación de las condiciones actualizadas.",
+      "SUBTITLE7": "7. Legislación y jurisdicción",
+      "TEXT7": "Estos términos se rigen por la legislación española. Para cualquier disputa, las partes se someten a los tribunales del domicilio del proveedor salvo normas imperativas en contrario.",
+      "ABOUTDUDES": "Si tiene preguntas sobre estos términos, contacte con nosotros a través de los canales indicados en la sección de contacto."
+    },
+    "WARNING": {
+      "TITLE": "Aviso legal",
+      "WARNING": "AVISO: el contenido de esta pagina es de adorno y toda la información mostrada no implica la violación de alguna ley",
+      "DATE": "Fecha de publicación: 18 de diciembre de 2025",
+      "SUBTITLE1": "Identificación del titular",
+      "TEXT1": "MemoWorks es una aplicación propiedad del titular responsable del servicio. Los datos de identificación y contacto están disponibles en la sección de contacto de la aplicación.",
+      "SUBTITLE2": "Objeto",
+      "TEXT2": "El presente aviso legal regula el acceso, uso y contenidos del sitio y de los servicios ofrecidos a través de la aplicación.",
+      "SUBTITLE3": "Acceso y uso",
+      "TEXT3": "El acceso a la aplicación es libre salvo para las áreas restringidas que requieren autenticación. El usuario se compromete a usar el contenido y servicios conforme a la ley y al respeto de los derechos de terceros.",
+      "SUBTITLE4": "Contenido y enlaces",
+      "TEXT4": "No nos responsabilizamos del contenido de terceros enlazados desde la aplicación. Nos reservamos el derecho a modificar, suspender o cancelar la información, contenidos y servicios ofrecidos.",
+      "SUBTITLE5": "Protección de datos",
+      "TEXT5": "El tratamiento de datos de carácter personal se realiza conforme a la Política de Privacidad publicada en la aplicación.",
+      "SUBTITLE6": "Propiedad intelectual",
+      "TEXT6": "Los derechos de propiedad intelectual e industrial del contenido de la aplicación pertenecen a sus titulares. Se prohíbe su reproducción total o parcial sin autorización expresa.",
+      "ABOUTDUDES": "Para cualquier consulta legal, por favor consulte con nuestro equipo de soporte o consulte las secciones de contacto y política de privacidad."
+    },
+    "COOKIES": {
+      "TITLE": "Información sobre las cookies",
+      "WARNING": "AVISO: el contenido de esta pagina es de adorno y toda la información mostrada no implica la violación de alguna ley",
+      "DATE": "Fecha de publicación: 18 de diciembre de 2025",
+      "SUBTITLE1": "¿Qué son las cookies?",
+      "TEXT1": "Las cookies son pequeños archivos que se almacenan en su dispositivo cuando visita un sitio web. Permiten recordar sus preferencias y optimizar la experiencia de uso.",
+      "SUBTITLE2": "Tipos de cookies que usamos",
+      "COOKIE1": "Cookies técnicas:",
+      "COOKIEDESCRIPTION1": " necesarias para el funcionamiento de la plataforma.",
+      "COOKIE2": "Cookies de preferencia:",
+      "COOKIEDESCRIPTION2": " recuerdan sus elecciones de idioma o apariencia.",
+      "COOKIE3": "Cookies analíticas:",
+      "COOKIEDESCRIPTION3": " recogen información agregada sobre el uso para mejorar el servicio (pueden ser anónimas).",
+      "COOKIE4": "Cookies de terceros:",
+      "COOKIEDESCRIPTION4": " utilizadas por proveedores externos para funciones como analítica o redes sociales.",
+      "SUBTITLE3": "Gestión y desactivación",
+      "TEXT3": "Puede configurar o desactivar las cookies mediante la configuración de su navegador. Tenga en cuenta que desactivar ciertas cookies puede afectar al funcionamiento de la aplicación.",
+      "SUBTITLE4": "Consentimiento",
+      "TEXT4": "Al utilizar la aplicación, usted acepta el uso de cookies según esta política, salvo que desactive aquellas que no sean estrictamente necesarias.",
+      "ABOUTDUDES": "Si desea más información sobre las cookies que utilizamos o cómo gestionarlas, contacte con nuestro equipo de soporte."
+    },
+    "STYLESGUIDE": {
+      "TITLE": "Guía de estilos — MemoWorks",
+      "INTRO": "Esta página recoge las decisiones de estilo y las clases/variables más importantes utilizadas en todo el proyecto.",
+      "TYPOGRAPHY": {
+        "TITLE": "1. Tipografía",
+        "FIRSTTYPOGRAPHY": "Fuente principal:",
+        "FIRSTTYPOGRAPHYDESCRIPTION": " Montserrat",
+        "SECONDTYPOGRAPHY": "Fuente secondaria:",
+        "SECONDTYPOGRAPHYDESCRIPTION": " Montserrat alternates",
+        "ALTERNATIVETYPOGRAPHY": "Fuente alterna:",
+        "ALTERNATIVETYPOGRAPHYDESCRIPTION": " sans-Sherif",
+        "TYPOGRAPHSIZES": "tamaños de fuente usados:",
+        "TYPOGRAPHSIZESDESCRIPTION": " 64px, 32px, 24px, 16px, 12px",
+        "TYPOGRAPHYDECORATIONS": "decoracion usada:",
+        "TYPOGRAPHYDECORATIONSDESCRIPTION": " regular, bold, semibold"
+      },
+      "COLORS": {
+        "TITLE": "2. Paleta de colores",
+        "DESCRIPTION1": "La paleta principal se gestiona en las variables SCSS. En el proyecto hay soporte para modo claro/oscuro; las clases y assets alternan según la variable ",
+        "DESCRIPTION2": " y la lógica en ",
+        "PRIMARYCOLOR": "Primario:",
+        "PRIMARYCOLORDESCRIPTION": " usado inicialmente como color de fondo, color de los inputs color de letra",
+        "SECONDARYCOLOR": "Secundario:",
+        "SECONDARYCOLORDESCRIPTION": " usado para los componentes botones, formularios, etc...",
+        "NEUTRALCOLOR": "Neutros:",
+        "NEUTRALCOLORDESCRIPTION": " utilizados para el color de letra del landing page y el modo oscuro",
+        "OTHERSCOLORS": "Otros colores:",
+        "OTHERSCOLORSDESCRIPTION": " usados para el toast y la pagina de error 404",
+        "USEDCOLORS": "Colores usados en el proyecto"
+      },
+      "ICONOGRAPHY": {
+        "TITLE": "3. Iconografía",
+        "DESCRIPTION1": "Se usan iconos SVG, WEBP y PNG personalizados. dichos iconos están en ",
+        "DESCRIPTION2": " y se incluyen en templates con ",
+        "DESCRIPTION3": " o como background en CSS."
+      },
+      "SPACING": {
+        "TITLE": "4. Espaciado y layout",
+        "TEXT1": "Se usan utilidades y clases tipo ",
+        "TEXT2": " para los layouts. La escala de espaciado está definida en variables SCSS (márgenes y paddings reutilizables)."
+      },
+      "COMPONENTS": {
+        "TITLE": "5. Componentes reutilizables",
+        "ITEM1": ": botón base con variantes (primario, secundario, outline).",
+        "ITEM2": ": modal de autenticación usado en landing y otras rutas. Este componente solo es visible cuando pulsas un boton",
+        "ITEM3": " componente utilizado en formularios",
+        "ITEM4": "Botones de acción dinámicos en el dashboard usan imágenes dentro de elementos creados con Renderer2 y clases como "
+      },
+      "FORMS": {
+        "TITLE": "6. Formularios y validación",
+        "TEXT1": "Los formularios usan validadores personalizados (por ejemplo verificaciones de contraseña y teléfono) en ",
+        "TEXT2": " y validadores asíncronos en ",
+        "TEXT3": ". Mostrar errores sigue el patrón de clases de estado (error/success) y mensajes inline."
+      },
+      "STYLES_GRID": {
+        "TITLE": "",
+        "TEXT": ""
+      },
+      "UTILITIES": {
+        "TITLE": "7. Utilidades CSS",
+        "TEXT1": "Revisar la carpeta ",
+        "TEXT2": " para utilidades: colores, variables, helpers de layout y estilos globales. Los nombres de carpeta empiezan por código numérico para orden semántico (ej. ",
+        "TEXT3": ", etc.)."
+      },
+      "DARKMODE": {
+        "TITLE": "8. Modo oscuro",
+        "TEXT1": "El modo oscuro se gestiona desde ",
+        "TEXT2": ". En templates se alternan imágenes con binding a ",
+        "TEXT3": " (ej. ",
+        "TEXT4": ") y las variables CSS se adaptan al tema."
+      },
+      "A11Y": {
+        "TITLE": "9. Accesibilidad (a11y)",
+        "ITEM1_PART1": "Elementos interactivos tienen ",
+        "ITEM1_PART2": " cuando se crean dinámicamente.",
+        "ITEM2": "Los botones gestionan eventos de teclado (Enter / Space) para cumplir accesibilidad."
+      },
+      "CONTRIBUTING": {
+        "TITLE": "10. Cómo contribuir",
+        "TEXT1": "Si añades estilos, sigue estas pautas:",
+        "LI1": "Usa variables SCSS para colores y tamaños.",
+        "LI2_PART1": "Añade clases utilitarias en ",
+        "LI2_PART2": " y evita estilos inline.",
+        "LI3": "Documenta la nueva variable/clase en esta página."
+      },
+      "LASTUPDATE": {
+        "PART1": "Última actualización: consulta el repositorio para ver cambios en ",
+        "PART2": "."
+      }
+    }
+  }
+}

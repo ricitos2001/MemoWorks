@@ -11,6 +11,11 @@ MemoWorks es una aplicación diseñada para ayudar a los usuarios a organizar y 
 - **Creación de grupos**: crea grupos familiares para poder asignar tareas a otros usuarios
 - **Sincronización en la Nube**: Accede a tus notas y tareas desde cualquier dispositivo.
 - **Interfaz Intuitiva**: Diseño amigable y fácil de usar.
+- **Autenticación Segura**: Inicio de sesión y registro con seguridad avanzada.
+- **Notificaciones**: Recibe notificaciones para recordatorios y actualizaciones importantes por correo electrónico.
+- **Modo Oscuro**: Opción para cambiar entre modo claro y oscuro para una mejor experiencia visual.
+- **Búsqueda Rápida**: Función de búsqueda para encontrar notas y tareas rápidamente.
+- **Sistema de idiomas**: Soporte para múltiples idiomas, incluyendo español e inglés.
 
 ### Tecnologías Utilizadas
 - **Frontend**: Angular para una experiencia de usuario dinámica y responsiva.

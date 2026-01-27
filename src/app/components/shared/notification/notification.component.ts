@@ -2,18 +2,21 @@ import {Component, ElementRef, inject, OnDestroy, OnInit, ViewChild, signal, Cha
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import {NotificationsService, Notification} from '../../../services/notifications.service';
 import {NotificationsStore} from '../../../stores/notifications.store';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-notification',
   imports: [
     DatePipe,
     NgForOf,
-    NgIf
+    NgIf,
+    TranslateModule
   ],
   templateUrl: './notification.component.html',
   styleUrl: '../../../../styles/styles.css',
 })
 export class NotificationComponent implements OnInit, OnDestroy {
+  constructor(private translate: TranslateService,) {}
   notificationsService = inject(NotificationsService);
   notificationsStore = inject(NotificationsStore);
   state = signal<{ loading: boolean; data: Notification[]; page: number; eof: boolean }>({
@@ -22,6 +25,9 @@ export class NotificationComponent implements OnInit, OnDestroy {
     page: 0,
     eof: false
   });
+
+  moreNotificacions: string = '';
+  noMoreNotifications: string = '';
 
   @ViewChild('anchor', { static: true }) anchor!: ElementRef<HTMLElement>;
   private observer!: IntersectionObserver;
@@ -41,6 +47,9 @@ export class NotificationComponent implements OnInit, OnDestroy {
         this.state.set({ ...this.state(), data: [...newItems, ...this.state().data] });
       }
     });
+
+    this.setTranslations();
+    this.translate.onLangChange.subscribe(() => this.setTranslations());
 
     this.observer = new IntersectionObserver(entries => {
       if (entries.some(e => e.isIntersecting)) {
@@ -82,5 +91,10 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.observer) this.observer.disconnect();
+  }
+
+  private setTranslations() {
+    this.moreNotificacions = this.translate.instant('COMPONENTS.SHARED.NOTIFICATIONLOAD.MORENOTIFICATIONS');
+    this.noMoreNotifications = this.translate.instant('COMPONENTS.SHARED.NOTIFICATIONLOAD.NOMORENOTIFICATIONS');
   }
 }

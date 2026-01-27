@@ -18,6 +18,16 @@
     <section class="flex">
       <section>
         <app-form-input
+          formControlName="name"
+          name="name"
+          label="Nombre"
+          placeholder="Nombre"
+          [required]="true"
+        ></app-form-input>
+        <article class="error" *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.invalid">
+          <small>Nombre obligatorio</small>
+        </article>
+        <app-form-input
           formControlName="username"
           name="username"
           label="Nombre de usuario"
@@ -27,16 +37,6 @@
         <article class="error" *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid">
           <small *ngIf="registerForm.get('username')?.errors?.['required']">El usuario es obligatorio.</small>
           <small *ngIf="registerForm.get('username')?.errors?.['usernameTaken']">Usuario ya existe.</small>
-        </article>
-        <app-form-input
-          formControlName="name"
-          name="name"
-          label="Nombre"
-          placeholder="Nombre"
-          [required]="true"
-        ></app-form-input>
-        <article class="error" *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.invalid">
-          <small>Nombre obligatorio</small>
         </article>
       </section>
       <section>

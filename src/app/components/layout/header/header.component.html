@@ -2,6 +2,7 @@
   <section class="container header__inner">
     <a href="/landing" class="header__logo"><img [src]="darkMode ? 'assets/img/logo_dark.svg' : 'assets/img/logo.svg'" alt="logo del header" class="footer__logo"></a>
     <article class="flex-center">
+      <app-language-selector></app-language-selector>
       <app-hamburger-menu></app-hamburger-menu>
       <app-dark-mode-button (click)="changeTheme(); toggle()" class="header__dark-mode-button"></app-dark-mode-button>
     </article>

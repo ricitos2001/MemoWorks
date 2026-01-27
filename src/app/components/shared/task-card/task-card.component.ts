@@ -2,20 +2,23 @@ import {Component, signal, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import { Task } from '../../../services/task.service';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-task-card',
-  imports: [DatePipe, NgIf, NgForOf],
+  imports: [DatePipe, NgIf, NgForOf, TranslateModule],
   templateUrl: './task-card.component.html',
   styleUrl: '../../../../styles/styles.css',
 })
-export class TaskCardComponent {
+export class TaskCardComponent implements OnInit {
 
   private route = inject(ActivatedRoute);
 
+  backButton = ''
+
   task = signal<Task | null>(null);
 
-  constructor() {
+  constructor(private translate: TranslateService) {
     this.route.data.subscribe(({ task }) => {
       this.task.set(task);
     });
@@ -28,5 +31,14 @@ export class TaskCardComponent {
     const date = new Date();
     date.setHours(+hours, +minutes, 0, 0);
     return date;
+  }
+
+  ngOnInit() {
+    this.setTranslations();
+    this.translate.onLangChange.subscribe(() => this.setTranslations());
+  }
+
+  private setTranslations() {
+    this.backButton = this.translate.instant('COMPONENTS.SHARED.BACKBUTTON');
   }
 }

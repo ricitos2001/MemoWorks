@@ -2,8 +2,8 @@
   <div class="modal__content">
     <p class="modal__message">{{ message }}</p>
     <div class="modal__footer">
-      <app-button (click)="close()">Cancelar</app-button>
-      <app-button (click)="confirm()">Eliminar</app-button>
+      <app-button (click)="close()">{{ confirmButton | translate }}</app-button>
+      <app-button (click)="confirm()">{{ cancelButton | translate }}</app-button>
     </div>
   </div>
 </app-modal>

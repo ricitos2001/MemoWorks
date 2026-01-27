@@ -10,15 +10,11 @@
         </li>
       </ul>
 
-      <div #anchor style="height: 1px; width: 100%;"></div>
+      <article #anchor style="height: 1px; width: 100%;"></article>
 
-      <div *ngIf="state().loading" class="notifications__loading">
-        Cargando más notificaciones...
-      </div>
+      <article *ngIf="state().loading" class="notifications__loading">{{moreNotificacions | translate}}</article>
 
-      <div *ngIf="state().eof && !state().loading" class="notifications__end">
-        No hay más notificaciones.
-      </div>
+      <article *ngIf="state().eof && !state().loading" class="notifications__end">{{noMoreNotifications | translate}}</article>
     </ng-container>
   </ng-container>
 

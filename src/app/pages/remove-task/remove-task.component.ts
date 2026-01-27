@@ -9,6 +9,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {TasksSignalStore} from '../../stores/tasks.signal.store';
 import {TaskService} from '../../services/task.service';
 import {NotificationsService, Notification} from '../../services/notifications.service';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-remove-task',
@@ -18,11 +19,13 @@ import {NotificationsService, Notification} from '../../services/notifications.s
     ViewTaskButtonComponent,
     BackButton,
     TrashButtonComponent,
-    NgIf
+    NgIf,
+    TranslateModule
   ],
   templateUrl: './remove-task.component.html',
   styleUrl: '../../../styles/styles.css',
 })
+
 export class RemoveTaskComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private tasksSignalStore = inject(TasksSignalStore);
@@ -30,6 +33,7 @@ export class RemoveTaskComponent implements OnInit {
   private comm = inject(CommunicationService);
   private taskService = inject(TaskService);
   private notifications = inject(NotificationsService);
+  private translate = inject(TranslateService);
   email = localStorage.getItem('email');
 
   tasks = computed(() => this.tasksSignalStore.state().data);
@@ -38,6 +42,9 @@ export class RemoveTaskComponent implements OnInit {
   error = computed(() => this.tasksSignalStore.error());
   page = this.tasksSignalStore.page;
   pageSize = this.tasksSignalStore.pageSize;
+  loadingText = ''
+  nextButton: string = '';
+  backButton: string = '';
 
   ngOnInit(): void {
     // Recargar tareas si llega notificación
@@ -52,6 +59,9 @@ export class RemoveTaskComponent implements OnInit {
     if (this.email) {
       this.tasksSignalStore.load(this.page());
     }
+
+    this.setTranslations();
+    this.translate.onLangChange.subscribe(() => this.setTranslations());
   }
 
   removeTask(taskId: string) {
@@ -109,5 +119,11 @@ export class RemoveTaskComponent implements OnInit {
     if (this.page() > 0) {
       this.tasksSignalStore.load(this.page() - 1);
     }
+  }
+
+  private setTranslations() {
+    this.loadingText = this.translate.instant('COMPONENTS.SHARED.TASKS.LOADINGTEXT');
+    this.nextButton = this.translate.instant('COMPONENTS.SHARED.TASKS.NEXTBUTTON');
+    this.backButton = this.translate.instant('COMPONENTS.SHARED.TASKS.BACKBUTTON');
   }
 }

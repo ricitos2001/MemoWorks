@@ -1,35 +1,35 @@
 <section class="settings__user" *ngIf="user">
   <section>
     <article class="settings__item">
-      <p class="settings__name">nombre</p>
+      <p class="settings__name">{{name | translate}}</p>
       <p class="settings__value">{{ user.name }}</p>
     </article>
     <article class="settings__item">
-      <p class="settings__name">apellidos</p>
+      <p class="settings__name">{{surnames | translate}}</p>
       <p class="settings__value">{{ user.surnames }}</p>
     </article>
     <article class="settings__item">
-      <p class="settings__name">nombre de usuarió</p>
+      <p class="settings__name">{{usernameText | translate}}</p>
       <p class="settings__value">{{ user.username }}</p>
     </article>
     <article class="settings__item">
-      <p class="settings__name">numero de teléfono</p>
+      <p class="settings__name">{{phoneNumber | translate}}</p>
       <p class="settings__value">{{ user.phoneNumber }}</p>
     </article>
     <article class="settings__item">
-      <p class="settings__name">correo electrónico</p>
+      <p class="settings__name">{{userEmail | translate}}</p>
       <p  class="settings__value">{{ user.email }}</p>
     </article>
   </section>
   <article class="grid-center">
     <img [src]="avatar || 'assets/img/logo.svg'" (error)="onAvatarImageError($event)" alt="user" class="settings__img-profile" loading="lazy" decoding="async">
-    <p class="settings__texto">imagen de perfil</p>
+    <p class="settings__texto">{{imageProfileText | translate}}</p>
     <input #fileInput type="file" accept="image/*" style="display:none" (change)="onFileSelected($event)" [attr.data-file-input-present]="!!fileInput" />
-    <app-button (click)="editImageProfile()">editar imagen de perfil</app-button>
+    <app-button (click)="editImageProfile()">{{editImageProfileButton | translate}}</app-button>
   </article>
 </section>
 <article class="settings__links">
-  <a (click)="editUserInfo()">Editar información del usuario</a>
-  <a (click)="logout()">Cerrar sesión</a>
-  <a (click)="removeAccount()">Eliminar cuenta</a>
+  <a (click)="editUserInfo()">{{editUserInfoButton | translate}}</a>
+  <a (click)="logout()">{{closeSessionButton | translate}}</a>
+  <a (click)="removeAccount()">{{removeAccountButton | translate}}</a>
 </article>

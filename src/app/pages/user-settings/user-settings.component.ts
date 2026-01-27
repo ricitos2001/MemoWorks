@@ -10,12 +10,14 @@ import { CommunicationService } from '../../services/shared/communication.servic
 import { AvatarService } from '../../services/shared/avatar.service';
 import { ToastService } from '../../services/shared/toast.service';
 import { NotificationsStore } from '../../stores/notifications.store';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-settings',
   imports: [
     ButtonComponent,
     NgIf,
+    TranslateModule,
   ],
   templateUrl: './user-settings.component.html',
   styleUrl: '../../../styles/styles.css',
@@ -35,11 +37,23 @@ export class UserSettingsComponent implements OnInit {
     private router: Router,
     private cd: ChangeDetectorRef,
     private comm: CommunicationService,
-    private avatarService: AvatarService
-    , private renderer: Renderer2
-    , private toastService: ToastService
-    , private notificationsStore: NotificationsStore
+    private avatarService: AvatarService,
+    private renderer: Renderer2,
+    private toastService: ToastService,
+    private notificationsStore: NotificationsStore,
+    private translate: TranslateService,
   ) {}
+
+  name: string = '';
+  surnames: string = '';
+  usernameText: string = '';
+  phoneNumber: string = '';
+  userEmail: string = '';
+  imageProfileText: string = '';
+  editImageProfileButton: string = '';
+  editUserInfoButton: string = ''
+  closeSessionButton: string = '';
+  removeAccountButton: string = '';
 
   ngOnInit(): void {
     this.loadUser();
@@ -59,6 +73,8 @@ export class UserSettingsComponent implements OnInit {
         this.reloadAvatar();
       }
     });
+    this.setTranslations();
+    this.translate.onLangChange.subscribe(() => this.setTranslations());
   }
 
   onAvatarImageError(event: Event) {
@@ -198,5 +214,18 @@ export class UserSettingsComponent implements OnInit {
     this.authService.logout();
     this.avatarService.clear(this.user.id);
     this.router.navigate(['/landing']);
+  }
+
+  private setTranslations() {
+    this.name = this.translate.instant('PAGES.SETTINGS.USERSETTINGS.NAME');
+    this.surnames = this.translate.instant('PAGES.SETTINGS.USERSETTINGS.SURNAMES');
+    this.usernameText = this.translate.instant('PAGES.SETTINGS.USERSETTINGS.USERNAMETEXT');
+    this.phoneNumber = this.translate.instant('PAGES.SETTINGS.USERSETTINGS.PHONENUMBER');
+    this.userEmail = this.translate.instant('PAGES.SETTINGS.USERSETTINGS.USEREMAIL');
+    this.imageProfileText = this.translate.instant('PAGES.SETTINGS.USERSETTINGS.IMAGEPROFILETEXT');
+    this.editImageProfileButton = this.translate.instant('PAGES.SETTINGS.USERSETTINGS.EDITIMAGEPROFILEBUTTON');
+    this.editUserInfoButton = this.translate.instant('PAGES.SETTINGS.USERSETTINGS.EDITUSERINFOBUTTON');
+    this.closeSessionButton = this.translate.instant('PAGES.SETTINGS.USERSETTINGS.CLOSESESSIONBUTTON');
+    this.removeAccountButton = this.translate.instant('PAGES.SETTINGS.USERSETTINGS.REMOVEACCOUNTBUTTON')
   }
 }

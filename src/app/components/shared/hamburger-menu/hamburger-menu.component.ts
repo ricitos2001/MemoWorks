@@ -8,10 +8,11 @@ import {Subscription} from 'rxjs';
 import {NotificationComponent} from '../notification/notification.component';
 import { ToastService } from '../../../services/shared/toast.service';
 import { NotificationsStore } from '../../../stores/notifications.store';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hamburger-menu',
-  imports: [NgIf, ButtonComponent, NotificationComponent],
+  imports: [NgIf, ButtonComponent, NotificationComponent, TranslateModule],
   templateUrl: './hamburger-menu.component.html',
   styleUrl: '../../../../styles/styles.css',
 })
@@ -36,8 +37,18 @@ export class HamburgerMenuComponent implements OnInit, OnDestroy {
     private authModalService: AuthModalService,
     private renderer: Renderer2,
     private toastService: ToastService,
-    private notificationsStore: NotificationsStore
+    private notificationsStore: NotificationsStore,
+    private translate: TranslateService
   ) {}
+
+  home: string = '';
+  whatOffer: string = '';
+  contact: string = '';
+  getstarted: string = '';
+  dashboard: string = '';
+  calendar: string = '';
+  configuration: string = '';
+  logoutText: string = '';
 
   toggleMenu() {
     this.isOpen = !this.isOpen;
@@ -135,6 +146,8 @@ export class HamburgerMenuComponent implements OnInit, OnDestroy {
         try { this.notificationsStore.clear(); } catch (e) {}
       }
     });
+    this.setTranslations();
+    this.translate.onLangChange.subscribe(() => this.setTranslations());
   }
 
   ngOnDestroy(): void {
@@ -163,5 +176,16 @@ export class HamburgerMenuComponent implements OnInit, OnDestroy {
     this.authService.loggedInSubject.next(false);
     this.authService.logout();
     this.router.navigate(['/landing']);
+  }
+
+  private setTranslations() {
+    this.home = this.translate.instant('COMPONENTS.SHARED.HAMBURGERMENU.HOME');
+    this.whatOffer = this.translate.instant('COMPONENTS.SHARED.HAMBURGERMENU.WHATOFFER');
+    this.contact = this.translate.instant('COMPONENTS.SHARED.HAMBURGERMENU.CONTACT');
+    this.getstarted = this.translate.instant('COMPONENTS.SHARED.HAMBURGERMENU.GETSTARTED');
+    this.dashboard = this.translate.instant('COMPONENTS.SHARED.HAMBURGERMENU.DASHBOARD');
+    this.calendar = this.translate.instant('COMPONENTS.SHARED.HAMBURGERMENU.CALENDAR');
+    this.configuration = this.translate.instant('COMPONENTS.SHARED.HAMBURGERMENU.CONFIGURATION');
+    this.logoutText = this.translate.instant('COMPONENTS.SHARED.HAMBURGERMENU.LOGOUT');
   }
 }

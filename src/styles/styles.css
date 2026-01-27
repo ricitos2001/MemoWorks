@@ -1429,6 +1429,16 @@ button.active {
   margin: 0;
 }
 
+.language-selector {
+  position: relative;
+  display: inline-block;
+}
+
+.language-selector__languages {
+  background-color: var(--components);
+  color: var(--letters);
+}
+
 /* ============================================================
    Variables globales
    ============================================================ */

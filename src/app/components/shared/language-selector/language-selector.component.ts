@@ -3,14 +3,14 @@ import {LanguageService} from '../../../services/language.service';
 import {NgForOf} from '@angular/common';
 
 @Component({
-  selector: 'app-languaje-selector',
+  selector: 'app-language-selector',
   imports: [
     NgForOf
   ],
-  templateUrl: './languaje-selector.component.html',
+  templateUrl: './language-selector.component.html',
   styleUrl: '../../../../styles/styles.css',
 })
-export class LanguajeSelectorComponent implements OnInit {
+export class LanguageSelectorComponent implements OnInit {
 
   constructor(private languageService: LanguageService) {
   }
@@ -20,7 +20,7 @@ export class LanguajeSelectorComponent implements OnInit {
     { code: 'en', label: 'English'}
   ];
 
-  currentLang = 'es';
+  currentLang!: string;
 
   ngOnInit(): void {
     this.currentLang = this.languageService.getCurrentLanguage();
@@ -32,9 +32,6 @@ export class LanguajeSelectorComponent implements OnInit {
   }
 
   setLanguage(lang: string) {
-    if (!lang) {
-      return;
-    }
     this.languageService.setLanguage(lang);
     this.currentLang = lang;
   }
