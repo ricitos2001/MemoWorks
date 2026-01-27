@@ -602,7 +602,8 @@ form {
     max-width: 5rem;
   }
   .footer__copyright {
-    max-width: 1.4rem;
+    width: 1rem;
+    height: 1rem;
   }
   .footer article {
     padding: 0;
