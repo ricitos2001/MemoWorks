@@ -1,4 +1,3 @@
-<label for="lang-select"></label>
-<select id="lang-select" (change)="setLanguage($any($event.target).value)" class="language-selector">
+<app-form-input id="lang-select" label="" (change)="setLanguage($any($event.target).value)" class="language-selector">
   <option *ngFor="let l of languages" [value]="l.code" [selected]="l.code === currentLang" class="language-selector__languages">{{l.label}}</option>
-</select>
+</app-form-input>

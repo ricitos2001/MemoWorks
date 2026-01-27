@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {LanguageService} from '../../../services/language.service';
 import {NgForOf} from '@angular/common';
+import {FormInputComponent} from '../form-input/form-input.component';
 
 @Component({
   selector: 'app-language-selector',
   imports: [
-    NgForOf
+    NgForOf,
+    FormInputComponent
   ],
   templateUrl: './language-selector.component.html',
   styleUrl: '../../../../styles/styles.css',
