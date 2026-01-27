@@ -6,19 +6,21 @@ import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from
 import {GroupService} from '../../services/group.service';
 import {CommunicationService} from '../../services/shared/communication.service';
 import {User, UserService} from '../../services/user.service';
-import {Notification as AppNotification, NotificationsService} from '../../services/notifications.service';
+import {Notification, NotificationsService} from '../../services/notifications.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GroupsStore} from '../../stores/groups.store';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-group',
-    imports: [
-        ButtonComponent,
-        FormInputComponent,
-        NgForOf,
-        NgIf,
-        ReactiveFormsModule
-    ],
+  imports: [
+    ButtonComponent,
+    FormInputComponent,
+    NgForOf,
+    NgIf,
+    ReactiveFormsModule,
+    TranslateModule
+  ],
   templateUrl: './edit-group.component.html',
   styleUrl: '../../../styles/styles.css',
 })
@@ -40,6 +42,7 @@ export class EditGroupComponent implements OnInit {
     private router: Router,
     private groupsStore: GroupsStore,
     private route: ActivatedRoute,
+    private translate: TranslateService,
 
   ) {
     this.groupForm = this.fb.group({
@@ -160,38 +163,38 @@ export class EditGroupComponent implements OnInit {
         this.comm.sendNotification({
           source: 'groupForm',
           type: 'success',
-          message: 'Grupo creada correctamente',
+          message: this.translate.instant('NOTIFICATIONS.GROUP.CREATED') || 'Grupo creada correctamente',
           payload: { refreshGroups: true }
         });
 
-        const apiNotification: AppNotification = {
-          title: 'Grupo creado',
-          message: `La tarea "${payload.title}" se ha creado correctamente.`,
-          createdAt: new Date(),
-          userEmail: this.email || '',
-        };
-        this.notifications.pushNotifications(apiNotification).subscribe({
-          next: () => {},
-          error: (err) => { console.warn('Error enviando notificación al API:', err); }
-        });
-        this.create.emit();
-        this.router.navigate(['/settings/familiarGroups']);
-      },
-      error: () => {
-        this.comm.sendNotification({
-          source: 'groupForm',
-          type: 'error',
-          message: 'Error al crear la tarea',
-        });
-        this.loading = false;
-        this.submitting.emit(false);
-      },
-      complete: () => {
-        this.loading = false;
-        this.submitting.emit(false);
-      }
-    });
-  }
+        const apiNotification: Notification = {
+          title: this.translate.instant('NOTIFICATIONS.GROUP.TITLE') || 'Grupo creado',
+          message: this.translate.instant('NOTIFICATIONS.GROUP.MESSAGE', { name: payload.name }) || `El grupo "${payload.name}" se ha creado correctamente.`,
+           createdAt: new Date(),
+           userEmail: this.email || '',
+         };
+         this.notifications.pushNotifications(apiNotification).subscribe({
+           next: () => {},
+           error: (err) => { console.warn('Error enviando notificaci3n al API:', err); }
+         });
+         this.create.emit();
+         this.router.navigate(['/settings/familiarGroups']);
+       },
+       error: () => {
+         this.comm.sendNotification({
+           source: 'groupForm',
+           type: 'error',
+           message: this.translate.instant('NOTIFICATIONS.GROUP.CREATE_ERROR') || 'Error al crear el grupo',
+         });
+         this.loading = false;
+         this.submitting.emit(false);
+       },
+       complete: () => {
+         this.loading = false;
+         this.submitting.emit(false);
+       }
+     });
+   }
 
   onCancel(event: Event): void {
     event.preventDefault();

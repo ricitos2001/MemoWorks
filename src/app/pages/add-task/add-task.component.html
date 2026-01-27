@@ -1,56 +1,56 @@
 <form class="add-task-form" [formGroup]="taskForm" (ngSubmit)="onSubmit($event)">
   <fieldset>
-    <legend>Agregar tarea</legend>
+    <legend>{{ 'PAGES.TASK.ADD_LEGEND' | translate }}</legend>
 
     <app-form-input
       formControlName="title"
       name="title"
-      placeholder="Value"
-      label="Título"
+      placeholder="{{ 'PAGES.TASK.TITLE_PLACEHOLDER' | translate }}"
+      [label]="'PAGES.TASK.TITLE_LABEL' | translate"
       [required]="true"
       class="grid"
     ></app-form-input>
     <article class="error" *ngIf="taskForm.get('title')?.touched && taskForm.get('title')?.invalid">
-      <small *ngIf="taskForm.get('title')?.errors?.['required']">Título obligatorio</small>
-      <small *ngIf="taskForm.get('title')?.errors?.['minlength']">Mínimo 5 caracteres</small>
+      <small *ngIf="taskForm.get('title')?.errors?.['required']">{{ 'VALIDATION.REQUIRED' | translate }}</small>
+      <small *ngIf="taskForm.get('title')?.errors?.['minlength']">{{ 'VALIDATION.MIN_LENGTH' | translate }}</small>
     </article>
 
     <app-form-input
       formControlName="description"
       name="description"
-      placeholder="Value"
-      label="Descripcion"
+      placeholder="{{ 'PAGES.TASK.DESCRIPTION_PLACEHOLDER' | translate }}"
+      [label]="'PAGES.TASK.DESCRIPTION_LABEL' | translate"
       type="textarea"
       [required]="true"
       class="grid"
     ></app-form-input>
     <article class="error" *ngIf="taskForm.get('description')?.touched && taskForm.get('description')?.invalid">
-      <small *ngIf="taskForm.get('description')?.errors?.['required']">Descripción obligatoria</small>
-      <small *ngIf="taskForm.get('description')?.errors?.['minlength']">Mínimo 10 caracteres</small>
+      <small *ngIf="taskForm.get('description')?.errors?.['required']">{{ 'VALIDATION.REQUIRED' | translate }}</small>
+      <small *ngIf="taskForm.get('description')?.errors?.['minlength']">{{ 'VALIDATION.MIN_LENGTH' | translate }}</small>
     </article>
 
-    <label class="label">Fecha y hora de realizacion</label>
+    <label class="label">{{ 'PAGES.TASK.DATE_TIME_LABEL' | translate }}</label>
     <article class="date-time-group">
       <app-form-input
         formControlName="date"
         type="date"
         name="date"
-        placeholder="--/--/----"
-        label="Fecha"
+        [placeholder]="'PAGES.TASK.DATE_PLACEHOLDER' | translate"
+        [label]="'PAGES.TASK.DATE_LABEL' | translate"
         [required]="true"
       ></app-form-input>
       <app-form-input
         formControlName="time"
         type="time"
         name="time"
-        placeholder="--:--"
-        label="Hora"
+        [placeholder]="'PAGES.TASK.TIME_PLACEHOLDER' | translate"
+        [label]="'PAGES.TASK.TIME_LABEL' | translate"
         [required]="true"
       ></app-form-input>
     </article>
 
     <article *ngIf="isAdmin$ | async" class="form-row" formGroupName="assigmentFor">
-      <label class="label">Asignar a</label>
+      <label class="label">{{ 'PAGES.TASK.ASSIGN_LABEL' | translate }}</label>
       <select class="form-select" formControlName="id">
         <option *ngFor="let user of groupUsers" [ngValue]="user.id">{{ user.name || user.email }}</option>
       </select>
@@ -58,8 +58,8 @@
 
     <app-form-input
       name="labelInput"
-      placeholder="Añadir etiqueta"
-      label="Añadir etiqueta"
+      [placeholder]="'PAGES.TASK.ADD_LABEL_PLACEHOLDER' | translate"
+      [label]="'PAGES.TASK.ADD_LABEL' | translate"
       (keydown.enter)="addLabel(labelInput.value, $event); labelInput.value='';"
       #labelInput
     ></app-form-input>
@@ -71,8 +71,8 @@
     </article>
 
     <article class="actions">
-      <app-button (click)="onSubmit($event)" [attr.aria-busy]="loading">Crear tarea</app-button>
-      <app-button class="secondary" (click)="!loading && cancel.emit()">Cancelar</app-button>
+      <app-button (click)="onSubmit($event)" [attr.aria-busy]="loading">{{ 'PAGES.TASK.CREATE_BUTTON' | translate }}</app-button>
+      <app-button class="secondary" (click)="!loading && cancel.emit()">{{ 'PAGES.TASK.CANCEL_BUTTON' | translate }}</app-button>
     </article>
   </fieldset>
 </form>

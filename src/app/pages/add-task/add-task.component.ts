@@ -11,6 +11,7 @@ import { CommunicationService } from '../../services/shared/communication.servic
 import { UserService } from '../../services/user.service';
 import { TasksSignalStore } from '../../stores/tasks.signal.store';
 import { NotificationsService, Notification } from '../../services/notifications.service';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import { GroupsStore } from '../../stores/groups.store';
 
 @Component({
@@ -24,6 +25,7 @@ import { GroupsStore } from '../../stores/groups.store';
     NgIf,
     NgForOf,
     AsyncPipe,
+    TranslateModule,
   ],
   templateUrl: './add-task.component.html',
   styleUrl: '../../../styles/styles.css',
@@ -54,6 +56,7 @@ export class AddTaskComponent implements OnInit {
     private userService: UserService,
     private tasksSignalStore: TasksSignalStore,
     private notifications: NotificationsService,
+    private translate: TranslateService,
   ) {
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
@@ -162,16 +165,16 @@ export class AddTaskComponent implements OnInit {
         this.comm.sendNotification({
           source: 'taskForm',
           type: 'success',
-          message: 'Tarea creada correctamente',
-          payload: { refreshTasks: true, taskId: (taskToAdd as any).id ?? null, reason: 'created' }
-        });
+          message: this.translate.instant('NOTIFICATIONS.TASK.CREATED') || 'Tarea creada correctamente',
+           payload: { refreshTasks: true, taskId: (taskToAdd as any).id ?? null, reason: 'created' }
+         });
 
-        const notification: Notification = {
-          title: 'Tarea creada',
-          message: `La tarea "${payload.title}" se ha creado correctamente.`,
-          createdAt: new Date(),
-          userEmail: this.email || '',
-        };
+         const notification: Notification = {
+          title: this.translate.instant('NOTIFICATIONS.TASK.TITLE') || 'Tarea creada',
+          message: this.translate.instant('NOTIFICATIONS.TASK.MESSAGE', { title: payload.title }) || `La tarea "${payload.title}" se ha creado correctamente.`,
+           createdAt: new Date(),
+           userEmail: this.email || '',
+         };
 
         this.notifications.pushNotifications(notification).subscribe();
         this.create.emit();
@@ -180,7 +183,7 @@ export class AddTaskComponent implements OnInit {
         this.comm.sendNotification({
           source: 'taskForm',
           type: 'error',
-          message: 'Error al crear la tarea',
+          message: this.translate.instant('NOTIFICATIONS.TASK.CREATE_ERROR') || 'Error al crear la tarea',
         });
       },
       complete: () => {

@@ -14,6 +14,7 @@ import { FormInputComponent } from '../../components/shared/form-input/form-inpu
 import { PasswordResetService } from '../../services/password-reset.service';
 import { passwordStrength } from '../../validators/password-strength.validator';
 import { passwordMatch } from '../../validators/password-match.validator';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-recover-password',
@@ -22,7 +23,8 @@ import { passwordMatch } from '../../validators/password-match.validator';
     ButtonComponent,
     FormInputComponent,
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    TranslateModule
   ],
   templateUrl: './recover-password.component.html',
   styleUrl: '../../../styles/styles.css'
@@ -43,7 +45,8 @@ export class RecoverPasswordComponent implements OnInit {
     private fb: FormBuilder,
     private passwordResetService: PasswordResetService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService,
   ) {}
 
   ngOnInit(): void {
@@ -125,11 +128,11 @@ export class RecoverPasswordComponent implements OnInit {
 
     this.passwordResetService.forgotPassword({ email }).subscribe({
       next: res => {
-        this.message = res.message;
+        this.message = res.message || this.translate.instant('PAGES.RECOVER.SUCCESS_EMAIL_SENT');
         this.submitted = false;
       },
       error: () => {
-        this.error = 'No se pudo procesar la solicitud';
+        this.error = this.translate.instant('PAGES.RECOVER.ERROR_PROCESSING_REQUEST');
         this.submitted = false;
       }
     });
@@ -142,11 +145,11 @@ export class RecoverPasswordComponent implements OnInit {
       .resetPassword({ token: this.token!, newPassword })
       .subscribe({
         next: res => {
-          this.message = res.message;
+          this.message = res.message || this.translate.instant('PAGES.RECOVER.SUCCESS_PASSWORD_CHANGED');
           setTimeout(() => this.router.navigate(['/login']), 2000);
         },
         error: () => {
-          this.error = 'No se pudo actualizar la contraseña';
+          this.error = this.translate.instant('PAGES.RECOVER.ERROR_UPDATING_PASSWORD');
           this.submitted = false;
         }
       });

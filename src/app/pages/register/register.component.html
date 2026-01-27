@@ -1,66 +1,66 @@
 <form class="add-task-form" [formGroup]="registerForm" (ngSubmit)="onSubmit($event)" novalidate>
   <fieldset class="fieldset">
-    <legend class="form__legend">Registrate</legend>
+    <legend class="form__legend">{{ 'PAGES.AUTH.REGISTER.LEGEND' | translate }}</legend>
     <app-button class="form-close" aria-label="Cerrar" (click)="close($event)">✕</app-button>
     <app-form-input
       formControlName="email"
       type="email"
       name="email"
-      label="Correo electrónico"
-      placeholder="Correo electrónico"
+      [label]="'PAGES.AUTH.REGISTER.EMAIL_LABEL' | translate"
+      [placeholder]="'PAGES.AUTH.REGISTER.EMAIL_PLACEHOLDER' | translate"
       [required]="true"
     ></app-form-input>
     <article class="error" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
-      <small *ngIf="registerForm.get('email')?.errors?.['required']">El correo es obligatorio.</small>
-      <small *ngIf="registerForm.get('email')?.errors?.['email']">Correo no válido.</small>
-      <small *ngIf="registerForm.get('email')?.errors?.['emailTaken']">Correo ya registrado.</small>
+      <small *ngIf="registerForm.get('email')?.errors?.['required']">{{ 'VALIDATION.REQUIRED' | translate }}</small>
+      <small *ngIf="registerForm.get('email')?.errors?.['email']">{{ 'VALIDATION.EMAIL_INVALID' | translate }}</small>
+      <small *ngIf="registerForm.get('email')?.errors?.['emailTaken']">{{ 'VALIDATION.EMAIL_TAKEN' | translate }}</small>
     </article>
     <section class="flex">
       <section>
         <app-form-input
           formControlName="name"
           name="name"
-          label="Nombre"
-          placeholder="Nombre"
+          [label]="'PAGES.AUTH.REGISTER.NAME_LABEL' | translate"
+          [placeholder]="'PAGES.AUTH.REGISTER.NAME_PLACEHOLDER' | translate"
           [required]="true"
         ></app-form-input>
         <article class="error" *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.invalid">
-          <small>Nombre obligatorio</small>
+          <small>{{ 'VALIDATION.REQUIRED' | translate }}</small>
         </article>
         <app-form-input
           formControlName="username"
           name="username"
-          label="Nombre de usuario"
-          placeholder="Nombre de usuario"
+          [label]="'PAGES.AUTH.REGISTER.USERNAME_LABEL' | translate"
+          [placeholder]="'PAGES.AUTH.REGISTER.USERNAME_PLACEHOLDER' | translate"
           [required]="true"
         ></app-form-input>
         <article class="error" *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid">
-          <small *ngIf="registerForm.get('username')?.errors?.['required']">El usuario es obligatorio.</small>
-          <small *ngIf="registerForm.get('username')?.errors?.['usernameTaken']">Usuario ya existe.</small>
+          <small *ngIf="registerForm.get('username')?.errors?.['required']">{{ 'VALIDATION.REQUIRED' | translate }}</small>
+          <small *ngIf="registerForm.get('username')?.errors?.['usernameTaken']">{{ 'VALIDATION.USERNAME_TAKEN' | translate }}</small>
         </article>
       </section>
       <section>
         <app-form-input
           formControlName="surnames"
           name="surnames"
-          label="Apellidos"
-          placeholder="Apellidos"
+          [label]="'PAGES.AUTH.REGISTER.SURNAMES_LABEL' | translate"
+          [placeholder]="'PAGES.AUTH.REGISTER.SURNAMES_PLACEHOLDER' | translate"
           [required]="true"
         ></app-form-input>
         <article class="error" *ngIf="registerForm.get('surnames')?.touched && registerForm.get('surnames')?.invalid">
-          <small>Apellidos obligatorios</small>
+          <small>{{ 'VALIDATION.REQUIRED' | translate }}</small>
         </article>
         <app-form-input
           formControlName="phoneNumber"
           type="tel"
           name="phoneNumber"
-          label="Teléfono"
-          placeholder="Teléfono"
+          [label]="'PAGES.AUTH.REGISTER.PHONE_LABEL' | translate"
+          [placeholder]="'PAGES.AUTH.REGISTER.PHONE_PLACEHOLDER' | translate"
           [required]="true"
         ></app-form-input>
         <article class="error" *ngIf="registerForm.get('phoneNumber')?.touched && registerForm.get('phoneNumber')?.invalid">
-          <small *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">Teléfono obligatorio.</small>
-          <small *ngIf="registerForm.get('phoneNumber')?.errors?.['invalidPhoneNumber']">Teléfono no válido.</small>
+          <small *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">{{ 'VALIDATION.REQUIRED' | translate }}</small>
+          <small *ngIf="registerForm.get('phoneNumber')?.errors?.['invalidPhoneNumber']">{{ 'VALIDATION.PHONE_INVALID' | translate }}</small>
         </article>
       </section>
     </section>
@@ -68,33 +68,33 @@
       formControlName="password"
       type="password"
       name="password"
-      label="Contraseña"
-      placeholder="Contraseña"
+      [label]="'PAGES.AUTH.REGISTER.PASSWORD_LABEL' | translate"
+      [placeholder]="'PAGES.AUTH.REGISTER.PASSWORD_PLACEHOLDER' | translate"
       [required]="true"
     ></app-form-input>
     <article class="error" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
-      <small *ngIf="registerForm.get('password')?.errors?.['required']">Contraseña obligatoria.</small>
-      <small *ngIf="registerForm.get('password')?.errors?.['minLength']">Debe tener al menos 8 caracteres.</small>
-      <small *ngIf="registerForm.get('password')?.errors?.['noUppercase']">Debe incluir una mayúscula.</small>
-      <small *ngIf="registerForm.get('password')?.errors?.['noLowercase']">Debe incluir una minúscula.</small>
-      <small *ngIf="registerForm.get('password')?.errors?.['noNumber']">Debe incluir un número.</small>
-      <small *ngIf="registerForm.get('password')?.errors?.['noSpecial']">Debe incluir un carácter especial.</small>
+      <small *ngIf="registerForm.get('password')?.errors?.['required']">{{ 'VALIDATION.PASSWORD_REQUIRED' | translate }}</small>
+      <small *ngIf="registerForm.get('password')?.errors?.['minLength']">{{ 'VALIDATION.MIN_LENGTH' | translate }}</small>
+      <small *ngIf="registerForm.get('password')?.errors?.['noUppercase']">{{ 'VALIDATION.PASSWORD_NO_UPPER' | translate }}</small>
+      <small *ngIf="registerForm.get('password')?.errors?.['noLowercase']">{{ 'VALIDATION.PASSWORD_NO_LOWER' | translate }}</small>
+      <small *ngIf="registerForm.get('password')?.errors?.['noNumber']">{{ 'VALIDATION.PASSWORD_NO_NUMBER' | translate }}</small>
+      <small *ngIf="registerForm.get('password')?.errors?.['noSpecial']">{{ 'VALIDATION.PASSWORD_NO_SPECIAL' | translate }}</small>
     </article>
 
     <app-form-input
       formControlName="repeatPassword"
       type="password"
       name="repeatPassword"
-      label="Repetir contraseña"
-      placeholder="Repetir contraseña"
+      [label]="'PAGES.AUTH.REGISTER.REPEAT_PASSWORD_LABEL' | translate"
+      [placeholder]="'PAGES.AUTH.REGISTER.REPEAT_PASSWORD_PLACEHOLDER' | translate"
       [required]="true"
     ></app-form-input>
     <article class="error" *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('repeatPassword')?.touched">
-      <small>Las contraseñas no coinciden.</small>
+      <small>{{ 'VALIDATION.PASSWORDS_MISMATCH' | translate }}</small>
     </article>
     <article class="grid-center">
-      <app-button type="submit" class="grid" [disabled]="registerForm.invalid || registerForm.pending || loading"><ng-container *ngIf="!loading">Registrate</ng-container><ng-container *ngIf="loading">Registrando...</ng-container></app-button>
-      <a (click)="openLogin($event)">¿Ya tienes cuenta? Iniciar sesión</a>
+      <app-button type="submit" class="grid" [disabled]="registerForm.invalid || registerForm.pending || loading"><ng-container *ngIf="!loading">{{ 'PAGES.AUTH.REGISTER.SUBMIT' | translate }}</ng-container><ng-container *ngIf="loading">{{ 'PAGES.AUTH.REGISTER.SUBMITTING' | translate }}</ng-container></app-button>
+      <a (click)="openLogin($event)">{{ 'PAGES.AUTH.REGISTER.HAVE_ACCOUNT' | translate }}</a>
     </article>
   </fieldset>
 </form>

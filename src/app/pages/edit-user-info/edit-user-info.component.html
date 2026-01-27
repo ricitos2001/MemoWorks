@@ -1,71 +1,71 @@
 <form class="add-task-form" [formGroup]="editUserForm" (ngSubmit)="onSubmit($event)" novalidate>
   <fieldset class="fieldset">
-    <legend>Registrate</legend>
+    <legend>{{ 'PAGES.USER.EDIT_LEGEND' | translate }}</legend>
 
     <app-form-input
       formControlName="email"
       type="email"
       name="email"
-      label="Correo electrónico"
-      placeholder="Correo electrónico"
+      [label]="'PAGES.USER.EMAIL_LABEL' | translate"
+      [placeholder]="'PAGES.USER.EMAIL_PLACEHOLDER' | translate"
       [required]="true"
     ></app-form-input>
     <article class="error" *ngIf="editUserForm.get('email')?.touched && editUserForm.get('email')?.invalid">
-      <small *ngIf="editUserForm.get('email')?.errors?.['required']">El correo es obligatorio.</small>
-      <small *ngIf="editUserForm.get('email')?.errors?.['email']">Correo no válido.</small>
-      <small *ngIf="editUserForm.get('email')?.errors?.['emailTaken']">Correo ya registrado.</small>
+      <small *ngIf="editUserForm.get('email')?.errors?.['required']">{{ 'VALIDATION.REQUIRED' | translate }}</small>
+      <small *ngIf="editUserForm.get('email')?.errors?.['email']">{{ 'VALIDATION.EMAIL_INVALID' | translate }}</small>
+      <small *ngIf="editUserForm.get('email')?.errors?.['emailTaken']">{{ 'VALIDATION.EMAIL_TAKEN' | translate }}</small>
     </article>
 
     <app-form-input
       formControlName="username"
       name="username"
-      label="Nombre de usuario"
-      placeholder="Nombre de usuario"
+      [label]="'PAGES.USER.USERNAME_LABEL' | translate"
+      [placeholder]="'PAGES.USER.USERNAME_PLACEHOLDER' | translate"
       [required]="true"
     ></app-form-input>
     <article class="error" *ngIf="editUserForm.get('username')?.touched && editUserForm.get('username')?.invalid">
-      <small *ngIf="editUserForm.get('username')?.errors?.['required']">El usuario es obligatorio.</small>
-      <small *ngIf="editUserForm.get('username')?.errors?.['usernameTaken']">Usuario ya existe.</small>
+      <small *ngIf="editUserForm.get('username')?.errors?.['required']">{{ 'VALIDATION.REQUIRED' | translate }}</small>
+      <small *ngIf="editUserForm.get('username')?.errors?.['usernameTaken']">{{ 'VALIDATION.USERNAME_TAKEN' | translate }}</small>
     </article>
 
     <app-form-input
       formControlName="name"
       name="name"
-      label="Nombre"
-      placeholder="Nombre"
+      [label]="'PAGES.USER.NAME_LABEL' | translate"
+      [placeholder]="'PAGES.USER.NAME_PLACEHOLDER' | translate"
       [required]="true"
     ></app-form-input>
     <article class="error" *ngIf="editUserForm.get('name')?.touched && editUserForm.get('name')?.invalid">
-      <small>Nombre obligatorio</small>
+      <small>{{ 'VALIDATION.REQUIRED' | translate }}</small>
     </article>
     <app-form-input
       formControlName="surnames"
       name="surnames"
-      label="Apellidos"
-      placeholder="Apellidos"
+      [label]="'PAGES.USER.SURNAMES_LABEL' | translate"
+      [placeholder]="'PAGES.USER.SURNAMES_PLACEHOLDER' | translate"
       [required]="true"
     ></app-form-input>
     <article class="error" *ngIf="editUserForm.get('surnames')?.touched && editUserForm.get('surnames')?.invalid">
-      <small>Apellidos obligatorios</small>
+      <small>{{ 'VALIDATION.REQUIRED' | translate }}</small>
     </article>
     <app-form-input
       formControlName="phoneNumber"
       type="tel"
-      label="Teléfono"
+      [label]="'PAGES.USER.PHONE_LABEL' | translate"
       name="phoneNumber"
-      placeholder="Teléfono"
+      [placeholder]="'PAGES.USER.PHONE_PLACEHOLDER' | translate"
       [required]="true"
     ></app-form-input>
     <article class="error" *ngIf="editUserForm.get('phoneNumber')?.touched && editUserForm.get('phoneNumber')?.invalid">
-      <small *ngIf="editUserForm.get('phoneNumber')?.errors?.['required']">Teléfono obligatorio.</small>
-      <small *ngIf="editUserForm.get('phoneNumber')?.errors?.['invalidPhoneNumber']">Teléfono no válido.</small>
+      <small *ngIf="editUserForm.get('phoneNumber')?.errors?.['required']">{{ 'VALIDATION.REQUIRED' | translate }}</small>
+      <small *ngIf="editUserForm.get('phoneNumber')?.errors?.['invalidPhoneNumber']">{{ 'VALIDATION.PHONE_INVALID' | translate }}</small>
     </article>
     <article class="error" *ngIf="editUserForm.errors?.['mismatch'] && editUserForm.get('repeatPassword')?.touched">
-      <small>Las contraseñas no coinciden.</small>
+      <small>{{ 'VALIDATION.PASSWORDS_MISMATCH' | translate }}</small>
     </article>
     <article class="grid-center">
-      <app-button type="submit" class="grid" [disabled]="editUserForm.invalid || editUserForm.pending">editar perfil</app-button>
-      <app-button type="button" class="grid" (click)="cancelEdittion()">cancelar</app-button>
+      <app-button type="submit" class="grid" [disabled]="editUserForm.invalid || editUserForm.pending">{{ 'PAGES.USER.EDIT_SUBMIT' | translate }}</app-button>
+      <app-button type="button" class="grid" (click)="cancelEdittion()">{{ 'PAGES.USER.CANCEL' | translate }}</app-button>
     </article>
   </fieldset>
 </form>

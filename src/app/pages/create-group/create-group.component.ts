@@ -1,17 +1,15 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormArray, AbstractControl, ReactiveFormsModule} from '@angular/forms';
-import { AsyncValidatorsService } from '../../services/async-validators.service';
+import {FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule} from '@angular/forms';
 import { GroupService } from '../../services/group.service';
 import {User, UserService} from '../../services/user.service';
 import {ButtonComponent} from '../../components/shared/button/button.component';
 import {FormInputComponent} from '../../components/shared/form-input/form-input.component';
 import {NgForOf, NgIf} from '@angular/common';
-import {TaskService} from '../../services/task.service';
 import {CommunicationService} from '../../services/shared/communication.service';
-import {TasksSignalStore} from '../../stores/tasks.signal.store';
-import {Notification as AppNotification, NotificationsService} from '../../services/notifications.service';
+import {Notification, NotificationsService} from '../../services/notifications.service';
 import {Router} from '@angular/router';
 import {GroupsStore} from '../../stores/groups.store';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-group',
@@ -22,7 +20,8 @@ import {GroupsStore} from '../../stores/groups.store';
     ButtonComponent,
     FormInputComponent,
     NgForOf,
-    NgIf
+    NgIf,
+    TranslateModule
   ]
 })
 
@@ -43,6 +42,7 @@ export class CreateGroupComponent implements OnInit {
     private notifications: NotificationsService,
     private router: Router,
     private groupsStore: GroupsStore,
+    private translate: TranslateService,
 
   ) {
     this.groupForm = this.fb.group({
@@ -140,38 +140,38 @@ export class CreateGroupComponent implements OnInit {
         this.comm.sendNotification({
           source: 'groupForm',
           type: 'success',
-          message: 'Grupo creada correctamente',
+          message: this.translate.instant('NOTIFICATIONS.GROUP.CREATED') || 'Grupo creada correctamente',
           payload: { refreshGroups: true }
         });
 
-        const apiNotification: AppNotification = {
-          title: 'Grupo creado',
-          message: `La tarea "${payload.title}" se ha creado correctamente.`,
-          createdAt: new Date(),
-          userEmail: this.email || '',
-        };
-        this.notifications.pushNotifications(apiNotification).subscribe({
-          next: () => {},
-          error: (err) => { console.warn('Error enviando notificación al API:', err); }
-        });
-        this.create.emit();
-        this.router.navigate(['/settings/familiarGroups']);
-      },
-      error: () => {
-        this.comm.sendNotification({
-          source: 'groupForm',
-          type: 'error',
-          message: 'Error al crear la tarea',
-        });
-        this.loading = false;
-        this.submitting.emit(false);
-      },
-      complete: () => {
-        this.loading = false;
-        this.submitting.emit(false);
-      }
-    });
-  }
+        const apiNotification: Notification = {
+          title: this.translate.instant('NOTIFICATIONS.GROUP.TITLE') || 'Grupo creado',
+          message: this.translate.instant('NOTIFICATIONS.GROUP.MESSAGE', { name: payload.name }) || `El grupo "${payload.name}" se ha creado correctamente.`,
+           createdAt: new Date(),
+           userEmail: this.email || '',
+         };
+         this.notifications.pushNotifications(apiNotification).subscribe({
+           next: () => {},
+           error: (err) => { console.warn('Error enviando notificación al API:', err); }
+         });
+         this.create.emit();
+         this.router.navigate(['/settings/familiarGroups']);
+       },
+       error: () => {
+         this.comm.sendNotification({
+           source: 'groupForm',
+           type: 'error',
+           message: this.translate.instant('NOTIFICATIONS.GROUP.CREATE_ERROR') || 'Error al crear el grupo',
+         });
+         this.loading = false;
+         this.submitting.emit(false);
+       },
+       complete: () => {
+         this.loading = false;
+         this.submitting.emit(false);
+       }
+     });
+   }
 
   onCancel(event: Event): void {
     event.preventDefault();

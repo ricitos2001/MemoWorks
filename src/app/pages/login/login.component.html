@@ -1,36 +1,36 @@
 <form class="add-task-form" [formGroup]="loginForm" (ngSubmit)="onSubmit($event)" novalidate>
   <fieldset class="grid-center">
-    <legend class="form__legend">Iniciar sesión</legend>
+    <legend class="form__legend">{{ 'PAGES.AUTH.LOGIN.LEGEND' | translate }}</legend>
     <app-button class="form-close" aria-label="Cerrar" (click)="close($event)">✕</app-button>
 
     <app-form-input
       formControlName="email"
       type="email"
       name="email"
-      label="Correo electrónico"
-      placeholder="Correo electrónico"
+      [label]="'PAGES.AUTH.LOGIN.EMAIL_LABEL' | translate"
+      [placeholder]="'PAGES.AUTH.LOGIN.EMAIL_PLACEHOLDER' | translate"
       [required]="true"
       class="grid"
     ></app-form-input>
     <article class="error" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
-      <small *ngIf="loginForm.get('email')?.errors?.['required']">El correo es obligatorio.</small>
-      <small *ngIf="loginForm.get('email')?.errors?.['email']">Correo no válido.</small>
+      <small *ngIf="loginForm.get('email')?.errors?.['required']">{{ 'VALIDATION.REQUIRED' | translate }}</small>
+      <small *ngIf="loginForm.get('email')?.errors?.['email']">{{ 'VALIDATION.EMAIL_INVALID' | translate }}</small>
     </article>
 
     <app-form-input
       formControlName="password"
       type="password"
       name="password"
-      label="Contraseña"
-      placeholder="Contraseña"
+      [label]="'PAGES.AUTH.LOGIN.PASSWORD_LABEL' | translate"
+      [placeholder]="'PAGES.AUTH.LOGIN.PASSWORD_PLACEHOLDER' | translate"
       [required]="true"
       class="grid"
     ></app-form-input>
     <article class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
-      <small>Contraseña obligatoria</small>
+      <small>{{ 'VALIDATION.PASSWORD_REQUIRED' | translate }}</small>
     </article>
-    <app-button type="submit" class="grid" [disabled]="loginForm.invalid || loginForm.pending">Iniciar sesión</app-button>
-    <a (click)="openRegister($event)">¿No tienes cuenta? Registrate</a>
-    <a [routerLink]="['/recoverPassword']">¿Has olvidado tu contraseña? Recuperala</a>
+    <app-button type="submit" class="grid" [disabled]="loginForm.invalid || loginForm.pending">{{ 'PAGES.AUTH.LOGIN.SUBMIT' | translate }}</app-button>
+    <a (click)="openRegister($event)">{{ 'PAGES.AUTH.LOGIN.NO_ACCOUNT' | translate }}</a>
+    <a [routerLink]="['/recoverPassword']">{{ 'PAGES.AUTH.LOGIN.FORGOT_PASSWORD' | translate }}</a>
   </fieldset>
 </form>

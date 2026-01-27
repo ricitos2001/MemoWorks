@@ -8,6 +8,7 @@ import {FormInputComponent} from '../../components/shared/form-input/form-input.
 import {NgForOf, NgIf} from '@angular/common';
 import {TasksSignalStore} from '../../stores/tasks.signal.store';
 import {NotificationsService, Notification} from '../../services/notifications.service';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-task',
@@ -16,7 +17,8 @@ import {NotificationsService, Notification} from '../../services/notifications.s
     FormInputComponent,
     NgForOf,
     NgIf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ],
   templateUrl: './edit-task.component.html',
   styleUrl: '../../../styles/styles.css',
@@ -34,6 +36,7 @@ export class EditTaskComponent implements OnInit {
     private route: ActivatedRoute,
     private tasksSignalStore: TasksSignalStore,
     private notifications: NotificationsService,
+    private translate: TranslateService,
   ) {
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
@@ -122,33 +125,33 @@ export class EditTaskComponent implements OnInit {
         this.comm.sendNotification({
           source: 'taskForm',
           type: 'success',
-          message: 'Tarea actualizada correctamente',
+          message: this.translate.instant('NOTIFICATIONS.TASK.UPDATED') || 'Tarea actualizada correctamente',
         });
         const apiNotification: Notification = {
-          title: 'Tarea actualizada',
-          message: `La tarea "${payload.title}" se ha actualizado correctamente.`,
-          createdAt: new Date(),
-          userEmail: this.email || '',
-        };
-        this.notifications.pushNotifications(apiNotification).subscribe({
-          next: () => {},
-          error: (err) => { console.warn('Error enviando notificación al API:', err); }
-        });
+          title: this.translate.instant('NOTIFICATIONS.TASK.UPDATED_TITLE') || 'Tarea actualizada',
+          message: this.translate.instant('NOTIFICATIONS.TASK.UPDATED_MESSAGE', { title: payload.title }) || `La tarea "${payload.title}" se ha actualizado correctamente.`,
+           createdAt: new Date(),
+           userEmail: this.email || '',
+         };
+         this.notifications.pushNotifications(apiNotification).subscribe({
+           next: () => {},
+           error: (err) => { console.warn('Error enviando notificación al API:', err); }
+         });
 
-        this.create.emit();
-        this.router.navigate(['/dashboard']);
+         this.create.emit();
+         this.router.navigate(['/dashboard']);
 
-      },
-      error: () => {
-        this.comm.sendNotification({
-          source: 'taskForm',
-          type: 'error',
-          message: 'Error al editar la tarea',
-        });
-      }
-    });
-  }
-  onCancel(event?: Event): void {
+       },
+       error: () => {
+         this.comm.sendNotification({
+           source: 'taskForm',
+           type: 'error',
+           message: this.translate.instant('NOTIFICATIONS.TASK.UPDATE_ERROR') || 'Error al editar la tarea',
+         });
+       }
+     });
+   }
+   onCancel(event?: Event): void {
     if (event) {
       event.preventDefault();
       event.stopPropagation();
@@ -157,8 +160,8 @@ export class EditTaskComponent implements OnInit {
     this.comm.sendNotification({
       source: 'taskForm',
       type: 'info',
-      message: 'Operación cancelada'
-    });
-    this.router.navigate(['/dashboard']);
-  }
-}
+      message: this.translate.instant('NOTIFICATIONS.TASK.CANCELLED') || 'Operación cancelada'
+     });
+     this.router.navigate(['/dashboard']);
+   }
+ }

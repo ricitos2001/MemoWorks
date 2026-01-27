@@ -8,6 +8,7 @@ import {phoneNumberValidation} from '../../validators/phone-number.validator';
 import {AsyncValidatorsService} from '../../services/async-validators.service';
 import {UserService} from '../../services/user.service';
 import {CommunicationService} from '../../services/shared/communication.service';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -16,7 +17,8 @@ import {CommunicationService} from '../../services/shared/communication.service'
     ButtonComponent,
     FormInputComponent,
     NgIf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ],
   templateUrl: './edit-user-info.component.html',
   styleUrl: '../../../styles/styles.css',
@@ -32,6 +34,7 @@ export class EditUserInfoComponent implements OnInit {
     private asyncValidators: AsyncValidatorsService,
     private route: ActivatedRoute,
     private comm: CommunicationService,
+    private translate: TranslateService,
   ) {
     this.editUserForm = this.fb.group({
       email: ['', {
@@ -91,7 +94,7 @@ export class EditUserInfoComponent implements OnInit {
         this.comm.sendNotification({
           source: 'userForm',
           type: 'success',
-          message: 'Usuario actualizado correctamente',
+          message: this.translate.instant('NOTIFICATIONS.USER.UPDATED') || 'Usuario actualizado correctamente',
         });
         this.router.navigate(['/settings/userSettings']);
 
@@ -100,7 +103,7 @@ export class EditUserInfoComponent implements OnInit {
         this.comm.sendNotification({
           source: 'userForm',
           type: 'error',
-          message: 'Error al editar el usuario',
+          message: this.translate.instant('NOTIFICATIONS.USER.UPDATE_ERROR') || 'Error al editar el usuario',
         });
       }
     });
@@ -110,7 +113,7 @@ export class EditUserInfoComponent implements OnInit {
     this.comm.sendNotification({
       source: 'userForm',
       type: 'info',
-      message: 'Operacion cancelada',
+      message: this.translate.instant('NOTIFICATIONS.USER.CANCELLED') || 'Operacion cancelada',
     });
     this.router.navigate(['/settings/userSettings']);
   }

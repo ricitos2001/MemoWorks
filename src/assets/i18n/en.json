@@ -14,10 +14,10 @@
     },
     "SHARED": {
       "GETSTARTED": "Get started",
-      "BACKBUTTON": "Back",
+      "BACKBUTTON": "back",
       "BREADCRUMB": {
         "HOME": "Home",
-        "LANDING": "Landing page"
+        "LANDING": "Landing"
       },
       "CONFIRMMODAL": {
         "CONFIRM": "Confirm",
@@ -41,36 +41,84 @@
         "LOADINGTEXT": "Loading...",
         "SEARCHER": "What do you want to search",
         "NORESULTS": "No results",
-        "TASKNOTFOUND": "No tasks were found that match your search.",
-        "STARTTOORGANIZE": "Let’s start organizing",
-        "ZEROTASKS": "You don’t have any tasks yet. Create your first one to get started.",
+        "TASKNOTFOUND": "No tasks found matching your search.",
+        "STARTTOORGANIZE": "Let's get organized",
+        "ZEROTASKS": "You have no tasks yet. Create the first one to get started.",
         "CREATEFIRSTTASK": "Create first task",
         "NEXTBUTTON": "Previous",
         "BACKBUTTON": "Next"
       }
     }
   },
+
   "PAGES": {
     "LANDING": {
-      "TITLE": "Organize your day-to-day life with MemoWorks",
+      "TITLE": "Organize your day-to-day with MemoWorks",
       "GETSTARTED": "Get started",
       "WHATOFFERS": "What we offer",
       "SUBTITLE1": "Organize your life",
-      "TEXT1": "Organize your tasks by creating notes and assigning them a date and time",
+      "TEXT1": "Organize your tasks by creating notes and assigning them a date and time to be done",
       "SUBTITLE2": "Create work groups",
       "TEXT2": "Create family or work groups with other users who can be assigned the tasks you come up with",
-      "SUBTITLE3": "Don’t forget pending tasks",
-      "TEXT3": "Receive email notifications on your phone so you don’t forget what you have pending"
+      "SUBTITLE3": "Don’t forget what’s pending",
+      "TEXT3": "Receive notifications by email on your phone so you don’t forget what’s pending"
+    },
+    "AUTH": {
+      "LOGIN": {
+        "LEGEND": "Sign in",
+        "EMAIL_LABEL": "Email",
+        "EMAIL_PLACEHOLDER": "Email",
+        "PASSWORD_LABEL": "Password",
+        "PASSWORD_PLACEHOLDER": "Password",
+        "SUBMIT": "Sign in",
+        "NO_ACCOUNT": "Don’t have an account? Sign up",
+        "FORGOT_PASSWORD": "Forgot your password? Recover it"
+      },
+      "REGISTER": {
+        "LEGEND": "Sign up",
+        "EMAIL_LABEL": "Email",
+        "EMAIL_PLACEHOLDER": "Email",
+        "NAME_LABEL": "First name",
+        "NAME_PLACEHOLDER": "First name",
+        "USERNAME_LABEL": "Username",
+        "USERNAME_PLACEHOLDER": "Username",
+        "SURNAMES_LABEL": "Last name",
+        "SURNAMES_PLACEHOLDER": "Last name",
+        "PHONE_LABEL": "Phone",
+        "PHONE_PLACEHOLDER": "Phone",
+        "PASSWORD_LABEL": "Password",
+        "PASSWORD_PLACEHOLDER": "Password",
+        "REPEAT_PASSWORD_LABEL": "Repeat password",
+        "REPEAT_PASSWORD_PLACEHOLDER": "Repeat password",
+        "SUBMIT": "Sign up",
+        "SUBMITTING": "Registering...",
+        "HAVE_ACCOUNT": "Already have an account? Sign in"
+      },
+      "RECOVER": {
+        "LEGEND": "Recover password",
+        "EMAIL_PLACEHOLDER": "Email",
+        "NEW_PASSWORD_LABEL": "New password",
+        "NEW_PASSWORD_PLACEHOLDER": "New password",
+        "CONFIRM_PASSWORD_LABEL": "Confirm password",
+        "CONFIRM_PASSWORD_PLACEHOLDER": "Confirm password",
+        "SEND_EMAIL": "Send email",
+        "CHANGE_PASSWORD": "Change password",
+        "BACK_TO_LOGIN": "Back to sign in",
+        "SUCCESS_EMAIL_SENT": "An email with instructions has been sent.",
+        "ERROR_PROCESSING_REQUEST": "Could not process the request.",
+        "SUCCESS_PASSWORD_CHANGED": "Password successfully updated.",
+        "ERROR_UPDATING_PASSWORD": "Could not update the password."
+      }
     },
     "SETTINGS": {
       "USERSETTINGS": {
-        "NAME": "First name",
+        "NAME": "Name",
         "SURNAMES": "Last name",
         "USERNAMETEXT": "Username",
         "PHONENUMBER": "Phone number",
-        "USEREMAIL": "Email address",
-        "IMAGEPROFILETEXT": "Profile picture",
-        "EDITIMAGEPROFILEBUTTON": "Edit profile picture",
+        "USEREMAIL": "Email",
+        "IMAGEPROFILETEXT": "Profile image",
+        "EDITIMAGEPROFILEBUTTON": "Edit profile image",
         "EDITUSERINFOBUTTON": "Edit user information",
         "CLOSESESSIONBUTTON": "Log out",
         "REMOVEACCOUNTBUTTON": "Delete account"
@@ -99,98 +147,98 @@
       }
     },
     "PRIVACY": {
-      "TITLE": "Privacy policy",
-      "WARNING": "NOTICE: the content of this page is for decorative purposes and all information shown does not imply the violation of any law",
+      "TITLE": "Privacy Policy",
+      "WARNING": "NOTICE: the content of this page is decorative and all displayed information does not imply violation of any law",
       "DATE": "Effective date: December 18, 2025",
       "SUBTITLE1": "1. Data controller",
-      "TEXT1": "The data controller is MemoWorks. For questions about data protection, you can contact us through the channels available in the application.",
+      "TEXT1": "The data controller is MemoWorks. For data protection inquiries you can contact us through the channels available in the application.",
       "SUBTITLE2": "2. Data we collect",
-      "TEXT2": "We collect data necessary to provide the services: name, email, account information, and data related to tasks. We may also collect usage data and anonymous telemetry to improve the service.",
+      "TEXT2": "We collect data necessary to provide the services: name, email, account information and data associated with tasks. We may also collect usage data and anonymous telemetry to improve the service.",
       "SUBTITLE3": "3. Purpose and legal basis",
-      "TEXT3": "Data is processed to provide the service, manage accounts, and communicate with users. The legal basis is contract performance and consent where applicable.",
+      "TEXT3": "Data are processed to provide the service, manage accounts and communicate with users. The legal basis is contract execution and consent where applicable.",
       "SUBTITLE4": "4. Data retention",
-      "TEXT4": "We will retain data while the account is active and for the period necessary to comply with legal obligations or to defend against claims.",
-      "SUBTITLE5": "5. Data subject rights",
-      "TEXT5": "Users may exercise their rights of access, rectification, erasure, objection, restriction, and portability by sending a request to the controller. We will indicate the legally applicable procedure and deadlines.",
-      "SUBTITLE6": "6. Data sharing",
-      "TEXT6": "Data will not be shared with third parties except where legally required or when necessary for service provision (for example, infrastructure providers) and always with appropriate safeguards.",
+      "TEXT4": "We will retain data while the account is active and for the period necessary to meet legal obligations or to defend claims.",
+      "SUBTITLE5": "5. Rights of data subjects",
+      "TEXT5": "Users may exercise their rights of access, rectification, deletion, objection, restriction and portability by sending a request to the controller. We will indicate the legally applicable procedure and deadlines.",
+      "SUBTITLE6": "6. Data transfers",
+      "TEXT6": "Data will not be transferred to third parties except by legal obligation or when necessary for service provision (for example, infrastructure providers) and always with appropriate safeguards.",
       "SUBTITLE7": "7. Security",
-      "TEXT7": "We implement technical and organizational measures to protect data against loss, misuse, or unauthorized access. However, no system is completely foolproof.",
-      "ABOUTDUDES": "If you have questions about our privacy policy, please contact our support team."
+      "TEXT7": "We implement technical and organizational measures to protect data against loss, misuse or unauthorized access. However, no system is completely infallible.",
+      "ABOUTDUDES": "If you have questions about our privacy policy, contact our support team."
     },
     "TERMS": {
-      "TITLE": "Terms and conditions",
-      "WARNING": "NOTICE: the content of this page is for decorative purposes and all information shown does not imply the violation of any law",
+      "TITLE": "Terms and Conditions",
+      "WARNING": "NOTICE: the content of this page is decorative and all displayed information does not imply violation of any law",
       "DATE": "Effective date: December 18, 2025",
       "SUBTITLE1": "1. Purpose",
-      "TEXT1": "These Terms and Conditions govern the use of the application and the services offered by MemoWorks. By registering, accessing, or using the platform, you agree to comply with these terms.",
+      "TEXT1": "These Terms and Conditions govern the use of the application and the services offered by MemoWorks. By registering, accessing or using the platform, you agree to comply with these terms.",
       "SUBTITLE2": "2. Access and registration",
       "TEXT2": "Access to certain features may require creating an account. The user agrees to provide truthful information and keep it updated. The account is personal and non-transferable.",
       "SUBTITLE3": "3. Acceptable use",
-      "TEXT3": "It is prohibited to use the platform for illegal activities, to violate third-party rights, or to publish offensive content. We reserve the right to suspend or delete accounts that violate these rules.",
+      "TEXT3": "It is forbidden to use the platform for illegal activities, to infringe third-party rights, or to publish offensive content. We reserve the right to suspend or delete accounts that violate these rules.",
       "SUBTITLE4": "4. Intellectual property",
-      "TEXT4": "All content, design, code, and graphic elements of the application are the property of their respective owners. Unauthorized reproduction is prohibited.",
+      "TEXT4": "All content, design, code and graphic elements of the application are the property of their respective owners. Unauthorized reproduction is prohibited.",
       "SUBTITLE5": "5. Limitation of liability",
-      "TEXT5": "To the maximum extent permitted by law, MemoWorks shall not be liable for indirect damages, data loss, or loss of profits arising from the use or inability to use the platform.",
+      "TEXT5": "To the fullest extent permitted by law, MemoWorks will not be liable for indirect damages, data loss or loss of profits resulting from the use or inability to use the platform.",
       "SUBTITLE6": "6. Modifications",
-      "TEXT6": "We may modify these Terms at any time. Changes will be published in the application and, where appropriate, users will be notified. Continued use implies acceptance of the updated terms.",
-      "SUBTITLE7": "7. Governing law and jurisdiction",
-      "TEXT7": "These terms are governed by Spanish law. For any dispute, the parties submit to the courts of the provider’s domicile unless mandatory rules state otherwise.",
-      "ABOUTDUDES": "If you have questions about these terms, contact us through the channels indicated in the contact section."
+      "TEXT6": "We may modify these Terms at any time. Changes will be published in the application and, when appropriate, users will be notified. Continued use implies acceptance of the updated terms.",
+      "SUBTITLE7": "7. Law and jurisdiction",
+      "TEXT7": "These terms are governed by Spanish law. For any dispute, the parties submit to the courts of the provider’s domicile except mandatory rules to the contrary.",
+      "ABOUTDUDES": "If you have questions about these terms, contact us through the channels listed in the contact section."
     },
     "WARNING": {
       "TITLE": "Legal notice",
-      "WARNING": "NOTICE: the content of this page is for decorative purposes and all information shown does not imply the violation of any law",
+      "WARNING": "NOTICE: the content of this page is decorative and all displayed information does not imply violation of any law",
       "DATE": "Publication date: December 18, 2025",
-      "SUBTITLE1": "Owner identification",
+      "SUBTITLE1": "Identification of the owner",
       "TEXT1": "MemoWorks is an application owned by the service provider. Identification and contact details are available in the contact section of the application.",
       "SUBTITLE2": "Purpose",
-      "TEXT2": "This legal notice regulates access to, use of, and content of the site and the services offered through the application.",
+      "TEXT2": "This legal notice regulates access, use and content of the site and the services offered through the application.",
       "SUBTITLE3": "Access and use",
-      "TEXT3": "Access to the application is free except for restricted areas that require authentication. The user agrees to use the content and services in accordance with the law and with respect for third-party rights.",
+      "TEXT3": "Access to the application is free except for restricted areas that require authentication. The user agrees to use content and services in compliance with the law and respecting third-party rights.",
       "SUBTITLE4": "Content and links",
-      "TEXT4": "We are not responsible for third-party content linked from the application. We reserve the right to modify, suspend, or cancel the information, content, and services offered.",
+      "TEXT4": "We are not responsible for third-party content linked from the application. We reserve the right to modify, suspend or cancel the information, content and services offered.",
       "SUBTITLE5": "Data protection",
-      "TEXT5": "The processing of personal data is carried out in accordance with the Privacy Policy published in the application.",
+      "TEXT5": "Personal data processing is carried out in accordance with the Privacy Policy published in the application.",
       "SUBTITLE6": "Intellectual property",
-      "TEXT6": "Intellectual and industrial property rights of the application content belong to their respective owners. Total or partial reproduction without express authorization is prohibited.",
-      "ABOUTDUDES": "For any legal inquiries, please contact our support team or consult the contact and privacy policy sections."
+      "TEXT6": "Intellectual and industrial property rights of the application content belong to their owners. Total or partial reproduction without express authorization is prohibited.",
+      "ABOUTDUDES": "For any legal query, please consult our support team or check the contact and privacy policy sections."
     },
     "COOKIES": {
       "TITLE": "Cookie information",
-      "WARNING": "NOTICE: the content of this page is for decorative purposes and all information shown does not imply the violation of any law",
+      "WARNING": "NOTICE: the content of this page is decorative and all displayed information does not imply violation of any law",
       "DATE": "Publication date: December 18, 2025",
       "SUBTITLE1": "What are cookies?",
-      "TEXT1": "Cookies are small files stored on your device when you visit a website. They allow preferences to be remembered and help optimize the user experience.",
+      "TEXT1": "Cookies are small files stored on your device when you visit a website. They allow the site to remember your preferences and optimize the user experience.",
       "SUBTITLE2": "Types of cookies we use",
       "COOKIE1": "Technical cookies:",
       "COOKIEDESCRIPTION1": " necessary for the platform to function.",
       "COOKIE2": "Preference cookies:",
       "COOKIEDESCRIPTION2": " remember your language or appearance choices.",
-      "COOKIE3": "Analytics cookies:",
+      "COOKIE3": "Analytical cookies:",
       "COOKIEDESCRIPTION3": " collect aggregated information about usage to improve the service (may be anonymous).",
       "COOKIE4": "Third-party cookies:",
-      "COOKIEDESCRIPTION4": " used by external providers for features such as analytics or social networks.",
-      "SUBTITLE3": "Management and deactivation",
-      "TEXT3": "You can configure or disable cookies through your browser settings. Please note that disabling certain cookies may affect the functioning of the application.",
+      "COOKIEDESCRIPTION4": " used by external providers for features like analytics or social networks.",
+      "SUBTITLE3": "Management and disabling",
+      "TEXT3": "You can configure or disable cookies via your browser settings. Note that disabling certain cookies may affect the platform’s functionality.",
       "SUBTITLE4": "Consent",
-      "TEXT4": "By using the application, you accept the use of cookies in accordance with this policy, unless you disable those that are not strictly necessary.",
-      "ABOUTDUDES": "If you would like more information about the cookies we use or how to manage them, please contact our support team."
+      "TEXT4": "By using the application, you consent to the use of cookies according to this policy, unless you disable those that are not strictly necessary.",
+      "ABOUTDUDES": "If you want more information about the cookies we use or how to manage them, contact our support team."
     },
     "STYLESGUIDE": {
       "TITLE": "Style guide — MemoWorks",
-      "INTRO": "This page gathers the style decisions and the most important classes/variables used throughout the project.",
+      "INTRO": "This page gathers the styling decisions and the main classes/variables used across the project.",
       "TYPOGRAPHY": {
         "TITLE": "1. Typography",
         "FIRSTTYPOGRAPHY": "Primary font:",
         "FIRSTTYPOGRAPHYDESCRIPTION": " Montserrat",
         "SECONDTYPOGRAPHY": "Secondary font:",
-        "SECONDTYPOGRAPHYDESCRIPTION": " Montserrat Alternates",
-        "ALTERNATIVETYPOGRAPHY": "Alternative font:",
-        "ALTERNATIVETYPOGRAPHYDESCRIPTION": " Sans-serif",
+        "SECONDTYPOGRAPHYDESCRIPTION": " Montserrat alternates",
+        "ALTERNATIVETYPOGRAPHY": "Alternate font:",
+        "ALTERNATIVETYPOGRAPHYDESCRIPTION": " sans-serif",
         "TYPOGRAPHSIZES": "Font sizes used:",
         "TYPOGRAPHSIZESDESCRIPTION": " 64px, 32px, 24px, 16px, 12px",
-        "TYPOGRAPHYDECORATIONS": "Font weights used:",
+        "TYPOGRAPHYDECORATIONS": "Decorations used:",
         "TYPOGRAPHYDECORATIONSDESCRIPTION": " regular, bold, semibold"
       },
       "COLORS": {
@@ -198,38 +246,38 @@
         "DESCRIPTION1": "The main palette is managed in SCSS variables. The project supports light/dark mode; classes and assets switch according to the variable ",
         "DESCRIPTION2": " and the logic in ",
         "PRIMARYCOLOR": "Primary:",
-        "PRIMARYCOLORDESCRIPTION": " initially used as background color, input color, and text color",
+        "PRIMARYCOLORDESCRIPTION": " initially used as background color, input color, text color",
         "SECONDARYCOLOR": "Secondary:",
-        "SECONDARYCOLORDESCRIPTION": " used for components such as buttons, forms, etc.",
+        "SECONDARYCOLORDESCRIPTION": " used for component buttons, forms, etc...",
         "NEUTRALCOLOR": "Neutrals:",
         "NEUTRALCOLORDESCRIPTION": " used for landing page text color and dark mode",
         "OTHERSCOLORS": "Other colors:",
-        "OTHERSCOLORSDESCRIPTION": " used for toast messages and the 404 error page",
+        "OTHERSCOLORSDESCRIPTION": " used for toast and 404 error page",
         "USEDCOLORS": "Colors used in the project"
       },
       "ICONOGRAPHY": {
         "TITLE": "3. Iconography",
-        "DESCRIPTION1": "Custom SVG, WEBP, and PNG icons are used. These icons are located in ",
-        "DESCRIPTION2": " and included in templates with ",
+        "DESCRIPTION1": "Custom SVG, WEBP and PNG icons are used. These icons are in ",
+        "DESCRIPTION2": " and are included in templates with ",
         "DESCRIPTION3": " or as CSS backgrounds."
       },
       "SPACING": {
         "TITLE": "4. Spacing and layout",
-        "TEXT1": "Utility classes such as ",
+        "TEXT1": "Utilities and classes like ",
         "TEXT2": " are used for layouts. The spacing scale is defined in SCSS variables (reusable margins and paddings)."
       },
       "COMPONENTS": {
         "TITLE": "5. Reusable components",
         "ITEM1": ": base button with variants (primary, secondary, outline).",
-        "ITEM2": ": authentication modal used on the landing page and other routes. This component is only visible when you click a button",
+        "ITEM2": ": authentication modal used on the landing and other routes. This component is only visible when you press a button",
         "ITEM3": " component used in forms",
-        "ITEM4": "Dynamic action buttons in the dashboard use images inside elements created with Renderer2 and classes such as "
+        "ITEM4": "Dynamic action buttons on the dashboard use images inside elements created with Renderer2 and classes like "
       },
       "FORMS": {
         "TITLE": "6. Forms and validation",
         "TEXT1": "Forms use custom validators (for example password and phone checks) in ",
-        "TEXT2": " and asynchronous validators in ",
-        "TEXT3": ". Error display follows the state class pattern (error/success) with inline messages."
+        "TEXT2": " and async validators in ",
+        "TEXT3": ". Showing errors follows the state classes pattern (error/success) and inline messages."
       },
       "STYLES_GRID": {
         "TITLE": "",
@@ -238,21 +286,21 @@
       "UTILITIES": {
         "TITLE": "7. CSS utilities",
         "TEXT1": "Check the folder ",
-        "TEXT2": " for utilities: colors, variables, layout helpers, and global styles. Folder names start with a numeric code for semantic order (e.g. ",
+        "TEXT2": " for utilities: colors, variables, layout helpers and global styles. Folder names start with a numeric code for semantic ordering (e.g. ",
         "TEXT3": ", etc.)."
       },
       "DARKMODE": {
         "TITLE": "8. Dark mode",
         "TEXT1": "Dark mode is managed from ",
-        "TEXT2": ". In templates, images are switched with binding to ",
+        "TEXT2": ". In templates images are swapped with binding to ",
         "TEXT3": " (e.g. ",
         "TEXT4": ") and CSS variables adapt to the theme."
       },
       "A11Y": {
         "TITLE": "9. Accessibility (a11y)",
-        "ITEM1_PART1": "Interactive elements include ",
+        "ITEM1_PART1": "Interactive elements have ",
         "ITEM1_PART2": " when created dynamically.",
-        "ITEM2": "Buttons handle keyboard events (Enter / Space) to meet accessibility requirements."
+        "ITEM2": "Buttons handle keyboard events (Enter / Space) to meet accessibility."
       },
       "CONTRIBUTING": {
         "TITLE": "10. How to contribute",
@@ -263,9 +311,101 @@
         "LI3": "Document the new variable/class on this page."
       },
       "LASTUPDATE": {
-        "PART1": "Last update: check the repository to see changes in ",
+        "PART1": "Last update: check the repository for changes in ",
         "PART2": "."
       }
+    },
+    "TASK": {
+      "ADD_LEGEND": "Add task",
+      "EDIT_LEGEND": "Edit task",
+      "TITLE_LABEL": "Title",
+      "TITLE_PLACEHOLDER": "Title",
+      "DESCRIPTION_LABEL": "Description",
+      "DESCRIPTION_PLACEHOLDER": "Description",
+      "DATE_TIME_LABEL": "Date and time to perform",
+      "DATE_LABEL": "Date",
+      "DATE_PLACEHOLDER": "--/--/----",
+      "TIME_LABEL": "Time",
+      "TIME_PLACEHOLDER": "--:--",
+      "ASSIGN_LABEL": "Assign to",
+      "ADD_LABEL": "Add label",
+      "ADD_LABEL_PLACEHOLDER": "Add label",
+      "CREATE_BUTTON": "Create task",
+      "EDIT_BUTTON": "Edit task",
+      "CANCEL_BUTTON": "Cancel"
+    },
+    "GROUP": {
+      "CREATE_LEGEND": "Create group",
+      "NAME_LABEL": "Group name",
+      "NAME_PLACEHOLDER": "Group name",
+      "DESC_LABEL": "Description",
+      "DESC_PLACEHOLDER": "Description",
+      "ADD_USER_LABEL": "Add user by name",
+      "ADD_USER_PLACEHOLDER": "Username",
+      "USER_NOT_FOUND": "User does not exist",
+      "USER_ALREADY_ADDED": "User is already added to the group",
+      "CREATE_BUTTON": "Create group",
+      "CANCEL_BUTTON": "Cancel"
+    },
+    "USER": {
+      "EDIT_LEGEND": "Edit profile",
+      "EMAIL_LABEL": "Email",
+      "EMAIL_PLACEHOLDER": "Email",
+      "USERNAME_LABEL": "Username",
+      "USERNAME_PLACEHOLDER": "Username",
+      "NAME_LABEL": "First name",
+      "NAME_PLACEHOLDER": "First name",
+      "SURNAMES_LABEL": "Last name",
+      "SURNAMES_PLACEHOLDER": "Last name",
+      "PHONE_LABEL": "Phone",
+      "PHONE_PLACEHOLDER": "Phone",
+      "EDIT_SUBMIT": "Edit profile",
+      "CANCEL": "Cancel"
+    }
+  },
+
+  "VALIDATION": {
+    "REQUIRED": "This field is required.",
+    "EMAIL_INVALID": "Invalid email.",
+    "PASSWORD_REQUIRED": "Password required.",
+    "EMAIL_TAKEN": "Email already registered.",
+    "USERNAME_TAKEN": "Username already exists.",
+    "PHONE_INVALID": "Invalid phone number.",
+    "PASSWORD_NO_UPPER": "Must include an uppercase letter.",
+    "PASSWORD_NO_LOWER": "Must include a lowercase letter.",
+    "PASSWORD_NO_NUMBER": "Must include a number.",
+    "PASSWORD_NO_SPECIAL": "Must include a special character.",
+    "PASSWORDS_MISMATCH": "Passwords do not match.",
+    "MIN_LENGTH": "Minimum length not met."
+  },
+
+  "NOTIFICATIONS": {
+    "AUTH": {
+      "LOGIN": {
+        "TITLE": "Login",
+        "MESSAGE": "User {{email}} has signed in."
+      }
+    },
+    "TASK": {
+      "CREATED": "Task created successfully",
+      "UPDATED": "Task updated successfully",
+      "TITLE": "Task created",
+      "MESSAGE": "The task \"{{title}}\" has been created successfully.",
+      "UPDATED_TITLE": "Task updated",
+      "UPDATED_MESSAGE": "The task \"{{title}}\" has been updated successfully.",
+      "CREATE_ERROR": "Error creating task",
+      "CANCELLED": "Operation cancelled"
+    },
+    "GROUP": {
+      "CREATED": "Group created successfully",
+      "TITLE": "Group created",
+      "MESSAGE": "The group \"{{name}}\" has been created successfully.",
+      "CREATE_ERROR": "Error creating group"
+    },
+    "USER": {
+      "UPDATED": "User updated successfully",
+      "UPDATE_ERROR": "Error updating user",
+      "CANCELLED": "Operation cancelled"
     }
   }
 }

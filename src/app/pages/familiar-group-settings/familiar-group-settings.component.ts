@@ -23,6 +23,7 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
     AsyncPipe,
     ConfirmModalComponent,
     TranslateModule,
+    RouterLink,
   ],
   templateUrl: './familiar-group-settings.component.html',
   styleUrl: '../../../styles/styles.css',

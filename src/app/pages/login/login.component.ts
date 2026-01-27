@@ -8,6 +8,7 @@ import {NgIf} from '@angular/common';
 import {passwordStrength} from '../../validators/password-strength.validator';
 import { AuthModalComponent } from '../../components/shared/auth-modal/auth-modal.component';
 import {NotificationsService, Notification} from '../../services/notifications.service';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ import {NotificationsService, Notification} from '../../services/notifications.s
     ReactiveFormsModule,
     NgIf,
     RouterLink,
+    TranslateModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: '../../../styles/styles.css',
@@ -32,6 +34,7 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder,
     private notifications: NotificationsService,
+    private translate: TranslateService,
     @Optional() @Host() private authModal?: AuthModalComponent,
   ) {
     this.loginForm = this.fb.group({
@@ -62,8 +65,8 @@ export class LoginComponent {
         this.authService.loggedInSubject.next(true);
         this.authSuccess.emit();
         const apiNotification: Notification = {
-          title: 'Inicio de sesión',
-          message: `El usuario ${this.loginForm.value.email} ha iniciado sesión.`,
+          title: this.translate.instant('NOTIFICATIONS.AUTH.LOGIN.TITLE'),
+          message: this.translate.instant('NOTIFICATIONS.AUTH.LOGIN.MESSAGE', { email: this.loginForm.value.email }),
           createdAt: new Date(),
           userEmail: this.loginForm.value.email,
         };

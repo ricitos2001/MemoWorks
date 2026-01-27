@@ -1,43 +1,43 @@
 <form class="add-task-form" [formGroup]="groupForm" (ngSubmit)="onSubmit($event)">
   <fieldset>
-    <legend>Crear grupo</legend>
+    <legend>{{ 'PAGES.GROUP.CREATE_LEGEND' | translate }}</legend>
     <app-form-input
       formControlName="name"
       name="name"
-      placeholder="Value"
-      label="Nombre del grupo"
+      [placeholder]="'PAGES.GROUP.NAME_PLACEHOLDER' | translate"
+      [label]="'PAGES.GROUP.NAME_LABEL' | translate"
       [required]="true"
       class="grid"
     ></app-form-input>
     <article class="error" *ngIf="groupForm.get('name')?.touched && groupForm.get('name')?.invalid">
-      <small *ngIf="groupForm.get('name')?.errors?.['required']">Título obligatorio</small>
-      <small *ngIf="groupForm.get('name')?.errors?.['minlength']">Mínimo 5 caracteres</small>
+      <small *ngIf="groupForm.get('name')?.errors?.['required']">{{ 'VALIDATION.REQUIRED' | translate }}</small>
+      <small *ngIf="groupForm.get('name')?.errors?.['minlength']">{{ 'VALIDATION.MIN_LENGTH' | translate }}</small>
     </article>
     <app-form-input
       formControlName="description"
       name="description"
-      placeholder="Value"
-      label="Descripcion"
+      [placeholder]="'PAGES.GROUP.DESC_PLACEHOLDER' | translate"
+      [label]="'PAGES.GROUP.DESC_LABEL' | translate"
       type="textarea"
       [required]="true"
       class="grid"
     ></app-form-input>
     <article class="error" *ngIf="groupForm.get('description')?.touched && groupForm.get('description')?.invalid">
-      <small *ngIf="groupForm.get('description')?.errors?.['required']">Descripción obligatoria</small>
-      <small *ngIf="groupForm.get('description')?.errors?.['minlength']">Mínimo 10 caracteres</small>
+      <small *ngIf="groupForm.get('description')?.errors?.['required']">{{ 'VALIDATION.REQUIRED' | translate }}</small>
+      <small *ngIf="groupForm.get('description')?.errors?.['minlength']">{{ 'VALIDATION.MIN_LENGTH' | translate }}</small>
     </article>
     <app-form-input
       name="users"
-      placeholder="users"
-      label="Añadir usuario por nombre"
+      [placeholder]="'PAGES.GROUP.ADD_USER_PLACEHOLDER' | translate"
+      [label]="'PAGES.GROUP.ADD_USER_LABEL' | translate"
       (keydown.enter)="addUser(labelInput.value, $event); labelInput.value='';"
       #labelInput
     ></app-form-input>
     <article class="error" *ngIf="userNotFound">
-      <small>El usuario no existe</small>
+      <small>{{ 'PAGES.GROUP.USER_NOT_FOUND' | translate }}</small>
     </article>
     <article class="error" *ngIf="userAlreadyAdded">
-      <small>El usuario ya está añadido al grupo</small>
+      <small>{{ 'PAGES.GROUP.USER_ALREADY_ADDED' | translate }}</small>
     </article>
     <ng-container *ngFor="let userCtrl of users.controls; let i = index">
       <article class="flex-center" *ngIf="userCtrl.value.id !== adminUserId">
@@ -46,8 +46,8 @@
       </article>
     </ng-container>
     <article class="actions">
-      <app-button (click)="onSubmit($event)" [attr.aria-busy]="loading">Crear grupo</app-button>
-      <app-button class="secondary" (click)="!loading && onCancel($event)">Cancelar</app-button>
+      <app-button (click)="onSubmit($event)" [attr.aria-busy]="loading">{{ 'PAGES.GROUP.CREATE_BUTTON' | translate }}</app-button>
+      <app-button class="secondary" (click)="!loading && onCancel($event)">{{ 'PAGES.GROUP.CANCEL_BUTTON' | translate }}</app-button>
     </article>
   </fieldset>
 </form>
