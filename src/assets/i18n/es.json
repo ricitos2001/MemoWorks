@@ -13,6 +13,7 @@
       }
     },
     "SHARED": {
+      "LANGUAGE" : "Idioma",
       "GETSTARTED": "Empecemos",
       "BACKBUTTON": "volver",
       "BREADCRUMB": {

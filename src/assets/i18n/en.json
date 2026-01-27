@@ -13,6 +13,7 @@
       }
     },
     "SHARED": {
+      "LANGUAGE" : "Language",
       "GETSTARTED": "Get started",
       "BACKBUTTON": "back",
       "BREADCRUMB": {

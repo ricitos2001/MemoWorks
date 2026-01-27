@@ -2,25 +2,28 @@ import {Component, OnInit} from '@angular/core';
 import {LanguageService} from '../../../services/language.service';
 import {NgForOf} from '@angular/common';
 import {FormInputComponent} from '../form-input/form-input.component';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-language-selector',
   imports: [
     NgForOf,
-    FormInputComponent
+    TranslateModule,
   ],
   templateUrl: './language-selector.component.html',
   styleUrl: '../../../../styles/styles.css',
 })
 export class LanguageSelectorComponent implements OnInit {
 
-  constructor(private languageService: LanguageService) {
+  constructor(private languageService: LanguageService, private translate: TranslateService) {
   }
 
   languages = [
     { code: 'es', label: 'Español'},
     { code: 'en', label: 'English'}
   ];
+
+  languageLabel = '';
 
   currentLang!: string;
 
@@ -31,10 +34,16 @@ export class LanguageSelectorComponent implements OnInit {
         this.currentLang = lang;
       }
     });
+    this.setTranslations();
+    this.translate.onLangChange.subscribe(() => this.setTranslations());
   }
 
   setLanguage(lang: string) {
     this.languageService.setLanguage(lang);
     this.currentLang = lang;
+  }
+
+  private setTranslations() {
+    this.languageLabel = this.translate.instant('COMPONENTS.SHARED.LANGUAGE');
   }
 }
