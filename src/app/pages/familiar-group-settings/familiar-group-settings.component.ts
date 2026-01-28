@@ -1,7 +1,7 @@
 import {Component, DestroyRef, EventEmitter, inject, OnInit, Output, ViewChild, Renderer2, ChangeDetectorRef} from '@angular/core';
 import {ButtonComponent}from '../../components/shared/button/button.component';
 import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
-import {Router, RouterLink} from '@angular/router';
+import {Router} from '@angular/router';
 import {CommunicationService} from '../../services/shared/communication.service';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {GroupsStore} from '../../stores/groups.store';
@@ -23,7 +23,6 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
     AsyncPipe,
     ConfirmModalComponent,
     TranslateModule,
-    RouterLink,
   ],
   templateUrl: './familiar-group-settings.component.html',
   styleUrl: '../../../styles/styles.css',
@@ -402,5 +401,11 @@ export class FamiliarGroupSettingsComponent implements OnInit{
     this.createGroupText1 = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.CREATEGROUPTEXT1');
     this.createGroupText2 = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.CREATEGROUPTEXT2');
     this.createGroupText3 = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.CREATEGROUPTEXT3');
+  }
+
+  viewMembers(groupId: string) {
+    this.router.navigate(['/settings/familiarGroups', groupId], {
+      state: { fromCalendar: false }
+    });
   }
 }

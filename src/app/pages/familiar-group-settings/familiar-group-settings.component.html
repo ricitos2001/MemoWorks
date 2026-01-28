@@ -29,7 +29,7 @@
                   <img [src]="getImage(user.id)" [alt]="user.name" class="settings__imgUser" loading="lazy" decoding="async">
                 </article>
               </section>
-              <app-button routerLink="/allMembers:id" class="settings__members-button">{{viewMembersButton | translate}}</app-button>
+              <app-button (click)="viewMembers(group.id)" class="settings__members-button">{{viewMembersButton | translate}}</app-button>
             </section>
           </section>
         </section>

@@ -316,6 +316,9 @@
         "PART2": "."
       }
     },
+    "ALLMEMBERS": {
+      "TITLE": "All members"
+    },
     "TASK": {
       "ADD_LEGEND": "Add task",
       "EDIT_LEGEND": "Edit task",

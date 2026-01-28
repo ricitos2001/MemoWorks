@@ -1,10 +1,9 @@
 <app-modal [isOpen]="isOpen" [title]="title" [showHeader]="true" (close)="close()">
   <div class="modal__content">
     <p class="modal__message">{{ message }}</p>
-    <div class="modal__footer">
-      <app-button (click)="close()">{{ confirmButton | translate }}</app-button>
-      <app-button (click)="confirm()">{{ cancelButton | translate }}</app-button>
-    </div>
+    <article class="modal__footer">
+      <app-button (click)="confirm()">{{ confirmButton | translate }}</app-button>
+      <app-button (click)="close()">{{ cancelButton | translate }}</app-button>
+    </article>
   </div>
 </app-modal>
-

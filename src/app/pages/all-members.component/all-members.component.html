@@ -1,0 +1,10 @@
+<article class="grid-center">
+  <h2 class="task-details__title">{{ allMembers | translate }}</h2>
+  <ul *ngIf="members.length > 0" class="members-list">
+    <li *ngFor="let m of members; trackBy: trackById" class="flex-center">
+      <img [src]="getImage(m.id)" alt="avatar" width="128" height="128" (error)="onAvatarError($event)" />
+      <p class="task-details__text">{{ m.username }}</p>
+    </li>
+  </ul>
+  <a routerLink="/settings/familiarGroups">{{ backButton | translate }}</a>
+</article>

@@ -316,6 +316,9 @@
         "PART2": "."
       }
     },
+    "ALLMEMBERS": {
+      "TITLE": "Todos los miembros"
+    },
     "TASK": {
       "ADD_LEGEND": "Agregar tarea",
       "EDIT_LEGEND": "Editar tarea",
