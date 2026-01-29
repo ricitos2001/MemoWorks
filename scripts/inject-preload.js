@@ -36,10 +36,31 @@ function toPosix(p) {
   return p.split(path.sep).join('/');
 }
 
-function stripBrowserPrefix(p) {
-  // si empieza por 'browser/' la eliminamos, si no, devolvemos tal cual
-  if (p.startsWith('browser/')) return p.replace(/^browser\//, '');
+function detectTopLevelPrefix(paths) {
+  if (!paths.length) return '';
+  const firstSegments = paths.map(p => p.split('/')[0] || '');
+  const candidate = firstSegments[0];
+  if (candidate && firstSegments.every(s => s === candidate)) return candidate + '/';
+  return '';
+}
+
+function stripPrefix(p, prefix) {
+  if (!prefix) return p;
+  if (p.startsWith(prefix)) return p.slice(prefix.length);
   return p;
+}
+
+function buildInjectionBlock(jsFiles, cssFiles, topPrefix) {
+  const links = [];
+  cssFiles.forEach(css => {
+    const normalized = '/' + stripPrefix(css, topPrefix);
+    links.push(`<link rel="preload" href="${normalized}" as="style">\n<link rel="stylesheet" href="${normalized}">`);
+  });
+  jsFiles.forEach(js => {
+    const normalized = '/' + stripPrefix(js, topPrefix);
+    links.push(`<link rel="modulepreload" href="${normalized}">`);
+  });
+  return `<!-- Injected preload/modulepreload links (auto-generated) -->\n${links.join('\n')}\n`;
 }
 
 function main() {
@@ -56,50 +77,54 @@ function main() {
 
   let indexHtml = fs.readFileSync(indexPath, 'utf8');
 
+  // Locate <head> start tag and end tag
+  const headStartMatch = indexHtml.match(/<head[^>]*>/i);
+  const headEndIndex = indexHtml.search(/<\/head>/i);
+  if (!headStartMatch || headEndIndex === -1) {
+    console.error('No <head> ... </head> block found in index.html');
+    process.exit(1);
+  }
+  const headStartTag = headStartMatch[0];
+  const headStartIndex = indexHtml.indexOf(headStartTag);
+  const headContentStart = headStartIndex + headStartTag.length;
+  const headContent = indexHtml.substring(headContentStart, headEndIndex);
+
+  // Clean headContent: remove existing injected markers, remove link tags for modulepreload/preload/stylesheet, and remove any /browser/ references
+  let cleanedHead = headContent
+    // remove previous marker blocks
+    .replace(/<!-- Injected preload\/modulepreload links \(auto-generated\) -->[\s\S]*?(?=$|<\/head>)/gi, '')
+    // remove link tags of rel=modulepreload, preload, stylesheet
+    .replace(/<link[^>]*rel=(['"])(?:modulepreload|preload|stylesheet)\1[^>]*>/gi, '')
+    // remove standalone href/src attributes that reference browser/ (defensive)
+    .replace(/(href|src)=(['"])\/?browser\//gi, '$1=$2/')
+    ;
+
   // Collect files in dist recursively (excluding maps)
   const allFiles = walkDir(distFolder).filter(f => !f.endsWith('.map'));
+  const relPaths = allFiles.map(f => toPosix(path.relative(distFolder, f))).filter(p => p && p !== 'index.html');
 
-  // Compute paths relative to the dist folder root and use posix style
-  const relPaths = allFiles
-    .map(f => toPosix(path.relative(distFolder, f)))
-    .filter(p => p && p !== 'index.html');
+  // Determine top prefix (prefer dir where index is located)
+  const indexDirRel = toPosix(path.relative(distFolder, path.dirname(indexPath)));
+  let topPrefix;
+  if (indexDirRel && indexDirRel !== '.') {
+    topPrefix = indexDirRel + '/';
+  } else {
+    topPrefix = detectTopLevelPrefix(relPaths);
+  }
 
   const jsFiles = relPaths.filter(f => f.endsWith('.js'));
   const cssFiles = relPaths.filter(f => f.endsWith('.css'));
 
-  const links = [];
+  const injectionBlock = buildInjectionBlock(jsFiles, cssFiles, topPrefix);
 
-  // Preload CSS (as=style) and keep stylesheet link (so browsers that ignore preload still load it)
-  // We limit to top-level CSS files (heuristic): those not in lazy chunk folders, but for ahora include all css
-  cssFiles.forEach(css => {
-    // Normalize removing browser/ prefix if present
-    const normalized = '/' + stripBrowserPrefix(css);
-    const href = normalized; // serve from webroot
-    links.push(`<link rel="preload" href="${href}" as="style">\n<link rel="stylesheet" href="${href}">`);
-  });
+  // Reconstruct head: startTag + cleanedHead (trimmed) + injectionBlock + </head>
+  const newHead = headStartTag + '\n' + cleanedHead.trim() + '\n' + injectionBlock + '</head>';
 
-  // Modulepreload for JS chunks
-  jsFiles.forEach(js => {
-    const normalized = '/' + stripBrowserPrefix(js);
-    const href = normalized;
-    links.push(`<link rel="modulepreload" href="${href}">`);
-  });
+  // Reconstruct full HTML
+  const newIndexHtml = indexHtml.substring(0, headStartIndex) + newHead + indexHtml.substring(headEndIndex + '</head>'.length);
 
-  const headClose = '</head>';
-  const markerStart = '<!-- Injected preload/modulepreload links (auto-generated) -->';
-  const insertion = `${markerStart}\n${links.join('\n')}\n`;
-
-  if (indexHtml.includes(markerStart)) {
-    // Replace existing entire injected block up to the closing head (we find marker and replace until headClose or end of marker)
-    // Simpler: remove old marker block first
-    indexHtml = indexHtml.replace(new RegExp(`${markerStart}[\s\S]*?\n`, 'g'), insertion);
-  } else {
-    // Insert before </head>
-    indexHtml = indexHtml.replace(headClose, insertion + headClose);
-  }
-
-  fs.writeFileSync(indexPath, indexHtml, 'utf8');
-  console.log(`Injected ${links.length} links into ${indexPath}`);
+  fs.writeFileSync(indexPath, newIndexHtml, 'utf8');
+  console.log(`Injected ${jsFiles.length + cssFiles.length} links into ${indexPath} (stripped prefix: '${topPrefix}')`);
 }
 
 main();
