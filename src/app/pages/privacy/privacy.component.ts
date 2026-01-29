@@ -8,6 +8,7 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
   ],
   templateUrl: './privacy.component.html',
   styleUrl: '../../../styles/styles.css',
+  standalone: true,
 })
 export class PrivacyComponent implements OnInit {
   constructor(private translate: TranslateService) {}

@@ -25,6 +25,7 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
   ],
   templateUrl: './register.component.html',
   styleUrl: '../../../styles/styles.css',
+  standalone: true
 })
 export class RegisterComponent {
   @Output() authSuccess = new EventEmitter<void>();

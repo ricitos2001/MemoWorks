@@ -8,6 +8,7 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
   ],
   templateUrl: './terms.component.html',
   styleUrl: '../../../styles/styles.css',
+  standalone: true,
 })
 export class TermsComponent implements OnInit{
   constructor(private translate: TranslateService) {}

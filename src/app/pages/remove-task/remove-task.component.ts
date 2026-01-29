@@ -26,6 +26,7 @@ import {SliderComponent} from '../../components/shared/slider/slider.component';
   ],
   templateUrl: './remove-task.component.html',
   styleUrl: '../../../styles/styles.css',
+  standalone: true,
 })
 
 export class RemoveTaskComponent implements OnInit {

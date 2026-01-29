@@ -22,7 +22,8 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
     NgForOf,
     NgIf,
     TranslateModule
-  ]
+  ],
+  standalone: true,
 })
 
 export class CreateGroupComponent implements OnInit {

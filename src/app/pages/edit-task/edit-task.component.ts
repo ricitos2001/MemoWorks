@@ -22,6 +22,7 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
   ],
   templateUrl: './edit-task.component.html',
   styleUrl: '../../../styles/styles.css',
+  standalone: true,
 })
 export class EditTaskComponent implements OnInit {
   taskForm: FormGroup;

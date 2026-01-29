@@ -23,6 +23,7 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
   ],
   templateUrl: './edit-group.component.html',
   styleUrl: '../../../styles/styles.css',
+  standalone: true,
 })
 export class EditGroupComponent implements OnInit {
   groupForm: FormGroup;

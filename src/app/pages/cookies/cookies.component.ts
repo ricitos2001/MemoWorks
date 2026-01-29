@@ -8,6 +8,7 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
   ],
   templateUrl: './cookies.component.html',
   styleUrl: '../../../styles/styles.css',
+  standalone: true,
 })
 export class CookiesComponent implements OnInit {
   constructor(private translate: TranslateService) {}

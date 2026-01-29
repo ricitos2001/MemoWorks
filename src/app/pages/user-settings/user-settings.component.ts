@@ -21,6 +21,7 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
   ],
   templateUrl: './user-settings.component.html',
   styleUrl: '../../../styles/styles.css',
+  standalone: true,
 })
 export class UserSettingsComponent implements OnInit {
 

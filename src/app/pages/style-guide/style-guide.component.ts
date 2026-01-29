@@ -21,7 +21,8 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
     EditTaskComponent,
     RecoverPasswordComponent,
     TranslateModule
-  ]
+  ],
+  standalone: true,
 })
 export class StyleGuideComponent implements OnInit{
   constructor(private translate: TranslateService) {}

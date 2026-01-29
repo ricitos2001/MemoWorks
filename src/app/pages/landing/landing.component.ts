@@ -16,6 +16,7 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
   ],
   templateUrl: './landing.component.html',
   styleUrl: '../../../styles/styles.css',
+  standalone: true,
 })
 export class LandingComponent implements OnInit {
   @ViewChild('authModal') authModal!: AuthModalComponent;
