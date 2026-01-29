@@ -20,7 +20,7 @@ RUN npm run build:prod -- --configuration production
 FROM nginx:stable-alpine
 
 # Eliminamos contenido por defecto
-RUN rm -rf /usr/share/nginx/html/
+RUN rm -rf /usr/share/nginx/html/*
 
 # Copiamos los archivos compilados desde el builder
 # Angular genera los ficheros estáticos en dist/<projectName>/; copiamos su contenido al root de nginx
