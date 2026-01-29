@@ -64,14 +64,18 @@ function main() {
   const links = [];
 
   // Preload CSS (as=style) and keep stylesheet link (so browsers that ignore preload still load it)
-  // We limit to top-level CSS files (heuristic): those not in lazy chunk folders, but for now include all css
   cssFiles.forEach(css => {
     const href = '/' + css; // serve from webroot
     links.push(`<link rel="preload" href="${href}" as="style">\n<link rel="stylesheet" href="${href}">`);
   });
 
-  // Modulepreload for JS chunks
-  jsFiles.forEach(js => {
+  // Modulepreload for JS chunks: limit to critical JS files only (e.g. main, runtime, polyfills)
+  // This avoids preloading lazy chunks and reduces the critical request chain.
+  const criticalJs = jsFiles.filter(f => /(^|\/)\s*(main|runtime|polyfills)[^/]*\.js$/.test(f) || /(^|\/)main-[^/]*\.js$/.test(f));
+  // Fallback: if we didn't find any 'main' file by pattern, include files starting with 'main-'
+  const modulePreloadFiles = criticalJs.length ? criticalJs : jsFiles.filter(f => f.includes('main'));
+
+  modulePreloadFiles.forEach(js => {
     const href = '/' + js;
     links.push(`<link rel="modulepreload" href="${href}">`);
   });

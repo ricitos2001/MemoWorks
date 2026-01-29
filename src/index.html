@@ -9,11 +9,19 @@
   <meta name="keywords" content="notas, gestión de notas, organización, tareas, recordatorios, productividad, aplicación de notas">
   <meta name="author" content="ricitos2001">
   <link rel="icon" type="image/x-icon" href="assets/img/logo.svg">
-  <!-- Preconnect para Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Preconnect sólo a fonts.gstatic.com (fonts.googleapis.com suele ser innecesario como preconnect si se carga la CSS de forma no bloqueante) -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Cargar Google Fonts de forma no bloqueante (display=swap) -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <!-- Cargar Google Fonts de forma no bloqueante: preload la hoja de CSS y cambiar rel a stylesheet onload -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  </noscript>
+  <!--
+    Si prefieres eliminar por completo la cadena crítica de Google Fonts, self-hostea las fuentes .woff2 en `src/assets/fonts/` y:
+    1) añade preloads para los .woff2 aquí: <link rel="preload" as="font" href="/assets/fonts/Montserrat-Regular.woff2" type="font/woff2" crossorigin>
+    2) añade un @font-face con `font-display: swap;` en tu CSS (p. ej. src/styles/styles.css).
+    Nota: `angular.json` ya incluye `src/assets`, así que cualquier archivo bajo `src/assets/fonts` se servirá en `/assets/fonts/`.
+  -->
 </head>
 <body>
   <app-root></app-root>
