@@ -124,3 +124,14 @@ Comandos útiles (desarrollo)
 - Servir en desarrollo: `npm start`
 - Build producción: `npm run build`
 - Ejecutar tests unitarios (Karma/Jasmine): `npm test`
+
+## Optimización de carga (preload / modulepreload)
+
+Se añadió un script que inyecta automáticamente enlaces de `preload` y `modulepreload` en el `index.html` generado en `dist/` para reducir la cadena crítica y mejorar LCP.
+
+- Usa: `npm run build:prod` — realiza la build de producción y ejecuta el script que inyecta los enlaces en `dist/MemoWorks/index.html`.
+- El script se encuentra en `scripts/inject-preload.js` y añade `<link rel="modulepreload">` para los bundles JS y `<link rel="preload" as="style">` + `<link rel="stylesheet">` para los CSS generados.
+
+Notas:
+- Revisa `dist/MemoWorks/index.html` después de la build para confirmar los enlaces inyectados.
+- Es una mejora automática sencilla; para un ajuste fino (preload selectivo de chunks críticos) revisa el contenido de `dist/` y adapta `scripts/inject-preload.js` según tus prioridades.
