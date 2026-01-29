@@ -15,7 +15,7 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/"]
+      test: ["CMD", "curl", "-f", "http://localhost/index.html"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -44,4 +44,3 @@ volumes:
 networks:
   memoworks_net:
     driver: bridge
-
