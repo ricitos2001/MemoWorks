@@ -6,48 +6,84 @@ const path = require('path');
 const distArg = process.argv[2] || './dist/MemoWorks';
 const distFolder = path.resolve(distArg);
 
+function findIndexHtml(dir) {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const e of entries) {
+    const full = path.join(dir, e.name);
+    if (e.isFile() && e.name.toLowerCase() === 'index.html') return full;
+    if (e.isDirectory()) {
+      const found = findIndexHtml(full);
+      if (found) return found;
+    }
+  }
+  return null;
+}
+
+function walkDir(dir, fileList = []) {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const e of entries) {
+    const full = path.join(dir, e.name);
+    if (e.isDirectory()) {
+      walkDir(full, fileList);
+    } else if (e.isFile()) {
+      fileList.push(full);
+    }
+  }
+  return fileList;
+}
+
+function toPosix(p) {
+  return p.split(path.sep).join('/');
+}
+
 function main() {
   if (!fs.existsSync(distFolder)) {
     console.error(`Dist folder not found: ${distFolder}`);
     process.exit(1);
   }
 
-  const indexPath = path.join(distFolder, 'index.html');
-  if (!fs.existsSync(indexPath)) {
-    console.error(`index.html not found in dist folder: ${indexPath}`);
+  const indexPath = findIndexHtml(distFolder);
+  if (!indexPath) {
+    console.error(`index.html not found in dist folder: ${distFolder}`);
     process.exit(1);
   }
 
   let indexHtml = fs.readFileSync(indexPath, 'utf8');
 
-  // Collect files in dist (only top-level files)
-  const files = fs.readdirSync(distFolder).filter(f => !f.endsWith('.map'));
+  // Collect files in dist recursively (excluding maps)
+  const allFiles = walkDir(distFolder).filter(f => !f.endsWith('.map'));
 
-  // JS modules and CSS
-  const jsFiles = files.filter(f => f.endsWith('.js'));
-  const cssFiles = files.filter(f => f.endsWith('.css'));
+  // Compute paths relative to the dist folder root and use posix style
+  const relPaths = allFiles
+    .map(f => toPosix(path.relative(distFolder, f)))
+    .filter(p => p && p !== 'index.html');
 
-  // Build preload/modulepreload links
+  const jsFiles = relPaths.filter(f => f.endsWith('.js'));
+  const cssFiles = relPaths.filter(f => f.endsWith('.css'));
+
   const links = [];
 
-  // Prefetch/preload CSS (highest priority for initial rendering)
+  // Preload CSS (as=style) and keep stylesheet link (so browsers that ignore preload still load it)
+  // We limit to top-level CSS files (heuristic): those not in lazy chunk folders, but for now include all css
   cssFiles.forEach(css => {
-    // Avoid injecting vendor or chunk runtime css? We'll preload all css files at top-level
-    links.push(`<link rel="preload" href="${path.posix.join('/', css)}" as="style">\n<link rel="stylesheet" href="${path.posix.join('/', css)}">`);
+    const href = '/' + css; // serve from webroot
+    links.push(`<link rel="preload" href="${href}" as="style">\n<link rel="stylesheet" href="${href}">`);
   });
 
-  // Modulepreload for JS chunks (module scripts)
+  // Modulepreload for JS chunks
   jsFiles.forEach(js => {
-    // runtime or polyfills usually small; we still modulepreload them
-    links.push(`<link rel="modulepreload" href="${path.posix.join('/', js)}">`);
+    const href = '/' + js;
+    links.push(`<link rel="modulepreload" href="${href}">`);
   });
 
   const headClose = '</head>';
-  const insertion = `<!-- Injected preload/modulepreload links (auto-generated) -->\n${links.join('\n')}\n`;
+  const markerStart = '<!-- Injected preload/modulepreload links (auto-generated) -->';
+  const insertion = `${markerStart}\n${links.join('\n')}\n`;
 
-  if (indexHtml.includes('<!-- Injected preload/modulepreload links (auto-generated) -->')) {
-    // Replace existing block
-    indexHtml = indexHtml.replace(/<!-- Injected preload[\s\S]*?-->/, insertion);
+  if (indexHtml.includes(markerStart)) {
+    // Replace existing entire injected block up to the closing head (we find marker and replace until headClose or end of marker)
+    // Simpler: remove old marker block first
+    indexHtml = indexHtml.replace(new RegExp(`${markerStart}[\s\S]*?\n`, 'g'), insertion);
   } else {
     // Insert before </head>
     indexHtml = indexHtml.replace(headClose, insertion + headClose);
