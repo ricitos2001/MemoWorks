@@ -36,6 +36,12 @@ function toPosix(p) {
   return p.split(path.sep).join('/');
 }
 
+function stripBrowserPrefix(p) {
+  // si empieza por 'browser/' la eliminamos, si no, devolvemos tal cual
+  if (p.startsWith('browser/')) return p.replace(/^browser\//, '');
+  return p;
+}
+
 function main() {
   if (!fs.existsSync(distFolder)) {
     console.error(`Dist folder not found: ${distFolder}`);
@@ -64,15 +70,18 @@ function main() {
   const links = [];
 
   // Preload CSS (as=style) and keep stylesheet link (so browsers that ignore preload still load it)
-  // We limit to top-level CSS files (heuristic): those not in lazy chunk folders, but for now include all css
+  // We limit to top-level CSS files (heuristic): those not in lazy chunk folders, but for ahora include all css
   cssFiles.forEach(css => {
-    const href = '/' + css; // serve from webroot
+    // Normalize removing browser/ prefix if present
+    const normalized = '/' + stripBrowserPrefix(css);
+    const href = normalized; // serve from webroot
     links.push(`<link rel="preload" href="${href}" as="style">\n<link rel="stylesheet" href="${href}">`);
   });
 
   // Modulepreload for JS chunks
   jsFiles.forEach(js => {
-    const href = '/' + js;
+    const normalized = '/' + stripBrowserPrefix(js);
+    const href = normalized;
     links.push(`<link rel="modulepreload" href="${href}">`);
   });
 
