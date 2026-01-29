@@ -37,6 +37,7 @@
       </section>
     </li>
   </ul>
+  <app-slider *ngIf="total() > pageSize"></app-slider>
 </ng-container>
 
 <ng-template #emptyState>
@@ -47,7 +48,4 @@
   </article>
 </ng-template>
 
-<article class="pagination" *ngIf="total() > pageSize && hasResults()">
-  <button (click)="prevPage()" [disabled]="page() <= 0">{{nextButton | translate}}</button>
-  <button (click)="nextPage()" [disabled]="page() >= total()">{{backButton | translate}}</button>
-</article>
+

@@ -33,9 +33,6 @@
       </section>
     </li>
   </ul>
-  <article class="pagination" *ngIf="total() > pageSize">
-    <button (click)="prevPage()" [disabled]="page() <= 0">{{nextButton | translate}}</button>
-    <button (click)="nextPage()" [disabled]="page() >= total()">{{backButton | translate}}</button>
-  </article>
+  <app-slider *ngIf="total() > pageSize"></app-slider>
   <app-back-button></app-back-button>
 </section>

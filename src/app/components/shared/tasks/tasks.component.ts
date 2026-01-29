@@ -11,6 +11,7 @@ import { ViewTaskButtonComponent } from '../view-task-button/view-task-button.co
 import { ButtonComponent } from '../button/button.component';
 import { SharedBarComponent } from '../shared-bar/shared-bar.component';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {SliderComponent} from '../slider/slider.component';
 
 @Component({
   selector: 'app-tasks',
@@ -22,7 +23,8 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
     ViewTaskButtonComponent,
     ButtonComponent,
     SharedBarComponent,
-    TranslateModule
+    TranslateModule,
+    SliderComponent
   ],
   templateUrl: './tasks.component.html',
   styleUrl: '../../../../styles/styles.css',
@@ -42,8 +44,6 @@ export class TasksComponent implements OnInit {
   startToOrganize: string = '';
   zeroTasks: string = '';
   createFirstTask: string = '';
-  nextButton: string = '';
-  backButton: string = '';
 
   tasks = computed(() => this.store.state().data);
   loading = computed(() => this.store.state().loading);
@@ -102,18 +102,6 @@ export class TasksComponent implements OnInit {
     return date;
   }
 
-  nextPage() {
-    if (this.page() < this.total()) {
-      this.store.load(this.page() + 1);
-    }
-  }
-
-  prevPage() {
-    if (this.page() > 0) {
-      this.store.load(this.page() - 1);
-    }
-  }
-
   private setTranslations() {
     this.loadingText = this.translate.instant('COMPONENTS.SHARED.TASKS.LOADINGTEXT');
     this.searcher = this.translate.instant('COMPONENTS.SHARED.TASKS.SEARCHER');
@@ -122,7 +110,5 @@ export class TasksComponent implements OnInit {
     this.startToOrganize = this.translate.instant('COMPONENTS.SHARED.TASKS.STARTTOORGANIZE');
     this.zeroTasks = this.translate.instant('COMPONENTS.SHARED.TASKS.ZEROTASKS');
     this.createFirstTask = this.translate.instant('COMPONENTS.SHARED.TASKS.CREATEFIRSTTASK');
-    this.nextButton = this.translate.instant('COMPONENTS.SHARED.TASKS.NEXTBUTTON');
-    this.backButton = this.translate.instant('COMPONENTS.SHARED.TASKS.BACKBUTTON');
   }
 }

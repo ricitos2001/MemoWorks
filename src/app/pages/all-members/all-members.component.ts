@@ -9,7 +9,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import { AvatarService } from '../../services/shared/avatar.service';
 
 @Component({
-  selector: 'app-all-members.component',
+  selector: 'app-all-members',
   standalone: true,
   imports: [
     CommonModule,

@@ -1,0 +1,4 @@
+<article class="pagination">
+  <app-button (click)="prevPage()" [disabled]="page() <= 0">{{nextButton | translate}}</app-button>
+  <app-button (click)="nextPage()" [disabled]="page() >= total()">{{backButton | translate}}</app-button>
+</article>

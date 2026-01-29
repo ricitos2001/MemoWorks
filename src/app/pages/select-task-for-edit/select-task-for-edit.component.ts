@@ -7,6 +7,8 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {CommunicationService} from '../../services/shared/communication.service';
 import {BackButton} from '../../components/shared/back-button/back-button';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {ButtonComponent} from '../../components/shared/button/button.component';
+import {SliderComponent} from '../../components/shared/slider/slider.component';
 
 @Component({
   selector: 'app-select-task-for-edit',
@@ -16,7 +18,9 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
     NgIf,
     ViewTaskButtonComponent,
     BackButton,
-    TranslateModule
+    TranslateModule,
+    ButtonComponent,
+    SliderComponent
   ],
   templateUrl: './select-task-for-edit.component.html',
   styleUrl: '../../../styles/styles.css',
@@ -36,8 +40,6 @@ export class SelectTaskForEditComponent implements OnInit {
   page = this.tasksSignalStore.page;
   pageSize = this.tasksSignalStore.pageSize;
   loadingText = ''
-  nextButton: string = '';
-  backButton: string = '';
 
   ngOnInit(): void {
     if (this.email) {
@@ -70,21 +72,7 @@ export class SelectTaskForEditComponent implements OnInit {
     return date;
   }
 
-  nextPage() {
-    if (this.page() < this.total()) {
-      this.tasksSignalStore.load(this.page() + 1);
-    }
-  }
-
-  prevPage() {
-    if (this.page() > 0) {
-      this.tasksSignalStore.load(this.page() - 1);
-    }
-  }
-
   private setTranslations() {
     this.loadingText = this.translate.instant('COMPONENTS.SHARED.TASKS.LOADINGTEXT');
-    this.nextButton = this.translate.instant('COMPONENTS.SHARED.TASKS.NEXTBUTTON');
-    this.backButton = this.translate.instant('COMPONENTS.SHARED.TASKS.BACKBUTTON');
   }
 }

@@ -10,6 +10,7 @@ import {TasksSignalStore} from '../../stores/tasks.signal.store';
 import {TaskService} from '../../services/task.service';
 import {NotificationsService, Notification} from '../../services/notifications.service';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {SliderComponent} from '../../components/shared/slider/slider.component';
 
 @Component({
   selector: 'app-remove-task',
@@ -20,7 +21,8 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
     BackButton,
     TrashButtonComponent,
     NgIf,
-    TranslateModule
+    TranslateModule,
+    SliderComponent
   ],
   templateUrl: './remove-task.component.html',
   styleUrl: '../../../styles/styles.css',
@@ -43,11 +45,8 @@ export class RemoveTaskComponent implements OnInit {
   page = this.tasksSignalStore.page;
   pageSize = this.tasksSignalStore.pageSize;
   loadingText = ''
-  nextButton: string = '';
-  backButton: string = '';
 
   ngOnInit(): void {
-    // Recargar tareas si llega notificación
     this.comm.notifications$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(n => {
@@ -109,21 +108,7 @@ export class RemoveTaskComponent implements OnInit {
     return date;
   }
 
-  nextPage() {
-    if (this.page() < this.total()) {
-      this.tasksSignalStore.load(this.page() + 1);
-    }
-  }
-
-  prevPage() {
-    if (this.page() > 0) {
-      this.tasksSignalStore.load(this.page() - 1);
-    }
-  }
-
   private setTranslations() {
     this.loadingText = this.translate.instant('COMPONENTS.SHARED.TASKS.LOADINGTEXT');
-    this.nextButton = this.translate.instant('COMPONENTS.SHARED.TASKS.NEXTBUTTON');
-    this.backButton = this.translate.instant('COMPONENTS.SHARED.TASKS.BACKBUTTON');
   }
 }
