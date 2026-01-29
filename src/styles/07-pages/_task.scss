@@ -243,6 +243,14 @@
   .tasks-grid .task__image-box { height: 140px; }
 }
 
+.task__content{
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-4);
+  flex-wrap: nowrap;
+}
+
+
 @media (max-width: 640px) {
   .tasks-grid { grid-template-columns: 1fr; }
   .tasks-grid .task { max-width: none; min-height: auto; }

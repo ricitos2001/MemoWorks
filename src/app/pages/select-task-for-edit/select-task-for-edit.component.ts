@@ -19,7 +19,6 @@ import {SliderComponent} from '../../components/shared/slider/slider.component';
     ViewTaskButtonComponent,
     BackButton,
     TranslateModule,
-    ButtonComponent,
     SliderComponent
   ],
   templateUrl: './select-task-for-edit.component.html',

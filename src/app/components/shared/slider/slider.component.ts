@@ -10,7 +10,6 @@ import {NgIf} from '@angular/common';
   imports: [
     ButtonComponent,
     TranslateModule,
-    NgIf
   ],
   templateUrl: './slider.component.html',
   styleUrl: '../../../../styles/styles.css',
