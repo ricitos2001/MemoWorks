@@ -50,6 +50,9 @@
                   "maximumError": "8kB"
                 }
               ],
+              "optimization": true,
+              "aot": true,
+              "extractLicenses": true,
               "outputHashing": "all"
             },
             "development": {
