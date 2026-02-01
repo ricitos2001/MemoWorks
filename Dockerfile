@@ -1,20 +1,7 @@
 # Etapa de compilación
-FROM node:22-bullseye-slim AS builder
+FROM node:22-alpine AS builder
 
 WORKDIR /app
-
-# Instalar dependencias del sistema y Chromium necesarias para Puppeteer/critical
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    chromium \
-    ca-certificates \
-    fonts-liberation \
-    libnss3 \
-    libxss1 \
-    libasound2 \
-    && rm -rf /var/lib/apt/lists/*
-
-# Indicar a Puppeteer la ruta del ejecutable de Chromium del sistema
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
 # Copiamos solo package.json y package-lock.json primero para usar cache de Docker
 COPY package.json package-lock.json ./
