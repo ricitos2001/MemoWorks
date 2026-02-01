@@ -12,10 +12,7 @@
     "build:es": "ng build --configuration=es",
     "build:en": "ng build --configuration=en",
     "build:locales": "ng build --localize",
-    "build:locales:critical": "ng build --localize --configuration=production && npm run generate-critical",
-    "build:locales:dev": "ng build --localize --configuration=development",
-    "postbuild": "node scripts/inject-preload.js ./dist/MemoWorks/browser",
-    "generate-critical": "critical index.html --base ./dist/MemoWorks/browser --inline --width 1300 --height 900 --css styles-*.css --target index.html"
+    "postbuild": "node scripts/inject-preload.js ./dist/MemoWorks/browser"
   },
   "prettier": {
     "printWidth": 100,
@@ -54,7 +51,6 @@
     "@angular/cli": "^21.0.2",
     "@angular/compiler-cli": "^21.0.0",
     "@types/dotenv": "^6.1.1",
-    "critical": "^6.0.0",
     "jsdom": "^27.1.0",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
