@@ -33,7 +33,7 @@
             ],
 
             "styles": [
-              "src/styles/styles.scss"
+              "src/styles/styles.css"
             ]
           },
           "configurations": {
@@ -46,8 +46,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "50kB",
-                  "maximumError": "100kB"
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
                 }
               ],
               "optimization": true,

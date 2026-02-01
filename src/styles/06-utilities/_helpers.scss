@@ -2,10 +2,12 @@
 @use "../01-tools/mixins" as *;
 
 /* ============================================================
-   Variables globales moved to 00-settings/_css-variables.scss
+   Variables globales
    ============================================================ */
 
-/* --scroll-offset is defined in 00-settings/_css-variables.scss */
+:root {
+  --scroll-offset: calc(var(--spacing-2) * 2 + 3rem);
+}
 
 /* ============================================================
    Scroll para anclas internas
