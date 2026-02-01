@@ -80,7 +80,7 @@ Resumen de errores identificados y soluciones aplicadas (mínimo 5):
 |--:|--------------------------------------------------------------|----------------------------|--------------------------|--------------------------------------------------------------------------------:|
 | 1 | Imágenes sin width/height explícitos provocando layout shift | 2.4.3 / Mejora de robustez | Lighthouse (diagnóstico) | Añadidos atributos `width` y `height` o CSS con `aspect-ratio` para evitar CLS. |
 | 2 | Mejorar la entrega de imagenes                               | 2.4.3 / Mejora de robustez | Lighthouse (diagnóstico) |                       Cambiar imagenes de tipo `png` por imagenes de tipo `csv` |
-| 3 |                                                              |                            |                          |                                                                                 |
+| 3 | Reducir css sin usar                                         | 2.4.3 / Mejora de robustez | Lighthousr (diagnostico) |  Reducir el css sin usar y refactorizar el css duplicado con variables globales |
 | 4 |                                                              |                            |                          |                                                                                 |
 | 5 |                                                              |                            |                          |                                                                                 |
 
@@ -138,10 +138,10 @@ Código DESPUÉS:
 
 IMPORTANTE: cambiar las imágenes de tipo png por imágenes de tipo svg para mejorar la entrega y escalabilidad de las mismas.
 
-#### Error #3:
-Problema:
-Impacto:
-Criterio WCAG:
+#### Error #3: Reducir CSS sin usar
+Problema: El CSS sin usar puede aumentar el tamaño de los archivos y afectar la velocidad de carga.
+Impacto: Bajo. Afecta a la experiencia de usuarios con conexiones lentas.
+Criterio WCAG: 2.4.3 - Navegación consistente / Mejora de robustez
 
 Código ANTES:
 
