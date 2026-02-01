@@ -65,8 +65,10 @@ Tabla resumen inicial:
 
 Las herramientas automáticas detectaron los siguientes problemas más relevantes (resumen):
 1. Algunas imágenes no tenían atributos explícitos de width/height (Lighthouse – diagnóstico relacionado con layout/CLS).
-2. Imágenes detectadas sin texto alternativo o con texto poco descriptivo (WAVE/TAW).
+2. 
 3. 
+4. 
+5. 
 
 (Nota: las capturas originales están en `docs/accesibilidad/datos`.)
 
@@ -86,20 +88,25 @@ Resumen de errores identificados y soluciones aplicadas (mínimo 5):
 
 Detalle de cada error con ejemplo de código (ANTES / DESPUÉS)
 
-#### Error #1:
-Problema:
-Impacto:
-Criterio WCAG:
+#### Error #1: Imágenes sin atributos width/height explícitos
+Problema: Las imágenes del header, delc footer y del landing no tenían atributos `width` y `height`, lo que podía causar cambios de layout (CLS) al cargarse.
+Impacto: Moderado. Afecta a la experiencia visual, especialmente en conexiones lentas.
+Criterio WCAG: 2.4.3 - Navegación consistente / Mejora de robustez
 
-Código ANTES:
+Código ANTES: 
 
-```
+```html
+<img [src]="darkMode ? 'assets/img/Clip_path_group.png' : 'assets/img/Clip_path_group-1200.webp'" alt="tercera imagen decorativa" aria-hidden="true" loading="lazy" class="landing__img">
 ```
 
 Código DESPUÉS:
 
+```html
+<img [src]="darkMode ? 'assets/img/Clip_path_group.png' : 'assets/img/Clip_path_group-1200.webp'" alt="tercera imagen decorativa" aria-hidden="true" loading="lazy" class="landing__img" width="0" height="0">
 ```
-```
+
+IMPORTANTE: modificar la clase CSS asociada para incluir un tamaño fijo evitando que las imágenes desaparezcan al añadir width/height en 0:
+
 
 #### Error #2:
 Problema: 
