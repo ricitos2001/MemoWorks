@@ -66,7 +66,8 @@ Tabla resumen inicial:
 Las herramientas automáticas detectaron los siguientes problemas más relevantes (resumen):
 1. Algunas imágenes no tenían atributos explícitos de width/height (Lighthouse – diagnóstico relacionado con layout/CLS).
 2. La entrega de algunas imágenes podría mejorarse (Lighthouse – diagnóstico relacionado con optimización de imágenes).
-3. 
+3. Reducir CSS sin usar (Lighthouse – diagnóstico relacionado con optimización de CSS).
+4. 
 
 (Nota: las capturas originales están en `docs/accesibilidad/datos`.)
 
@@ -88,7 +89,9 @@ Detalle de cada error con ejemplo de código (ANTES / DESPUÉS)
 
 #### Error #1: Imágenes sin atributos width/height explícitos
 Problema: Las imágenes del header, delc footer y del landing no tenían atributos `width` y `height`, lo que podía causar cambios de layout (CLS) al cargarse.
+
 Impacto: Moderado. Afecta a la experiencia visual, especialmente en conexiones lentas.
+
 Criterio WCAG: 2.4.3 - Navegación consistente / Mejora de robustez
 
 Código ANTES: 
@@ -108,7 +111,9 @@ IMPORTANTE: modificar la clase CSS asociada para incluir un tamaño fijo evitand
 
 #### Error #2: Mejorar la entrega de imágenes
 Problema: Las imágenes no optimizadas pueden afectar la velocidad de carga y la experiencia del usuario.
+
 Impacto: Moderado. Afecta a usuarios con conexiones lentas.
+
 Criterio WCAG: 2.1.1 - Teclado / 2.4.3 - Navegación consistente
 
 Código ANTES:
@@ -140,22 +145,26 @@ IMPORTANTE: cambiar las imágenes de tipo png por imágenes de tipo svg para mej
 
 #### Error #3: Reducir CSS sin usar
 Problema: El CSS sin usar puede aumentar el tamaño de los archivos y afectar la velocidad de carga.
+
 Impacto: Bajo. Afecta a la experiencia de usuarios con conexiones lentas.
+
 Criterio WCAG: 2.4.3 - Navegación consistente / Mejora de robustez
 
 Código ANTES:
 
-```
+```css
 ```
 
 Código DESPUÉS:
 
-```
+```css
 ```
 
 #### Error #4:
 Problema:
+
 Impacto:
+
 Criterio WCAG:
 
 Código ANTES:
