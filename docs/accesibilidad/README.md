@@ -65,10 +65,8 @@ Tabla resumen inicial:
 
 Las herramientas automáticas detectaron los siguientes problemas más relevantes (resumen):
 1. Algunas imágenes no tenían atributos explícitos de width/height (Lighthouse – diagnóstico relacionado con layout/CLS).
-2. 
+2. La entrega de algunas imágenes podría mejorarse (Lighthouse – diagnóstico relacionado con optimización de imágenes).
 3. 
-4. 
-5. 
 
 (Nota: las capturas originales están en `docs/accesibilidad/datos`.)
 
@@ -78,13 +76,13 @@ Las herramientas automáticas detectaron los siguientes problemas más relevante
 
 Resumen de errores identificados y soluciones aplicadas (mínimo 5):
 
-| # | Error | Criterio WCAG | Herramienta | Solución aplicada |
-|--:|------|---------------|------------|------------------:|
+| # | Error                                                        | Criterio WCAG              | Herramienta              |                                                               Solución aplicada |
+|--:|--------------------------------------------------------------|----------------------------|--------------------------|--------------------------------------------------------------------------------:|
 | 1 | Imágenes sin width/height explícitos provocando layout shift | 2.4.3 / Mejora de robustez | Lighthouse (diagnóstico) | Añadidos atributos `width` y `height` o CSS con `aspect-ratio` para evitar CLS. |
-| 2 |||||
-| 3 |||||
-| 4 |||||
-| 5 |||||
+| 2 | Mejorar la entrega de imagenes                               | 2.4.3 / Mejora de robustez | Lighthouse (diagnóstico) |                       Cambiar imagenes de tipo `png` por imagenes de tipo `csv` |
+| 3 |                                                              |                            |                          |                                                                                 |
+| 4 |                                                              |                            |                          |                                                                                 |
+| 5 |                                                              |                            |                          |                                                                                 |
 
 Detalle de cada error con ejemplo de código (ANTES / DESPUÉS)
 
@@ -108,20 +106,37 @@ Código DESPUÉS:
 IMPORTANTE: modificar la clase CSS asociada para incluir un tamaño fijo evitando que las imágenes desaparezcan al añadir width/height en 0:
 
 
-#### Error #2:
-Problema: 
-Impacto: 
-Criterio WCAG:
+#### Error #2: Mejorar la entrega de imágenes
+Problema: Las imágenes no optimizadas pueden afectar la velocidad de carga y la experiencia del usuario.
+Impacto: Moderado. Afecta a usuarios con conexiones lentas.
+Criterio WCAG: 2.1.1 - Teclado / 2.4.3 - Navegación consistente
 
 Código ANTES:
-
-```
+```html
+<nav class="flex">
+  <a href="#"><img src="assets/img/discord.png" alt="logo de discord" class="footer__icon"></a>
+  <a href="#"><img src="assets/img/instagram.png" alt="logo de instagram" class="footer__icon"></a>
+  <a href="#"><img src="assets/img/twitter.png" alt="logo de twitter" class="footer__icon"></a>
+  <a href="#"><img src="assets/img/facebook.png" alt="logo de facebook" class="footer__icon"></a>
+  <a href="#"><img src="assets/img/reddit.png" alt="logo de reddit" class="footer__icon"></a>
+  <a href="https://ko-fi.com/ricitos2001/tip"><img src="assets/img/ko-fi.png" alt="logo de ko-fi" class="footer__icon"></a>
+</nav>
 ```
 
 Código DESPUÉS:
 
+```html
+<nav class="flex">
+  <a href="#"><img src="assets/img/discord.svg" alt="logo de discord" class="footer__icon"></a>
+  <a href="#"><img src="assets/img/instagram.svg" alt="logo de instagram" class="footer__icon"></a>
+  <a href="#"><img src="assets/img/twitter.svg" alt="logo de twitter" class="footer__icon"></a>
+  <a href="#"><img src="assets/img/facebook.svg" alt="logo de facebook" class="footer__icon"></a>
+  <a href="#"><img src="assets/img/reddit.svg" alt="logo de reddit" class="footer__icon"></a>
+  <a href="https://ko-fi.com/ricitos2001/tip"><img src="assets/img/ko-fi.svg" alt="logo de ko-fi" class="footer__icon"></a>
+</nav>
 ```
-```
+
+IMPORTANTE: cambiar las imágenes de tipo png por imágenes de tipo svg para mejorar la entrega y escalabilidad de las mismas.
 
 #### Error #3:
 Problema:
