@@ -1669,7 +1669,6 @@ h6[id],
   padding: var(--spacing-4);
   align-items: center;
   margin: 0;
-  flex-wrap: wrap;
 }
 
 .settings__name {
