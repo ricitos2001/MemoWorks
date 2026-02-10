@@ -53,12 +53,19 @@
 
   input,
   textarea,
-  select,
+  select {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    white-space: normal;
+  }
+
   button,
   .button,
   .btn {
-    width: 100%;
-    max-width: 100%;
+    width: 20rem;
     box-sizing: border-box;
     overflow-wrap: anywhere;
     word-break: break-word;
