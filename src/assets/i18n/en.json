@@ -392,6 +392,10 @@
       "LOGIN": {
         "TITLE": "Login",
         "MESSAGE": "User {{email}} has signed in."
+      },
+      "REGISTER": {
+        "TITLE": "Register",
+        "MESSAGE": "User {{email}} has signed up."
       }
     },
     "TASK": {

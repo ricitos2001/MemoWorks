@@ -1,23 +1,24 @@
 <article *ngIf="loading()">{{ loadingText | translate }}</article>
 <article *ngIf="error()">{{ error() }}</article>
 <ng-container *ngIf="hasUsers();">
-  <app-shared-bar
-    (search)="onSearch($event)"
-    class="grid-center task__searcher">
+  <app-shared-bar (search)="onSearch($event)" class="grid-center user__searcher">
     <h3>{{ searcher | translate }}</h3>
   </app-shared-bar>
   <article *ngIf="!hasResults() && !loading()" class="card card--empty grid-center">
     <h3>{{ noResults | translate }}</h3>
     <p>{{ userNotFound | translate }}</p>
   </article>
-  <ul *ngIf="hasResults()" class="tasks-grid">
-    <li *ngFor="let user of users(); trackBy: trackById" class="task__li task">
-      <img [alt]="user.name" [src]="getImage(user.id)" class="settings__imgUser" decoding="async" loading="lazy">
-      <p class=""><strong>{{ name | translate }}: </strong>{{ user.name }}</p>
-      <p class=""><strong>{{ surnames | translate }}: </strong>{{ user.surnames }}</p>
-      <p class=""><strong>{{ usernameText | translate }}: </strong>{{ user.username }}</p>
-      <p class=""><strong>{{ phoneNumber | translate }}: </strong>{{ user.phoneNumber }}</p>
-      <p class=""><strong>{{ userEmail | translate }}: </strong>{{ user.email }}</p>
+  <h2 class="user__title">{{ userList | translate }}</h2>
+  <ul *ngIf="hasResults()" class="user__container">
+    <li *ngFor="let user of users(); trackBy: trackById" class="user__li user">
+      <article class="user__imgContainer">
+        <img [alt]="user.name" [src]="getImage(user.id)" class="user__imgUser" decoding="async" loading="lazy">
+      </article>
+      <p class="user__text"><strong>{{ name | translate }}: </strong>{{ user.name }}</p>
+      <p class="user__text"><strong>{{ surnames | translate }}: </strong>{{ user.surnames }}</p>
+      <p class="user__text"><strong>{{ usernameText | translate }}: </strong>{{ user.username }}</p>
+      <p class="user__text"><strong>{{ phoneNumber | translate }}: </strong>{{ user.phoneNumber }}</p>
+      <p class="user__text"><strong>{{ userEmail | translate }}: </strong>{{ user.email }}</p>
     </li>
   </ul>
   <app-slider *ngIf="total() > pageSize"></app-slider>

@@ -394,6 +394,10 @@
       "LOGIN": {
         "TITLE": "Inicio de sesión",
         "MESSAGE": "El usuario {{email}} ha iniciado sesión."
+      },
+      "REGISTER": {
+        "TITLE": "Registro de sesión",
+        "MESSAGE": "El usuario {{email}} se ha registrado ."
       }
     },
     "TASK": {

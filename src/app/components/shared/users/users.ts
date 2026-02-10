@@ -17,6 +17,7 @@ import {AvatarService} from '../../../services/shared/avatar.service';
     SharedBarComponent,
     SliderComponent,
 
+
   ],
   templateUrl: './users.html',
   styleUrl: '../../../../styles/styles.css',
@@ -34,6 +35,8 @@ export class Users implements OnInit {
   usernameText: string = '';
   phoneNumber: string = '';
   userEmail: string = '';
+  userList = ''
+
   email = localStorage.getItem('email');
   private store = inject(UsersSignalStore);
   users = computed(() => this.store.state().data);
@@ -99,5 +102,6 @@ export class Users implements OnInit {
     this.usernameText = this.translate.instant('PAGES.SETTINGS.USERSETTINGS.USERNAMETEXT');
     this.phoneNumber = this.translate.instant('PAGES.SETTINGS.USERSETTINGS.PHONENUMBER');
     this.userEmail = this.translate.instant('PAGES.SETTINGS.USERSETTINGS.USEREMAIL');
+    this.userList = this.translate.instant('COMPONENTS.LAYOUT.FOOTER.USERLIST')
   }
 }
