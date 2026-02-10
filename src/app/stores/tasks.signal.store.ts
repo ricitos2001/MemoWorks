@@ -1,6 +1,6 @@
-import { Injectable, signal } from '@angular/core';
-import { TaskService, Task } from '../services/task.service';
-import { AuthService } from '../services/auth.service';
+import {Injectable, signal} from '@angular/core';
+import {Task, TaskService} from '../services/task.service';
+import {AuthService} from '../services/auth.service';
 
 interface TasksState {
   loading: boolean;
@@ -9,7 +9,7 @@ interface TasksState {
   total: number;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class TasksSignalStore {
 
   page = signal(0);
@@ -44,33 +44,10 @@ export class TasksSignalStore {
      Helpers
      ======================= */
 
-  private reset() {
-    this.page.set(0);
-    this.state.set({
-      loading: false,
-      data: [],
-      allData: [],
-      total: 0
-    });
-    this.error.set(null);
-  }
-
-  private normalizeTask(task: Task): Task {
-    return {
-      ...task,
-      id: task.id != null ? String(task.id) : task.id,
-      labels: Array.isArray(task.labels)
-        ? task.labels
-        : task.labels
-          ? [String(task.labels)]
-          : []
-    } as Task;
-  }
-
   load(page: number) {
     if (!this.email) return;
     this.page.set(page);
-    this.state.update(s => ({ ...s, loading: true }));
+    this.state.update(s => ({...s, loading: true}));
     this.error.set(null);
     this.api.getTasksByUserEmail(page, this.pageSize, this.email)
       .subscribe({
@@ -85,7 +62,7 @@ export class TasksSignalStore {
         },
         error: err => {
           console.error(err);
-          this.state.update(s => ({ ...s, loading: false }));
+          this.state.update(s => ({...s, loading: false}));
           this.error.set('Error al cargar tareas');
         }
       });
@@ -93,7 +70,7 @@ export class TasksSignalStore {
 
   loadAll() {
     if (!this.email) return;
-    this.state.update(s => ({ ...s, loading: true }));
+    this.state.update(s => ({...s, loading: true}));
     this.error.set(null);
     let allTasks: Task[] = [];
     const pageSize = 50;
@@ -117,7 +94,7 @@ export class TasksSignalStore {
           },
           error: err => {
             console.error(err);
-            this.state.update(s => ({ ...s, loading: false }));
+            this.state.update(s => ({...s, loading: false}));
             this.error.set('Error al cargar todas las tareas');
           }
         });
@@ -165,12 +142,12 @@ export class TasksSignalStore {
 
   search(term: unknown) {
     if (typeof term !== 'string') {
-      this.state.update(s => ({ ...s, data: s.allData }));
+      this.state.update(s => ({...s, data: s.allData}));
       return;
     }
     const t = term.toLowerCase().trim();
     if (!t) {
-      this.state.update(s => ({ ...s, data: s.allData }));
+      this.state.update(s => ({...s, data: s.allData}));
       return;
     }
     const filtered = this.state().allData.filter(task =>
@@ -182,5 +159,28 @@ export class TasksSignalStore {
       ...s,
       data: filtered
     }));
+  }
+
+  private reset() {
+    this.page.set(0);
+    this.state.set({
+      loading: false,
+      data: [],
+      allData: [],
+      total: 0
+    });
+    this.error.set(null);
+  }
+
+  private normalizeTask(task: Task): Task {
+    return {
+      ...task,
+      id: task.id != null ? String(task.id) : task.id,
+      labels: Array.isArray(task.labels)
+        ? task.labels
+        : task.labels
+          ? [String(task.labels)]
+          : []
+    } as Task;
   }
 }
