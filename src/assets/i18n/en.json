@@ -9,11 +9,12 @@
         "STYLES": "Style guide",
         "WARNING": "Legal notice",
         "PRIVACY": "Privacy policy",
-        "COOKIES": "Cookie information"
+        "COOKIES": "Cookie information",
+        "USERLIST": "User list"
       }
     },
     "SHARED": {
-      "LANGUAGE" : "Language",
+      "LANGUAGE": "Language",
       "GETSTARTED": "Get started",
       "BACKBUTTON": "back",
       "BREADCRUMB": {
@@ -51,7 +52,6 @@
       }
     }
   },
-
   "PAGES": {
     "LANDING": {
       "TITLE": "Organize your day-to-day with MemoWorks",
@@ -367,7 +367,6 @@
       "CANCEL": "Cancel"
     }
   },
-
   "VALIDATION": {
     "REQUIRED": "This field is required.",
     "EMAIL_INVALID": "Invalid email.",
@@ -382,7 +381,6 @@
     "PASSWORDS_MISMATCH": "Passwords do not match.",
     "MIN_LENGTH": "Minimum length not met."
   },
-
   "NOTIFICATIONS": {
     "AUTH": {
       "LOGIN": {

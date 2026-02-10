@@ -98,14 +98,14 @@ export const routes: Routes = [
       {path: '', redirectTo: 'userList', pathMatch: "full"},
       {
         path: 'userList',
-        loadChildren: () => import('./pages/users/users-module').then(m => m.UsersModule),
+        loadChildren: () => import('./components/shared/users/users-module').then(m => m.UsersModule),
         data: {title: 'User-list', breadcrumb: 'User-list'}
       },
     ]
   },
   {
     path: 'users',
-    loadComponent: () => import('./pages/users/users').then(m => m.Users),
+    loadComponent: () => import('./components/shared/users/users').then(m => m.Users),
     data: {title: 'User-list', breadcrumb: 'User-list'}
   },
   {

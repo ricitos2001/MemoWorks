@@ -6,6 +6,7 @@ import {AuthService} from '../../../services/auth.service';
 import {ToastService} from '../../../services/shared/toast.service';
 import {NotificationsStore} from '../../../stores/notifications.store';
 import {NgIf} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -26,11 +27,12 @@ export class FooterComponent implements OnInit {
   warning = ''
   privacy = ''
   cookies = ''
+  userList = ''
   loggedIn: boolean = false;
   showNotifications = false;
   private authSub?: Subscription;
 
-  constructor(private themeService: ThemeService, private translate: TranslateService, private authService: AuthService, private toastService: ToastService, private notificationsStore: NotificationsStore,) {
+  constructor(private themeService: ThemeService, private translate: TranslateService, private authService: AuthService, private toastService: ToastService, private notificationsStore: NotificationsStore, private router: Router,) {
   }
 
   ngOnInit(): void {
@@ -56,6 +58,10 @@ export class FooterComponent implements OnInit {
     this.translate.onLangChange.subscribe(() => this.setTranslations());
   }
 
+  goToSite() {
+    this.router.navigate(['/users/userList'])
+  }
+
   private setTranslations() {
     this.legalInformation = this.translate.instant('COMPONENTS.LAYOUT.FOOTER.LEGALINFORMATION');
     this.help = this.translate.instant('COMPONENTS.LAYOUT.FOOTER.HELP');
@@ -65,5 +71,6 @@ export class FooterComponent implements OnInit {
     this.warning = this.translate.instant('COMPONENTS.LAYOUT.FOOTER.WARNING');
     this.privacy = this.translate.instant('COMPONENTS.LAYOUT.FOOTER.PRIVACY');
     this.cookies = this.translate.instant('COMPONENTS.LAYOUT.FOOTER.COOKIES');
+    this.userList = this.translate.instant('COMPONENTS.LAYOUT.FOOTER.USERLIST');
   }
 }

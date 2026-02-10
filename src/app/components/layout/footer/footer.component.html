@@ -17,7 +17,7 @@
         <a href="/styles">{{ styles | translate }}</a>
       </li>
       <li *ngIf="loggedIn">
-        <a href="/users">lista de usuarios</a>
+        <a (click)="goToSite()">{{ userList | translate }}</a>
       </li>
     </ul>
   </article>
