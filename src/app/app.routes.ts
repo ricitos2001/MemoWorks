@@ -32,11 +32,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/cookies/cookies.component').then(m => m.CookiesComponent),
     data: {breadcrumb: 'cookies'}
   },
-  {
-    path: 'users',
-    loadComponent: () => import('./pages/users/users').then(m => m.Users),
-    data: {title: 'User-list', breadcrumb: 'User-list'}
-  },
   {path: 'styles', component: StyleGuideComponent, data: {breadcrumb: 'style-guide'}},
   {path: 'login', component: LoginComponent, data: {breadcrumb: 'login'}},
   {path: 'register', component: RegisterComponent, data: {breadcrumb: 'register'}},
@@ -93,6 +88,25 @@ export const routes: Routes = [
         data: {breadcrumb: 'accessibility'}
       },
     ]
+  },
+  {
+    path: 'users',
+    canActivate: [authGuard],
+    loadComponent: () => import('./pages/user-list/user-list').then(m => m.UserList),
+    data: {title: 'users', breadcrumb: 'users'},
+    children: [
+      {path: '', redirectTo: 'userList', pathMatch: "full"},
+      {
+        path: 'userList',
+        loadChildren: () => import('./pages/users/users-module').then(m => m.UsersModule),
+        data: {title: 'User-list', breadcrumb: 'User-list'}
+      },
+    ]
+  },
+  {
+    path: 'users',
+    loadComponent: () => import('./pages/users/users').then(m => m.Users),
+    data: {title: 'User-list', breadcrumb: 'User-list'}
   },
   {
     path: 'editUserInfo/:id',

@@ -1,20 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {ThemeService} from '../../../services/shared/theme.service';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {Subscription} from 'rxjs';
+import {AuthService} from '../../../services/auth.service';
+import {ToastService} from '../../../services/shared/toast.service';
+import {NotificationsStore} from '../../../stores/notifications.store';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-footer',
   imports: [
-    TranslateModule
+    TranslateModule,
+    NgIf
   ],
   templateUrl: './footer.component.html',
   styleUrl: '../../../../styles/styles.css',
 })
 export class FooterComponent implements OnInit {
   darkMode = false;
-
-  constructor(private themeService: ThemeService, private translate: TranslateService) {}
-
   legalInformation = ''
   help = ''
   contact = ''
@@ -23,9 +26,28 @@ export class FooterComponent implements OnInit {
   warning = ''
   privacy = ''
   cookies = ''
+  loggedIn: boolean = false;
+  showNotifications = false;
+  private authSub?: Subscription;
 
+  constructor(private themeService: ThemeService, private translate: TranslateService, private authService: AuthService, private toastService: ToastService, private notificationsStore: NotificationsStore,) {
+  }
 
   ngOnInit(): void {
+    this.authSub = this.authService.loggedIn$.subscribe(status => {
+      this.loggedIn = status;
+      if (!status) {
+        this.showNotifications = false;
+        try {
+          this.toastService.dismissAll();
+        } catch (e) {
+        }
+        try {
+          this.notificationsStore.clear();
+        } catch (e) {
+        }
+      }
+    });
     this.themeService.currentTheme$.subscribe(theme => {
       this.darkMode = theme === 'dark';
     });
