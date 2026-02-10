@@ -53,12 +53,19 @@
 
   input,
   textarea,
-  select,
+  select {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    white-space: normal;
+  }
+
   button,
   .button,
   .btn {
-    width: 100%;
-    max-width: 100%;
+    width: 20rem;
     box-sizing: border-box;
     overflow-wrap: anywhere;
     word-break: break-word;
@@ -148,7 +155,7 @@
   border-bottom-right-radius: var(--radius-md);
 }
 
-.settings__familiar-group-info, .settings__section-group{
+.settings__familiar-group-info, .settings__section-group {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -171,12 +178,12 @@
   flex-wrap: wrap;
 }
 
-.settings__users-container{
+.settings__users-container {
   display: flex;
   flex-direction: row;
 }
 
-.settings__create-group{
+.settings__create-group {
   display: grid;
   place-items: center;
   padding: var(--spacing-4);
@@ -246,7 +253,7 @@
     align-items: center;
   }
 
-  .settings__user , .settings__users-container{
+  .settings__user, .settings__users-container {
     flex-direction: column-reverse;
   }
 

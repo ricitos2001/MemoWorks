@@ -1645,12 +1645,18 @@ h6[id],
 }
 .settings__info input,
 .settings__info textarea,
-.settings__info select,
+.settings__info select {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: normal;
+}
 .settings__info button,
 .settings__info .button,
 .settings__info .btn {
-  width: 100%;
-  max-width: 100%;
+  width: 20rem;
   box-sizing: border-box;
   overflow-wrap: anywhere;
   word-break: break-word;
