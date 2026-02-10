@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import {Task} from './task.service';
-import { LoadingService } from './shared/loading.service';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {PaginatedResponse, Task} from './task.service';
+import {LoadingService} from './shared/loading.service';
 import {finalize} from 'rxjs/operators';
-import { environment } from '../../enviroments/enviroment';
+import {environment} from '../../enviroments/enviroment';
 
 export interface User {
   id: number;
@@ -28,6 +28,18 @@ export class UserService {
   token = localStorage.getItem('token');
 
   constructor(private http: HttpClient, private loadingService: LoadingService) {
+  }
+
+  getPaginatedUsers(page: number, pageSize: number): Observable<PaginatedResponse<User>> {
+    const params = new HttpParams()
+      .set('page', page)
+      .set('pageSize', pageSize);
+    return this.http.get<PaginatedResponse<User>>(`${environment.apiUrl}/api/v1/users`, {
+      headers: {
+        Authorization: `Bearer ${this.token}`
+      },
+      params
+    });
   }
 
   getUsers(): Observable<User[]> {

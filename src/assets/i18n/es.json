@@ -43,10 +43,18 @@
         "LOADINGTEXT": "Cargando...",
         "SEARCHER": "Qué quieres buscar",
         "NORESULTS": "Sin resultados",
-        "TASKNOTFOUND": "No se encontraron tareas que coincidan con tu búsqueda.",
+        "USERNOTFOUND": "No se encontraron tareas que coincidan con tu búsqueda.",
         "STARTTOORGANIZE": "Empecemos a organizarnos",
         "ZEROTASKS": "Aún no tienes tareas. Crea la primera para empezar.",
         "CREATEFIRSTTASK": "Crear primera tarea",
+        "NEXTBUTTON": "Anterior",
+        "BACKBUTTON": "Siguiente"
+      },
+      "USERS": {
+        "LOADINGTEXT": "Cargando...",
+        "SEARCHER": "Qué usuario quieres buscar",
+        "NORESULTS": "Sin resultados",
+        "TASKNOTFOUND": "No se encontraron usuarios que coincidan con tu búsqueda.",
         "NEXTBUTTON": "Anterior",
         "BACKBUTTON": "Siguiente"
       }

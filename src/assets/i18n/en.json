@@ -43,12 +43,18 @@
         "LOADINGTEXT": "Loading...",
         "SEARCHER": "What do you want to search",
         "NORESULTS": "No results",
-        "TASKNOTFOUND": "No tasks found matching your search.",
+        "USERNOTFOUND": "No tasks found matching your search.",
         "STARTTOORGANIZE": "Let's get organized",
         "ZEROTASKS": "You have no tasks yet. Create the first one to get started.",
         "CREATEFIRSTTASK": "Create first task",
         "NEXTBUTTON": "Previous",
         "BACKBUTTON": "Next"
+      },
+      "USERS": {
+        "LOADINGTEXT": "Loading...",
+        "SEARCHER": "What user do you want to search",
+        "NORESULTS": "No results",
+        "USERNOTFOUND": "No users found matching your search."
       }
     }
   },
