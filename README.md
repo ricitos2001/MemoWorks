@@ -102,7 +102,7 @@ flowchart LR
   Service[Servicio / Store]
   Other[Otros componentes]
   User --> Template --> Component --> Service --> Other
-  Component -->|@HostListener| Document[(document/window)]
+  Component -->|HostListener| Document[(document/window)]
   Document --> Component
   Component -->|Renderer2 . listen| Document
   Service -->|BehaviorSubject| Other
