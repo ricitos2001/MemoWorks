@@ -3,6 +3,7 @@
 MemoWorks es una aplicación diseñada para ayudar a los usuarios a organizar y gestionar sus notas y tareas de manera eficiente. Con una interfaz intuitiva y funcionalidades avanzadas, MemoWorks facilita la creación, edición y seguimiento de notas y listas de tareas.
 
 ## Documentacion
+
 ### Características Principales
 
 - **Gestión de Notas**: Crear, editar y eliminar notas fácilmente.
@@ -18,6 +19,7 @@ MemoWorks es una aplicación diseñada para ayudar a los usuarios a organizar y 
 - **Sistema de idiomas**: Soporte para múltiples idiomas, incluyendo español e inglés.
 
 ### Tecnologías Utilizadas
+
 - **Frontend**: Angular para una experiencia de usuario dinámica y responsiva.
 - **Backend**: Spring Boot para una gestión robusta de datos y lógica de negocio.
 - **Base de Datos**: MySQL para almacenamiento seguro y eficiente de datos.
@@ -26,6 +28,7 @@ MemoWorks es una aplicación diseñada para ayudar a los usuarios a organizar y 
 - **Diseño UI/UX**: Figma para prototipado y diseño de interfaces.
 
 ### Instalación y Configuración
+
 1. Clona el repositorio desde GitHub:
     ```bash
     git clone <REPO_URL>
@@ -44,7 +47,9 @@ MemoWorks es una aplicación diseñada para ayudar a los usuarios a organizar y 
 9. Abre tu navegador y accede a la URL proporcionada por render para utilizar la aplicación.
 
 ## Contribuciones
+
 Las contribuciones son bienvenidas. Si deseas contribuir al proyecto, por favor sigue estos pasos
+
 1. Haz un fork del repositorio.
 2. Crea una nueva rama para tu característica o corrección de errores.
 3. Realiza tus cambios y haz commit de los mismos.
@@ -53,9 +58,11 @@ Las contribuciones son bienvenidas. Si deseas contribuir al proyecto, por favor 
 6. ¡Gracias por contribuir a MemoWorks!
 
 ## Licencia
+
 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
 
 ## Contacto
+
 Para cualquier consulta o soporte, por favor contacta a [cuchsou815@g.educaand.es] o a [cesar2001ricitos@gmail.com]
 ¡Gracias por usar MemoWorks!
 
@@ -79,6 +86,7 @@ Control de eventos (preventDefault y stopPropagation): en acciones de teclado qu
 Comunicación entre componentes: usamos servicios singleton (por ejemplo `AuthModalService`, `ThemeService`) con Subjects/Signals/BehaviorSubjects para comunicar acciones entre componentes no relacionados jerárquicamente. Esto desacopla la UI de detalles de implementación del DOM y facilita testing.
 
 Buenas prácticas aplicadas:
+
 - Evitar listeners dispersos y usar `@HostListener` o `Renderer2.listen` con limpieza en `ngOnDestroy()`.
 - Evitar `document.createElement` y manipulaciones directas del DOM desde templates; usar `Renderer2` o `ViewChild`.
 - Gestionar foco y atributos ARIA (aria-hidden, aria-expanded, aria-controls, role) en componentes interactivos.
@@ -89,27 +97,26 @@ Diagrama de flujo de eventos (Mermaid)
 ```mermaid
 flowchart LR
   User[Usuario]
-  Template[Template (bindings)]
-  Component[Componente (TS)]
+  Template[Template bindings]
+  Component[Componente TS]
   Service[Servicio / Store]
   Other[Otros componentes]
-
   User --> Template --> Component --> Service --> Other
   Component -->|@HostListener| Document[(document/window)]
   Document --> Component
-  Component -->|Renderer2.listen| Document
+  Component -->|Renderer2 . listen| Document
   Service -->|BehaviorSubject| Other
 ```
 
 Tabla de compatibilidad (resumen por evento / API)
 
-| Evento / API | Chrome | Firefox | Safari | Edge | Notas / Fallback |
-|---|---:|---:|---:|---:|---|
-| click | ✅ | ✅ | ✅ | ✅ | Nativo, no requiere polyfill |
-| keydown (Escape/Arrows/Enter/Space) | ✅ | ✅ | ✅ | ✅ | Usado para accesibilidad; usar preventDefault cuando corresponda |
-| focusin / focusout | ✅ | ✅ | ✅ | ✅ | Recomendado frente a focus/blur por propagación |
-| matchMedia('(prefers-color-scheme)') | ✅ (76+) | ✅ (67+) | ✅ (12.1+) | ✅ (79+) | Escuchar cambios con addEventListener('change') o addListener para compatibilidad incremental |
-| document / window listeners (HostListener) | ✅ | ✅ | ✅ | ✅ | Requiere comprobaciones SSR (typeof window !== 'undefined') si se usa en Universal |
+| Evento / API                               |  Chrome | Firefox |    Safari |    Edge | Notas / Fallback                                                                              |
+|--------------------------------------------|--------:|--------:|----------:|--------:|-----------------------------------------------------------------------------------------------|
+| click                                      |       ✅ |       ✅ |         ✅ |       ✅ | Nativo, no requiere polyfill                                                                  |
+| keydown (Escape/Arrows/Enter/Space)        |       ✅ |       ✅ |         ✅ |       ✅ | Usado para accesibilidad; usar preventDefault cuando corresponda                              |
+| focusin / focusout                         |       ✅ |       ✅ |         ✅ |       ✅ | Recomendado frente a focus/blur por propagación                                               |
+| matchMedia('(prefers-color-scheme)')       | ✅ (76+) | ✅ (67+) | ✅ (12.1+) | ✅ (79+) | Escuchar cambios con addEventListener('change') o addListener para compatibilidad incremental |
+| document / window listeners (HostListener) |       ✅ |       ✅ |         ✅ |       ✅ | Requiere comprobaciones SSR (typeof window !== 'undefined') si se usa en Universal            |
 
 Cómo probar (resumen rápido)
 
@@ -133,5 +140,6 @@ Se añadió un script que inyecta automáticamente enlaces de `preload` y `modul
 - El script se encuentra en `scripts/inject-preload.js` y añade `<link rel="modulepreload">` para los bundles JS y `<link rel="preload" as="style">` + `<link rel="stylesheet">` para los CSS generados.
 
 Notas:
+
 - Revisa `dist/MemoWorks/index.html` después de la build para confirmar los enlaces inyectados.
 - Es una mejora automática sencilla; para un ajuste fino (preload selectivo de chunks críticos) revisa el contenido de `dist/` y adapta `scripts/inject-preload.js` según tus prioridades.
