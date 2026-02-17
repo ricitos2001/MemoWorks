@@ -1,5 +1,5 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component, OnInit, signal} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
 import {HeaderComponent} from './components/layout/header/header.component';
 import {FooterComponent} from './components/layout/footer/footer.component';
 import {MainComponent} from './components/layout/main/main.component';
@@ -8,6 +8,7 @@ import {AuthInterceptor} from './interceptors/auth-interceptor';
 import {LoadingInterceptor} from './interceptors/loading.interceptor-interceptor';
 import {ToastComponent} from './components/shared/toast/toast.component';
 import {SpinnerComponent} from './components/shared/spinner/spinner.component';
+import Lenis from 'lenis';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +16,22 @@ import {SpinnerComponent} from './components/shared/spinner/spinner.component';
   templateUrl: './app.html',
   styleUrl: '../styles/styles.css',
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
   ]
 })
 
-export class App {
+export class App implements OnInit {
   protected readonly title = signal('MemoWorks');
+
+  ngOnInit() {
+    const lenis = new Lenis();
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  }
 }
