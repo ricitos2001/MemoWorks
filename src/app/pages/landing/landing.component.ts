@@ -35,6 +35,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   text2 = '';
   subtitle3 = '';
   text3 = '';
+
   // Animations
   @ViewChild('animatedElement') animatedElement!: ElementRef<HTMLElement>;
 
