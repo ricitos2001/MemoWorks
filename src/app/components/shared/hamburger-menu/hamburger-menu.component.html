@@ -6,9 +6,12 @@
 <nav [attr.id]="menuId" [class.open]="isOpen" class="menu">
   <ul class="header__nav">
     <ng-container *ngIf="!loggedIn">
-      <li><a class="header__link" href="#inicio">{{ home | translate }}</a></li>
-      <li><a class="header__link" href="#queOfrecemos">{{ whatOffer | translate }}</a></li>
-      <li><a class="header__link" href="#contacto">{{ contact | translate }}</a></li>
+      <li><a (click)="navigateToSection($event, 'inicio')" class="header__link"
+             href="#inicio">{{ home | translate }}</a></li>
+      <li><a (click)="navigateToSection($event, 'queOfrecemos')" class="header__link"
+             href="#queOfrecemos">{{ whatOffer | translate }}</a></li>
+      <li><a (click)="navigateToSection($event, 'contacto')" class="header__link"
+             href="#contacto">{{ contact | translate }}</a></li>
       <li>
         <app-button (click)="openAuthModal('register')" class="header__link">{{ getstarted | translate }}</app-button>
       </li>
@@ -18,19 +21,21 @@
       <li><a class="header__link" href="/calendar">{{ calendar | translate }}</a></li>
       <li><a class="header__link" href="/settings">{{ configuration | translate }}</a></li>
       <li class="flex-center">
-        <button (click)="toggleNotifications()" [attr.aria-controls]="notificationsId"
-                [attr.aria-expanded]="showNotifications" aria-label="Abrir bandeja de notificaciones"
-                class="theme-btn spacing-button"><img alt="Notificaciones" class="bell-icon"
-                                                            src="assets/img/Bell.svg"><span *ngIf="hasNew"
-                                                                                       class="badge"></span></button>
+        <app-button (click)="toggleNotifications()" [attr.aria-controls]="notificationsId"
+                    [attr.aria-expanded]="showNotifications" aria-label="Abrir bandeja de notificaciones"
+                    class="theme-btn spacing-button">
+          <img alt="Notificaciones" class="bell-icon" src="assets/img/Bell.svg">
+          <span *ngIf="hasNew" class="badge"></span>
+        </app-button>
         <app-button (click)="logout()" class="header__logout">Cerrar sesión</app-button>
       </li>
     </ng-container>
   </ul>
 </nav>
 
-<aside #notificationsSidebar (keydown.escape)="closeNotifications()" *ngIf="showNotifications" [attr.id]="notificationsId"
-       aria-label="Bandeja de notificaciones" class="notifications-tray" role="search" tabindex="-1">
+<aside #notificationsSidebar (keydown.escape)="closeNotifications()" *ngIf="showNotifications"
+       [attr.id]="notificationsId" aria-label="Bandeja de notificaciones" class="notifications-tray" role="search"
+       tabindex="-1">
   <article class="notifications-tray__header">
     <h4 class="notifications-tray__title">Notificaciones</h4>
     <button (click)="closeNotifications()" aria-label="Cerrar notificaciones" class="notifications-close">✕</button>

@@ -130,17 +130,6 @@
   --transition-slow: 500ms ease-in-out;
   --tray-offset-x: 4rem;
   --tray-gap: 0.5rem;
-}
-
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-:root {
   --background: var(--color-primary-1);
   --letters: var(--color-primary-1);
   --components: var(--color-secondary-3);
@@ -156,6 +145,7 @@
   --label-letters: var(--color-secondary-3);
   --dark-mode-button: var(--color-secondary-4);
   --searcher: var(--color-secondary-3);
+  --scroll-offset: calc(var(--spacing-2) * 2 + 3rem);
 }
 
 .theme-dark {
@@ -174,6 +164,14 @@
   --label-letters: var(--neutral-700);
   --dark-mode-button: var(--neutral-600);
   --searcher: var(--color-primary-1);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -1438,13 +1436,6 @@ button.active {
 }
 
 /* ============================================================
-   Variables globales
-   ============================================================ */
-:root {
-  --scroll-offset: calc(var(--spacing-2) * 2 + 3rem);
-}
-
-/* ============================================================
    Scroll para anclas internas
    ============================================================ */
 h1[id],
@@ -1513,6 +1504,9 @@ h6[id],
 }
 .landing__section h1, .landing__section h2, .landing__section h3 {
   font-weight: var(--font-weight-bold);
+}
+.landing__section {
+  scroll-margin: 9rem;
 }
 
 /* ============================================================
