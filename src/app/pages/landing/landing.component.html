@@ -1,48 +1,50 @@
-<section class="grid-center landing__section" id="inicio">
-  <h1>{{title | translate}}</h1>
-  <app-button (click)="openAuthModal('register')" class="landing__space">{{ getStarted | translate }}</app-button>
-  <app-auth-modal #authModal (authSuccess)="onAuthSuccess()"></app-auth-modal>
-  <article class="flex-center grid">
-    <img src="assets/img/Package.svg" alt="Paquetes" class="landing__icon" loading="lazy" decoding="async">
-    <img src="assets/img/Upload%20cloud.svg" alt="Subir archivos" class="landing__icon" loading="lazy" decoding="async">
-    <img src="assets/img/Settings.svg" alt="Ajustes" class="landing__icon" loading="lazy" decoding="async">
-    <img src="assets/img/Zap.svg" alt="Acciones rápidas" class="landing__icon" loading="lazy" decoding="async">
-    <img src="assets/img/Users.svg" alt="Usuarios" class="landing__icon" loading="lazy" decoding="async">
-  </article>
-</section>
-<section class="grid-center landing__section" id="queOfrecemos">
-  <h2>{{whatOffers | translate}}</h2>
-  <article class="flex-center container landing__article">
-    <article>
-      <h3>{{subtitle1 | translate}}</h3>
-      <p>{{text1 | translate}}</p>
+<section #animatedElement>
+  <section class="grid-center landing__section" id="inicio">
+    <h1>{{title | translate}}</h1>
+    <app-button (click)="openAuthModal('register')" class="landing__space">{{ getStarted | translate }}</app-button>
+    <app-auth-modal #authModal (authSuccess)="onAuthSuccess()"></app-auth-modal>
+    <article class="flex-center grid">
+      <img alt="Paquetes" class="landing__icon" decoding="async" loading="lazy" src="assets/img/Package.svg">
+      <img alt="Subir archivos" class="landing__icon" decoding="async" loading="lazy" src="assets/img/Upload%20cloud.svg">
+      <img alt="Ajustes" class="landing__icon" decoding="async" loading="lazy" src="assets/img/Settings.svg">
+      <img alt="Acciones rápidas" class="landing__icon" decoding="async" loading="lazy" src="assets/img/Zap.svg">
+      <img alt="Usuarios" class="landing__icon" decoding="async" loading="lazy" src="assets/img/Users.svg">
     </article>
-    <picture>
-      <source type="image/avif" [attr.srcset]="!darkMode ? 'assets/img/Group_150-400.avif 400w, assets/img/Group_150-800.avif 800w, assets/img/Group_150-1200.avif 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
-      <source type="image/webp" [attr.srcset]="!darkMode ? 'assets/img/Group_150-400.webp 400w, assets/img/Group_150-800.webp 800w, assets/img/Group_150-1200.webp 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
-      <img [src]="darkMode ? 'assets/img/Group_150.png' : 'assets/img/Group_150-1200.webp'" alt="primera imagen decorativa" aria-hidden="true" loading="lazy" class="landing__img" width="0" height="0">
-    </picture>
-  </article>
-  <article class="flex-center container landing__article">
-    <picture>
-      <source type="image/avif" [attr.srcset]="!darkMode ? 'assets/img/Group_151-400.avif 400w, assets/img/Group_151-800.avif 800w, assets/img/Group_151-1200.avif 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
-      <source type="image/webp" [attr.srcset]="!darkMode ? 'assets/img/Group_151-400.webp 400w, assets/img/Group_151-800.webp 800w, assets/img/Group_151-1200.webp 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
-      <img [src]="darkMode ? 'assets/img/Group_151.png' : 'assets/img/Group_151-1200.webp'" alt="segunda imagen decorativa" aria-hidden="true" loading="lazy" class="landing__img" width="0" height="0">
-    </picture>
-    <article>
-      <h3>{{subtitle2 | translate}}</h3>
-      <p>{{text2 | translate}}</p>
+  </section>
+  <section class="grid-center landing__section group" id="queOfrecemos">
+    <h2>{{whatOffers | translate}}</h2>
+    <article class="flex-center container landing__article">
+      <article>
+        <h3>{{subtitle1 | translate}}</h3>
+        <p>{{text1 | translate}}</p>
+      </article>
+      <picture>
+        <source [attr.srcset]="!darkMode ? 'assets/img/Group_150-400.avif 400w, assets/img/Group_150-800.avif 800w, assets/img/Group_150-1200.avif 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px" type="image/avif">
+        <source [attr.srcset]="!darkMode ? 'assets/img/Group_150-400.webp 400w, assets/img/Group_150-800.webp 800w, assets/img/Group_150-1200.webp 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px" type="image/webp">
+        <img [src]="darkMode ? 'assets/img/Group_150.png' : 'assets/img/Group_150-1200.webp'" alt="primera imagen decorativa" aria-hidden="true" class="landing__img" height="0" loading="lazy" width="0">
+      </picture>
     </article>
-  </article>
-  <article class="flex-center container landing__article">
-    <article>
-      <h3>{{subtitle3 | translate}}</h3>
-      <p>{{text3 | translate}}</p>
+    <article class="flex-center container landing__article">
+      <picture>
+        <source [attr.srcset]="!darkMode ? 'assets/img/Group_151-400.avif 400w, assets/img/Group_151-800.avif 800w, assets/img/Group_151-1200.avif 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px" type="image/avif">
+        <source [attr.srcset]="!darkMode ? 'assets/img/Group_151-400.webp 400w, assets/img/Group_151-800.webp 800w, assets/img/Group_151-1200.webp 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px" type="image/webp">
+        <img [src]="darkMode ? 'assets/img/Group_151.png' : 'assets/img/Group_151-1200.webp'" alt="segunda imagen decorativa" aria-hidden="true" class="landing__img" height="0" loading="lazy" width="0">
+      </picture>
+      <article>
+        <h3>{{subtitle2 | translate}}</h3>
+        <p>{{text2 | translate}}</p>
+      </article>
     </article>
-    <picture>
-      <source type="image/avif" [attr.srcset]="!darkMode ? 'assets/img/Clip_path_group-400.avif 400w, assets/img/Clip_path_group-800.avif 800w, assets/img/Clip_path_group-1200.avif 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
-      <source type="image/webp" [attr.srcset]="!darkMode ? 'assets/img/Clip_path_group-400.webp 400w, assets/img/Clip_path_group-800.webp 800w, assets/img/Clip_path_group-1200.webp 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px">
-      <img [src]="darkMode ? 'assets/img/Clip_path_group.png' : 'assets/img/Clip_path_group-1200.webp'" alt="tercera imagen decorativa" aria-hidden="true" loading="lazy" class="landing__img" width="0" height="0">
-    </picture>
-  </article>
+    <article class="flex-center container landing__article">
+      <article>
+        <h3>{{subtitle3 | translate}}</h3>
+        <p>{{text3 | translate}}</p>
+      </article>
+      <picture>
+        <source [attr.srcset]="!darkMode ? 'assets/img/Clip_path_group-400.avif 400w, assets/img/Clip_path_group-800.avif 800w, assets/img/Clip_path_group-1200.avif 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px" type="image/avif">
+        <source [attr.srcset]="!darkMode ? 'assets/img/Clip_path_group-400.webp 400w, assets/img/Clip_path_group-800.webp 800w, assets/img/Clip_path_group-1200.webp 1200w' : null" sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px" type="image/webp">
+        <img [src]="darkMode ? 'assets/img/Clip_path_group.png' : 'assets/img/Clip_path_group-1200.webp'" alt="tercera imagen decorativa" aria-hidden="true" class="landing__img" height="0" loading="lazy" width="0">
+      </picture>
+    </article>
+  </section>
 </section>
