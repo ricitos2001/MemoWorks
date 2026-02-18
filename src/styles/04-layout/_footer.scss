@@ -9,9 +9,7 @@
   justify-content: space-between;
   padding: var(--spacing-8) 0;
   position: sticky;
-  top: 0;
   transition: box-shadow var(--transition-base), transform var(--transition-base);
-  z-index: 10;
   flex-wrap: wrap;
 }
 
