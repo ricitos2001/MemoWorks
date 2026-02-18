@@ -2,7 +2,6 @@
   <section class="grid-center landing__section" id="inicio">
     <h1>{{title | translate}}</h1>
     <app-button (click)="openAuthModal('register')" class="landing__space">{{ getStarted | translate }}</app-button>
-    <app-auth-modal #authModal (authSuccess)="onAuthSuccess()"></app-auth-modal>
     <article class="flex-center grid">
       <img alt="Paquetes" class="landing__icon" decoding="async" loading="lazy" src="assets/img/Package.svg">
       <img alt="Subir archivos" class="landing__icon" decoding="async" loading="lazy" src="assets/img/Upload%20cloud.svg">
@@ -48,3 +47,4 @@
     </article>
   </section>
 </section>
+<app-auth-modal #authModal (authSuccess)="onAuthSuccess()"></app-auth-modal>

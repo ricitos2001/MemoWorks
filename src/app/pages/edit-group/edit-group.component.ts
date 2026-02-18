@@ -4,7 +4,7 @@ import {FormInputComponent} from "../../components/shared/form-input/form-input.
 import {NgForOf, NgIf} from "@angular/common";
 import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {GroupService} from '../../services/group.service';
-import {CommunicationService} from '../../services/shared/communication.service';
+import {CommunicationService} from '../../services/communication.service';
 import {User, UserService} from '../../services/user.service';
 import {Notification, NotificationsService} from '../../services/notifications.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -33,6 +33,8 @@ export class EditGroupComponent implements OnInit {
   adminUserId: number | null = null;
   email = localStorage.getItem('email');
   @Output() submitting = new EventEmitter<boolean>();
+  @Output() cancel = new EventEmitter<void>();
+  @Output() create = new EventEmitter<void>();
 
   constructor(
     private groupService: GroupService,
@@ -87,13 +89,11 @@ export class EditGroupComponent implements OnInit {
       },
     });
   }
+
   removeUser(index: number, event: Event): void {
     event.preventDefault()
     this.users.removeAt(index);
   }
-
-  @Output() cancel = new EventEmitter<void>();
-  @Output() create = new EventEmitter<void>();
 
   getValues(id: string): void {
     this.groupService.getGroup(id).subscribe({

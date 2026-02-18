@@ -1,9 +1,9 @@
 import {Component, DestroyRef, inject} from '@angular/core';
-import {Router, RouterOutlet, NavigationEnd} from '@angular/router';
-import { NgFor } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { filter } from 'rxjs/operators';
+import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
+import {NgFor} from '@angular/common';
+import {TranslateModule} from '@ngx-translate/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-settings',
@@ -20,7 +20,7 @@ export class SettingsComponent {
   tabs: { key: string; route: string }[] = [
     { key: 'USER', route: 'userSettings' },
     { key: 'FAMILIAR_GROUPS', route: 'familiarGroups' },
-    { key: 'ACCESSIBILITY', route: 'accessibility' },
+    //{ key: 'ACCESSIBILITY', route: 'accessibility' },
   ];
 
   // activeTab holds the route (e.g. 'userSettings')
@@ -41,6 +41,12 @@ export class SettingsComponent {
       });
   }
 
+  // Getter that returns the translation key for the current active tab
+  get activeKey(): string {
+    const found = this.tabs.find(t => t.route === this.activeTab);
+    return found ? found.key : 'USER';
+  }
+
   onTabChange(route: string) {
     this.setActiveByKey(route);
     this.router.navigate([`/settings/${route}`]);
@@ -52,12 +58,6 @@ export class SettingsComponent {
     if (found) {
       this.activeTab = found.route;
     }
-  }
-
-  // Getter that returns the translation key for the current active tab
-  get activeKey(): string {
-    const found = this.tabs.find(t => t.route === this.activeTab);
-    return found ? found.key : 'USER';
   }
 
 }

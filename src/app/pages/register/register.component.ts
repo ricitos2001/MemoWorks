@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Optional, Host } from '@angular/core';
+import {Component, EventEmitter, Host, Optional, Output} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {ButtonComponent} from '../../components/shared/button/button.component';
@@ -9,9 +9,9 @@ import {passwordMatch} from '../../validators/password-match.validator';
 import {passwordStrength} from '../../validators/password-strength.validator';
 import {phoneNumberValidation} from '../../validators/phone-number.validator';
 import {AsyncValidatorsService} from '../../services/async-validators.service';
-import { AuthModalComponent } from '../../components/shared/auth-modal/auth-modal.component';
-import { ToastService } from '../../services/shared/toast.service';
-import {NotificationsService, Notification} from '../../services/notifications.service';
+import {AuthModalComponent} from '../../components/shared/auth-modal/auth-modal.component';
+import {ToastService} from '../../services/toast.service';
+import {Notification, NotificationsService} from '../../services/notifications.service';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({

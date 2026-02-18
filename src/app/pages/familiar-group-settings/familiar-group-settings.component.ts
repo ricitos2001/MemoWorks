@@ -1,16 +1,26 @@
-import {Component, DestroyRef, EventEmitter, inject, OnInit, Output, ViewChild, Renderer2, ChangeDetectorRef} from '@angular/core';
-import {ButtonComponent}from '../../components/shared/button/button.component';
+import {
+  ChangeDetectorRef,
+  Component,
+  DestroyRef,
+  EventEmitter,
+  inject,
+  OnInit,
+  Output,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
+import {ButtonComponent} from '../../components/shared/button/button.component';
 import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
 import {Router} from '@angular/router';
-import {CommunicationService} from '../../services/shared/communication.service';
+import {CommunicationService} from '../../services/communication.service';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {GroupsStore} from '../../stores/groups.store';
-import {GroupService, Group} from '../../services/group.service';
+import {Group, GroupService} from '../../services/group.service';
 import {ConfirmModalComponent} from '../../components/shared/confirm-modal/confirm-modal.component';
-import { AvatarService } from '../../services/shared/avatar.service';
-import { firstValueFrom } from 'rxjs';
-import { AuthService } from '../../services/auth.service';
-import { filter } from 'rxjs/operators';
+import {AvatarService} from '../../services/avatar.service';
+import {firstValueFrom} from 'rxjs';
+import {AuthService} from '../../services/auth.service';
+import {filter} from 'rxjs/operators';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -28,23 +38,9 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
   styleUrl: '../../../styles/styles.css',
 })
 export class FamiliarGroupSettingsComponent implements OnInit{
-  constructor(private groupService: GroupService, private avatarService: AvatarService, private renderer: Renderer2, private cd: ChangeDetectorRef, private translate: TranslateService) {
-  }
   @Output() createFromEmpty = new EventEmitter<void>();
-  private groupsStore = inject(GroupsStore);
-  private destroyRef = inject(DestroyRef);
-  private router = inject(Router);
-  private comm = inject(CommunicationService);
-  private auth = inject(AuthService);
   loading = false
-
-
-  // leer email dinámicamente para que el componente reaccione a login/logout sin recargar
-  get email(): string | null { return localStorage.getItem('email'); }
-  groups$ = this.groupsStore.groups$;
   @ViewChild(ConfirmModalComponent) confirmModal!: ConfirmModalComponent;
-  private groupToDelete: any = null;
-
   groupName = '';
   groupDescription = '';
   editGroupImageButton = '';
@@ -57,6 +53,20 @@ export class FamiliarGroupSettingsComponent implements OnInit{
   createGroupText1 = '';
   createGroupText2 = '';
   createGroupText3 = '';
+  private groupsStore = inject(GroupsStore);
+  groups$ = this.groupsStore.groups$;
+  private destroyRef = inject(DestroyRef);
+  private router = inject(Router);
+  private comm = inject(CommunicationService);
+  private auth = inject(AuthService);
+  private groupToDelete: any = null;
+  private _loadingGroups = new Set<number | string>();
+
+  constructor(private groupService: GroupService, private avatarService: AvatarService, private renderer: Renderer2, private cd: ChangeDetectorRef, private translate: TranslateService) {
+  }
+
+  // leer email dinámicamente para que el componente reaccione a login/logout sin recargar
+  get email(): string | null { return localStorage.getItem('email'); }
 
   ngOnInit(): void {
     // Si el usuario se loguea en runtime, refrescar grupos (y por tanto las imágenes protegidas)
@@ -167,62 +177,12 @@ export class FamiliarGroupSettingsComponent implements OnInit{
     });
   }
 
-  private proceedDeleteGroup() {
-    const group = this.groupToDelete;
-    if (!group?.id) return;
-    this.loading = true;
-    this.groupService.removeGroup(group.id)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: () => {
-          this.groupsStore.remove(group.id);
-          this.router.navigate(['/settings/familiarGroups']);
-          this.loading = false;
-        },
-        error: (err) => {
-          console.error('Error eliminando grupo:', err);
-          this.loading = false;
-          alert('No se pudo eliminar el grupo. Intenta de nuevo.');
-        }
-      });
-  }
-
   editGroup(groupId: string) {
     this.router.navigate(['/editGroup', groupId]);
   }
 
   public editGroupImage(group: Group): void {
     void this.editGroupImageInternal(group);
-  }
-
-  private async editGroupImageInternal(group: Group): Promise<void> {
-     if (!group?.id) return;
-    const el = document.getElementById(`groupFileInput_${group.id}`) as HTMLInputElement | null;
-    if (el) {
-      el.value = '';
-      el.click();
-      return;
-    }
-
-     const input = this.renderer.createElement('input');
-     this.renderer.setAttribute(input, 'type', 'file');
-     this.renderer.setAttribute(input, 'accept', 'image/*');
-    const unregister = this.renderer.listen(input, 'change', (event: Event) => {
-      this.handleGroupFileChange(event, group, unregister);
-    });
-    if ((input as any).click) (input as any).click();
-   }
-
-  private async handleGroupFileChange(
-    event: Event,
-    group: Group,
-    unregister: () => void
-  ): Promise<void> {
-    try {
-      await this.onGroupFileSelected(event, group);
-    } finally {
-      unregister();
-    }
   }
 
   async onGroupFileSelected(event: Event, group: Group): Promise<void> {
@@ -319,7 +279,88 @@ export class FamiliarGroupSettingsComponent implements OnInit{
     return defaultImg;
   }
 
-  private _loadingGroups = new Set<number | string>();
+  onGroupImgError(event: Event, group: Group | any): void {
+    try {
+      const imgEl = event.target as HTMLImageElement;
+      if (!imgEl) return;
+      const src = imgEl.src || '';
+      console.warn('[FamiliarGroupSettings] imagen fallo al cargar para group=', group?.id ?? group?.name ?? '<unknown>', ' src=', src);
+
+      // If src is not encoded, try re-encoding it once
+      try {
+        const decoded = decodeURI(src);
+        const reencoded = encodeURI(decoded);
+        if (reencoded !== src) {
+          console.info('[FamiliarGroupSettings] reintentando con URL codificada:', reencoded);
+          imgEl.src = reencoded;
+          return;
+        }
+      } catch (e) {
+        // ignore decode errors
+      }
+
+      // Si falla, usar fallback por defecto
+      imgEl.src = 'assets/img/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector-removebg-preview.png';
+    } catch (err) {
+      console.error('[FamiliarGroupSettings] onGroupImgError error', err);
+    }
+  }
+
+  viewMembers(groupId: string) {
+    this.router.navigate(['/settings/familiarGroups', groupId], {
+      state: { fromCalendar: false }
+    });
+  }
+
+  private proceedDeleteGroup() {
+    const group = this.groupToDelete;
+    if (!group?.id) return;
+    this.loading = true;
+    this.groupService.removeGroup(group.id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.groupsStore.remove(group.id);
+          this.router.navigate(['/settings/familiarGroups']);
+          this.loading = false;
+        },
+        error: (err) => {
+          console.error('Error eliminando grupo:', err);
+          this.loading = false;
+          alert('No se pudo eliminar el grupo. Intenta de nuevo.');
+        }
+      });
+  }
+
+  private async editGroupImageInternal(group: Group): Promise<void> {
+     if (!group?.id) return;
+    const el = document.getElementById(`groupFileInput_${group.id}`) as HTMLInputElement | null;
+    if (el) {
+      el.value = '';
+      el.click();
+      return;
+    }
+
+     const input = this.renderer.createElement('input');
+     this.renderer.setAttribute(input, 'type', 'file');
+     this.renderer.setAttribute(input, 'accept', 'image/*');
+    const unregister = this.renderer.listen(input, 'change', (event: Event) => {
+      this.handleGroupFileChange(event, group, unregister);
+    });
+    if ((input as any).click) (input as any).click();
+   }
+
+  private async handleGroupFileChange(
+    event: Event,
+    group: Group,
+    unregister: () => void
+  ): Promise<void> {
+    try {
+      await this.onGroupFileSelected(event, group);
+    } finally {
+      unregister();
+    }
+  }
 
   private async ensureGroupImageLoaded(group: Group | any): Promise<void> {
     if (!group?.id) return;
@@ -361,33 +402,6 @@ export class FamiliarGroupSettingsComponent implements OnInit{
     }
   }
 
-  onGroupImgError(event: Event, group: Group | any): void {
-    try {
-      const imgEl = event.target as HTMLImageElement;
-      if (!imgEl) return;
-      const src = imgEl.src || '';
-      console.warn('[FamiliarGroupSettings] imagen fallo al cargar para group=', group?.id ?? group?.name ?? '<unknown>', ' src=', src);
-
-      // If src is not encoded, try re-encoding it once
-      try {
-        const decoded = decodeURI(src);
-        const reencoded = encodeURI(decoded);
-        if (reencoded !== src) {
-          console.info('[FamiliarGroupSettings] reintentando con URL codificada:', reencoded);
-          imgEl.src = reencoded;
-          return;
-        }
-      } catch (e) {
-        // ignore decode errors
-      }
-
-      // Si falla, usar fallback por defecto
-      imgEl.src = 'assets/img/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector-removebg-preview.png';
-    } catch (err) {
-      console.error('[FamiliarGroupSettings] onGroupImgError error', err);
-    }
-  }
-
   private setTranslations() {
     this.groupName = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.GROUPNAME');
     this.groupDescription = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.GROUPDESCRIPTION');
@@ -401,11 +415,5 @@ export class FamiliarGroupSettingsComponent implements OnInit{
     this.createGroupText1 = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.CREATEGROUPTEXT1');
     this.createGroupText2 = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.CREATEGROUPTEXT2');
     this.createGroupText3 = this.translate.instant('PAGES.SETTINGS.FAMILIARGROUPSETTINGS.CREATEGROUPTEXT3');
-  }
-
-  viewMembers(groupId: string) {
-    this.router.navigate(['/settings/familiarGroups', groupId], {
-      state: { fromCalendar: false }
-    });
   }
 }

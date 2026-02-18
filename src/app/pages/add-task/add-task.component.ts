@@ -1,18 +1,18 @@
 import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
-import { map } from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
-import { ButtonComponent } from '../../components/shared/button/button.component';
-import { FormInputComponent } from '../../components/shared/form-input/form-input.component';
+import {ButtonComponent} from '../../components/shared/button/button.component';
+import {FormInputComponent} from '../../components/shared/form-input/form-input.component';
 
-import { TaskService } from '../../services/task.service';
-import { CommunicationService } from '../../services/shared/communication.service';
-import { UserService } from '../../services/user.service';
-import { TasksSignalStore } from '../../stores/tasks.signal.store';
-import { NotificationsService, Notification } from '../../services/notifications.service';
+import {TaskService} from '../../services/task.service';
+import {CommunicationService} from '../../services/communication.service';
+import {UserService} from '../../services/user.service';
+import {TasksSignalStore} from '../../stores/tasks.signal.store';
+import {Notification, NotificationsService} from '../../services/notifications.service';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import { GroupsStore } from '../../stores/groups.store';
+import {GroupsStore} from '../../stores/groups.store';
 
 @Component({
   selector: 'app-add-task',
@@ -78,43 +78,6 @@ export class AddTaskComponent implements OnInit {
   ngOnInit(): void {
     this.initCurrentUser();
     this.initGroupContext();
-  }
-
-  private initCurrentUser(): void {
-    const email = localStorage.getItem('email');
-    if (!email) return;
-    this.userService.getUser(email).subscribe(user => {
-      if (!user?.id) return;
-      const control = this.taskForm.get('assigmentFor.id');
-      const currentValue = control?.value;
-      const isDirty = control?.dirty;
-      if (currentValue == null && !isDirty) {
-        control?.setValue(user.id);
-      }
-    });
-  }
-
-  private initGroupContext(): void {
-    this.groupsStore.groups$
-      .pipe(map(groups => groups[0] || null))
-      .subscribe(group => {
-        if (!group) {
-          this.groupUsers = [];
-          this.currentGroupId = null;
-          return;
-        }
-        this.groupUsers = group.users ?? [];
-        this.currentGroupId = group.id ?? null;
-        const email = localStorage.getItem('email');
-        if (group.adminUser?.email !== email) {
-          const currentUser = this.groupUsers.find(u => u.email === email);
-          if (currentUser) {
-            this.taskForm.patchValue({
-              assigmentFor: { id: currentUser.id }
-            });
-          }
-        }
-      });
   }
 
   addLabel(value: string, event: Event): void {
@@ -191,5 +154,42 @@ export class AddTaskComponent implements OnInit {
         this.submitting.emit(false);
       }
     });
+  }
+
+  private initCurrentUser(): void {
+    const email = localStorage.getItem('email');
+    if (!email) return;
+    this.userService.getUser(email).subscribe(user => {
+      if (!user?.id) return;
+      const control = this.taskForm.get('assigmentFor.id');
+      const currentValue = control?.value;
+      const isDirty = control?.dirty;
+      if (currentValue == null && !isDirty) {
+        control?.setValue(user.id);
+      }
+    });
+  }
+
+  private initGroupContext(): void {
+    this.groupsStore.groups$
+      .pipe(map(groups => groups[0] || null))
+      .subscribe(group => {
+        if (!group) {
+          this.groupUsers = [];
+          this.currentGroupId = null;
+          return;
+        }
+        this.groupUsers = group.users ?? [];
+        this.currentGroupId = group.id ?? null;
+        const email = localStorage.getItem('email');
+        if (group.adminUser?.email !== email) {
+          const currentUser = this.groupUsers.find(u => u.email === email);
+          if (currentUser) {
+            this.taskForm.patchValue({
+              assigmentFor: { id: currentUser.id }
+            });
+          }
+        }
+      });
   }
 }

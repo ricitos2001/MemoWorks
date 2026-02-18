@@ -1,0 +1,19 @@
+@use "../00-settings/css-variables" as *;
+@use "../01-tools/mixins" as *;
+
+/* Page transition styles */
+.page-container {
+  position: relative;
+  overflow: hidden;
+  min-height: 1px; /* garantizar que exista para animaciones */
+}
+
+#page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 850; /* por debajo de modales (modal z-index 1000) */
+  pointer-events: none;
+  background: rgba(0,0,0,0);
+  transition: background 300ms ease;
+  display: none;
+}

@@ -1,19 +1,19 @@
 <footer class="footer flex">
   <section class="grid-center">
-    <a href="/landing" class="footer__logo"><img [src]="darkMode ? 'assets/img/logo_dark.svg' : 'assets/img/logo.svg'" alt="logo del footer" class="footer__logo" width="0" height="0"></a>
+    <a class="footer__logo" routerLink="/landing"><img [src]="darkMode ? 'assets/img/logo_dark.svg' : 'assets/img/logo.svg'" alt="logo del footer" class="footer__logo" height="0" width="0"></a>
     <article class="flex-center footer__brand">
       <h3 class="footer__texto">MemoWorks</h3>
-      <img src="assets/img/copyright.svg" alt="copyright" class="footer__copyright">
+      <img alt="copyright" class="footer__copyright" src="assets/img/copyright.svg">
     </article>
   </section>
   <article>
     <h3 class="footer__texto">{{legalInformation | translate}}</h3>
     <ul>
       <li>
-        <a href="/terms">{{terms | translate}}</a>
+        <a routerLink="/terms">{{terms | translate}}</a>
       </li>
       <li>
-        <a href="/styles">{{styles | translate}}</a>
+        <a routerLink="/styles">{{styles | translate}}</a>
       </li>
       <li>
       </li>
@@ -23,25 +23,25 @@
     <h3 class="footer__texto">{{help | translate}}</h3>
     <ul>
       <li>
-        <a href="/warning">{{warning | translate}}</a>
+        <a routerLink="/warning">{{warning | translate}}</a>
       </li>
       <li>
-        <a href="/privacy">{{privacy | translate}}</a>
+        <a routerLink="/privacy">{{privacy | translate}}</a>
       </li>
       <li>
-        <a href="/cookies">{{cookies | translate}}</a>
+        <a routerLink="/cookies">{{cookies | translate}}</a>
       </li>
     </ul>
   </article>
   <article>
     <h3 class="footer__texto" id="contacto">{{contact | translate}}</h3>
     <nav class="flex">
-      <a href="#"><img src="assets/img/discord.svg" alt="logo de discord" class="footer__icon"></a>
-      <a href="#"><img src="assets/img/instagram.svg" alt="logo de instagram" class="footer__icon"></a>
-      <a href="#"><img src="assets/img/twitter.svg" alt="logo de twitter" class="footer__icon"></a>
-      <a href="#"><img src="assets/img/facebook.svg" alt="logo de facebook" class="footer__icon"></a>
-      <a href="#"><img src="assets/img/reddit.svg" alt="logo de reddit" class="footer__icon"></a>
-      <a href="https://ko-fi.com/ricitos2001/tip"><img src="assets/img/ko-fi.svg" alt="logo de ko-fi" class="footer__icon"></a>
+      <a href="#"><img alt="logo de discord" class="footer__icon" src="assets/img/discord.svg"></a>
+      <a href="#"><img alt="logo de instagram" class="footer__icon" src="assets/img/instagram.svg"></a>
+      <a href="#"><img alt="logo de twitter" class="footer__icon" src="assets/img/twitter.svg"></a>
+      <a href="#"><img alt="logo de facebook" class="footer__icon" src="assets/img/facebook.svg"></a>
+      <a href="#"><img alt="logo de reddit" class="footer__icon" src="assets/img/reddit.svg"></a>
+      <a href="https://ko-fi.com/ricitos2001/tip"><img alt="logo de ko-fi" class="footer__icon" src="assets/img/ko-fi.svg"></a>
     </nav>
   </article>
 </footer>

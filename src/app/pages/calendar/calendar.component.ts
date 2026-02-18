@@ -1,25 +1,26 @@
 import {
   Component,
   DestroyRef,
+  effect,
   ElementRef,
   inject,
+  OnDestroy,
   OnInit,
   Renderer2,
-  ViewChild,
-  effect, OnDestroy
+  ViewChild
 } from '@angular/core';
 import {OptionButtonComponent} from '../../components/shared/option-button/option-button.component';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {CommunicationService} from '../../services/shared/communication.service';
+import {CommunicationService} from '../../services/communication.service';
 import {TaskFormModalComponent} from '../../components/shared/task-form-modal/task-form-modal.component';
-import {ToastService} from '../../services/shared/toast.service';
+import {ToastService} from '../../services/toast.service';
 import {Router} from '@angular/router';
-import { CalendarOptions } from '@fullcalendar/core';
+import {CalendarOptions} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import {FullCalendarModule, FullCalendarComponent} from '@fullcalendar/angular';
+import {FullCalendarComponent, FullCalendarModule} from '@fullcalendar/angular';
 import {TasksSignalStore} from '../../stores/tasks.signal.store';
-import { LanguageService } from '../../services/language.service';
+import {LanguageService} from '../../services/language.service';
 
 @Component({
   selector: 'app-calendar',
@@ -34,14 +35,14 @@ import { LanguageService } from '../../services/language.service';
 })
 export class CalendarComponent implements OnInit, OnDestroy{
   @ViewChild('buttons', { static: false }) buttons!: ElementRef;
+  status = false;
+  email = localStorage.getItem('email');
   @ViewChild(TaskFormModalComponent)
   private taskFormModal!: TaskFormModalComponent;
   @ViewChild(FullCalendarComponent) // reference to the calendar component to change options at runtime
   private fullCalendarComp?: FullCalendarComponent;
   // Almacena funciones de eliminación de listeners para limpiar al desmontar elementos dinámicos
   private dynamicListeners: (() => void)[] = [];
-
-  status = false;
   private destroyRef = inject(DestroyRef);
   private renderer = inject(Renderer2);
   private comm = inject(CommunicationService);
@@ -49,11 +50,6 @@ export class CalendarComponent implements OnInit, OnDestroy{
   private router = inject(Router);
   private tasksSignalStore = inject(TasksSignalStore);
   private languageService = inject(LanguageService);
-
-  email = localStorage.getItem('email');
-
-
-
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
@@ -148,6 +144,10 @@ export class CalendarComponent implements OnInit, OnDestroy{
     }
   }
 
+  viewDetails(taskId: number) {
+    this.router.navigate(['/task', taskId], { state: { fromCalendar: true } });
+  }
+
   private createAddButton() {
     const addButton = this.renderer.createElement('img');
     this.renderer.setProperty(addButton, 'src', 'assets/img/File%20plus.svg');
@@ -212,9 +212,5 @@ export class CalendarComponent implements OnInit, OnDestroy{
     });
     this.dynamicListeners.push(un3);
     this.renderer.appendChild(this.buttons.nativeElement, removeButton);
-  }
-
-  viewDetails(taskId: number) {
-    this.router.navigate(['/task', taskId], { state: { fromCalendar: true } });
   }
 }

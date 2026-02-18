@@ -2,13 +2,13 @@ import {Component, computed, DestroyRef, inject, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import {ViewTaskButtonComponent} from '../../components/shared/view-task-button/view-task-button.component';
-import {CommunicationService} from '../../services/shared/communication.service';
+import {CommunicationService} from '../../services/communication.service';
 import {BackButton} from '../../components/shared/back-button/back-button';
 import {TrashButtonComponent} from '../../components/shared/trash-button/trash-button.component';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {TasksSignalStore} from '../../stores/tasks.signal.store';
 import {TaskService} from '../../services/task.service';
-import {NotificationsService, Notification} from '../../services/notifications.service';
+import {Notification, NotificationsService} from '../../services/notifications.service';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {SliderComponent} from '../../components/shared/slider/slider.component';
 
@@ -30,22 +30,21 @@ import {SliderComponent} from '../../components/shared/slider/slider.component';
 })
 
 export class RemoveTaskComponent implements OnInit {
+  email = localStorage.getItem('email');
+  loadingText = ''
   private destroyRef = inject(DestroyRef);
   private tasksSignalStore = inject(TasksSignalStore);
-  private router = inject(Router);
-  private comm = inject(CommunicationService);
-  private taskService = inject(TaskService);
-  private notifications = inject(NotificationsService);
-  private translate = inject(TranslateService);
-  email = localStorage.getItem('email');
-
   tasks = computed(() => this.tasksSignalStore.state().data);
   loading = computed(() => this.tasksSignalStore.state().loading);
   total = computed(() => this.tasksSignalStore.state().total);
   error = computed(() => this.tasksSignalStore.error());
   page = this.tasksSignalStore.page;
   pageSize = this.tasksSignalStore.pageSize;
-  loadingText = ''
+  private router = inject(Router);
+  private comm = inject(CommunicationService);
+  private taskService = inject(TaskService);
+  private notifications = inject(NotificationsService);
+  private translate = inject(TranslateService);
 
   ngOnInit(): void {
     this.comm.notifications$

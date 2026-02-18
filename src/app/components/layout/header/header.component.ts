@@ -1,8 +1,9 @@
 import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {DarkModeButtonComponent} from '../../shared/dark-mode-button/dark-mode-button.component';
 import {HamburgerMenuComponent} from '../../shared/hamburger-menu/hamburger-menu.component';
-import {ThemeService} from '../../../services/shared/theme.service';
+import {ThemeService} from '../../../services/theme.service';
 import {LanguageSelectorComponent} from '../../shared/language-selector/language-selector.component';
+import {RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,16 +12,16 @@ import {LanguageSelectorComponent} from '../../shared/language-selector/language
     DarkModeButtonComponent,
     HamburgerMenuComponent,
     LanguageSelectorComponent,
+    RouterModule,
   ],
   styleUrl: '../../../../styles/styles.css',
 })
 export class HeaderComponent implements AfterViewInit, OnInit {
 
-  constructor(private renderer: Renderer2, public themeService: ThemeService) {}
-
   darkMode = false;
-
   @ViewChild('header', { static: false }) header!: ElementRef;
+
+  constructor(private renderer: Renderer2, public themeService: ThemeService) {}
 
   ngAfterViewInit() {
     console.log(this.header.nativeElement);

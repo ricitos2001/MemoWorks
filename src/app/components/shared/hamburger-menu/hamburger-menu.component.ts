@@ -2,17 +2,17 @@ import {Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ViewC
 import {NgIf} from '@angular/common';
 import {AuthService} from '../../../services/auth.service';
 import {ButtonComponent} from '../button/button.component';
-import {Router} from '@angular/router';
-import {AuthModalService} from '../../../services/shared/auth-modal.service';
+import {Router, RouterLink} from '@angular/router';
+import {AuthModalService} from '../../../services/auth-modal.service';
 import {Subscription} from 'rxjs';
 import {NotificationComponent} from '../notification/notification.component';
-import {ToastService} from '../../../services/shared/toast.service';
+import {ToastService} from '../../../services/toast.service';
 import {NotificationsStore} from '../../../stores/notifications.store';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hamburger-menu',
-  imports: [NgIf, ButtonComponent, NotificationComponent, TranslateModule],
+  imports: [NgIf, ButtonComponent, NotificationComponent, TranslateModule, RouterLink],
   templateUrl: './hamburger-menu.component.html',
   styleUrl: '../../../../styles/styles.css',
 })

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
-import { UserService } from '../user.service';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, firstValueFrom, Observable} from 'rxjs';
+import {UserService} from './user.service';
 
 export interface AvatarPayload {
   src: string;
@@ -15,19 +15,6 @@ export class AvatarService {
   private currentObjectUrl?: string;
 
   constructor(private userService: UserService) {}
-
-  private localKey(userId: number) {
-    return `avatar_${userId}`;
-  }
-
-  private blobToDataURL(blob: Blob): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onerror = () => reject(new Error('Error leyendo blob como dataURL'));
-      reader.onload = () => resolve(reader.result as string);
-      reader.readAsDataURL(blob);
-    });
-  }
 
   // Public wrapper para reutilizar la conversión Blob -> dataURL desde otros servicios/componentes
   public async blobToDataURLPublic(blob: Blob): Promise<string> {
@@ -51,36 +38,6 @@ export class AvatarService {
       console.error('[AvatarService] no se pudo convertir dataURL para fallback', err);
       this.avatarSubject.next(null);
     }
-  }
-
-  private dataURLToBlob(dataUrl: string): Blob {
-    const parts = dataUrl.split(',');
-    const mimeMatch = parts[0].match(/:(.*?);/);
-    const mime = mimeMatch ? mimeMatch[1] : 'application/octet-stream';
-    const binary = atob(parts[1]);
-    const array = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i++) {
-      array[i] = binary.charCodeAt(i);
-    }
-    return new Blob([array], { type: mime });
-  }
-
-  private setObjectUrlFromBlob(blob: Blob) {
-    if (this.currentObjectUrl) {
-      try { URL.revokeObjectURL(this.currentObjectUrl); } catch (e) { /* ignore */ }
-    }
-    this.currentObjectUrl = URL.createObjectURL(blob);
-    console.info('[AvatarService] emit objectURL, size=', blob.size, 'url=', this.currentObjectUrl);
-    this.avatarSubject.next({ src: this.currentObjectUrl, v: Date.now() });
-  }
-
-  private detectMime(buffer: ArrayBuffer): string | null {
-    const bytes = new Uint8Array(buffer);
-    if (bytes.length >= 4 && bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4E && bytes[3] === 0x47) return 'image/png';
-    if (bytes.length >= 3 && bytes[0] === 0xFF && bytes[1] === 0xD8 && bytes[2] === 0xFF) return 'image/jpeg';
-    if (bytes.length >= 4 && bytes[0] === 0x47 && bytes[1] === 0x49 && bytes[2] === 0x46 && bytes[3] === 0x38) return 'image/gif';
-    if (bytes.length >= 12 && bytes[0] === 0x52 && bytes[1] === 0x49 && bytes[2] === 0x46 && bytes[3] === 0x46 && bytes[8] === 0x57 && bytes[9] === 0x45 && bytes[10] === 0x42 && bytes[11] === 0x50) return 'image/webp';
-    return null;
   }
 
   setLocalAvatar(userId: number, dataUrl: string): void {
@@ -281,5 +238,48 @@ export class AvatarService {
       this.currentObjectUrl = undefined;
     }
     this.avatarSubject.next(null);
+  }
+
+  private localKey(userId: number) {
+    return `avatar_${userId}`;
+  }
+
+  private blobToDataURL(blob: Blob): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error('Error leyendo blob como dataURL'));
+      reader.onload = () => resolve(reader.result as string);
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  private dataURLToBlob(dataUrl: string): Blob {
+    const parts = dataUrl.split(',');
+    const mimeMatch = parts[0].match(/:(.*?);/);
+    const mime = mimeMatch ? mimeMatch[1] : 'application/octet-stream';
+    const binary = atob(parts[1]);
+    const array = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+      array[i] = binary.charCodeAt(i);
+    }
+    return new Blob([array], { type: mime });
+  }
+
+  private setObjectUrlFromBlob(blob: Blob) {
+    if (this.currentObjectUrl) {
+      try { URL.revokeObjectURL(this.currentObjectUrl); } catch (e) { /* ignore */ }
+    }
+    this.currentObjectUrl = URL.createObjectURL(blob);
+    console.info('[AvatarService] emit objectURL, size=', blob.size, 'url=', this.currentObjectUrl);
+    this.avatarSubject.next({ src: this.currentObjectUrl, v: Date.now() });
+  }
+
+  private detectMime(buffer: ArrayBuffer): string | null {
+    const bytes = new Uint8Array(buffer);
+    if (bytes.length >= 4 && bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4E && bytes[3] === 0x47) return 'image/png';
+    if (bytes.length >= 3 && bytes[0] === 0xFF && bytes[1] === 0xD8 && bytes[2] === 0xFF) return 'image/jpeg';
+    if (bytes.length >= 4 && bytes[0] === 0x47 && bytes[1] === 0x49 && bytes[2] === 0x46 && bytes[3] === 0x38) return 'image/gif';
+    if (bytes.length >= 12 && bytes[0] === 0x52 && bytes[1] === 0x49 && bytes[2] === 0x46 && bytes[3] === 0x46 && bytes[8] === 0x57 && bytes[9] === 0x45 && bytes[10] === 0x42 && bytes[11] === 0x50) return 'image/webp';
+    return null;
   }
 }

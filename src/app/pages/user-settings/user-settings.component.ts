@@ -1,15 +1,15 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
-import { NgIf } from '@angular/common';
-import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
+import {ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {NgIf} from '@angular/common';
+import {Router} from '@angular/router';
+import {firstValueFrom} from 'rxjs';
 
-import { ButtonComponent } from '../../components/shared/button/button.component';
-import { AuthService } from '../../services/auth.service';
-import { User, UserService } from '../../services/user.service';
-import { CommunicationService } from '../../services/shared/communication.service';
-import { AvatarService } from '../../services/shared/avatar.service';
-import { ToastService } from '../../services/shared/toast.service';
-import { NotificationsStore } from '../../stores/notifications.store';
+import {ButtonComponent} from '../../components/shared/button/button.component';
+import {AuthService} from '../../services/auth.service';
+import {User, UserService} from '../../services/user.service';
+import {CommunicationService} from '../../services/communication.service';
+import {AvatarService} from '../../services/avatar.service';
+import {ToastService} from '../../services/toast.service';
+import {NotificationsStore} from '../../stores/notifications.store';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -27,10 +27,18 @@ export class UserSettingsComponent implements OnInit {
 
   user!: User;
   avatar?: string;
-
-  private email = localStorage.getItem('email');
-
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+  name: string = '';
+  surnames: string = '';
+  usernameText: string = '';
+  phoneNumber: string = '';
+  userEmail: string = '';
+  imageProfileText: string = '';
+  editImageProfileButton: string = '';
+  editUserInfoButton: string = ''
+  closeSessionButton: string = '';
+  removeAccountButton: string = '';
+  private email = localStorage.getItem('email');
 
   constructor(
     private authService: AuthService,
@@ -44,17 +52,6 @@ export class UserSettingsComponent implements OnInit {
     private notificationsStore: NotificationsStore,
     private translate: TranslateService,
   ) {}
-
-  name: string = '';
-  surnames: string = '';
-  usernameText: string = '';
-  phoneNumber: string = '';
-  userEmail: string = '';
-  imageProfileText: string = '';
-  editImageProfileButton: string = '';
-  editUserInfoButton: string = ''
-  closeSessionButton: string = '';
-  removeAccountButton: string = '';
 
   ngOnInit(): void {
     this.loadUser();
@@ -83,26 +80,6 @@ export class UserSettingsComponent implements OnInit {
     img.src = 'assets/img/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector-removebg-preview.png';
   }
 
-  private loadUser(): void {
-    if (!this.email) return;
-    this.userService.getUser(this.email).subscribe({
-      next: user => {
-        this.user = user;
-        // Cargar avatar: si ya existe en localStorage, loadAvatar omitirá la petición remota.
-        this.avatarService.loadAvatar(this.user.id);
-        this.cd.detectChanges()
-      },
-      error: () => console.error('No se pudo cargar el usuario'),
-    });
-  }
-
-  private reloadAvatar(): void {
-    if (!this.user?.id) return;
-
-    // Forzar fetch remoto para asegurarnos de tener la versión actualizada tras cambios.
-    this.avatarService.loadAvatar(this.user.id, true);
-  }
-
   editImageProfile(): void {
     if (this.fileInput && this.fileInput.nativeElement) {
       this.fileInput.nativeElement.value = '';
@@ -116,14 +93,6 @@ export class UserSettingsComponent implements OnInit {
       try { this.onFileSelected(event); } finally { unregister(); }
     });
     if ((input as any).click) { (input as any).click(); }
-  }
-  private fileToDataUrl(file: File): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onerror = () => reject(new Error('Error leyendo archivo'));
-      reader.onload = () => resolve(reader.result as string);
-      reader.readAsDataURL(file);
-    });
   }
 
   async onFileSelected(event: Event): Promise<void> {
@@ -215,6 +184,35 @@ export class UserSettingsComponent implements OnInit {
     this.authService.logout();
     this.avatarService.clear(this.user.id);
     this.router.navigate(['/landing']);
+  }
+
+  private loadUser(): void {
+    if (!this.email) return;
+    this.userService.getUser(this.email).subscribe({
+      next: user => {
+        this.user = user;
+        // Cargar avatar: si ya existe en localStorage, loadAvatar omitirá la petición remota.
+        this.avatarService.loadAvatar(this.user.id);
+        this.cd.detectChanges()
+      },
+      error: () => console.error('No se pudo cargar el usuario'),
+    });
+  }
+
+  private reloadAvatar(): void {
+    if (!this.user?.id) return;
+
+    // Forzar fetch remoto para asegurarnos de tener la versión actualizada tras cambios.
+    this.avatarService.loadAvatar(this.user.id, true);
+  }
+
+  private fileToDataUrl(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error('Error leyendo archivo'));
+      reader.onload = () => resolve(reader.result as string);
+      reader.readAsDataURL(file);
+    });
   }
 
   private setTranslations() {

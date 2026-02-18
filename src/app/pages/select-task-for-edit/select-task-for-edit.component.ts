@@ -4,10 +4,9 @@ import {ViewTaskButtonComponent} from '../../components/shared/view-task-button/
 import {Router} from '@angular/router';
 import {TasksSignalStore} from '../../stores/tasks.signal.store';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {CommunicationService} from '../../services/shared/communication.service';
+import {CommunicationService} from '../../services/communication.service';
 import {BackButton} from '../../components/shared/back-button/back-button';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {ButtonComponent} from '../../components/shared/button/button.component';
 import {SliderComponent} from '../../components/shared/slider/slider.component';
 
 @Component({
@@ -26,19 +25,19 @@ import {SliderComponent} from '../../components/shared/slider/slider.component';
   standalone: true
 })
 export class SelectTaskForEditComponent implements OnInit {
+  email = localStorage.getItem('email');
+  loadingText = ''
   private destroyRef = inject(DestroyRef);
   private tasksSignalStore = inject(TasksSignalStore);
-  private router = inject(Router);
-  private comm = inject(CommunicationService);
-  private translate = inject(TranslateService);
-  email = localStorage.getItem('email');
   tasks = computed(() => this.tasksSignalStore.state().data);
   loading = computed(() => this.tasksSignalStore.state().loading);
   error = computed(() => this.tasksSignalStore.error());
   total = computed(() => this.tasksSignalStore.state().total);
   page = this.tasksSignalStore.page;
   pageSize = this.tasksSignalStore.pageSize;
-  loadingText = ''
+  private router = inject(Router);
+  private comm = inject(CommunicationService);
+  private translate = inject(TranslateService);
 
   ngOnInit(): void {
     if (this.email) {

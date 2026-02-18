@@ -1,16 +1,9 @@
-import {
-  Component, DestroyRef,
-  ElementRef,
-  inject,
-  OnInit,
-  Renderer2,
-  ViewChild,
-} from '@angular/core';
+import {Component, DestroyRef, ElementRef, inject, OnInit, Renderer2, ViewChild,} from '@angular/core';
 import {OptionButtonComponent} from '../../components/shared/option-button/option-button.component';
 import {TasksComponent} from '../../components/shared/tasks/tasks.component';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {CommunicationService} from '../../services/shared/communication.service';
-import {ToastService} from '../../services/shared/toast.service';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {CommunicationService} from '../../services/communication.service';
+import {ToastService} from '../../services/toast.service';
 import {TaskFormModalComponent} from '../../components/shared/task-form-modal/task-form-modal.component';
 import {Router} from '@angular/router';
 
@@ -28,9 +21,9 @@ import {Router} from '@angular/router';
 
 export class DasboardComponent implements OnInit {
   @ViewChild('buttons', { static: false }) buttons!: ElementRef;
+  status = false;
   @ViewChild(TaskFormModalComponent)
   private taskFormModal!: TaskFormModalComponent;
-  status = false;
   private dynamicListeners: (() => void)[] = [];
 
   private destroyRef = inject(DestroyRef);

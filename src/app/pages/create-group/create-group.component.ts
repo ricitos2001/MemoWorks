@@ -1,11 +1,11 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule} from '@angular/forms';
-import { GroupService } from '../../services/group.service';
+import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {GroupService} from '../../services/group.service';
 import {User, UserService} from '../../services/user.service';
 import {ButtonComponent} from '../../components/shared/button/button.component';
 import {FormInputComponent} from '../../components/shared/form-input/form-input.component';
 import {NgForOf, NgIf} from '@angular/common';
-import {CommunicationService} from '../../services/shared/communication.service';
+import {CommunicationService} from '../../services/communication.service';
 import {Notification, NotificationsService} from '../../services/notifications.service';
 import {Router} from '@angular/router';
 import {GroupsStore} from '../../stores/groups.store';
@@ -34,6 +34,8 @@ export class CreateGroupComponent implements OnInit {
   adminUserId: number | null = null;
   email = localStorage.getItem('email');
   @Output() submitting = new EventEmitter<boolean>();
+  @Output() cancel = new EventEmitter<void>();
+  @Output() create = new EventEmitter<void>();
 
   constructor(
     private groupService: GroupService,
@@ -96,9 +98,6 @@ export class CreateGroupComponent implements OnInit {
     event.preventDefault()
     this.users.removeAt(index);
   }
-
-  @Output() cancel = new EventEmitter<void>();
-  @Output() create = new EventEmitter<void>();
 
   ngOnInit(): void {
     const email = localStorage.getItem('email');

@@ -17,16 +17,16 @@
       </li>
     </ng-container>
     <ng-container *ngIf="loggedIn">
-      <li><a class="header__link" href="/dashboard">{{ dashboard | translate }}</a></li>
-      <li><a class="header__link" href="/calendar">{{ calendar | translate }}</a></li>
-      <li><a class="header__link" href="/settings">{{ configuration | translate }}</a></li>
+      <li><a class="header__link" routerLink="/dashboard">{{ dashboard | translate }}</a></li>
+      <li><a class="header__link" routerLink="/calendar">{{ calendar | translate }}</a></li>
+      <li><a class="header__link" routerLink="/settings">{{ configuration | translate }}</a></li>
       <li class="flex-center">
-        <app-button (click)="toggleNotifications()" [attr.aria-controls]="notificationsId"
+        <button (click)="toggleNotifications()" [attr.aria-controls]="notificationsId"
                     [attr.aria-expanded]="showNotifications" aria-label="Abrir bandeja de notificaciones"
                     class="theme-btn spacing-button">
           <img alt="Notificaciones" class="bell-icon" src="assets/img/Bell.svg">
           <span *ngIf="hasNew" class="badge"></span>
-        </app-button>
+        </button>
         <app-button (click)="logout()" class="header__logout">Cerrar sesión</app-button>
       </li>
     </ng-container>

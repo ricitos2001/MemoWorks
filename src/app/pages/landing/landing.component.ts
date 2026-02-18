@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {ThemeService} from '../../services/shared/theme.service';
+import {ThemeService} from '../../services/theme.service';
 import {AuthModalComponent} from '../../components/shared/auth-modal/auth-modal.component';
 import {ButtonComponent} from '../../components/shared/button/button.component';
-import {AuthModalService} from '../../services/shared/auth-modal.service';
+import {AuthModalService} from '../../services/auth-modal.service';
 import {distinctUntilChanged} from 'rxjs';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {gsap} from 'gsap';
@@ -24,7 +24,7 @@ gsap.registerPlugin(ScrollTrigger);
 })
 export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('authModal') authModal!: AuthModalComponent;
-
+  @ViewChild('animatedElement') animatedElement!: ElementRef<HTMLElement>;
   darkMode = false;
   title = '';
   getStarted = '';
@@ -35,9 +35,6 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   text2 = '';
   subtitle3 = '';
   text3 = '';
-
-  // Animations
-  @ViewChild('animatedElement') animatedElement!: ElementRef<HTMLElement>;
 
   constructor(private router: Router, private themeService: ThemeService, private authModalService: AuthModalService, private translate: TranslateService) {}
 

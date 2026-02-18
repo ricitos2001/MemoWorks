@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {LoadingService} from './shared/loading.service';
+import {LoadingService} from './loading.service';
 import {Observable} from 'rxjs';
 import {finalize, map} from 'rxjs/operators';
-import {PaginatedResponse, Task} from './task.service';
+import {PaginatedResponse} from './task.service';
 import {environment} from '../../enviroments/enviroment';
 import {User} from './user.service';
 

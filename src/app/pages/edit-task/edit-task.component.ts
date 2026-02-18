@@ -1,13 +1,13 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TaskService} from '../../services/task.service';
-import {CommunicationService} from '../../services/shared/communication.service';
+import {CommunicationService} from '../../services/communication.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ButtonComponent} from '../../components/shared/button/button.component';
 import {FormInputComponent} from '../../components/shared/form-input/form-input.component';
 import {NgForOf, NgIf} from '@angular/common';
 import {TasksSignalStore} from '../../stores/tasks.signal.store';
-import {NotificationsService, Notification} from '../../services/notifications.service';
+import {Notification, NotificationsService} from '../../services/notifications.service';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -28,6 +28,8 @@ export class EditTaskComponent implements OnInit {
   taskForm: FormGroup;
   loading = false;
   email = localStorage.getItem('email');
+  @Output() cancel = new EventEmitter<void>();
+  @Output() create = new EventEmitter<void>();
 
   constructor(
     private taskService: TaskService,
@@ -97,9 +99,6 @@ export class EditTaskComponent implements OnInit {
     event.preventDefault();
     this.labels.removeAt(index);
   }
-
-  @Output() cancel = new EventEmitter<void>();
-  @Output() create = new EventEmitter<void>();
 
   onSubmit(event: Event): void {
     event.preventDefault();

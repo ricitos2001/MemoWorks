@@ -1490,6 +1490,23 @@ h6[id],
   box-shadow: none;
 }
 
+/* Page transition styles */
+.page-container {
+  position: relative;
+  overflow: hidden;
+  min-height: 1px; /* garantizar que exista para animaciones */
+}
+
+#page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 850; /* por debajo de modales (modal z-index 1000) */
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0);
+  transition: background 300ms ease;
+  display: none;
+}
+
 /* ============================================================
    Sección principal de landing
    ============================================================ */
@@ -1497,7 +1514,7 @@ h6[id],
   text-align: center;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-8);
+  padding: 10rem;
 }
 .landing__section > * {
   margin: 0.5rem 0;
@@ -1509,6 +1526,11 @@ h6[id],
   scroll-margin: 9rem;
 }
 
+/*
+.landing__article {
+  padding: 10rem
+}
+*/
 /* ============================================================
    Espaciadores de landing
    ============================================================ */

@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {Task} from './task.service';
-import { LoadingService } from './shared/loading.service';
+import {LoadingService} from './loading.service';
 import {finalize} from 'rxjs/operators';
-import { environment } from '../../enviroments/enviroment';
+import {environment} from '../../enviroments/enviroment';
 
 export interface User {
   id: number;

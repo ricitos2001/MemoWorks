@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {CommonModule, NgIf} from '@angular/common';
-import { LoadingService } from '../../../services/shared/loading.service';
+import {LoadingService} from '../../../services/loading.service';
 
 @Component({
   selector: 'app-spinner',

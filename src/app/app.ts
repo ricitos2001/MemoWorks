@@ -1,5 +1,5 @@
 import {Component, OnInit, signal} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {HeaderComponent} from './components/layout/header/header.component';
 import {FooterComponent} from './components/layout/footer/footer.component';
 import {MainComponent} from './components/layout/main/main.component';
@@ -9,6 +9,7 @@ import {LoadingInterceptor} from './interceptors/loading.interceptor-interceptor
 import {ToastComponent} from './components/shared/toast/toast.component';
 import {SpinnerComponent} from './components/shared/spinner/spinner.component';
 import Lenis from 'lenis';
+import {PageTransitionService} from './services/page-transition.service';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,8 @@ import Lenis from 'lenis';
 export class App implements OnInit {
   protected readonly title = signal('MemoWorks');
 
+  constructor(private router: Router, private pageTransition: PageTransitionService) {}
+
   ngOnInit() {
     const lenis = new Lenis();
 
@@ -33,5 +36,13 @@ export class App implements OnInit {
     }
 
     requestAnimationFrame(raf);
+
+    // Suscribirse a eventos del Router para reproducir animación de entrada
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // después de la navegación, reproducir la animación de entrada
+        this.pageTransition.playEnter();
+      }
+    });
   }
 }

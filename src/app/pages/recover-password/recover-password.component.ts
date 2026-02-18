@@ -1,19 +1,14 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators
-} from '@angular/forms';
-import { NgIf } from '@angular/common';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {NgIf} from '@angular/common';
 
-import { ButtonComponent } from '../../components/shared/button/button.component';
-import { FormInputComponent } from '../../components/shared/form-input/form-input.component';
+import {ButtonComponent} from '../../components/shared/button/button.component';
+import {FormInputComponent} from '../../components/shared/form-input/form-input.component';
 
-import { PasswordResetService } from '../../services/password-reset.service';
-import { passwordStrength } from '../../validators/password-strength.validator';
-import { passwordMatch } from '../../validators/password-match.validator';
+import {PasswordResetService} from '../../services/password-reset.service';
+import {passwordStrength} from '../../validators/password-strength.validator';
+import {passwordMatch} from '../../validators/password-match.validator';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -24,7 +19,8 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
     FormInputComponent,
     ReactiveFormsModule,
     NgIf,
-    TranslateModule
+    TranslateModule,
+    RouterLink
   ],
   templateUrl: './recover-password.component.html',
   styleUrl: '../../../styles/styles.css'
@@ -66,44 +62,6 @@ export class RecoverPasswordComponent implements OnInit {
      FORMULARIOS
      ========================= */
 
-  private initEmailForm(): void {
-    this.recoverPasswordForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]]
-    });
-  }
-
-  private initResetForm(): void {
-    this.recoverPasswordForm = this.fb.group(
-      {
-        newPassword: ['', [Validators.required, passwordStrength()]],
-        confirmPassword: ['', Validators.required]
-      },
-      { validators: passwordMatch('newPassword', 'confirmPassword') }
-    );
-  }
-
-  /* =========================
-     TOKEN
-     ========================= */
-
-  private verifyToken(token: string): void {
-    this.passwordResetService.verifyToken(token).subscribe({
-      next: res => {
-        if (!res.valid) {
-          this.router.navigate(['/invalid-token']);
-          return;
-        }
-        this.tokenValid = true;
-        this.initResetForm();
-      },
-      error: () => this.router.navigate(['/invalid-token'])
-    });
-  }
-
-  /* =========================
-     SUBMIT
-     ========================= */
-
   onSubmit(event: Event): void {
     event.preventDefault();
 
@@ -121,6 +79,44 @@ export class RecoverPasswordComponent implements OnInit {
     } else {
       this.resetPassword();
     }
+  }
+
+  private initEmailForm(): void {
+    this.recoverPasswordForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]]
+    });
+  }
+
+  /* =========================
+     TOKEN
+     ========================= */
+
+  private initResetForm(): void {
+    this.recoverPasswordForm = this.fb.group(
+      {
+        newPassword: ['', [Validators.required, passwordStrength()]],
+        confirmPassword: ['', Validators.required]
+      },
+      { validators: passwordMatch('newPassword', 'confirmPassword') }
+    );
+  }
+
+  /* =========================
+     SUBMIT
+     ========================= */
+
+  private verifyToken(token: string): void {
+    this.passwordResetService.verifyToken(token).subscribe({
+      next: res => {
+        if (!res.valid) {
+          this.router.navigate(['/invalid-token']);
+          return;
+        }
+        this.tokenValid = true;
+        this.initResetForm();
+      },
+      error: () => this.router.navigate(['/invalid-token'])
+    });
   }
 
   private sendRecoveryEmail(): void {

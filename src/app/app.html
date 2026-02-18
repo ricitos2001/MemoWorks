@@ -1,8 +1,10 @@
 <app-toast></app-toast>
 <app-spinner></app-spinner>
 <app-header></app-header>
-<app-main>
-  <router-outlet/>
+<app-main class="page-container" id="page-container">
+  <router-outlet></router-outlet>
 </app-main>
 <app-footer></app-footer>
+<!-- overlay para transiciones; el servicio puede manipularlo o usar su propio elemento -->
+<article aria-hidden="true" id="page-transition-overlay" style="display:none;"></article>
 <script src="https://unpkg.com/lenis@1.3.17/dist/lenis.min.js"></script>

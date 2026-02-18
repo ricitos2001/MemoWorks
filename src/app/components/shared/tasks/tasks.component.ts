@@ -1,15 +1,23 @@
 import {
-  Component, DestroyRef, EventEmitter, inject, OnInit, Output, ChangeDetectionStrategy, computed} from '@angular/core';
-import { NgForOf, NgIf, DatePipe } from '@angular/common';
-import { Router } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  EventEmitter,
+  inject,
+  OnInit,
+  Output
+} from '@angular/core';
+import {DatePipe, NgForOf, NgIf} from '@angular/common';
+import {Router} from '@angular/router';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
-import { TasksSignalStore } from '../../../stores/tasks.signal.store';
-import { CommunicationService } from '../../../services/shared/communication.service';
+import {TasksSignalStore} from '../../../stores/tasks.signal.store';
+import {CommunicationService} from '../../../services/communication.service';
 
-import { ViewTaskButtonComponent } from '../view-task-button/view-task-button.component';
-import { ButtonComponent } from '../button/button.component';
-import { SharedBarComponent } from '../shared-bar/shared-bar.component';
+import {ViewTaskButtonComponent} from '../view-task-button/view-task-button.component';
+import {ButtonComponent} from '../button/button.component';
+import {SharedBarComponent} from '../shared-bar/shared-bar.component';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {SliderComponent} from '../slider/slider.component';
 
@@ -32,11 +40,6 @@ import {SliderComponent} from '../slider/slider.component';
 })
 export class TasksComponent implements OnInit {
   @Output() createFromEmpty = new EventEmitter<void>();
-  private store = inject(TasksSignalStore);
-  private destroyRef = inject(DestroyRef);
-  private router = inject(Router);
-  private comm = inject(CommunicationService);
-  private translate = inject(TranslateService);
   loadingText = ''
   searcher: string = '';
   noResults: string = '';
@@ -44,24 +47,24 @@ export class TasksComponent implements OnInit {
   startToOrganize: string = '';
   zeroTasks: string = '';
   createFirstTask: string = '';
-
+  email = localStorage.getItem('email');
+  private store = inject(TasksSignalStore);
   tasks = computed(() => this.store.state().data);
   loading = computed(() => this.store.state().loading);
   error = computed(() => this.store.error());
   total = computed(() => this.store.state().total);
-
   hasTasks = computed(() =>
     this.store.state().allData.length > 0
   );
-
   hasResults = computed(() =>
     this.store.state().data.length > 0
   );
-
   page = this.store.page;
   pageSize = this.store.pageSize;
-
-  email = localStorage.getItem('email');
+  private destroyRef = inject(DestroyRef);
+  private router = inject(Router);
+  private comm = inject(CommunicationService);
+  private translate = inject(TranslateService);
 
   ngOnInit(): void {
     if (this.email) {

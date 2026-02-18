@@ -1,6 +1,6 @@
-<header class="header" #header>
+<header #header class="header">
   <section class="container header__inner">
-    <a href="/landing" class="header__logo"><img [src]="darkMode ? 'assets/img/logo_dark.svg' : 'assets/img/logo.svg'" alt="logo del header" class="footer__logo" width="0" height="0"></a>
+    <a class="header__logo" routerLink="/landing"><img [src]="darkMode ? 'assets/img/logo_dark.svg' : 'assets/img/logo.svg'" alt="logo del header" class="footer__logo" height="0" width="0"></a>
     <article class="flex-center">
       <app-language-selector></app-language-selector>
       <app-hamburger-menu></app-hamburger-menu>

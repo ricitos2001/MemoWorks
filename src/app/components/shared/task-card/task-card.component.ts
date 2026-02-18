@@ -1,22 +1,20 @@
-import {Component, signal, inject, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, inject, OnInit, signal} from '@angular/core';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
-import { Task } from '../../../services/task.service';
+import {Task} from '../../../services/task.service';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-task-card',
-  imports: [DatePipe, NgIf, NgForOf, TranslateModule],
+  imports: [DatePipe, NgIf, NgForOf, TranslateModule, RouterLink],
   templateUrl: './task-card.component.html',
   styleUrl: '../../../../styles/styles.css',
 })
 export class TaskCardComponent implements OnInit {
 
-  private route = inject(ActivatedRoute);
-
   backButton = ''
-
   task = signal<Task | null>(null);
+  private route = inject(ActivatedRoute);
 
   constructor(private translate: TranslateService) {
     this.route.data.subscribe(({ task }) => {

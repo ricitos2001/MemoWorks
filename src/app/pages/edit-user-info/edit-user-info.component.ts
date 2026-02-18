@@ -7,7 +7,7 @@ import {NgIf} from '@angular/common';
 import {phoneNumberValidation} from '../../validators/phone-number.validator';
 import {AsyncValidatorsService} from '../../services/async-validators.service';
 import {UserService} from '../../services/user.service';
-import {CommunicationService} from '../../services/shared/communication.service';
+import {CommunicationService} from '../../services/communication.service';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 
