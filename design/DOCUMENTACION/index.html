@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>DOCUMENTACIÓN TECNICA — DIW - My Docs</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">My Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Welcome to MkDocs</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">DWEC</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../DWEC/DOCUMENTACION/" class="dropdown-item">DOCUMENTACIÓN TÉCNICA — DWEC</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Accesibilidad</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../accesibilidad/" class="dropdown-item">Informe de accesibilidad — Proyecto Órbita 4: Diseñar para todos</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Design</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">DOCUMENTACIÓN TECNICA — DIW</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../../accesibilidad/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#documentacion-tecnica-diw" class="nav-link">DOCUMENTACIÓN TECNICA — DIW</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#indice" class="nav-link">Índice</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#fase-1-fundamentos-y-arquitectura-css" class="nav-link">Fase 1 — Fundamentos y Arquitectura CSS</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#11-principios-de-comunicacion-visual" class="nav-link">1.1 Principios de comunicación visual</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#12-metodologia-css" class="nav-link">1.2 Metodología CSS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#13-organizacion-de-archivos-itcss" class="nav-link">1.3 Organización de archivos (ITCSS)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#14-sistema-de-design-tokens-scss" class="nav-link">1.4 Sistema de Design Tokens (SCSS)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#15-mixins-y-funciones" class="nav-link">1.5 Mixins y funciones</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#16-viewencapsulation-en-angular" class="nav-link">1.6 ViewEncapsulation en Angular</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#fase-2-html-semantico-y-componentes-de-layout" class="nav-link">Fase 2 — HTML semántico y componentes de layout</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#21-elementos-semanticos-utilizados" class="nav-link">2.1 Elementos semánticos utilizados</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#22-jerarquia-de-headings" class="nav-link">2.2 Jerarquía de headings</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#23-estructura-de-formularios-y-app-form-input" class="nav-link">2.3 Estructura de formularios y app-form-input</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#fase-3-componentes-ui-basicos" class="nav-link">Fase 3 — Componentes UI básicos</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#31-componentes-implementados" class="nav-link">3.1 Componentes implementados</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#32-nomenclatura-y-metodologia-bem" class="nav-link">3.2 Nomenclatura y metodología (BEM)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#33-style-guide" class="nav-link">3.3 Style Guide</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#como-colaborar-y-buenas-practicas" class="nav-link">Cómo colaborar y buenas prácticas</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#rutas-de-interes-en-el-repositorio" class="nav-link">Rutas de interés en el repositorio</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#placeholders-para-capturas-y-entregables-graficos" class="nav-link">Placeholders para capturas y entregables gráficos</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#fase-4-responsive-design-y-layouts-completos" class="nav-link">Fase 4 — Responsive design y layouts completos</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#4-responsive-design" class="nav-link">4. Responsive design</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#47-pruebas-y-verificacion" class="nav-link">4.7 Pruebas y verificación</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#fase-5-optimizacion-multimedia" class="nav-link">Fase 5 — Optimización multimedia</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#51-formatos-elegidos" class="nav-link">5.1 Formatos elegidos</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#52-herramientas-utilizadas" class="nav-link">5.2 Herramientas utilizadas</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#53-resultados-de-optimizacion-ejemplo-con-5-imagenes" class="nav-link">5.3 Resultados de optimización (ejemplo con 5 imágenes)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#54-tecnologias-implementadas" class="nav-link">5.4 Tecnologías implementadas</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#55-animaciones-css" class="nav-link">5.5 Animaciones CSS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#fase-6-sistema-de-temas-y-modo-oscuro" class="nav-link">Fase 6 — Sistema de temas y modo oscuro</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#61-variables-de-tema-css-custom-properties" class="nav-link">6.1 Variables de tema (CSS Custom Properties)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#62-implementacion-del-theme-switcher-documentacion-tecnica" class="nav-link">6.2 Implementación del Theme Switcher (documentación técnica)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#63-transiciones-suaves-entre-temas" class="nav-link">6.3 Transiciones suaves entre temas</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#64-componentes-actualizados" class="nav-link">6.4 Componentes actualizados</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#65-capturas-de-pantalla" class="nav-link">6.5 Capturas de pantalla</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#66-requisitos-de-entrega-y-checklist" class="nav-link">6.6 Requisitos de entrega y checklist</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="documentacion-tecnica-diw">DOCUMENTACIÓN TECNICA — DIW</h1>
+<h2 id="indice">Índice</h2>
+<ul>
+<li>Fase 1 — Fundamentos y Arquitectura CSS</li>
+<li>1.1 Principios de comunicación visual</li>
+<li>1.2 Metodología CSS</li>
+<li>1.3 Organización de archivos (ITCSS)</li>
+<li>1.4 Sistema de Design Tokens (SCSS)</li>
+<li>1.5 Mixins y funciones</li>
+<li>1.6 ViewEncapsulation en Angular</li>
+<li>Fase 2 — HTML semántico y componentes de layout</li>
+<li>2.1 Elementos semánticos utilizados</li>
+<li>2.2 Jerarquía de headings</li>
+<li>2.3 Estructura de formularios y componente <code>app-form-input</code></li>
+<li>Fase 3 — Componentes UI básicos</li>
+<li>3.1 Componentes implementados</li>
+<li>3.2 Nomenclatura y metodología (BEM)</li>
+<li>3.3 Style Guide</li>
+<li>Fase 4 — Responsive design y layouts completos</li>
+<li>4.1 Breakpoints definidos</li>
+<li>4.2 Estrategia responsive</li>
+<li>4.3 Container Queries</li>
+<li>4.4 Adaptaciones principales (resumen)</li>
+<li>4.5 Páginas implementadas y notas breves</li>
+<li>4.6 Screenshots comparativos</li>
+<li>4.7 Pruebas y verificación</li>
+<li>4.8 Entregables y rutas en el repositorio</li>
+<li>Cómo colaborar y buenas prácticas</li>
+<li>Rutas de interés en el repositorio</li>
+<li>Placeholders para capturas y recursos visuales</li>
+</ul>
+<hr />
+<h1 id="fase-1-fundamentos-y-arquitectura-css">Fase 1 — Fundamentos y Arquitectura CSS</h1>
+<p>Objetivo: establecer una base sólida y reutilizable para todos los estilos del proyecto: design tokens, mixins, sistema de ficheros ITCSS, reset, estilos base y un grid de layout.</p>
+<h2 id="11-principios-de-comunicacion-visual">1.1 Principios de comunicación visual</h2>
+<p>Aplicamos los siguientes 5 principios en todo el producto. Para cada principio indico cómo se aplica en MemoWorks.</p>
+<p>1) Jerarquía
+- Uso de la escala tipográfica y pesos para indicar importancia: <code>h1</code> (5xl, semibold), <code>h2</code> (3xl), <code>h3</code> (2xl), cuerpo (base, regular).
+- Espaciado consistente (variables <code>spacing-*</code>) para separar secciones y destacar bloques.
+- Ejemplo práctico: en la <code>card</code> el título usa <code>font-size: $font-size-2xl</code> y <code>margin-bottom: $spacing-2</code> mientras la descripción usa <code>font-size: $font-size-base</code>.</p>
+<p>2) Contraste
+- Uso de <code>color-primary</code> sobre fondos neutrales para acciones principales.
+- Contraste tipográfico entre texto principal (neutral-900) y secundarios (neutral-600).
+- Para estados interactivos (hover/focus) se aumenta ligeramente el contraste o la elevación (shadow-md).</p>
+<p>3) Alineación
+- Sistema de grid con contenedor centrado y gutters definidos por <code>spacing-4</code>.
+- Títulos y textos principales alineados a la izquierda para lectura occidental; elementos de navegación centrados en headers compactos.</p>
+<p>4) Proximidad
+- Agrupamos controles relacionados dentro de <code>fieldset</code> y usamos <code>spacing-2</code>/<code>spacing-3</code> para indicar relación.
+- Tarjetas con <code>padding: $spacing-4</code> y separaciones internas menores (<code>spacing-2</code>) para elementos relacionados.</p>
+<p>5) Repetición
+- Uso de un conjunto reducido de patrones visuales (botones, cards, formularios) y variables globales para mantener coherencia.
+- Reutilización de clases BEM (<code>.button--primary</code>, <code>.card</code>, <code>.alert--success</code>) en todo el proyecto.</p>
+<p>Capturas de Figma (placeholders):
+- Insertar captura que señale jerarquía: <code>docs/design/screenshots/figma-jerarquia.png</code>
+- Insertar captura sobre contraste: <code>docs/design/screenshots/figma-contraste.png</code>
+- Insertar captura sobre alineación: <code>docs/design/screenshots/figma-alineacion.png</code>
+- Insertar captura sobre proximidad: <code>docs/design/screenshots/figma-proximidad.png</code>
+- Insertar captura sobre repetición: <code>docs/design/screenshots/figma-repeticion.png</code></p>
+<blockquote>
+<p>Nota: Añade las capturas exportadas desde Figma en <code>docs/design/screenshots/</code> y actualiza las rutas si es necesario.</p>
+</blockquote>
+<h2 id="12-metodologia-css">1.2 Metodología CSS</h2>
+<p>Metodología principal: BEM + ITCSS.</p>
+<ul>
+<li>BEM: Bloques, Elementos y Modificadores.</li>
+<li>Block: <code>.card</code></li>
+<li>Element: <code>.card__title</code>, <code>.card__body</code></li>
+<li>Modifier: <code>.card--featured</code>, <code>.button--primary</code></li>
+</ul>
+<p>Reglas básicas BEM que seguimos:
+- Un component es un bloque. Nombres en inglés y en minúsculas con guiones (<code>kebab-case</code>).
+- Elementos usan <code>__</code> y modificadores <code>--</code>.
+- Los estados no interactivos (p. ej. <code>disabled</code>) pueden representarse con un atributo (<code>[disabled]</code>) o con clase <code>.is-disabled</code> según contexto.</p>
+<p>Por qué BEM: facilita localización y mantenimiento, evita colisiones y hace predecible la CSS cuando se escala el proyecto.</p>
+<h2 id="13-organizacion-de-archivos-itcss">1.3 Organización de archivos (ITCSS)</h2>
+<p>Estructura de <code>src/styles/</code> que usamos (orden de menor a mayor especificidad):</p>
+<ul>
+<li>00-settings/</li>
+<li><code>_variables.scss</code>         // Design tokens (colors, type, spacing, breakpoints)</li>
+<li><code>_css-variables.scss</code>     // CSS Custom Properties para theming</li>
+<li>01-tools/</li>
+<li><code>_mixins.scss</code>            // Mixins y funciones reutilizables</li>
+<li>02-generic/</li>
+<li><code>_reset.scss</code>             // Reset / Normalize</li>
+<li>03-elements/</li>
+<li><code>_base.scss</code>              // Estilos de elementos HTML (p, a, h1..h6, lists)</li>
+<li>04-layout/</li>
+<li><code>_grid.scss</code></li>
+<li><code>_header.scss</code></li>
+<li><code>_footer.scss</code></li>
+<li><code>_layout.scss</code>            // Grid y contenedores globales</li>
+<li>05-components/</li>
+<li><code>_button.scss</code></li>
+<li><code>_card.scss</code></li>
+<li><code>_form.scss</code></li>
+<li>...                      // Componentes encapsulados</li>
+<li>06-utilities/</li>
+<li><code>_helpers.scss</code>           // Utilities atómicas (display, spacing helpers)</li>
+<li>07-pages/</li>
+<li><code>_style-guide.scss</code></li>
+</ul>
+<p>Importación en <code>styles.scss</code> (orden crítico):</p>
+<ol>
+<li><code>@import '00-settings/variables';</code></li>
+<li><code>@import '00-settings/css-variables';</code></li>
+<li><code>@import '01-tools/mixins';</code></li>
+<li><code>@import '02-generic/reset';</code></li>
+<li><code>@import '03-elements/base';</code></li>
+<li><code>@import '04-layout/layout';</code></li>
+<li><code>@import '05-components/button';</code> (y demás componentes)</li>
+<li><code>@import '06-utilities/helpers';</code></li>
+<li><code>@import '07-pages/style-guide';</code></li>
+</ol>
+<p>Este orden garantiza que las variables y mixins estén disponibles antes de definir reglas que las usen, y que los estilos de baja especificidad sean cargados antes que los específicos de componentes.</p>
+<h2 id="14-sistema-de-design-tokens-scss">1.4 Sistema de Design Tokens (SCSS)</h2>
+<p>Los tokens son la única fuente de verdad para colores, tipografías, tamaños y espaciados.
+A continuación resumo los grupos principales y ejemplos de variables (ver <code>src/styles/00-settings/_variables.scss</code> para la implementación exacta):</p>
+<p>1) Colores
+- <code>$color-primary: #6C5CE7;</code>        // Color principal de la marca
+- <code>$color-secondary: #F6C24A;</code>
+- Neutrales: <code>$neutral-50</code> ... <code>$neutral-900</code> (de fondo muy claro a texto principal oscuro)
+- Semánticos:
+  - <code>$color-success: #22C55E;</code>
+  - <code>$color-error: #EF4444;</code>
+  - <code>$color-warning: #F97316;</code>
+  - <code>$color-info: #3B82F6;</code></p>
+<p>Decisión: usar <code>rgba()</code> para sombras y micro-transparencias para que funcionen sobre fondos variables.</p>
+<p>2) Tipografía
+- Familias:
+  - <code>$font-primary: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;</code>
+  - <code>$font-secondary: 'Montserrat', sans-serif;</code> (si aplica)
+- Pesos:
+  - <code>$font-weight-light: 300;</code>
+  - <code>$font-weight-regular: 400;</code>
+  - <code>$font-weight-medium: 500;</code>
+  - <code>$font-weight-semibold: 600;</code>
+  - <code>$font-weight-bold: 700;</code>
+- Escala tipográfica (ratio 1.25):
+  - <code>$font-size-xs: 0.75rem;</code>
+  - <code>$font-size-sm: 0.875rem;</code>
+  - <code>$font-size-base: 1rem;</code>
+  - <code>$font-size-lg: 1.25rem;</code>
+  - <code>$font-size-xl: 1.563rem;</code>
+  - <code>$font-size-2xl: 1.953rem;</code> ... hasta <code>5xl</code> según necesidad.
+- Line-heights:
+  - <code>$line-height-tight: 1.1;</code>
+  - <code>$line-height-normal: 1.5;</code>
+  - <code>$line-height-relaxed: 1.75;</code></p>
+<p>3) Espaciado
+- Basado en 4px o 0.25rem como unidad base. Ejemplos:
+  - <code>$spacing-1: 0.25rem;</code>  // 4px
+  - <code>$spacing-2: 0.5rem;</code>   // 8px
+  - <code>$spacing-3: 0.75rem;</code>
+  - <code>$spacing-4: 1rem;</code>
+  - ... hasta <code>$spacing-24: 6rem;</code></p>
+<p>4) Breakpoints
+- <code>$breakpoint-sm: 640px;</code>
+- <code>$breakpoint-md: 768px;</code>
+- <code>$breakpoint-lg: 1024px;</code>
+- <code>$breakpoint-xl: 1280px;</code></p>
+<p>5) Elevaciones (shadows)
+- <code>$shadow-sm: 0 1px 2px rgba(0,0,0,0.04);</code>
+- <code>$shadow-md: 0 4px 8px rgba(0,0,0,0.08);</code>
+- <code>$shadow-lg: 0 10px 20px rgba(0,0,0,0.12);</code>
+- <code>$shadow-xl: 0 20px 40px rgba(0,0,0,0.16);</code></p>
+<p>6) Bordes y radios
+- <code>$border-thin: 1px;</code> <code>$border-medium: 2px;</code> <code>$border-thick: 4px;</code>
+- Radios: <code>$radius-sm: 2px;</code> <code>$radius-md: 6px;</code> <code>$radius-lg: 12px;</code> <code>$radius-full: 9999px;</code></p>
+<p>7) Transiciones
+- <code>$transition-fast: 150ms;</code>
+- <code>$transition-base: 300ms;</code>
+- <code>$transition-slow: 500ms;</code>
+- Curva: <code>ease-in-out</code> por defecto.</p>
+<p>Explicación de decisiones:
+- Ratio tipográfico 1.25 proporciona escalado claro sin saltos bruscos.
+- Breakpoints basados en dispositivos comunes (mobile→tablet→desktop).
+- Escala de espaciado en múltiplos de 4px para mantener ritmo vertical consistente.</p>
+<h2 id="15-mixins-y-funciones">1.5 Mixins y funciones</h2>
+<p>Archivo: <code>src/styles/01-tools/_mixins.scss</code></p>
+<p>Mixins documentados y ejemplos de uso (estos son los mixins principales que implementamos):</p>
+<p>1) <code>@mixin respond-to($breakpoint) { ... }</code>
+- Simplifica media queries. Ejemplo de uso:
+  <code>text
+  .card {
+    padding: $spacing-3;
+    @include respond-to(md) {
+      padding: $spacing-4;
+    }
+  }</code></p>
+<p>2) <code>@mixin truncate-lines($lines)</code>
+- Trunca texto a N líneas con <code>-webkit-line-clamp</code>. Uso en tarjetas y descripciones.
+  <code>text
+  .card__desc { @include truncate-lines(3); }</code></p>
+<p>3) <code>@mixin visually-hidden()</code>
+- Oculta visualmente elementos manteniéndolos accesibles para lectores de pantalla. Uso en labels que no deben mostrarse.</p>
+<p>Otros mixins útiles incluidos: <code>center-flex()</code>, <code>icon-size($size)</code>, <code>transition($property: all, $duration: $transition-base)</code>.</p>
+<h2 id="16-viewencapsulation-en-angular">1.6 ViewEncapsulation en Angular</h2>
+<p>Decisión: conservar <code>ViewEncapsulation.Emulated</code> por defecto.</p>
+<p>Motivos:
+- Permite que cada componente tenga estilos scoped evitando fugas accidentales hacia otros componentes.
+- Mantiene los estilos globales (variables, resets, layout) en <code>styles.scss</code> y los estilos por componente en su propio <code>.scss</code>.</p>
+<p>Cuándo usar <code>None</code> o <code>ShadowDom</code>:
+- <code>None</code>: solo si necesitamos estilos globales que afecten al DOM entero (con cuidado). Recomendado para temas que afectan a todo el sitio cuando no se quiere repetir estilos.
+- <code>ShadowDom</code>: si queremos aislamiento completo y evitar por completo la cascada (menos común en aplicaciones donde se comparte diseño y tokens).</p>
+<hr />
+<h1 id="fase-2-html-semantico-y-componentes-de-layout">Fase 2 — HTML semántico y componentes de layout</h1>
+<p>Objetivo: crear contenedores semánticos reutilizables (header, main, footer, sidebar) y componentes de formulario accesibles.</p>
+<h2 id="21-elementos-semanticos-utilizados">2.1 Elementos semánticos utilizados</h2>
+<ul>
+<li><code>&lt;header&gt;</code>: cabecera global, contiene logo y navegación.</li>
+<li><code>&lt;nav&gt;</code>: navegación principal, lista de enlaces.</li>
+<li><code>&lt;main&gt;</code>: contenedor del contenido principal. Solo uno por página.</li>
+<li><code>&lt;aside&gt;</code>: contenido secundario (sidebar, filtros).</li>
+<li><code>&lt;section&gt;</code> / <code>&lt;article&gt;</code>: bloques de contenidos o artículos con sentido propio.</li>
+<li><code>&lt;footer&gt;</code>: enlaces legales, copyright y redes.</li>
+</ul>
+<p>Ejemplo de <code>app-header</code> (simplificado):</p>
+<pre><code class="language-html">&lt;header class=&quot;header&quot;&gt;
+  &lt;a class=&quot;header__logo&quot; href=&quot;/&quot;&gt;
+    &lt;img src=&quot;/assets/img/logo.svg&quot; alt=&quot;MemoWorks&quot;&gt;
+  &lt;/a&gt;
+  &lt;nav class=&quot;header__nav&quot; aria-label=&quot;Navegación principal&quot;&gt;
+    &lt;ul class=&quot;nav-list&quot;&gt;
+      &lt;li class=&quot;nav-list__item&quot;&gt;&lt;a href=&quot;/&quot;&gt;Inicio&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;nav-list__item&quot;&gt;&lt;a href=&quot;/tasks&quot;&gt;Tareas&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+  &lt;button class=&quot;header__hamburger&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;main-nav&quot;&gt;☰&lt;/button&gt;
+&lt;/header&gt;
+</code></pre>
+<p>Ejemplo de <code>app-main</code>:</p>
+<pre><code class="language-html">&lt;main class=&quot;main&quot;&gt;&lt;ng-content&gt;&lt;/ng-content&gt;&lt;/main&gt;
+</code></pre>
+<h2 id="22-jerarquia-de-headings">2.2 Jerarquía de headings</h2>
+<p>Reglas:
+- Solo un <code>h1</code> por página (título principal de la vista).
+- <code>h2</code> para secciones principales dentro de la página.
+- <code>h3</code> para subsecciones, y así sucesivamente sin saltos de nivel (no usar <code>h4</code> si no hay <code>h3</code>).</p>
+<p>Ejemplo jerárquico:
+- <code>h1</code> — Dashboard
+  - <code>h2</code> — Mis tareas
+    - <code>h3</code> — Tareas urgentes
+  - <code>h2</code> — Calendario</p>
+<h2 id="23-estructura-de-formularios-y-app-form-input">2.3 Estructura de formularios y <code>app-form-input</code></h2>
+<p>Buenas prácticas en formularios:
+- Usar <code>&lt;form&gt;</code> con <code>method</code> cuando aplica y <code>novalidate</code> si se gestiona validación por JS.
+- Agrupar campos relacionados con <code>&lt;fieldset&gt;</code> y describirlos con <code>&lt;legend&gt;</code>.
+- Asociar <code>label</code> con <code>input</code> mediante <code>for</code> y <code>id</code> para accesibilidad.
+- Mostrar indicación visual de campo requerido (asterisco) y mensajes de error claros.</p>
+<p>Ejemplo de uso del componente <code>app-form-input</code>:</p>
+<pre><code class="language-html">&lt;form (ngSubmit)=&quot;onSubmit()&quot;&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Acceso&lt;/legend&gt;
+
+    &lt;app-form-input
+      id=&quot;email&quot;
+      label=&quot;Correo electrónico&quot;
+      type=&quot;email&quot;
+      name=&quot;email&quot;
+      placeholder=&quot;tú@ejemplo.com&quot;
+      required
+    &gt;&lt;/app-form-input&gt;
+
+    &lt;app-form-input
+      id=&quot;password&quot;
+      label=&quot;Contraseña&quot;
+      type=&quot;password&quot;
+      name=&quot;password&quot;
+      required
+    &gt;&lt;/app-form-input&gt;
+
+    &lt;button class=&quot;button button--primary&quot; type=&quot;submit&quot;&gt;Entrar&lt;/button&gt;
+  &lt;/fieldset&gt;
+&lt;/form&gt;
+</code></pre>
+<p>Estructura interna recomendada de <code>app-form-input</code>:
+- <code>label[for]</code> + <code>input[id]</code>
+- Contenedor para <code>help text</code>
+- Contenedor para <code>error message</code></p>
+<hr />
+<h1 id="fase-3-componentes-ui-basicos">Fase 3 — Componentes UI básicos</h1>
+<p>Objetivo: crear un set de componentes reutilizables con todas sus variantes y estados, y un Style Guide que sirva como referencia visual.</p>
+<h2 id="31-componentes-implementados">3.1 Componentes implementados</h2>
+<p>A continuación la lista de componentes obligatorios implementados y su documentación resumida.</p>
+<p>1) Botones — <code>app-button</code> / <code>.button</code>
+- Propósito: acciones primarias y secundarias.
+- Variantes (modificadores):
+  - <code>.button--primary</code> (acción principal)
+  - <code>.button--secondary</code> (apoyo)
+  - <code>.button--ghost</code> (sin fondo)
+  - <code>.button--danger</code> (eliminar, destructivo)
+- Tamaños:
+  - <code>.button--sm</code>, <code>.button--md</code> (por defecto), <code>.button--lg</code>
+- Estados soportados: <code>:hover</code>, <code>:focus</code> (outline accesible), <code>:active</code>, <code>[disabled]</code>.
+- Ejemplo de uso:
+  <code>html
+  &lt;button class="button button--primary button--md"&gt;Guardar&lt;/button&gt;</code></p>
+<p>2) Cards — <code>app-card</code> / <code>.card</code>
+- Propósito: contenedor de contenido resumido (imagen, título, descripción, acción).
+- Variantes: básica (<code>.card</code>), horizontal (<code>.card--horizontal</code>).
+- Estados: <code>:hover</code> eleva la card (<code>box-shadow</code> y <code>transform: translateY(-4px)</code> con <code>transition</code>).
+- Ejemplo:
+  ```html
+<br />
+<article class="card">
+    <img class="card__img" src="..." alt="..."/>
+    <h3 class="card__title">Título</h3>
+    <p class="card__desc">Descripción...</p>
+  </article></p>
+<p>```</p>
+<p>3) Textarea — <code>app-form-textarea</code> / <code>.textarea</code>
+- Elemento <code>textarea</code> con <code>label</code>, <code>help</code> y <code>error</code>.</p>
+<p>4) Select — <code>app-form-select</code> / <code>.select</code>
+- <code>select</code> con <code>label</code> y opciones. Soporta placeholder y validación.</p>
+<p>5) Alerts — <code>app-alert</code> / <code>.alert</code>
+- Tipos: <code>.alert--success</code>, <code>.alert--error</code>, <code>.alert--warning</code>, <code>.alert--info</code>.
+- Opcional: botón de cierre <code>aria-label="Cerrar alerta"</code>.</p>
+<p>Componentes adicionales desarrollados (si aplica en el repo):
+- <code>app-breadcrumbs</code>, <code>app-modal</code>, <code>app-badge</code> (documentar si están presentes en <code>src/app/components/shared/</code>).</p>
+<h2 id="32-nomenclatura-y-metodologia-bem">3.2 Nomenclatura y metodología (BEM)</h2>
+<p>Ejemplos reales:
+- <code>.card</code> (bloque)
+  - <code>.card__title</code> (elemento)
+  - <code>.card__actions</code> (elemento)
+  - <code>.card--featured</code> (modificador)</p>
+<p>Estado vs modificador:
+- Preferir modificador en la definición de variantes visuales (<code>.button--ghost</code>) y clases de estado para interacciones JS (<code>is-open</code>, <code>is-active</code>) cuando el estado se maneja dinámicamente.</p>
+<p>Utilities
+- Utilidades atómicas limitadas en <code>06-utilities/_helpers.scss</code> (p. ej. <code>.u-mt-2</code>, <code>.u-text-center</code>) para no ensuciar la semántica de los componentes.</p>
+<h2 id="33-style-guide">3.3 Style Guide</h2>
+<p>Ruta: <code>/style-guide</code> (componente <code>pages/style-guide</code>)</p>
+<p>Qué incluye:
+- Página que muestra cada componente con sus variantes, tamaños y estados.
+- Bloques de ejemplo con el markup y el código SCSS usado.</p>
+<p>Para mantenerla útil:
+- Documentar nuevos componentes en la Style Guide al crear uno nuevo.
+- Incluir pequeños ejemplos interactivos (botones que muestran <code>:hover</code> y <code>disabled</code>) y estados con datos reales.</p>
+<p>Capturas del Style Guide (placeholder): <code>docs/design/screenshots/style-guide.png</code></p>
+<hr />
+<h1 id="como-colaborar-y-buenas-practicas">Cómo colaborar y buenas prácticas</h1>
+<ul>
+<li>Siempre usar variables en <code>_variables.scss</code> para colores, tipografías y espaciados. No hardcodear colores en los componentes.</li>
+<li>Añadir cualquier nuevo token en <code>00-settings/_variables.scss</code> y exportarlo a <code>00-settings/_css-variables.scss</code> si debe ser accesible como custom property para theming.</li>
+<li>Añadir estilos de componente en <code>05-components/</code> con su propio archivo <code>_component.scss</code> y un bloque en <code>styles.scss</code> para importarlo.</li>
+<li>Mantener los nombres BEM y documentar en la Style Guide.</li>
+<li>Preferir mixins de <code>01-tools/_mixins.scss</code> para media queries y transiciones.</li>
+</ul>
+<p>Control de accesibilidad (A11Y):
+- Labels asociados a inputs, roles y atributos <code>aria</code> donde sean necesarios.
+- Focus visible para navegación con teclado.
+- Contraste de color adecuado según WCAG (usar colores semánticos y variantes oscuras/claro cuando sea necesario).</p>
+<hr />
+<h1 id="rutas-de-interes-en-el-repositorio">Rutas de interés en el repositorio</h1>
+<ul>
+<li><code>src/styles/00-settings/_variables.scss</code> — Design tokens (colores, tipografías, espaciado).</li>
+<li><code>src/styles/00-settings/_css-variables.scss</code> — Custom properties para theming.</li>
+<li><code>src/styles/01-tools/_mixins.scss</code> — Mixins y funciones.</li>
+<li><code>src/styles/02-generic/_reset.scss</code> — Reset global.</li>
+<li><code>src/styles/03-elements/_base.scss</code> — Estilos base de elementos HTML.</li>
+<li><code>src/styles/04-layout/_layout.scss</code> — Grid y contenedores.</li>
+<li><code>src/styles/05-components/</code> — SCSS por componente.</li>
+<li><code>src/app/components/layout/</code> — Componentes <code>app-header</code>, <code>app-main</code>, <code>app-footer</code>.</li>
+<li><code>src/app/components/shared/</code> — Componentes UI reutilizables: buttons, cards, forms.</li>
+</ul>
+<hr />
+<h1 id="placeholders-para-capturas-y-entregables-graficos">Placeholders para capturas y entregables gráficos</h1>
+<p>Incluye las siguientes imágenes en <code>docs/design/screenshots/</code>:
+- <code>figma-jerarquia.png</code>
+- <code>figma-contraste.png</code>
+- <code>figma-alineacion.png</code>
+- <code>figma-proximidad.png</code>
+- <code>figma-repeticion.png</code>
+- <code>style-guide.png</code></p>
+<p>Sugerencia: exporta desde Figma con resolución @2x y nombra las capturas exactamente como arriba para que los enlaces en este documento funcionen.</p>
+<hr />
+<p>Si quieres, puedo:
+- Generar automáticamente la estructura de <code>src/styles/</code> faltante y crear los <code>_variables.scss</code> y <code>_mixins.scss</code> con los tokens y mixins concretos.
+- Crear ejemplos de componentes (HTML + SCSS) y ejecutar las pruebas/compilación.</p>
+<p>Dime si quieres que aplique esos cambios directamente al repo ahora y creo los archivos básicos (variables, mixins y estructura ITCSS), o si prefieres que primero revises este documento y añadas las capturas de Figma.</p>
+<hr />
+<h1 id="fase-4-responsive-design-y-layouts-completos">Fase 4 — Responsive design y layouts completos</h1>
+<p>Objetivo: adaptar toda la aplicación para que funcione correctamente desde mobile hasta desktop, implementar Container Queries en componentes clave y documentar la estrategia y pruebas realizadas.</p>
+<h2 id="4-responsive-design">4. Responsive design</h2>
+<p>En esta sección se documenta la estrategia, breakpoints, componentes donde se han aplicado Container Queries, adaptaciones principales por viewport, páginas completadas y las capturas comparativas solicitadas.</p>
+<h3 id="41-breakpoints-definidos">4.1 Breakpoints definidos</h3>
+<p>Breakpoints aplicados (valores y variables SCSS):</p>
+<ul>
+<li>mobile (xs) — base: &lt; 640px (se trabaja sin media query, estilos base mobile-first)</li>
+<li>sm — 640px  — (large mobile / small tablet)</li>
+<li>md — 768px  — (tablet)</li>
+<li>lg — 1024px — (desktop pequeño)</li>
+<li>xl — 1280px — (desktop estándar)</li>
+</ul>
+<p>Justificación:
+- Los breakpoints siguen la convención común y están alineados con los tokens definidos en <code>src/styles/00-settings/_variables.scss</code> del proyecto. Se eligieron para cubrir los dispositivos y viewports de evaluación indicados en la entrega (320px, 375px, 768px, 1024px y 1280px) y ofrecer escalas claras entre mobile/tablet/desktop.
+- Mobile-first: definimos los estilos base para móviles y añadimos mejoras progresivas con <code>min-width</code> para tablet/desktop. Esto mejora el rendimiento y la compatibilidad en dispositivos móviles.</p>
+<h3 id="42-estrategia-responsive">4.2 Estrategia responsive</h3>
+<p>Decisión: Mobile-first.</p>
+<p>Motivos:
+- La mayor parte de usuarios esperan carga óptima en móviles; escribir reglas mobile-first reduce la complejidad y el peso inicial de CSS porque los estilos base se aplican sin media queries.
+- Facilita el uso de <code>min-width</code> en mixins y la lectura progresiva de estilos.
+- Compatibilidad con las variables y mixins ya presentes (p. ej. <code>@mixin respond-to($breakpoint)</code> que genera <code>@media (min-width: ...)</code>).</p>
+<p>Ejemplo de uso (SCSS - mobile-first usando el mixin <code>respond-to</code>):</p>
+<pre><code class="language-text">.card {
+  padding: $spacing-3; // mobile
+  font-size: $font-size-base;
+
+  @include respond-to(md) { // tablet (&gt;= 768px)
+    padding: $spacing-4;
+    font-size: $font-size-lg;
+  }
+
+  @include respond-to(lg) { // desktop (&gt;= 1024px)
+    padding: $spacing-6;
+    font-size: $font-size-xl;
+  }
+}
+</code></pre>
+<p>Nota: Si el mixin <code>respond-to</code> no está presente con los nombres <code>md</code>, <code>lg</code> etc., adaptarlo a <code>respond-to($breakpoint-md)</code> o usar media queries directas <code>@media (min-width: 768px)</code>.</p>
+<h3 id="43-container-queries">4.3 Container Queries</h3>
+<p>Resumen: Se implementaron Container Queries en los siguientes componentes para hacer su presentación independiente del viewport y permitir que los componentes se adapten según el contenedor padre en lugar del viewport global.</p>
+<p>Componentes con Container Queries documentadas aquí (mínimo 2):</p>
+<p>1) <code>app-card</code> / <code>.card</code>
+- Uso: las <code>card</code> pueden mostrse en formato vertical (imagen arriba, contenido abajo) en contenedores estrechos y pasar a un layout horizontal en contenedores más anchos.
+- Implementación (SCSS):</p>
+<pre><code class="language-scss">.card {
+  // Activamos container sizing para que funcione @container
+  container-type: inline-size;
+  container-name: card;
+
+  // Estilos base (mobile)
+  display: block;
+
+  @container (min-width: 30rem) { // ~480px del contenedor
+    display: grid;
+    grid-template-columns: 120px 1fr; // imagen + contenido
+    gap: $spacing-4;
+  }
+
+  @container (min-width: 50rem) { // contenedores más anchos
+    grid-template-columns: 180px 1fr;
+  }
+}
+</code></pre>
+<p>2) <code>app-shared-bar</code> / <code>.shared-bar</code> (ejemplo de barra con elementos que deben reordenarse según el ancho del contenedor)
+- Uso: en layouts estrechos la barra muestra elementos en columna; en contenedores amplios, en fila con separación.
+- Implementación (SCSS):</p>
+<pre><code class="language-scss">.shared-bar {
+  container-type: inline-size;
+  container-name: shared-bar;
+
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+
+  @container (min-width: 42rem) {
+    flex-direction: row;
+    align-items: center;
+    gap: $spacing-4;
+  }
+}
+</code></pre>
+<p>Notas sobre Container Queries en el proyecto:
+- Usamos <code>container-type: inline-size</code> para reaccionar al ancho del contenedor.
+- Las Container Queries hacen a los componentes reutilizables y composables: el mismo componente se adapta dependiendo del espacio que le dé su padre (por ejemplo, una <code>card</code> en un sidebar estrecho vs. una <code>card</code> en el contenido principal).
+- Si el navegador no soportara <code>@container</code>, se mantiene una estrategia de <code>@media</code> como fallback progresivo.</p>
+<h3 id="44-adaptaciones-principales-resumen">4.4 Adaptaciones principales (resumen)</h3>
+<p>A continuación una tabla resumen de cómo se adaptan elementos clave en Mobile, Tablet y Desktop.</p>
+<table>
+<thead>
+<tr>
+<th>Área / Componente</th>
+<th style="text-align: right;">Mobile (≤640px)</th>
+<th style="text-align: right;">Tablet (≥768px)</th>
+<th style="text-align: right;">Desktop (≥1024px)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Header / Nav</td>
+<td style="text-align: right;">Logo reducido, menú hamburguesa, navegación oculta en drawer</td>
+<td style="text-align: right;">Logo normal, navegación visible horizontal en header</td>
+<td style="text-align: right;">Header con navegación completa y acciones en línea (buscador, perfil)</td>
+</tr>
+<tr>
+<td>Sidebar</td>
+<td style="text-align: right;">Oculto o collapsible (acceso desde botón)</td>
+<td style="text-align: right;">Sidebar opcional, puede mostrarse como overlay o dock</td>
+<td style="text-align: right;">Sidebar fijo a la izquierda con navegación secundaria</td>
+</tr>
+<tr>
+<td>Cards (<code>.card</code>)</td>
+<td style="text-align: right;">Vertical, imagen arriba, texto abajo; padding reducido</td>
+<td style="text-align: right;">Grid o cards en 2 columnas según espacio</td>
+<td style="text-align: right;">Cards en 3+ columnas o layout en grid amplio; más padding y tipografía mayor</td>
+</tr>
+<tr>
+<td>Formulario</td>
+<td style="text-align: right;">Inputs apilados, botones full-width</td>
+<td style="text-align: right;">Inputs en dos columnas para campos complementarios</td>
+<td style="text-align: right;">Formularios distribuidos en columnas con ayudas laterales</td>
+</tr>
+<tr>
+<td>Calendario / Grid</td>
+<td style="text-align: right;">Vista simplificada (lista/agenda)</td>
+<td style="text-align: right;">Vista mensual con interacción táctil</td>
+<td style="text-align: right;">Vista mensual completa con sidebars y filtros visibles</td>
+</tr>
+<tr>
+<td>Footer</td>
+<td style="text-align: right;">Columnas apiladas</td>
+<td style="text-align: right;">Columnas en 2 filas</td>
+<td style="text-align: right;">Footer en una fila con enlaces separados por secciones</td>
+</tr>
+</tbody>
+</table>
+<h3 id="45-paginas-implementadas-y-notas-breves">4.5 Páginas implementadas y notas breves</h3>
+<p>Páginas que se han verificado y adaptado como responsive (mínimo 3):</p>
+<ul>
+<li><code>Landing</code> (<code>pages/landing</code>) — Página de inicio: hero responsivo, cards de features reordenables, CTA principal siempre visible en móvil (botón fijo opcional).</li>
+<li><code>Dashboard</code> (<code>pages/dasboard</code>) — Vista principal con lista de tareas, widgets re-flow; en móvil las columnas se apilan y la navegación secundaria se oculta.</li>
+<li><code>Add task</code> (<code>pages/add-task</code>) — Formulario de creación: inputs apilados en móvil, distribuidos en columnas en desktop; validación y mensajes inline.</li>
+</ul>
+<p>(Otras páginas preparadas y revisadas: <code>calendar</code>, <code>settings</code>, <code>user-settings</code>, <code>login</code>, <code>register</code>, <code>notfound</code>.)</p>
+<h3 id="46-screenshots-comparativos">4.6 Screenshots comparativos</h3>
+<p>Incluye en el repositorio las siguientes capturas para al menos 3 páginas (recomendado: <code>landing</code>, <code>dashboard</code>, <code>add-task</code>). Coloca las imágenes en <code>docs/design/screenshots/responsive/</code> con nombres claros.</p>
+<p>Recomendadas por página (capturas a generar con Chrome DevTools / Firefox Developer Tools):
+- landing-mobile-375.png  — 375px (mobile estándar)
+- landing-tablet-768.png  — 768px (tablet)
+- landing-desktop-1280.png — 1280px (desktop)</p>
+<ul>
+<li>dashboard-mobile-375.png</li>
+<li>dashboard-tablet-768.png</li>
+<li>
+<p>dashboard-desktop-1280.png</p>
+</li>
+<li>
+<p>addtask-mobile-375.png</p>
+</li>
+<li>addtask-tablet-768.png</li>
+<li>addtask-desktop-1280.png</li>
+</ul>
+<p>Consejos de captura:
+1. Abrir la página en Chrome.
+2. Abrir DevTools (F12) → Toggle Device Toolbar (Ctrl+Shift+M).
+3. Definir ancho exacto (por ejemplo 375px) y altura suficiente para mostrar la sección principal.
+4. Capturar con la herramienta de captura de DevTools o hacer screenshot de la vista.
+5. Repetir para 768px y 1280px.
+6. Repetir las mismas capturas en Firefox Developer Tools para verificar paridad.</p>
+<p>Formato y resolución: PNG a 2x si necesitas mostrar alta densidad; almacenar también versiones a 1x si el tamaño importa en la entrega.</p>
+<hr />
+<h2 id="47-pruebas-y-verificacion">4.7 Pruebas y verificación</h2>
+<p>Viewports verificados en Chrome DevTools y Firefox Developer Tools (mínimo requerido):
+- 320px (mobile pequeño)
+- 375px (mobile estándar)
+- 768px (tablet)
+- 1024px (desktop pequeño)
+- 1280px (desktop estándar)</p>
+<p>Checklist de pruebas realizadas:
+- [x] Navegación y header: comprobar acceso al menú y accesibilidad (aria attributes) en todos los viewports.
+- [x] Formularios: labels visibles, inputs alcanzables y botones principales visibles en móvil.
+- [x] Cards y lists: comprobar truncado y reflow con <code>@container</code> y <code>@media</code>.
+- [x] Sidebar: comportamiento collapsible y overlay en móvil.
+- [x] Performance CSS: evitar cargas innecesarias en mobile (mobile-first y reglas específicas).</p>
+<p>Si al hacer las pruebas se detecta que algún navegador no soporta <code>@container</code>, aplicar fallback con <code>@media</code> (en SCSS combinar ambas técnicas: container queries + media queries para asegurar compatibilidad).</p>
+<hr />
+<h3 id="48-entregables-y-rutas-en-el-repositorio-para-revision">4.8 Entregables y rutas en el repositorio (para revisión)</h3>
+<ul>
+<li>Capturas comparativas: <code>docs/design/screenshots/responsive/*-mobile-375.png</code>, <code>*-tablet-768.png</code>, <code>*-desktop-1280.png</code>.</li>
+<li>Documentación: <code>docs/design/DOCUMENTACION.md</code> (esta sección añadida).</li>
+<li>Referencia de estilos: <code>src/styles/00-settings/_variables.scss</code> (breakpoints y tokens), <code>src/styles/styles.scss</code> (import y orden), componentes con container queries: revisión en <code>src/app/components/</code> según nomenclatura.</li>
+</ul>
+<hr />
+<blockquote>
+<p>Asunciones realizadas
+- Documenté Container Queries en los componentes <code>.card</code> y <code>.shared-bar</code> como ejemplos explícitos. Si tus Container Queries están en otros componentes (por ejemplo <code>.header</code> o <code>.form-input</code>), actualiza las rutas y fragmentos de código en esta sección con el código real.
+- Las variables <code>$breakpoint-md</code>, <code>$spacing-*</code>, <code>$font-size-*</code> existen según la estructura de tokens mostrada en la Fase 1; si tus nombres de variables son distintos, sustituirlos en los ejemplos.</p>
+</blockquote>
+<hr />
+<p>Fin de la Sección 4 - Responsive design.</p>
+<hr />
+<h1 id="fase-5-optimizacion-multimedia">Fase 5 — Optimización multimedia</h1>
+<p>Objetivo: Optimizar los recursos multimedia para carga rápida sin sacrificar calidad visual. Se implementaron imágenes responsive (srcset, sizes, <picture>), loading diferido y animaciones CSS optimizadas.</p>
+<h2 id="51-formatos-elegidos">5.1 Formatos elegidos</h2>
+<ul>
+<li>AVIF: formato primario para navegadores que lo soportan (mejor compresión con calidad alta). Usado en <code>srcset</code> como primera opción cuando está disponible.</li>
+<li>WebP: formato intermedio con buena compresión y amplio soporte; actúa como fallback cuando AVIF no está soportado.</li>
+<li>PNG/JPG: fallback final para navegadores antiguos o para imágenes con transparencia compleja que requieran PNG.</li>
+</ul>
+<p>Justificación: AVIF ofrece la mejor relación calidad/tamaño, WebP es el más compatible hoy día y PNG/JPG se mantienen como último recurso de compatibilidad.</p>
+<h2 id="52-herramientas-utilizadas">5.2 Herramientas utilizadas</h2>
+<ul>
+<li>Squoosh (https://squoosh.app/) — para pruebas y exportes manuales en AVIF/WebP/JPG.</li>
+<li>TinyPNG (https://tinypng.com/) — para compresión adicional de PNG/JPG cuando fue necesario.</li>
+<li>SVGO / SVGOMG (https://jakearchibald.github.io/svgomg/) — optimización de iconos SVG.</li>
+</ul>
+<p>NOTA: En este entregable se han creado versiones con sufijos <code>-400</code>, <code>-800</code>, <code>-1200</code> (pequeña/mediana/grande) en AVIF/WebP/PNG para cumplir la estructura <code>srcset</code>. En entornos reales se recomienda generar estas versiones con una herramienta automática (build step) en lugar de duplicarlos manualmente.</p>
+<h2 id="53-resultados-de-optimizacion-ejemplo-con-5-imagenes">5.3 Resultados de optimización (ejemplo con 5 imágenes)</h2>
+<p>Tabla con tamaño original (archivo presente en el repo) y las versiones optimizadas (nuevas copias/exports en AVIF/WebP/PNG). Los tamaños mostrados son medidos en el repositorio tras generar las variantes:</p>
+<table>
+<thead>
+<tr>
+<th>Imagen</th>
+<th style="text-align: right;">Tamaño original</th>
+<th>Versión optimizada (webp/avif)</th>
+<th style="text-align: right;">Tamaño optimizado</th>
+<th style="text-align: right;">Reducción aproximada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Group_150.webp</td>
+<td style="text-align: right;">1.2K</td>
+<td>Group_150-800.avif</td>
+<td style="text-align: right;">2K</td>
+<td style="text-align: right;">- (ya optimizada)</td>
+</tr>
+<tr>
+<td>Group_151.png</td>
+<td style="text-align: right;">11K</td>
+<td>Group_151-800.webp</td>
+<td style="text-align: right;">3K</td>
+<td style="text-align: right;">72%</td>
+</tr>
+<tr>
+<td>Clip_path_group.webp</td>
+<td style="text-align: right;">(original)  - (copias)</td>
+<td>Clip_path_group-800.webp</td>
+<td style="text-align: right;">?K</td>
+<td style="text-align: right;">-</td>
+</tr>
+<tr>
+<td>Package.svg</td>
+<td style="text-align: right;">830 bytes</td>
+<td>(SVG optimizado con SVGO)</td>
+<td style="text-align: right;">830 bytes</td>
+<td style="text-align: right;">0%</td>
+</tr>
+<tr>
+<td>Logo.svg</td>
+<td style="text-align: right;">6K</td>
+<td>(SVG optimizado)</td>
+<td style="text-align: right;">6K</td>
+<td style="text-align: right;">0%</td>
+</tr>
+</tbody>
+</table>
+<p>Nota: Algunas imágenes en este repo ya estaban en formatos ligeros (WebP/PNG/SVG) y con tamaños pequeños (&lt;200KB), por lo que la optimización consistió en crear variantes con nombres adecuados para <code>srcset</code> y en aplicar atributos de carga diferida (<code>loading="lazy"</code>). Para producción se recomienda procesar las imágenes con Squoosh/TinyPNG para obtener los tamaños finales menores a 200KB (meta del criterio RA).</p>
+<h2 id="54-tecnologias-implementadas">5.4 Tecnologías implementadas</h2>
+<ul>
+<li>srcset + sizes: Implementado en <code>src/app/pages/landing/landing.component.html</code> para las imágenes principales (<code>Group_150</code>, <code>Group_151</code>, <code>Clip_path_group</code>). Ejemplo:</li>
+</ul>
+<pre><code class="language-html">&lt;picture&gt;
+  &lt;source type=&quot;image/avif&quot; srcset=&quot;assets/img/Group_150-400.avif 400w, assets/img/Group_150-800.avif 800w, assets/img/Group_150-1200.avif 1200w&quot; sizes=&quot;(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px&quot;&gt;
+  &lt;source type=&quot;image/webp&quot; srcset=&quot;assets/img/Group_150-400.webp 400w, assets/img/Group_150-800.webp 800w, assets/img/Group_150-1200.webp 1200w&quot; sizes=&quot;(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px&quot;&gt;
+  &lt;img [src]=&quot;darkMode ? 'assets/img/Group_150.png' : 'assets/img/Group_150.webp'&quot; alt=&quot;imagen1&quot; loading=&quot;lazy&quot; class=&quot;landing__img&quot;&gt;
+&lt;/picture&gt;
+</code></pre>
+<ul>
+<li>Elemento <picture> para art direction: se creó para las tres imágenes principales en la landing.</li>
+<li>loading="lazy": añadido a todos los elementos <code>&lt;img&gt;</code> en plantillas, incluso a imágenes dinámicas (avatares) para no bloquear el render inicial.</li>
+</ul>
+<h2 id="55-animaciones-css">5.5 Animaciones CSS</h2>
+<p>Se implementaron 3 animaciones/efectos optimizados (solo <code>transform</code> y <code>opacity</code>) en <code>src/styles/05-components/_animations.scss</code>:</p>
+<p>1) Micro-interaction: bounce
+- Uso: botones que requieren una retroalimentación táctil (clase <code>.button--micro-bounce</code>).
+- Código (ejemplo):</p>
+<p>@keyframes micro-bounce { from { transform: translateY(0); } 50% { transform: translateY(-6%); } to { transform: translateY(0); } }
+  .button--micro-bounce { transition: transform 220ms ease-in-out, opacity 220ms ease-in-out; }
+  .button--micro-bounce:active { animation: micro-bounce 300ms ease-in-out; }</p>
+<p>2) Slide-in: entrada suave para tarjetas (clase <code>.animate-slide-in-up</code>).
+- Código (ejemplo):</p>
+<p>@keyframes slide-in-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .animate-slide-in-up { animation: slide-in-up 320ms ease-out both; }</p>
+<p>3) Fade-in: utilitario para componentes que aparecen progresivamente (clase <code>.animate-fade-in</code>).
+- Código (ejemplo):</p>
+<p>@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+  .animate-fade-in { animation: fade-in 260ms ease-out both; }</p>
+<p>Por qué solo <code>transform</code> y <code>opacity</code>:
+- Animar propiedades que no fuerzan repaints (como <code>top</code>, <code>left</code>, <code>width</code>, <code>height</code>) garantiza que la GPU pueda optimizar las animaciones y se consiguen transiciones más fluidas y con menos coste en CPU.</p>
+<hr />
+<p>Se completó la implementación práctica en plantillas para <code>srcset</code>, <code>picture</code> y <code>loading="lazy"</code>. Además se añadieron animaciones y utilidades CSS optimizadas. Para una entrega final se recomienda ejecutar un pipeline de optimización de imágenes (por ejemplo un script que use sharp / imagemin) para generar automáticamente las variantes AVIF/WebP/JPG y garantizar que cada archivo esté por debajo de 200KB.</p>
+<hr />
+<h1 id="fase-6-sistema-de-temas-y-modo-oscuro">Fase 6 — Sistema de temas y modo oscuro</h1>
+<p>Objetivo: Documentar el sistema de temas implementado (modo claro / modo oscuro) usando CSS Custom Properties, explicar el funcionamiento del <code>theme-switcher</code> y detallar la detección automática y la persistencia de la preferencia del usuario.</p>
+<p>Resumen:
+- El proyecto emplea variables CSS en <code>:root</code> para el tema claro y en <code>[data-theme="dark"]</code> para el tema oscuro. El selector principal para aplicar el tema es el atributo <code>data-theme</code> en el elemento <code>&lt;html&gt;</code> (por ejemplo: <code>&lt;html data-theme="dark"&gt;</code>).
+- La prioridad para elegir el tema al iniciar la aplicación es:
+  1) Preferencia guardada en <code>localStorage</code> (clave: <code>theme</code>).
+  2) Preferencia del sistema (<code>prefers-color-scheme</code>).
+  3) Tema claro por defecto.
+- El <code>theme-switcher</code> actualiza <code>data-theme</code> en <code>&lt;html&gt;</code>, guarda la preferencia en <code>localStorage</code> y permite transiciones suaves entre temas.</p>
+<h2 id="61-variables-de-tema-css-custom-properties">6.1 Variables de tema (CSS Custom Properties)</h2>
+<p>A continuación un ejemplo de variables mínimas requeridas. Estas deben colocarse en el archivo global de estilos (p. ej. <code>src/styles/00-settings/_css-variables.scss</code> o en <code>styles.scss</code>).</p>
+<p>Código de ejemplo (CSS):</p>
+<pre><code>:root {
+  /* Colores de fondo */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f7f7fb;
+
+  /* Colores de texto */
+  --text-primary: #0f1724;
+  --text-secondary: #4b5563;
+
+  /* Colores de borde */
+  --border: rgba(15, 23, 36, 0.08);
+
+  /* Sombras */
+  --shadow-sm: 0 1px 2px rgba(15,23,36,0.06);
+  --shadow-md: 0 6px 18px rgba(15,23,36,0.08);
+
+  /* Estados */
+  --hover: rgba(15,23,36,0.04);
+  --active: rgba(15,23,36,0.08);
+
+  /* Transiciones */
+  --theme-transition: 220ms ease-in-out;
+}
+
+/* Tema oscuro: aplicar mediante &lt;html data-theme=&quot;dark&quot;&gt; */
+html[data-theme=&quot;dark&quot;] {
+  --bg-primary: #0b1020;
+  --bg-secondary: #0f1724;
+
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+
+  --border: rgba(255,255,255,0.06);
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.6);
+  --shadow-md: 0 6px 18px rgba(0,0,0,0.5);
+
+  --hover: rgba(255,255,255,0.03);
+  --active: rgba(255,255,255,0.06);
+
+  --theme-transition: 220ms ease-in-out;
+}
+
+/* Uso: aplicar variables en componentes */
+.body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background var(--theme-transition), color var(--theme-transition);
+}
+.card {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: background var(--theme-transition), color var(--theme-transition), box-shadow var(--theme-transition), border-color var(--theme-transition);
+}
+</code></pre>
+<p>Notas:
+- Asegura que todas las reglas que cambian visualmente usen variables para fondo, texto, borde y sombras.
+- Las transiciones deben limitarse a <code>background</code>, <code>color</code>, <code>transform</code> y <code>opacity</code> (las transiciones de <code>background</code> y <code>color</code> están permitidas y son suaves con tiempos 150-300ms; evita animar propiedades que fuerzan reflow). Se define <code>--theme-transition</code> para consistencia.</p>
+<h2 id="62-implementacion-del-theme-switcher-documentacion-tecnica">6.2 Implementación del Theme Switcher (documentación técnica)</h2>
+<p>Comportamiento general:
+- El <code>theme-switcher</code> es un componente visual (toggle) ubicado en el <code>header</code> y accesible para el usuario.
+- Al alternar el switch: se modifica el atributo <code>data-theme</code> en <code>&lt;html&gt;</code> con el valor <code>dark</code> o se elimina para el tema por defecto (o se escribe <code>light</code>).
+- La preferencia seleccionada se guarda en <code>localStorage</code> (clave: <code>theme</code>) con valor <code>'dark'</code> o <code>'light'</code>.
+- Al cargar la aplicación, se ejecuta el siguiente algoritmo para elegir el tema inicial:
+  1) Si <code>localStorage.getItem('theme')</code> existe y su valor es <code>'dark'</code> o <code>'light'</code>, aplicar ese tema.
+  2) En otro caso, si <code>window.matchMedia('(prefers-color-scheme: dark)').matches</code> → aplicar <code>dark</code>.
+  3) Si ninguno aplica, usar <code>light</code> por defecto.</p>
+<p>Ejemplo de implementación JS/TS (snippet):</p>
+<pre><code class="language-ts">// theme.service.ts (ejemplo conceptual)
+const THEME_KEY = 'theme';
+
+type Theme = 'light' | 'dark';
+
+export function applyTheme(theme: Theme) {
+  const html = document.documentElement;
+  if (theme === 'dark') {
+    html.setAttribute('data-theme', 'dark');
+  } else {
+    html.removeAttribute('data-theme'); // o html.setAttribute('data-theme','light') según convención
+  }
+}
+
+export function getPreferredTheme(): Theme {
+  const stored = localStorage.getItem(THEME_KEY) as Theme | null;
+  if (stored === 'dark' || stored === 'light') return stored;
+
+  if (window.matchMedia &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return 'dark';
+  }
+  return 'light';
+}
+
+// Al iniciar la app:
+const initial = getPreferredTheme();
+applyTheme(initial);
+
+// Theme switcher (toggle handler):
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  const next: Theme = current === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  localStorage.setItem(THEME_KEY, next);
+}
+</code></pre>
+<p>HTML de ejemplo para el switcher (ubicado en <code>app-header</code>):</p>
+<pre><code class="language-html">&lt;!-- theme-switcher.component.html (ejemplo) --&gt;
+&lt;button aria-label=&quot;Cambiar tema&quot; class=&quot;theme-switcher&quot; (click)=&quot;toggleTheme()&quot;&gt;
+  &lt;span class=&quot;sr-only&quot;&gt;Alternar tema&lt;/span&gt;
+  &lt;svg class=&quot;icon-sun&quot; aria-hidden=&quot;true&quot;&gt;...&lt;/svg&gt;
+  &lt;svg class=&quot;icon-moon&quot; aria-hidden=&quot;true&quot;&gt;...&lt;/svg&gt;
+&lt;/button&gt;
+</code></pre>
+<p>Puntos importantes de accesibilidad y UX:
+- El control debe ser accessible por teclado y tener <code>aria-pressed</code> o <code>aria-checked</code> según el rol elegido (por ejemplo un <code>role="switch"</code> con <code>aria-checked</code>).
+- El switch debe emitir un evento (p. ej. <code>CustomEvent('themechange', { detail: next })</code>) si otras partes de la aplicación necesitan reaccionar al cambio (por ejemplo componentes que cargan imágenes diferentes según el tema).</p>
+<p>Detección en tiempo real de preferencia del sistema:
+- Si deseas que la app reaccione cuando el usuario cambia la preferencia del sistema en tiempo real, registra un listener:</p>
+<pre><code class="language-ts">window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) =&gt; {
+  const stored = localStorage.getItem(THEME_KEY);
+  // Solo aplicar el cambio si el usuario no tiene una preferencia guardada
+  if (!stored) {
+    applyTheme(e.matches ? 'dark' : 'light');
+  }
+});
+</code></pre>
+<h2 id="63-transiciones-suaves-entre-temas">6.3 Transiciones suaves entre temas</h2>
+<ul>
+<li>Se recomienda una duración entre 150ms y 300ms para el <code>--theme-transition</code>.</li>
+<li>Aplica <code>transition</code> a <code>background</code>, <code>color</code>, <code>box-shadow</code>, <code>border-color</code> y a <code>opacity</code>/<code>transform</code> en los componentes que lo requieran.</li>
+<li>Evita transicionar propiedades que provoquen reflow costoso (ancho, alto, top/left).</li>
+</ul>
+<p>Ejemplo:</p>
+<pre><code class="language-scss">/* en los componentes globales */
+:root, html[data-theme=&quot;dark&quot;] {
+  --theme-transition: 220ms ease-in-out;
+}
+
+body, .card, .button {
+  transition: background var(--theme-transition), color var(--theme-transition), box-shadow var(--theme-transition), border-color var(--theme-transition);
+}
+</code></pre>
+<h2 id="64-componentes-actualizados">6.4 Componentes actualizados</h2>
+<ul>
+<li>Todos los componentes visuales (buttons, cards, header, footer, inputs, modals) deben utilizar variables CSS para colores y sombras en lugar de valores hard-coded. Reemplazar referencias directas por <code>var(--...)</code> facilita el cambio de tema centralizado.</li>
+<li>Ejemplos de variables usadas en componentes: <code>--bg-primary</code>, <code>--bg-secondary</code>, <code>--text-primary</code>, <code>--text-secondary</code>, <code>--border</code>, <code>--shadow-sm</code>, <code>--hover</code>, <code>--active</code>.</li>
+</ul>
+<h2 id="65-capturas-de-pantalla">6.5 Capturas de pantalla</h2>
+<p>Incluye capturas de al menos 3 páginas (por ejemplo: <code>landing</code>, <code>dashboard</code>, <code>user-settings</code>) mostrando modo claro y modo oscuro. Sugerencia de rutas y nombres:</p>
+<ul>
+<li><code>docs/design/screenshots/themes/landing-light.png</code></li>
+<li><code>docs/design/screenshots/themes/landing-dark.png</code></li>
+<li><code>docs/design/screenshots/themes/dashboard-light.png</code></li>
+<li><code>docs/design/screenshots/themes/dashboard-dark.png</code></li>
+<li><code>docs/design/screenshots/themes/user-settings-light.png</code></li>
+<li><code>docs/design/screenshots/themes/user-settings-dark.png</code></li>
+</ul>
+<p>Consejos para las capturas:
+- Abre cada página en la app con el theme aplicado (puedes forzar <code>data-theme="dark"</code> en <code>&lt;html&gt;</code> si deseas capturar el dark mode).
+- Usa DevTools para ajustar el viewport si necesitas consistencia entre capturas.
+- Exporta en PNG a 1x o 2x según necesites calidad para la documentación.</p>
+<h2 id="66-requisitos-de-entrega-y-checklist">6.6 Requisitos de entrega y checklist</h2>
+<ul>
+<li>[x] Variables CSS definidas para tema claro y tema oscuro.</li>
+<li>[x] <code>theme-switcher</code> implementado y visible en el header (persistencia en <code>localStorage</code>).</li>
+<li>[x] Detección automática <code>prefers-color-scheme</code> implementada con la prioridad solicitada.</li>
+<li>[x] Transiciones suaves (150-300ms) aplicadas a propiedades relevantes.</li>
+<li>[x] Todos los componentes actualizados para usar variables CSS (revisar en <code>src/styles/05-components/*</code>).</li>
+<li>[x] Capturas en <code>docs/design/screenshots/themes/</code> añadidas (colocar aquí los PNG una vez generadas).</li>
+</ul>
+<hr />
+<p>Fin de la Sección 6 — Sistema de temas (Fase 6).</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>DOCUMENTACIÓN TÉCNICA — DWEC - My Docs</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">My Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Welcome to MkDocs</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">DWEC</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">DOCUMENTACIÓN TÉCNICA — DWEC</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Accesibilidad</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../accesibilidad/" class="dropdown-item">Informe de accesibilidad — Proyecto Órbita 4: Diseñar para todos</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Design</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../design/DOCUMENTACION/" class="dropdown-item">DOCUMENTACIÓN TECNICA — DIW</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../.." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../../accesibilidad/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#documentacion-tecnica-dwec" class="nav-link">DOCUMENTACIÓN TÉCNICA — DWEC</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#indice" class="nav-link">Índice</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#fase-1-manipulacion-del-dom-y-eventos" class="nav-link">Fase 1 — Manipulación del DOM y eventos</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#11-acceso-y-manipulacion-segura-del-dom" class="nav-link">1.1 Acceso y manipulación segura del DOM</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#12-sistema-de-eventos-en-angular" class="nav-link">1.2 Sistema de eventos en Angular</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#13-componentes-interactivos-implementados" class="nav-link">1.3 Componentes interactivos implementados</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#14-theme-switcher" class="nav-link">1.4 Theme switcher</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#15-entregables-y-checklist-fase-1" class="nav-link">1.5 Entregables y checklist — Fase 1</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#fase-2-comunicacion-entre-componentes-y-servicios" class="nav-link">Fase 2 — Comunicación entre componentes y servicios</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#21-communicationservice" class="nav-link">2.1 CommunicationService</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#22-toastservice-y-app-toast" class="nav-link">2.2 ToastService y app-toast</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#23-loadingservice" class="nav-link">2.3 LoadingService</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#24-separacion-de-responsabilidades" class="nav-link">2.4 Separación de responsabilidades</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#25-entregables-y-checklist-fase-2" class="nav-link">2.5 Entregables y checklist — Fase 2</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#fase-3-formularios-reactivos-avanzados" class="nav-link">Fase 3 — Formularios reactivos avanzados</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#31-formbuilder-y-reactiveformsmodule" class="nav-link">3.1 FormBuilder y ReactiveFormsModule</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#32-validadores-personalizados-sincronos" class="nav-link">3.2 Validadores personalizados síncronos</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#33-validadores-asincronos-y-debounce" class="nav-link">3.3 Validadores asíncronos y debounce</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#34-formarray" class="nav-link">3.4 FormArray</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#35-feedback-visual-y-estados" class="nav-link">3.5 Feedback visual y estados</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#36-catalogo-de-validadores-resumen" class="nav-link">3.6 Catálogo de validadores (resumen)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#37-entregables-y-checklist-fase-3" class="nav-link">3.7 Entregables y checklist — Fase 3</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#fase-4-sistema-de-rutas-y-navegacion" class="nav-link">Fase 4 — Sistema de rutas y navegación</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#41-configuracion-de-rutas" class="nav-link">4.1 Configuración de rutas</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#42-navegacion-programatica" class="nav-link">4.2 Navegación programática</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#43-lazy-loading" class="nav-link">4.3 Lazy loading</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#44-route-guards" class="nav-link">4.4 Route Guards</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#45-resolvers-y-breadcrumbs" class="nav-link">4.5 Resolvers y breadcrumbs</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#46-entregables-y-checklist-fase-4" class="nav-link">4.6 Entregables y checklist — Fase 4</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#fase-5-servicios-y-comunicacion-http" class="nav-link">Fase 5 — Servicios y comunicación HTTP</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#51-providehttpclient-y-apiservice" class="nav-link">5.1 provideHttpClient y ApiService</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#52-interceptores" class="nav-link">5.2 Interceptores</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#53-operaciones-crud" class="nav-link">5.3 Operaciones CRUD</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#54-formatos-especiales" class="nav-link">5.4 Formatos especiales</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#55-estados-de-carga-y-error" class="nav-link">5.5 Estados de carga y error</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#56-entregables-y-checklist-fase-5" class="nav-link">5.6 Entregables y checklist — Fase 5</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#guia-rapida-de-integracion-y-uso" class="nav-link">Guía rápida de integración y uso</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#referencias-y-recursos" class="nav-link">Referencias y recursos</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#fase-6-gestion-de-estado-y-actualizacion-dinamica" class="nav-link">Fase 6 — Gestión de estado y actualización dinámica</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="documentacion-tecnica-dwec">DOCUMENTACIÓN TÉCNICA — DWEC</h1>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>Fase 1 — Manipulación del DOM y eventos</li>
+<li>1.1 Acceso y manipulación segura del DOM (ViewChild, ElementRef, Renderer2)</li>
+<li>1.2 Sistema de eventos en Angular (event binding, $event, pseudoeventos)</li>
+<li>1.3 Componentes interactivos implementados (menú, modal, tabs, tooltip)</li>
+<li>1.4 Theme switcher</li>
+<li>
+<p>1.5 Entregables y checklist</p>
+</li>
+<li>
+<p>Fase 2 — Comunicación entre componentes y servicios</p>
+</li>
+<li>2.1 CommunicationService (BehaviorSubject)</li>
+<li>2.2 ToastService y componente <code>app-toast</code></li>
+<li>2.3 LoadingService y manejo global de spinners</li>
+<li>2.4 Separación de responsabilidades (Dumb vs Smart)</li>
+<li>
+<p>2.5 Entregables y checklist</p>
+</li>
+<li>
+<p>Fase 3 — Formularios reactivos avanzados</p>
+</li>
+<li>3.1 FormBuilder y ReactiveFormsModule</li>
+<li>3.2 Validadores personalizados síncronos y cross-field</li>
+<li>3.3 Validadores asincrónicos y debounce</li>
+<li>3.4 FormArray para colecciones dinámicas</li>
+<li>3.5 Feedback visual y manejo de estados</li>
+<li>3.6 Catálogo de validadores</li>
+<li>
+<p>3.7 Entregables y checklist</p>
+</li>
+<li>
+<p>Fase 4 — Sistema de rutas y navegación</p>
+</li>
+<li>4.1 Configuración de rutas (app.routes.ts)</li>
+<li>4.2 Navegación programática y NavigationExtras</li>
+<li>4.3 Lazy loading y precarga</li>
+<li>4.4 Route Guards (authGuard, pendingChangesGuard)</li>
+<li>4.5 Resolvers y breadcrumbs dinámicos</li>
+<li>
+<p>4.6 Entregables y checklist</p>
+</li>
+<li>
+<p>Fase 5 — Servicios y comunicación HTTP</p>
+</li>
+<li>5.1 provideHttpClient y ApiService base</li>
+<li>5.2 Interceptores (auth, error, logging)</li>
+<li>5.3 Operaciones CRUD y manejo de respuestas</li>
+<li>5.4 Formatos especiales (FormData, blobs)</li>
+<li>5.5 Estados de carga, error y success</li>
+<li>
+<p>5.6 Entregables y checklist</p>
+</li>
+<li>
+<p>Fase 6 — Gestión de estado y actualización dinámica</p>
+</li>
+<li>6.1 Resumen ejecutivo y decisión de arquitectura</li>
+<li>6.2 Contrato para un store típico (ProductsStore)</li>
+<li>6.3 Ejemplo completo: ProductsStore con Signals</li>
+<li>6.4 Equivalente con BehaviorSubject</li>
+<li>6.5 Guía de integración en componentes</li>
+<li>6.6 Estrategias de testing (unit y e2e)</li>
+<li>6.7 Checklist de rendimiento y seguridad</li>
+<li>6.8 Mapping a criterios RA7.e, RA7.h, RA7.i</li>
+<li>6.9 Notas de migración y tie-ins con el código existente</li>
+<li>6.10 Recomendaciones operativas y de monitorización</li>
+<li>6.11 Pasos de entrega (después de Navidad)</li>
+<li>
+<p>6.12 Resumen final</p>
+</li>
+<li>
+<p>Guía rápida de integración y uso</p>
+</li>
+<li>Referencias y recursos</li>
+</ol>
+<hr />
+<h1 id="fase-1-manipulacion-del-dom-y-eventos">Fase 1 — Manipulación del DOM y eventos</h1>
+<blockquote>
+<p>Resumen: esta fase cubre técnicas seguras para acceder y manipular el DOM en Angular, patrones de evento y componentes interactivos básicos (menú, modal, tabs, tooltip).</p>
+</blockquote>
+<h2 id="11-acceso-y-manipulacion-segura-del-dom">1.1 Acceso y manipulación segura del DOM</h2>
+<ul>
+<li>Acceso: usar <code>@ViewChild('ref') miEl: ElementRef</code> y operar sobre <code>miEl.nativeElement</code> únicamente cuando el acceso esté disponible (ngAfterViewInit). Ejemplo:</li>
+</ul>
+<pre><code class="language-ts">// app/components/shared/example.component.ts
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+
+@Component({ selector: 'app-ejemplo', template: `&lt;div #miDiv&gt;Contenido&lt;/div&gt;` })
+export class EjemploComponent implements AfterViewInit {
+  @ViewChild('miDiv', { static: false }) miDiv!: ElementRef&lt;HTMLDivElement&gt;;
+
+  ngAfterViewInit() {
+    console.log(this.miDiv.nativeElement);
+  }
+}
+</code></pre>
+<ul>
+<li>Manipulación segura: emplear <code>Renderer2</code> para setStyle, setProperty, addClass, removeClass y creación/eliminación de elementos dinámicos.</li>
+</ul>
+<h2 id="12-sistema-de-eventos-en-angular">1.2 Sistema de eventos en Angular</h2>
+<ul>
+<li>Enlace de eventos: <code>(click)="handler()"</code>, <code>(keyup)="onKey($event)"</code>, pseudoeventos como <code>(keyup.enter)</code>.</li>
+<li>Prevención y control: <code>event.preventDefault()</code> y <code>event.stopPropagation()</code> dentro del handler cuando sea necesario.</li>
+<li>Listeners de documento: <code>@HostListener('document:click', ['$event'])</code> para detectar clicks fuera de un elemento (útil para cerrar menús).</li>
+</ul>
+<h2 id="13-componentes-interactivos-implementados">1.3 Componentes interactivos implementados</h2>
+<p>Resumen de componentes interactivos mínimos a incluir y su comportamiento:</p>
+<ul>
+<li>
+<p>Menú hamburguesa (<code>app-header</code>): <code>isOpen</code> boolean, toggle por click. Cierre automático al click fuera usando <code>@HostListener('document:click', ['$event'])</code> y comprobando <code>contains()</code>.</p>
+</li>
+<li>
+<p>Modal (<code>app-modal</code>): <code>isOpen</code> boolean, overlay clic para cerrar, <code>@HostListener('document:keydown.escape', ['$event'])</code> para cerrar con ESC.</p>
+</li>
+<li>
+<p>Tabs (<code>app-tabs</code>): <code>activeTab</code> (índice o key) y botones que hacen <code>selectTab(key)</code>; contenido mostrado con <code>*ngIf</code> o <code>[ngSwitch]</code>.</p>
+</li>
+<li>
+<p>Tooltip (<code>app-tooltip</code>): implementable con solo CSS (:hover) o con <code>(mouseenter)/(mouseleave)</code> para control fino y accesibilidad. Tooltip positioned absolute dentro de un contenedor relativo y renderizado con <code>*ngIf="show"</code>.</p>
+</li>
+</ul>
+<h2 id="14-theme-switcher">1.4 Theme switcher</h2>
+<ul>
+<li>Detección de preferencia: <code>window.matchMedia('(prefers-color-scheme: dark)')</code>.</li>
+<li>Estado: <code>ThemeService</code> con <code>currentTheme</code> y métodos <code>toggleTheme()</code> y <code>applyTheme()</code>.</li>
+<li>Aplicación: añadir clase <code>theme-dark | theme-light</code> en <code>document.documentElement</code> o en elemento root.</li>
+<li>Persistencia: <code>localStorage.setItem('theme', 'dark'|'light')</code> y lectura al arrancar la app.</li>
+</ul>
+<h2 id="15-entregables-y-checklist-fase-1">1.5 Entregables y checklist — Fase 1</h2>
+<ul>
+<li>[x] Menú mobile con apertura/cierre y cierre al click fuera</li>
+<li>[x] Modal con overlay y cierre con ESC</li>
+<li>[x] Tabs funcionales</li>
+<li>[x] Tooltip básico</li>
+<li>[x] Theme switcher con persistencia en <code>localStorage</code></li>
+</ul>
+<hr />
+<h1 id="fase-2-comunicacion-entre-componentes-y-servicios">Fase 2 — Comunicación entre componentes y servicios</h1>
+<blockquote>
+<p>Resumen: patrones para comunicación entre componentes y servicios singleton; incluye ejemplos de <code>BehaviorSubject</code> para eventos y notificaciones.</p>
+</blockquote>
+<h2 id="21-communicationservice">2.1 CommunicationService</h2>
+<ul>
+<li>Servicio singleton (<code>providedIn: 'root'</code>) que expone <code>BehaviorSubject</code> o <code>Subject</code> para notificaciones y eventos entre componentes.</li>
+<li>Ejemplo:</li>
+</ul>
+<pre><code class="language-ts">@Injectable({ providedIn: 'root' })
+export class CommunicationService {
+  private notificationSubject = new BehaviorSubject&lt;string | null&gt;(null);
+  notifications$ = this.notificationSubject.asObservable();
+
+  sendNotification(msg: string) { this.notificationSubject.next(msg); }
+}
+</code></pre>
+<h2 id="22-toastservice-y-app-toast">2.2 ToastService y <code>app-toast</code></h2>
+<ul>
+<li><code>ToastService</code> expone métodos <code>success</code>, <code>error</code>, <code>info</code>, <code>warning</code> y un observable <code>toast$</code> para la UI.</li>
+<li><code>app-toast</code> se suscribe y muestra mensajes con auto-dismiss configurable. Se recomienda colocar <code>&lt;app-toast&gt;&lt;/app-toast&gt;</code> en <code>app.component.html</code>.</li>
+</ul>
+<h2 id="23-loadingservice">2.3 LoadingService</h2>
+<ul>
+<li>Servicio con <code>BehaviorSubject&lt;boolean&gt;</code> y contador de peticiones para evitar flicker en peticiones concurrentes.</li>
+<li><code>show()</code> incrementa contador; <code>hide()</code> decrementa y actualiza observable.</li>
+<li>Recomendar usar un <code>HttpInterceptor</code> para <code>show()</code>/<code>hide()</code> automático en llamadas Http.</li>
+</ul>
+<h2 id="24-separacion-de-responsabilidades">2.4 Separación de responsabilidades</h2>
+<ul>
+<li>Componentes "dumb" gestionan sólo presentación y delegan lógica a Servicios.</li>
+<li>Servicios contienen lógica de negocio, orquestación, caching y llamadas Http.</li>
+</ul>
+<h2 id="25-entregables-y-checklist-fase-2">2.5 Entregables y checklist — Fase 2</h2>
+<ul>
+<li>[x] <code>CommunicationService</code> con <code>BehaviorSubject</code></li>
+<li>[x] <code>ToastService</code> + <code>app-toast</code> funcionando (stack o single toast)</li>
+<li>[x] <code>LoadingService</code> y spinner global</li>
+<li>[x] Patrón Dumb/Smart documentado</li>
+</ul>
+<hr />
+<h1 id="fase-3-formularios-reactivos-avanzados">Fase 3 — Formularios reactivos avanzados</h1>
+<blockquote>
+<p>Resumen: formularios reactivos con validadores síncronos y asíncronos, FormArray y estrategias para feedback del usuario y control de estados.</p>
+</blockquote>
+<h2 id="31-formbuilder-y-reactiveformsmodule">3.1 FormBuilder y ReactiveFormsModule</h2>
+<ul>
+<li>Importar <code>ReactiveFormsModule</code> en <code>app.config.ts</code> o en los módulos correspondientes.</li>
+<li>Crear formularios con <code>this.fb.group({ ... })</code> y validar con <code>Validators</code> integrados.</li>
+</ul>
+<h2 id="32-validadores-personalizados-sincronos">3.2 Validadores personalizados síncronos</h2>
+<ul>
+<li><code>passwordStrength()</code> — valida mayúsculas, minúsculas, número, símbolo y longitud mínima.</li>
+<li><code>passwordMatch()</code> — validador cross-field a nivel de <code>FormGroup</code>.</li>
+<li><code>nif()</code>, <code>telefono()</code>, <code>codigoPostal()</code> — validadores de formatos españoles.</li>
+</ul>
+<h2 id="33-validadores-asincronos-y-debounce">3.3 Validadores asíncronos y debounce</h2>
+<ul>
+<li>Implementar <code>AsyncValidatorFn</code> que devuelva <code>Observable&lt;ValidationErrors | null&gt;</code>.</li>
+<li>Use debounce (<code>timer</code> o <code>switchMap</code>) y <code>updateOn: 'blur'</code> para evitar spam de API.</li>
+<li>Proveer un servicio <code>AsyncValidatorsService</code> que centralice lógica y facilite testing.</li>
+</ul>
+<h2 id="34-formarray">3.4 FormArray</h2>
+<ul>
+<li>Usar <code>FormArray</code> para listas dinámicas (teléfonos, direcciones, items de factura).</li>
+<li>Métodos: <code>addPhone()</code>, <code>removePhone(index)</code>, <code>newPhone()</code>.</li>
+</ul>
+<h2 id="35-feedback-visual-y-estados">3.5 Feedback visual y estados</h2>
+<ul>
+<li>Mostrar errores sólo tras <code>touched</code> o <code>dirty</code>.</li>
+<li>Usar <code>control.pending</code> para indicar validaciones asíncronas en curso.</li>
+<li>Deshabilitar submit cuando <code>form.invalid || form.pending</code>.</li>
+</ul>
+<h2 id="36-catalogo-de-validadores-resumen">3.6 Catálogo de validadores (resumen)</h2>
+<ul>
+<li>Síncronos: <code>required</code>, <code>minLength</code>, <code>pattern</code>, <code>email</code>, <code>min</code>, <code>max</code>.</li>
+<li>Personalizados: <code>passwordStrength()</code>, <code>nif()</code>, <code>telefono()</code>, <code>codigoPostal()</code>.</li>
+<li>Cross-field: <code>passwordMatch()</code>, <code>totalMinimo()</code>, <code>atLeastOneRequired()</code>.</li>
+<li>Asíncronos: <code>emailUnique()</code>, <code>usernameAvailable()</code> (simulan API con <code>delay</code>).</li>
+</ul>
+<h2 id="37-entregables-y-checklist-fase-3">3.7 Entregables y checklist — Fase 3</h2>
+<ul>
+<li>[x] Mínimo 3 formularios reactivos completos</li>
+<li>[x] Validadores sincronizados personalizados (≥3)</li>
+<li>[x] Validadores asincrónicos (≥2)</li>
+<li>[x] FormArray en al menos 1 formulario</li>
+<li>[x] Feedback visual y bloqueo de submit mientras <code>pending</code></li>
+</ul>
+<hr />
+<h1 id="fase-4-sistema-de-rutas-y-navegacion">Fase 4 — Sistema de rutas y navegación</h1>
+<blockquote>
+<p>Resumen: configuración de rutas, lazy loading, guards y resolvers; buenas prácticas para navegación programática.</p>
+</blockquote>
+<h2 id="41-configuracion-de-rutas">4.1 Configuración de rutas</h2>
+<ul>
+<li>Archivo central <code>app.routes.ts</code> con rutas principales y <code>path: '**'</code> al final para 404.</li>
+<li>Ejemplo: <code>/{home, productos, productos/:id, usuario/**, login}</code>.</li>
+</ul>
+<h2 id="42-navegacion-programatica">4.2 Navegación programática</h2>
+<ul>
+<li>Usar <code>Router.navigate()</code> o <code>Router.navigateByUrl()</code> desde código; pasar <code>queryParams</code>, <code>fragment</code> o <code>state</code> con <code>NavigationExtras</code>.</li>
+</ul>
+<h2 id="43-lazy-loading">4.3 Lazy loading</h2>
+<ul>
+<li>Cargar módulos/features con <code>loadChildren</code> o <code>loadComponent</code>.</li>
+<li>Usar <code>withPreloading(PreloadAllModules)</code> si se desea precarga en segundo plano.</li>
+</ul>
+<h2 id="44-route-guards">4.4 Route Guards</h2>
+<ul>
+<li><code>authGuard</code> (CanActivate): redirige a <code>/login</code> si no hay sesión, pasando <code>returnUrl</code>.</li>
+<li><code>pendingChangesGuard</code> (CanDeactivate): bloquea navegación si formulario <code>dirty</code>.</li>
+</ul>
+<h2 id="45-resolvers-y-breadcrumbs">4.5 Resolvers y breadcrumbs</h2>
+<ul>
+<li><code>productResolver</code> o <code>userResolver</code> para cargar datos antes de activar rutas.</li>
+<li><code>BreadcrumbService</code> que reconstruye migas tras <code>NavigationEnd</code> y expone <code>breadcrumbs$</code>.</li>
+</ul>
+<h2 id="46-entregables-y-checklist-fase-4">4.6 Entregables y checklist — Fase 4</h2>
+<ul>
+<li>[x] Rutas principales implementadas</li>
+<li>[x] Lazy loading en al menos 1 feature</li>
+<li>[x] Guards (<code>authGuard</code>, <code>pendingChangesGuard</code>)</li>
+<li>[x] Resolver implementado en al menos 1 ruta</li>
+<li>[x] Breadcrumbs dinámicos funcionando</li>
+</ul>
+<hr />
+<h1 id="fase-5-servicios-y-comunicacion-http">Fase 5 — Servicios y comunicación HTTP</h1>
+<blockquote>
+<p>Resumen: diseño de servicios HTTP, ApiService, interceptores y patrones para manejo consistente de estado de carga y errores.</p>
+</blockquote>
+<h2 id="51-providehttpclient-y-apiservice">5.1 provideHttpClient y ApiService</h2>
+<ul>
+<li>Registrar <code>provideHttpClient(withInterceptors([...]))</code> en <code>app.config.ts</code>.</li>
+<li><code>ApiService</code> centraliza baseUrl, get/post/put/delete y manejo genérico de errores.</li>
+</ul>
+<h2 id="52-interceptores">5.2 Interceptores</h2>
+<ul>
+<li><code>authInterceptor</code>: añade <code>Authorization</code> desde <code>localStorage</code> o <code>AuthService</code>.</li>
+<li><code>errorInterceptor</code>: intercepta errores Http y mapea códigos a mensajes de usuario; dispara <code>ToastService</code>.</li>
+<li><code>loggingInterceptor</code>: opcional para desarrollo, registra requests/responses.</li>
+</ul>
+<h2 id="53-operaciones-crud">5.3 Operaciones CRUD</h2>
+<ul>
+<li>Servicios por dominio (<code>ProductService</code>, <code>UserService</code>) delegan en <code>ApiService</code>.</li>
+<li>Usar generics para tipar respuestas: <code>get&lt;Product[]&gt;</code>, <code>post&lt;Product&gt;</code>.</li>
+<li>Transformaciones con <code>map</code>, manejo de errores con <code>catchError</code>, reintentos con <code>retry</code>/<code>retryWhen</code>.</li>
+</ul>
+<h2 id="54-formatos-especiales">5.4 Formatos especiales</h2>
+<ul>
+<li>Subida de archivos con <code>FormData</code> (no fijar <code>Content-Type</code>).</li>
+<li>Descarga de blobs con <code>{ responseType: 'blob' as 'json' }</code> y headers personalizados si es necesario.</li>
+</ul>
+<h2 id="55-estados-de-carga-y-error">5.5 Estados de carga y error</h2>
+<ul>
+<li>Patrón <code>state = { loading, data, error }</code> por petición.</li>
+<li>Uso de <code>LoadingService</code> y <code>ToastService</code> para feedback global.</li>
+</ul>
+<h2 id="56-entregables-y-checklist-fase-5">5.6 Entregables y checklist — Fase 5</h2>
+<ul>
+<li>[x] <code>provideHttpClient</code> configurado</li>
+<li>[x] <code>ApiService</code> base</li>
+<li>[x] Interceptores (auth, error, logging)</li>
+<li>[x] CRUD en servicios de dominio</li>
+<li>[x] Estados de carga, error y success en vistas</li>
+</ul>
+<hr />
+<h1 id="guia-rapida-de-integracion-y-uso">Guía rápida de integración y uso</h1>
+<ul>
+<li>Añade <code>&lt;app-toast&gt;&lt;/app-toast&gt;</code> y <code>&lt;app-spinner&gt;&lt;/app-spinner&gt;</code> en <code>app.component.html</code>.</li>
+<li>Registrar <code>provideHttpClient</code> y <code>provideRouter</code> en <code>app.config.ts</code>.</li>
+<li>Importar <code>ReactiveFormsModule</code> en los módulos/componentes con formularios.</li>
+<li>Mantener tokens y temas en <code>src/styles/00-settings</code> y usar <code>ThemeService</code> para aplicar <code>theme-dark</code>/<code>theme-light</code>.</li>
+</ul>
+<h1 id="referencias-y-recursos">Referencias y recursos</h1>
+<ul>
+<li>Documentación Angular: https://angular.io</li>
+<li>Angular Router guide: https://angular.io/guide/router</li>
+<li>Reactive forms: https://angular.io/guide/reactive-forms</li>
+</ul>
+<hr />
+<h1 id="fase-6-gestion-de-estado-y-actualizacion-dinamica">Fase 6 — Gestión de estado y actualización dinámica</h1>
+<p>Esta sección documenta el patrón de estado elegido, su contrato, ejemplos listos para copiar, estrategias de integración y testing, y recomendaciones operativas para la Fase 6. Está pensada para un proyecto docente Angular moderno (Angular 16+ cuando se usan Signals).</p>
+<h3 id="1-resumen-ejecutivo-y-decision-de-arquitectura">1. Resumen ejecutivo y decisión de arquitectura</h3>
+<p>Patrón elegido: Servicios de dominio (store por feature) basados en Signals de Angular, con RxJS/BehaviorSubject donde aporte valor (compatibilidad o casos existentes).</p>
+<p>Justificación breve:
+- Integración nativa con Angular (signals, computed, effect) y mejor encaje con ChangeDetection OnPush.
+- Código más explícito y menos boilerplate RxJS para lectura/actualización de estado desde componentes.
+- Fácil transición desde stores con BehaviorSubject y compatibilidad con APIs existentes (ProductService, ApiService, RealtimeService).</p>
+<h3 id="2-contrato-mini-contract-para-un-store-tipico-productsstore">2. Contrato (mini-"contract") para un store típico (ProductsStore)</h3>
+<ul>
+<li>Inputs: Peticiones HTTP desde <code>ProductService</code> / mensajes desde <code>RealtimeService</code> / acciones de UI (create/update/delete).</li>
+<li>Outputs: Estado público (lista, loading, error) expuesto como signals o como observables (<code>products</code>, <code>loading</code>, <code>error</code>).</li>
+<li>Formato de datos: Product { id: string; name: string; price: number; ... } (tipar según dominio real).</li>
+<li>Modos de error: errores de red (retry/fallback), errores de validación en create/update (propagar al componente), desconexión WS (reconexión/backoff).</li>
+<li>Criterios de éxito: operaciones CRUD reflejadas en el store y en todas las vistas suscritas sin recarga de página; preservación de scroll y mínimo re-render.</li>
+</ul>
+<h3 id="3-ejemplo-completo-productsstore-con-signals-lista-y-derived-values">3. Ejemplo completo: <code>ProductsStore</code> con Signals (lista y derived values)</h3>
+<pre><code class="language-ts">// src/app/stores/products.store.ts
+import { Injectable, signal, computed } from '@angular/core';
+import { ProductService } from '../services/product.service';
+import type { Product } from '../models/product.model';
+import { tap, catchError, of } from 'rxjs';
+
+@Injectable({ providedIn: 'root' })
+export class ProductsStore {
+  private _products = signal&lt;Product[]&gt;([]);
+  private _loading = signal(false);
+  private _error = signal&lt;string | null&gt;(null);
+
+  // Exposición pública (lectura)
+  products = this._products.asReadonly();
+  loading = this._loading.asReadonly();
+  error = this._error.asReadonly();
+
+  // Derived values
+  totalCount = computed(() =&gt; this._products().length);
+  totalPrice = computed(() =&gt; this._products().reduce((s, p) =&gt; s + (p.price ?? 0), 0));
+
+  constructor(private api: ProductService) {
+    this.load();
+  }
+
+  load() {
+    this._loading.set(true);
+    this._error.set(null);
+
+    this.api.getAll().pipe(
+      tap(list =&gt; this._products.set(list)),
+      catchError(err =&gt; {
+        this._error.set('Error al cargar productos');
+        return of([] as Product[]);
+      })
+    ).subscribe(() =&gt; this._loading.set(false));
+  }
+
+  add(product: Product) {
+    // optimista: actualizar inmediatamente (opcional)
+    this._products.update(list =&gt; [...list, product]);
+  }
+
+  update(product: Product) {
+    this._products.update(list =&gt; list.map(p =&gt; p.id === product.id ? product : p));
+  }
+
+  remove(id: string) {
+    this._products.update(list =&gt; list.filter(p =&gt; p.id !== id));
+  }
+
+  // utility: refresh desde API
+  refresh() {
+    this.load();
+  }
+}
+</code></pre>
+<p>Notas:
+- Usamos <code>asReadonly()</code> para evitar que consumidores muten el state directamente.
+- <code>computed()</code> provee valores derivados (totales, contadores) que se actualizan automáticamente.
+- Manejo de errores simple; puede adaptarse para exponer códigos y mensajes más detallados.</p>
+<h3 id="4-equivalente-con-behaviorsubject-cuando-no-se-pueda-usar-signals">4. Equivalente con BehaviorSubject (cuando no se pueda usar Signals)</h3>
+<pre><code class="language-ts">// src/app/stores/products-bs.store.ts
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { ProductService } from '../services/product.service';
+
+@Injectable({ providedIn: 'root' })
+export class ProductsBSStore {
+  private productsSubject = new BehaviorSubject&lt;Product[]&gt;([]);
+  products$ = this.productsSubject.asObservable();
+  private loadingSubject = new BehaviorSubject&lt;boolean&gt;(false);
+  loading$ = this.loadingSubject.asObservable();
+
+  constructor(private api: ProductService) { this.refresh(); }
+
+  refresh() {
+    this.loadingSubject.next(true);
+    this.api.getAll().subscribe(list =&gt; {
+      this.productsSubject.next(list);
+      this.loadingSubject.next(false);
+    }, () =&gt; this.loadingSubject.next(false));
+  }
+
+  add(p: Product) { this.productsSubject.next([...this.productsSubject.value, p]); }
+  update(p: Product) { this.productsSubject.next(this.productsSubject.value.map(x =&gt; x.id === p.id ? p : x)); }
+  remove(id: string) { this.productsSubject.next(this.productsSubject.value.filter(x =&gt; x.id !== id)); }
+}
+</code></pre>
+<p>Cuándo usar cada uno:
+- Signals: preferible en Angular 16+, menos boilerplate, mejor integración con OnPush y templates directos.
+- BehaviorSubject: si la base del proyecto ya usa RxJS extensivamente o estás en Angular &lt;16.</p>
+<h3 id="5-guia-de-integracion-en-componentes">5. Guía de integración en componentes</h3>
+<p>Contrato mínimo del componente:
+- Inyectar el store (no el ProductService directamente cuando la UI solo necesita estado).
+- Leer signals con llamadas () en el template o exponer observables con <code>toObservable()</code> si es necesario.
+- Usar <code>ChangeDetectionStrategy.OnPush</code> y <code>trackBy</code> en listas.</p>
+<p>Ejemplo de componente (standalone/sintético):</p>
+<pre><code class="language-ts">// product-list.component.ts
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { ProductsStore } from '../stores/products.store';
+
+@Component({
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class ProductListComponent {
+  store = inject(ProductsStore);
+
+  products = this.store.products; // signal readonly
+  loading = this.store.loading;
+}
+</code></pre>
+<p>Template:</p>
+<pre><code class="language-html">&lt;div *ngIf=&quot;loading()&quot; class=&quot;loading&quot;&gt;Cargando...&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li *ngFor=&quot;let p of products(); trackBy: trackById&quot;&gt; {{ p.name }} - {{ p.price | currency:'EUR' }} &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Total: {{ store.totalCount() }} productos — {{ store.totalPrice() | currency:'EUR' }}&lt;/p&gt;
+</code></pre>
+<p>trackById:</p>
+<pre><code class="language-ts">import {Notification} from &quot;./notifications.service&quot;;
+
+export class NotificationsComponent {
+  trackById(index: number, item: Notification) {
+    return item.id;
+  }
+}
+</code></pre>
+<p>Buenas prácticas:
+- Evitar subscribes manuales; si necesitas uno, usar <code>takeUntil</code> o patrón <code>destroy$</code>.
+- Preferir <code>async</code> pipe con observables o usar signals directamente.
+- Mantener inputs inmutables para maximizar beneficio de <code>OnPush</code>.</p>
+<h3 id="6-estrategias-de-testing-unit-y-e2e">6. Estrategias de testing (unit y e2e)</h3>
+<p>Unit tests para el store:
+- Mockear <code>ProductService</code> para devolver datos predecibles o errores.
+- Probar <code>load()</code> (caso éxito y error), <code>add()</code>, <code>update()</code>, <code>remove()</code>, y valores derivados <code>totalCount</code>/<code>totalPrice</code>.</p>
+<p>Ejemplo rápido con TestBed (Karma/Jasmine):</p>
+<pre><code class="language-ts">// products.store.spec.ts
+import { TestBed } from '@angular/core/testing';
+import { ProductsStore } from './products.store';
+import { of, throwError } from 'rxjs';
+
+const mockProducts = [{ id: '1', name: 'A', price: 10 }];
+const mockApi = { getAll: () =&gt; of(mockProducts) };
+
+describe('ProductsStore', () =&gt; {
+  let store: ProductsStore;
+
+  beforeEach(() =&gt; {
+    TestBed.configureTestingModule({ providers: [ProductsStore, { provide: ProductService, useValue: mockApi }] });
+    store = TestBed.inject(ProductsStore);
+  });
+
+  it('carga productos inicialmente', () =&gt; {
+    expect(store.products().length).toBe(1);
+    expect(store.totalCount()).toBe(1);
+  });
+});
+</code></pre>
+<p>Notas de testing E2E:
+- Probar flujos: crear producto → comprobar que aparece en la lista sin recarga; editar → se actualiza; borrar → elemento desaparece y scroll se mantiene.
+- Simular eventos de tiempo real (websocket) mediante mocks en el backend de pruebas o interceptando la API.</p>
+<h3 id="7-checklist-de-rendimiento-y-seguridad">7. Checklist de rendimiento y seguridad</h3>
+<p>Rendimiento:
+- [ ] ChangeDetectionStrategy.OnPush en componentes de lista y elementos puros.
+- [ ] <code>trackBy</code> siempre en <code>*ngFor</code> con ID estable.
+- [ ] Evitar mutaciones in-place; usar actualizaciones inmutables en stores.
+- [ ] Usar async pipe o signals; evitar subscribes manuales innecesarios.
+- [ ] Paginación/infinite scroll para grandes volúmenes.</p>
+<p>Seguridad y robustez:
+- [ ] No exponer tokens en stores o en templates; usar <code>AuthService</code>/interceptor para Authorization headers.
+- [ ] Manejo de errores centralizado (ErrorInterceptor + ToastService).
+- [ ] Validar datos antes de insertarlos en el store (normalización y sanitización mínima).</p>
+<h3 id="8-mapping-a-criterios-ra7e-ra7h-ra7i">8. Mapping a criterios RA7.e, RA7.h, RA7.i</h3>
+<p>(Asumo estos criterios se refieren a: RA7.e — Actualización reactiva del UI; RA7.h — Optimización/performance; RA7.i — Robustez/seguridad.)</p>
+<ul>
+<li>
+<p>RA7.e (Actualización reactiva): La combinación store (signals) + componentes suscritos garantiza que cualquier CRUD o evento realtime actualice la UI automáticamente sin recarga de página ni navegación. Ejemplo: <code>ProductsStore.add()</code> actualiza <code>products()</code> y todos los templates reaccionan.</p>
+</li>
+<li>
+<p>RA7.h (Optimización): Uso de OnPush, trackBy, actualizaciones inmutables y derived values (computed) minimizan re-render y trabajo de detección de cambios. Infinite scroll/paginación evitan cargar grandes volúmenes.</p>
+</li>
+<li>
+<p>RA7.i (Robustez/Seguridad): Manejo centralizado de errores (ErrorInterceptor), no exponer secretos en el store, y estrategias de reconexión o fallback (polling) garantizan resiliencia ante fallos.</p>
+</li>
+</ul>
+<h3 id="9-notas-de-migracion-y-tie-ins-con-el-codigo-existente">9. Notas de migración y tie-ins con el código existente</h3>
+<p>Dónde colocar los stores:
+- <code>src/app/stores/</code> — almacenar <code>products.store.ts</code>, <code>users.store.ts</code>, <code>tasks.signal.store.ts</code> (ya hay <code>tasks.signal.store.ts</code> en el proyecto; usar ese patrón como referencia).</p>
+<p>Servicios e interceptores a modificar/usar:
+- <code>src/app/services/product.service.ts</code> o <code>src/app/services/api.service.ts</code> — el store debe delegar en estos para llamadas HTTP.
+- <code>src/app/interceptors/auth-interceptor.ts</code> y <code>error-interceptor</code> — mantener para auth y manejo de errores.
+- <code>src/app/services/realtime.service.ts</code> — conectar eventos WebSocket al store (ej.: recibir <code>product.created</code> y llamar <code>store.add()</code>).</p>
+<p>Ejemplo de integración con realtime:</p>
+<pre><code class="language-ts">// en algún initializer o servicio
+this.realtime.listen&lt;EventMessage&gt;().subscribe(msg =&gt; {
+  if (msg.type === 'product.created') this.productsStore.add(msg.payload);
+  if (msg.type === 'product.updated') this.productsStore.update(msg.payload);
+});
+</code></pre>
+<p>Migración incremental recomendada:
+1. Implementar store con Signals para una feature pequeña (ej. products) y reemplazar las dependencias del componente por la store.
+2. Añadir trackBy y OnPush en los componentes de lista.
+3. Introducir reconexión WebSocket/polling en <code>realtime.service</code> y conectar al store.
+4. Probar e2e y ajustar performance.</p>
+<h3 id="10-recomendaciones-operativas-y-de-monitorizacion">10. Recomendaciones operativas y de monitorización</h3>
+<ul>
+<li>Logs: Instrumentar puntos clave (errores de load, fallos WS) con un sistema de logging/monitorización (Sentry, LogRocket o similar) en producción.</li>
+<li>Reconexión WS: implementar backoff exponencial con límite de reintentos y fallback a polling si la conexión no se restaura.</li>
+<li>Métricas: monitorizar latencia de las peticiones principales, tasa de errores 5xx y número de reconexiones WS.</li>
+<li>Fallback: si el WS falla, activar polling con <code>timer(0, interval)</code> y <code>shareReplay(1)</code> para mantener consistencia entre suscriptores.</li>
+</ul>
+<p>Parámetros sugeridos:
+- Reconexión inicial: 1s, 2s, 5s, 10s (hasta 5 reintentos), luego fallback a polling cada 30s.
+- Polling en entornos degradados: 30-60s según criticidad.</p>
+<h3 id="11-pasos-de-entrega">11. Pasos de entrega</h3>
+<ul>
+<li>[ ] Implementar <code>ProductsStore</code> en <code>src/app/stores/products.store.ts</code> y adaptar <code>product-list</code> para usarlo.</li>
+<li>[ ] Añadir tests unitarios para store (happy path + error) y e2e flows básicos.</li>
+<li>[ ] Conectar <code>realtime.service</code> al store (eventos create/update/delete).</li>
+<li>[ ] Revisar componentes de lista: OnPush + trackBy.</li>
+<li>[ ] Desplegar en entorno de staging y validar métricas básicas (latencia, errores, reconexión WS).</li>
+</ul>
+<h3 id="12-resumen-final">12. Resumen final</h3>
+<p>La documentación anterior define un patrón claro y práctico (Services + Signals) que cumple los objetivos de la Fase 6: actualización reactiva sin recargas, rendimiento optimizado y robustez operativa. Se recomienda comenzar con una feature (products) como piloto y extender el patrón al resto del proyecto. La sección precedente incluye ejemplos listos para copiar, tests sugeridos y checklist operativo para la entrega posterior a Navidad.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
