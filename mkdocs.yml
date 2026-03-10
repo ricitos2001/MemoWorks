@@ -1,4 +1,5 @@
-site_name: My Docs
+site_name: MemoWorks Documentation
+site_description: Documentation for MemoWorks, the ultimate note-taking app.
 
 theme:
     name: material
