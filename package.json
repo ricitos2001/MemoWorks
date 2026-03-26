@@ -50,11 +50,14 @@
   },
   "devDependencies": {
     "@angular/build": "^21.0.2",
-    "@angular/cli": "^21.0.2",
+    "@angular/cli": "^21.2.4",
     "@angular/compiler-cli": "^21.0.0",
     "@types/dotenv": "^6.1.1",
     "jsdom": "^27.1.0",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
+  },
+  "overrides": {
+    "picomatch": "^4.0.4"
   }
 }
