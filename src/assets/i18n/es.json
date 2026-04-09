@@ -387,7 +387,13 @@
     "AUTH": {
       "LOGIN": {
         "TITLE": "Inicio de sesión",
-        "MESSAGE": "El usuario {{email}} ha iniciado sesión."
+        "MESSAGE": "El usuario {{email}} ha iniciado sesión.",
+        "ERROR": "Error al iniciar sesión"
+      },
+      "REGISTER": {
+        "TITLE": "Registro de usuario",
+        "MESSAGE": "El nuevo usuario {{email}} se ha registrado correctamente.",
+        "ERROR": "Error al registrar el usuario"
       }
     },
     "TASK": {

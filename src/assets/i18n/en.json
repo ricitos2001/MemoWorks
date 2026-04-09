@@ -387,7 +387,13 @@
     "AUTH": {
       "LOGIN": {
         "TITLE": "Login",
-        "MESSAGE": "User {{email}} has signed in."
+        "MESSAGE": "User {{email}} has signed in.",
+          "ERROR": "Error logging in"
+      },
+      "REGISTER": {
+        "TITLE": "Register",
+        "MESSAGE": "The new user {{email}} has registered.",
+        "ERROR": "Error registering user"
       }
     },
     "TASK": {
